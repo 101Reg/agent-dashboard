@@ -1,0 +1,384 @@
+{
+  "agents": [
+    {
+      "name": "Hero",
+      "file": "chief-of-staff",
+      "role": "Trusted Chief of Staff for Hero (Reggie) — strategic thinking, coordination, and decision support across Mirror App and future products. Thinks before building. Use proactively on \"should we build\", \"help me think through\", \"prioritize\", \"what are my options\", \"chief of staff\", \"cos\".",
+      "icon": "🎯",
+      "type": "Strategic",
+      "status": "active"
+    },
+    {
+      "name": "Taylor",
+      "file": "customer-success",
+      "role": "Customer success specialist. Use proactively for tester feedback analysis, churn signal detection, behavioral pattern synthesis, and tester communications.",
+      "icon": "💬",
+      "type": "Operations",
+      "status": "active"
+    },
+    {
+      "name": "Elon",
+      "file": "data",
+      "role": "Data analysis specialist. Use proactively for Plaid transaction patterns, retention metrics, behavioral data, user engagement, and quantitative analysis.",
+      "icon": "📊",
+      "type": "Analytical",
+      "status": "active"
+    },
+    {
+      "name": "Gil",
+      "file": "debug",
+      "role": "Forensic debugger and root cause investigator. Use when a bug resists 3 fix attempts, when root cause is unknown, when reproduction is inconsistent, when the Developer escalates, or when Hero invokes directly for any debugging task. Finds the problem — does not write the fix.",
+      "icon": "🔍",
+      "type": "Diagnostic",
+      "status": "active"
+    },
+    {
+      "name": "developer",
+      "file": "developer",
+      "role": "Expert software developer. Use proactively when writing code, debugging, reviewing code, building features, or solving technical problems across any project.",
+      "icon": "⚡",
+      "type": "Implementation",
+      "status": "active"
+    },
+    {
+      "name": "fact-checker",
+      "file": "fact-checker",
+      "role": "Reviews any output for hallucinated claims, fabricated statistics, and unsupported assertions. Use for investor materials, regulatory content, published docs, or any high-stakes deliverable.",
+      "icon": "✅",
+      "type": "Quality",
+      "status": "active"
+    },
+    {
+      "name": "Warren",
+      "file": "finance",
+      "role": "Financial strategy specialist. Use proactively for pricing models, unit economics, runway projections, revenue analysis, and monetization decisions.",
+      "icon": "💰",
+      "type": "Strategy",
+      "status": "active"
+    },
+    {
+      "name": "Johnny",
+      "file": "legal",
+      "role": "Legal and compliance specialist for fintech and behavioral wellness. Use proactively for privacy, Plaid compliance, financial data regulations, terms of service, and user consent.",
+      "icon": "⚖️",
+      "type": "Compliance",
+      "status": "active"
+    },
+    {
+      "name": "Sky",
+      "file": "marketer",
+      "role": "Marketing orchestrator for Mirror. Use proactively for copy, content, campaigns, conversions, email sequences, SEO, and any marketing execution task.",
+      "icon": "📣",
+      "type": "Marketing",
+      "status": "active"
+    },
+    {
+      "name": "Ye",
+      "file": "product",
+      "role": "Product strategy specialist. Use proactively for feature validation, roadmap prioritization, product-market fit analysis, and build/don't-build decisions.",
+      "icon": "🧭",
+      "type": "Strategy",
+      "status": "active"
+    },
+    {
+      "name": "research",
+      "file": "research",
+      "role": "Market intelligence and research specialist. Use proactively for trend scanning, competitor monitoring, social signals, user language mining, and raw intelligence gathering.",
+      "icon": "🧬",
+      "type": "Intelligence",
+      "status": "active"
+    },
+    {
+      "name": "reviewer",
+      "file": "reviewer",
+      "role": "Code quality reviewer. Runs after developer completes implementation. Tests outputs against sprint contract acceptance criteria.",
+      "icon": "🔎",
+      "type": "Quality",
+      "status": "active"
+    }
+  ],
+  "agentCount": 12,
+  "escalationPaths": [
+    {
+      "from": "developer",
+      "to": "debug",
+      "label": "After 3 failed fixes",
+      "freq": "high"
+    },
+    {
+      "from": "debug",
+      "to": "developer",
+      "label": "Diagnosis → fix handback",
+      "freq": "high"
+    },
+    {
+      "from": "debug",
+      "to": "chief-of-staff",
+      "label": "Unresolved issues",
+      "freq": "medium"
+    },
+    {
+      "from": "product",
+      "to": "data",
+      "label": "Needs quantitative validation",
+      "freq": "medium"
+    },
+    {
+      "from": "product",
+      "to": "customer-success",
+      "label": "Needs user feedback",
+      "freq": "medium"
+    },
+    {
+      "from": "product",
+      "to": "research",
+      "label": "Needs market data",
+      "freq": "low"
+    },
+    {
+      "from": "customer-success",
+      "to": "chief-of-staff",
+      "label": "Churn threats",
+      "freq": "medium"
+    },
+    {
+      "from": "reviewer",
+      "to": "chief-of-staff",
+      "label": "After 3 fail cycles",
+      "freq": "low"
+    },
+    {
+      "from": "finance",
+      "to": "legal",
+      "label": "Compliance implications",
+      "freq": "low"
+    },
+    {
+      "from": "legal",
+      "to": "developer",
+      "label": "Implementation needs",
+      "freq": "low"
+    },
+    {
+      "from": "marketer",
+      "to": "research",
+      "label": "Market intelligence",
+      "freq": "medium"
+    },
+    {
+      "from": "data",
+      "to": "product",
+      "label": "Pattern implications",
+      "freq": "medium"
+    }
+  ],
+  "metrics": {
+    "sessions": [],
+    "hasData": false
+  },
+  "memory": {
+    "total": 109,
+    "byType": {
+      "feedback": 76,
+      "project": 19,
+      "user": 11,
+      "reference": 2,
+      "other": 0
+    },
+    "labels": {
+      "feedback": [
+        "feedback_agent_eval_harness",
+        "feedback_agent_reference_rules",
+        "feedback_agent_sandbox",
+        "feedback_api_billing",
+        "feedback_api_prompt_size",
+        "feedback_ask_before_structure",
+        "feedback_ask_for_spec",
+        "feedback_batch_features",
+        "feedback_capture_at_source",
+        "feedback_chat_rate_limits",
+        "feedback_claude_p_testing",
+        "feedback_claude_repo_gitignore",
+        "feedback_data_tagging",
+        "feedback_description_routing",
+        "feedback_design_concept_first",
+        "feedback_electron35_filepath",
+        "feedback_electron_debug",
+        "feedback_electron_drag",
+        "feedback_electron_ipc",
+        "feedback_electron_native",
+        "feedback_electron_tabs",
+        "feedback_enumerate_states",
+        "feedback_env_verify",
+        "feedback_eval_design",
+        "feedback_eval_preconditions",
+        "feedback_factual_updates",
+        "feedback_fe_eval_framework",
+        "feedback_firewall_data",
+        "feedback_flag_empty_state_risk",
+        "feedback_frontmatter_spec",
+        "feedback_hook_e2e",
+        "feedback_hook_paths",
+        "feedback_hooks_hot_load",
+        "feedback_incremental_migration",
+        "feedback_iron_law_pattern",
+        "feedback_jsx_artifact_source",
+        "feedback_live_testing",
+        "feedback_marketing_intake_fix",
+        "feedback_mcp_debug",
+        "feedback_measure_after_trim",
+        "feedback_mirror_not_hero_copy",
+        "feedback_namespace_on_install",
+        "feedback_nextjs14_deps",
+        "feedback_no_scripts_in_terminal",
+        "feedback_no_sed_bypass",
+        "feedback_oauth_xano_gap",
+        "feedback_orchard_repackage",
+        "feedback_parallel_agents",
+        "feedback_parallel_audit_fix",
+        "feedback_pbcopy_embed",
+        "feedback_plan_before_build",
+        "feedback_plan_mode_eval",
+        "feedback_pretooluse_friction",
+        "feedback_protect_secrets",
+        "feedback_prototype_direct_convert",
+        "feedback_research_before_build",
+        "feedback_schema_pressure_test",
+        "feedback_secondary_sources",
+        "feedback_skill_evals",
+        "feedback_subagent_bash",
+        "feedback_test_clear_paths",
+        "feedback_test_isolation",
+        "feedback_ts_iteration",
+        "feedback_type_check",
+        "feedback_vercel_cli",
+        "feedback_vercel_timeouts",
+        "feedback_verify_research",
+        "feedback_webflow_auth_scripts",
+        "feedback_webflow_complete_embed",
+        "feedback_webflow_no_link_tag",
+        "feedback_xano_add_table",
+        "feedback_xano_csv_crud",
+        "feedback_xano_csv_import",
+        "feedback_xano_filter_bug",
+        "feedback_xano_ui_claims",
+        "feedback_xanoscript_workflow"
+      ],
+      "project": [
+        "feedback_session_hook",
+        "project_agency_3stack",
+        "project_agency_brand",
+        "project_agent_os_evolution",
+        "project_agent_upgrades",
+        "project_ai_agency",
+        "project_debug_agent",
+        "project_edge",
+        "project_impeccable_install",
+        "project_mirror_budget_redesign",
+        "project_mirror_build3",
+        "project_mirror_js_migration",
+        "project_mirror_testing_window",
+        "project_obsidian_vault",
+        "project_orchard",
+        "project_orchard_next",
+        "project_os_scorecard",
+        "project_setup_audit",
+        "project_xano_audit"
+      ],
+      "user": [
+        "user_accuracy_law",
+        "user_behavioral_scientist",
+        "user_data_privacy",
+        "user_dogfood_qa",
+        "user_external_input",
+        "user_identity",
+        "user_learns_by_doing",
+        "user_marathon_builder",
+        "user_mom_test_copy",
+        "user_naming_style",
+        "user_tester_feedback_loop"
+      ],
+      "reference": [
+        "reference_edge_docs",
+        "reference_workflow_tools"
+      ]
+    }
+  },
+  "system": {
+    "skills": 17,
+    "rules": 7,
+    "hooks": 5,
+    "mcpServers": 2
+  },
+  "timeline": [
+    {
+      "date": "Apr 4-5, 2026",
+      "title": "Security Hardening",
+      "desc": "Auth flow fixes, feedback system, Webflow security audit",
+      "active": true
+    },
+    {
+      "date": "Mar 31 – Apr 3, 2026",
+      "title": "Mirror Build 3.0",
+      "desc": "Full app shipped in 4 parallel sessions — check-ins, budgets, insights, onboarding"
+    },
+    {
+      "date": "Mar 30, 2026",
+      "title": "Mirror JS Migration",
+      "desc": "Embeds moved to Cloudflare Pages, eliminated Webflow inline script limits"
+    },
+    {
+      "date": "Mar 29, 2026",
+      "title": "Agent OS v2.0",
+      "desc": "Harness alignment — 22 fixes across 3 tiers, all agents on official spec"
+    },
+    {
+      "date": "Mar 25-28, 2026",
+      "title": "Edge MVP",
+      "desc": "Multi-agent trading intelligence PWA — 5,000 lines, 70 files, 8 sprints"
+    },
+    {
+      "date": "Mar 22-24, 2026",
+      "title": "38twelve Agency Launch",
+      "desc": "AI agency brand, intake chatbot, email system — shipped in 3 days"
+    },
+    {
+      "date": "Mar 21, 2026",
+      "title": "Orchard Terminal",
+      "desc": "Frosted glass Electron terminal — built and packaged as .app in one day"
+    },
+    {
+      "date": "Mar 20, 2026",
+      "title": "Mirror Research Phase",
+      "desc": "Deep behavioral research — 8 sources, 29-page strategy doc"
+    }
+  ],
+  "selfImprovement": [
+    {
+      "date": "2026-04-03",
+      "text": "Build 3.0 audit caught subscription filter bug → fixed before tester exposure",
+      "high": false
+    },
+    {
+      "date": "2026-03-30",
+      "text": "Mirror JS migration eliminated inline script limits → moved to Cloudflare Pages",
+      "high": false
+    },
+    {
+      "date": "2026-03-29",
+      "text": "Agent OS harness alignment — 22 fixes across 3 tiers, all agents aligned to official spec",
+      "high": true
+    },
+    {
+      "date": "2026-03-29",
+      "text": "Detected recurring debug loops across sessions → built dedicated Debug agent (Gil)",
+      "high": true
+    },
+    {
+      "date": "2026-03-22",
+      "text": "Setup audit revealed trigger conflicts and stale tester counts → comprehensive system fix",
+      "high": true
+    }
+  ],
+  "lastUpdated": "2026-04-05T23:26:50.312Z"
+}

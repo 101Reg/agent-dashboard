@@ -177,11 +177,11 @@
     "hasData": false
   },
   "memory": {
-    "total": 112,
+    "total": 116,
     "byType": {
-      "feedback": 78,
+      "feedback": 81,
       "project": 20,
-      "user": 11,
+      "user": 12,
       "reference": 2,
       "other": 0
     },
@@ -190,6 +190,7 @@
         "feedback_agent_eval_harness",
         "feedback_agent_reference_rules",
         "feedback_agent_sandbox",
+        "feedback_ai_generated_context",
         "feedback_api_billing",
         "feedback_api_prompt_size",
         "feedback_ask_before_structure",
@@ -224,6 +225,7 @@
         "feedback_incremental_migration",
         "feedback_iron_law_pattern",
         "feedback_jsx_artifact_source",
+        "feedback_linkedin_no_fetch",
         "feedback_live_testing",
         "feedback_marketing_intake_fix",
         "feedback_mcp_debug",
@@ -254,6 +256,7 @@
         "feedback_type_check",
         "feedback_vercel_cli",
         "feedback_vercel_timeouts",
+        "feedback_verify_job_links",
         "feedback_verify_research",
         "feedback_vite_scaffold",
         "feedback_webflow_auth_scripts",
@@ -290,6 +293,7 @@
       ],
       "user": [
         "user_accuracy_law",
+        "user_apple_career",
         "user_behavioral_scientist",
         "user_data_privacy",
         "user_dogfood_qa",
@@ -383,5 +387,5 @@
       "high": true
     }
   ],
-  "lastUpdated": "2026-04-05T23:57:38.545Z"
+  "lastUpdated": "2026-04-06T02:25:18.529Z"
 }

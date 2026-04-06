@@ -177,10 +177,10 @@
     "hasData": false
   },
   "memory": {
-    "total": 109,
+    "total": 112,
     "byType": {
-      "feedback": 76,
-      "project": 19,
+      "feedback": 78,
+      "project": 20,
       "user": 11,
       "reference": 2,
       "other": 0
@@ -195,6 +195,7 @@
         "feedback_ask_before_structure",
         "feedback_ask_for_spec",
         "feedback_batch_features",
+        "feedback_canvas_mobile_labels",
         "feedback_capture_at_source",
         "feedback_chat_rate_limits",
         "feedback_claude_p_testing",
@@ -254,6 +255,7 @@
         "feedback_vercel_cli",
         "feedback_vercel_timeouts",
         "feedback_verify_research",
+        "feedback_vite_scaffold",
         "feedback_webflow_auth_scripts",
         "feedback_webflow_complete_embed",
         "feedback_webflow_no_link_tag",
@@ -268,6 +270,7 @@
         "feedback_session_hook",
         "project_agency_3stack",
         "project_agency_brand",
+        "project_agent_dashboard",
         "project_agent_os_evolution",
         "project_agent_upgrades",
         "project_ai_agency",
@@ -380,5 +383,5 @@
       "high": true
     }
   ],
-  "lastUpdated": "2026-04-05T23:26:50.312Z"
+  "lastUpdated": "2026-04-05T23:57:38.545Z"
 }

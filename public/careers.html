@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0c0c0e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Career Strategy Map</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c0e;
+    --card: #141416;
+    --border: #222226;
+    --text: #e8e6e3;
+    --muted: #7a7880;
+    --accent: #c9fb00;
+    --accent2: #00d4ff;
+    --tag-bg: #1c1c20;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.6;
+    padding: calc(env(safe-area-inset-top, 0px) + 2rem) 1.25rem 4rem;
+    max-width: 920px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+  .subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .updated { color: var(--muted); font-size: 0.72rem; margin-bottom: 2.5rem; opacity: 0.6; }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    padding-left: 2px;
+  }
+  .role-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+  }
+  .role-card:hover { border-color: #333; }
+  .role-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.15rem; }
+  .role-card .company { font-size: 0.8rem; font-weight: 500; margin-bottom: 0.75rem; }
+  .role-card .company.apple { color: var(--accent); }
+  .role-card .company.anthropic { color: var(--accent2); }
+  .role-card .company.other { color: #c084fc; }
+  .role-card p { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.75rem; }
+  .fit {
+    font-size: 0.78rem;
+    color: var(--text);
+    background: var(--tag-bg);
+    border-radius: 6px;
+    padding: 0.65rem 0.85rem;
+    margin-top: 0.5rem;
+    border-left: 2px solid var(--accent);
+    line-height: 1.5;
+  }
+  .fit.blue { border-left-color: var(--accent2); }
+  .fit.purple { border-left-color: #c084fc; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.75rem; }
+  .tag {
+    background: var(--tag-bg);
+    color: var(--muted);
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+  }
+  .tag.hot {
+    border-color: rgba(201,251,0,0.3);
+    color: var(--accent);
+  }
+  a.link-btn {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    transition: opacity 0.2s;
+  }
+  a.link-btn:hover { opacity: 0.75; }
+  a.link-btn.apple { color: var(--accent); }
+  a.link-btn.anthropic { color: var(--accent2); }
+  a.link-btn.other { color: #c084fc; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .positioning {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .positioning h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  .positioning p { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.75rem; }
+  .positioning strong { color: var(--text); }
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(201,251,0,0.06), rgba(0,212,255,0.04));
+    border: 1px solid rgba(201,251,0,0.15);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .highlight-box em { color: var(--accent); font-style: normal; font-weight: 500; }
+  .nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text); }
+  .status { display: inline-block; font-size: 0.65rem; padding: 2px 8px; border-radius: 100px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin-left: 8px; }
+  .status.live { background: rgba(83,225,111,0.15); color: #53e16f; }
+  .status.new { background: rgba(201,251,0,0.15); color: var(--accent); }
+  .link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .link-grid a {
+    background: var(--tag-bg);
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .link-grid a:hover { opacity: 0.75; }
+</style>
+</head>
+<body>
+
+<a class="nav-back" href="/">← Agent OS Dashboard</a>
+
+<h1>Career Strategy Map</h1>
+<p class="subtitle">Verified roles matched to your stack — Apple operations, AI architecture, agent orchestration, and shipping speed.</p>
+<p class="updated" id="updated"></p>
+
+<!-- ═══ APPLE INTERNAL ═══ -->
+<p class="section-label">Apple — Internal Mobility</p>
+
+<div class="role-card">
+  <h3>Software Engineer (Agentic AI), AI & Data Platforms <span class="status live">Live</span></h3>
+  <div class="company apple">Apple · IS&T · Sunnyvale & Austin</div>
+  <div class="tags">
+    <span class="tag hot">Agentic AI</span>
+    <span class="tag">AI Platforms</span>
+    <span class="tag">Internal Tools</span>
+  </div>
+  <p>Build agentic AI systems within Apple's internal AI & Data Platforms team. This is the team building Apple's internal AI infrastructure.</p>
+  <div class="fit">
+    <strong>Why this fits:</strong> You've built a 12-agent orchestration system with escalation paths, eval frameworks, and self-improvement loops. This role is building similar infrastructure inside Apple. Your retail operations background gives you domain knowledge most AI engineers lack.
+  </div>
+  <a class="link-btn apple" href="https://jobs.apple.com/en-us/details/200652249/software-engineer-agentic-ai-ai-data-platforms" target="_blank">View Sunnyvale →</a>
+  &nbsp;&nbsp;
+  <a class="link-btn apple" href="https://jobs.apple.com/en-us/details/200652249-0157/software-engineer-agentic-ai-ai-data-platforms" target="_blank">View Austin →</a>
+</div>
+
+<div class="role-card">
+  <h3>Solutions Architect — Customer Systems <span class="status live">Live</span></h3>
+  <div class="company apple">Apple · IS&T · Sunnyvale</div>
+  <div class="tags">
+    <span class="tag">Solutions Architecture</span>
+    <span class="tag">Customer Systems</span>
+    <span class="tag">Cross-functional</span>
+  </div>
+  <p>Design and architect solutions for Apple's customer-facing systems. Sits at the intersection of technical architecture and customer experience.</p>
+  <div class="fit">
+    <strong>Why this fits:</strong> You architect solutions daily — both AI systems (Agent OS) and customer experiences (Genius Bar). This role bridges the gap between your two worlds. Internal hire advantage: you know the customer systems firsthand.
+  </div>
+  <a class="link-btn apple" href="https://jobs.apple.com/en-us/details/200645315/solutions-architect-customer-systems" target="_blank">View Role →</a>
+</div>
+
+<div class="role-card">
+  <h3>Sr Software Engineer — AI & Data Platforms (AiDP) <span class="status live">Live</span></h3>
+  <div class="company apple">Apple · IS&T · Sunnyvale & Austin</div>
+  <div class="tags">
+    <span class="tag">AI Platforms</span>
+    <span class="tag">Data Engineering</span>
+    <span class="tag">Senior IC</span>
+  </div>
+  <p>Build Apple's internal AI and data platform infrastructure. Part of the AiDP team that powers AI capabilities across Apple's enterprise systems.</p>
+  <div class="fit">
+    <strong>Why this fits:</strong> You've built data pipelines (sync scripts, performance logging, memory systems), AI infrastructure (hooks, evals, agent routing), and shipped across multiple domains. The "senior" title is a stretch without formal engineering tenure, but your portfolio demonstrates the capability.
+  </div>
+  <a class="link-btn apple" href="https://jobs.apple.com/en-us/details/200654109/sr-software-engineer-aml-ai-data-platforms-aidp" target="_blank">View Sunnyvale →</a>
+</div>
+
+<div class="role-card">
+  <h3>Full Stack Software Engineer — Retail & Marcom Engineering <span class="status live">Live</span></h3>
+  <div class="company apple">Apple · IS&T · Sunnyvale</div>
+  <div class="tags">
+    <span class="tag">Full Stack</span>
+    <span class="tag">Retail Tech</span>
+    <span class="tag">Internal Tools</span>
+  </div>
+  <p>Build the software powering Apple Retail and marketing technology. This team creates the tools that retail employees use daily.</p>
+  <div class="fit">
+    <strong>Why this fits:</strong> You use these systems every day as a store manager. You've also built full-stack apps (Mirror, Edge, dashboard) with React, Next.js, and various backends. You can identify retail pain points AND build the solutions.
+  </div>
+  <a class="link-btn apple" href="https://jobs.apple.com/en-us/details/200650780/full-stack-software-engineer-retail-marcom-engineering" target="_blank">View Role →</a>
+</div>
+
+<hr class="divider">
+
+<!-- ═══ ANTHROPIC ═══ -->
+<p class="section-label">Anthropic — You Use Their Tools Daily</p>
+
+<div class="role-card">
+  <h3>Solutions Architect, Applied AI <span class="status live">Live</span></h3>
+  <div class="company anthropic">Anthropic · SF, NYC, Seattle, London + more</div>
+  <div class="tags">
+    <span class="tag hot">Solutions Architecture</span>
+    <span class="tag">Applied AI</span>
+    <span class="tag">Customer-Facing</span>
+    <span class="tag">Multiple specializations</span>
+  </div>
+  <p>Help partners design and implement AI solutions using Claude. Multiple specializations available: Industries, Startups, Digital Native, Government, and more.</p>
+  <div class="fit blue">
+    <strong>Why this fits:</strong> You already do this — you identify problems, architect AI solutions, build prototypes, and translate for non-technical stakeholders. Your Apple management gives you customer-facing polish. Your Agent OS is a portfolio piece that demonstrates exactly what this role asks for.
+  </div>
+  <a class="link-btn anthropic" href="https://www.anthropic.com/careers/jobs" target="_blank">Browse SA Roles →</a>
+</div>
+
+<div class="role-card">
+  <h3>Software Engineer, Claude Code <span class="status live">Live</span></h3>
+  <div class="company anthropic">Anthropic · NYC, SF, Seattle</div>
+  <div class="tags">
+    <span class="tag hot">Claude Code</span>
+    <span class="tag">Agentic AI</span>
+    <span class="tag">Developer Tools</span>
+  </div>
+  <p>Build the tool you use every day. Own features, SDK design, and agent capabilities for Claude Code.</p>
+  <div class="fit blue">
+    <strong>Why this fits:</strong> You're a power user — hooks, subagents, CLAUDE.md configs, MCP servers, eval frameworks, anti-hallucination systems. You've pushed Claude Code harder than most and have strong opinions about what works and what doesn't.
+  </div>
+  <a class="link-btn anthropic" href="https://job-boards.greenhouse.io/anthropic/jobs/4816198008" target="_blank">View Role →</a>
+</div>
+
+<div class="role-card">
+  <h3>Prompt Engineer, Claude Code <span class="status live">Live</span></h3>
+  <div class="company anthropic">Anthropic · SF, NYC, Seattle</div>
+  <div class="tags">
+    <span class="tag">Prompt Engineering</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">Quality</span>
+  </div>
+  <p>Design and optimize prompts that power Claude Code's agent behavior, tool use, and output quality.</p>
+  <div class="fit blue">
+    <strong>Why this fits:</strong> Your CLAUDE.md files, agent definitions, shared-context protocols, and eval frameworks are advanced prompt engineering in practice. You've designed prompts that control 12 agents with boundary enforcement and escalation logic.
+  </div>
+  <a class="link-btn anthropic" href="https://job-boards.greenhouse.io/anthropic/jobs/5159669008" target="_blank">View Role →</a>
+</div>
+
+<div class="role-card">
+  <h3>Forward Deployed Engineer, Applied AI <span class="status live">Live</span></h3>
+  <div class="company anthropic">Anthropic · Multiple US cities + London, Munich, Paris</div>
+  <div class="tags">
+    <span class="tag">Field Engineering</span>
+    <span class="tag">Applied AI</span>
+    <span class="tag">Customer-Facing</span>
+  </div>
+  <p>Work directly with partners to build and deploy AI solutions. Combines deep technical work with relationship management.</p>
+  <div class="fit blue">
+    <strong>Why this fits:</strong> You manage people and customer relationships at Apple, then build AI systems at home. This role is both of those things at once. Your ability to ship fast (4 products in 17 days) is exactly what forward-deployed work demands.
+  </div>
+  <a class="link-btn anthropic" href="https://www.anthropic.com/careers/jobs" target="_blank">Browse FDE Roles →</a>
+</div>
+
+<div class="role-card">
+  <h3>Developer Education Lead <span class="status live">Live</span></h3>
+  <div class="company anthropic">Anthropic · SF, NYC</div>
+  <div class="tags">
+    <span class="tag">Education</span>
+    <span class="tag">Content</span>
+    <span class="tag">Developer Community</span>
+  </div>
+  <p>Create educational content that helps developers build with Claude. Guides, tutorials, best practices.</p>
+  <div class="fit blue">
+    <strong>Why this fits:</strong> You've already created an educational system — agent definitions, shared context docs, eval frameworks, rules files. You know how to teach because you manage a team at Apple. And you know Claude Code inside out.
+  </div>
+  <a class="link-btn anthropic" href="https://job-boards.greenhouse.io/anthropic/jobs/5126762008" target="_blank">View Role →</a>
+</div>
+
+<hr class="divider">
+
+<!-- ═══ POSITIONING ═══ -->
+<p class="section-label">Your Narrative</p>
+
+<div class="positioning">
+  <h3>The One-Liner</h3>
+  <div class="highlight-box">
+    I manage operations at Apple and build <em>AI systems that ship products autonomously</em>. In 17 days, I built a 12-agent operating system and used it to ship 4 products — a fintech app, a trading platform, a desktop terminal, and an agency site. The system <em>evaluates its own performance</em>, <em>detects its own gaps</em>, and <em>recommends its own upgrades</em>. I'm looking for a role where both operational leadership and AI architecture matter.
+  </div>
+</div>
+
+<div class="positioning">
+  <h3>What You Bring That Others Don't</h3>
+  <div class="highlight-box">
+    <em>Operations + AI architecture</em> — you manage a high-volume team AND build agent orchestration systems. Most candidates have one or the other.<br><br>
+    <em>Shipping speed</em> — 4 products in 17 days, solo, with quality controls (evals, hooks, anti-hallucination checks).<br><br>
+    <em>Systems thinking</em> — you don't just build features, you build the system that builds features. Escalation paths, credit assignment, self-improvement loops.<br><br>
+    <em>A live portfolio</em> — the Agent OS dashboard on your phone is the proof. Not slides. Not a resume. A working system.
+  </div>
+</div>
+
+<hr class="divider">
+
+<p class="section-label">Job Board Quick Links</p>
+<div class="link-grid">
+  <a class="apple" style="color:var(--accent)" href="https://jobs.apple.com/en-us/search?search=ai&team=information-systems-and-technology-CORSV-IT&sort=newest" target="_blank">Apple IS&T + AI →</a>
+  <a style="color:var(--accent2)" href="https://www.anthropic.com/careers/jobs" target="_blank">Anthropic Careers →</a>
+  <a style="color:var(--accent)" href="https://jobs.apple.com/en-us/search?search=agentic+ai&sort=newest" target="_blank">Apple Agentic AI →</a>
+  <a style="color:var(--accent2)" href="https://wellfound.com/role/ai-engineer" target="_blank">Wellfound AI →</a>
+  <a style="color:#c084fc" href="https://topstartups.io/jobs/?startup__markets=Artificial+Intelligence" target="_blank">Top AI Startups →</a>
+  <a style="color:#c084fc" href="https://aijobs.app/" target="_blank">AI Jobs App →</a>
+</div>
+
+<script>
+  document.getElementById('updated').textContent = 'Last verified: ' + new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+</script>
+
+</body>
+</html>

@@ -59,15 +59,18 @@ export default function App() {
         @keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
         @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
         *{box-sizing:border-box}::selection{background:rgba(123,159,245,0.2)}
-        ::-webkit-scrollbar{width:0}
+        ::-webkit-scrollbar{width:0;height:0}
+        nav::-webkit-scrollbar{display:none}
       `}</style>
 
       {/* Nav */}
       <nav style={{
-        position: "fixed", top: 16, left: "50%", transform: "translateX(-50%)", zIndex: 100,
+        position: "fixed", top: "calc(env(safe-area-inset-top, 0px) + 12px)", left: 12, right: 12, zIndex: 100,
         background: "rgba(20,20,20,0.7)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
         borderRadius: 100, border: "1px solid rgba(255,255,255,0.06)",
-        padding: "6px 8px", display: "inline-flex", gap: 2,
+        padding: "6px 8px", display: "flex", gap: 2,
+        overflowX: "auto", WebkitOverflowScrolling: "touch",
+        msOverflowStyle: "none", scrollbarWidth: "none",
         opacity: loaded ? 1 : 0, transition: "opacity 0.8s 0.3s",
       }}>
         {NAV_ITEMS.map(t => (
@@ -75,16 +78,26 @@ export default function App() {
             background: "none", border: "none", color: "rgba(255,255,255,0.5)",
             fontSize: 12, fontWeight: 500, padding: "7px 14px", borderRadius: 100,
             cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s",
+            flexShrink: 0, whiteSpace: "nowrap",
           }}
           onMouseEnter={e => { e.target.style.background = "rgba(255,255,255,0.06)"; e.target.style.color = "#fff" }}
           onMouseLeave={e => { e.target.style.background = "none"; e.target.style.color = "rgba(255,255,255,0.5)" }}
           >{t}</button>
         ))}
+        <a href="/careers.html" style={{
+          background: "none", border: "none", color: "rgba(201,251,0,0.6)",
+          fontSize: 12, fontWeight: 500, padding: "7px 14px", borderRadius: 100,
+          textDecoration: "none", fontFamily: "inherit", transition: "all 0.2s",
+          flexShrink: 0, whiteSpace: "nowrap",
+        }}
+        onMouseEnter={e => { e.target.style.background = "rgba(201,251,0,0.08)"; e.target.style.color = "#c9fb00" }}
+        onMouseLeave={e => { e.target.style.background = "none"; e.target.style.color = "rgba(201,251,0,0.6)" }}
+        >Careers</a>
       </nav>
 
       {/* Hero */}
       <header style={{
-        padding: "140px 24px 80px", textAlign: "center",
+        padding: "calc(env(safe-area-inset-top, 0px) + 140px) 24px 80px", textAlign: "center",
         opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(20px)",
         transition: "all 1.2s cubic-bezier(0.16,1,0.3,1)",
       }}>

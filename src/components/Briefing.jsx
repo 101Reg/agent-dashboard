@@ -31,7 +31,7 @@ export default function Briefing({ nightShift, sessions }) {
     )
   }
 
-  const { status, lastRun, findings, evalCanaries, proposalCount, actionRequired, frictionTrends, domainFrequency, agentUsage, skillGaps, memoryHealth, proposalTrackRecord } = nightShift
+  const { status, lastRun, findings, evalCanaries, proposalCount, actionRequired, frictionTrends, domainFrequency, agentUsage, skillGaps, memoryHealth, proposalTrackRecord, benchmarks } = nightShift
   const statusColor = STATUS_COLORS[status] || STATUS_COLORS.GREEN
 
   return (
@@ -240,6 +240,46 @@ export default function Briefing({ nightShift, sessions }) {
                   </div>
                 </div>
               ))}
+            </div>
+          </Card>
+        </Reveal>
+      )}
+
+      {/* Benchmarks */}
+      {benchmarks && benchmarks.length > 0 && (
+        <Reveal delay={230}>
+          <Card style={{ padding: 24, marginBottom: 12 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: 16 }}>
+              Benchmarks
+            </div>
+            <div style={{ display: "grid", gap: 10 }}>
+              {benchmarks.map((b, i) => {
+                const isPivot = b.status.includes("PIVOT")
+                const isWatch = b.status.includes("WATCH")
+                const dotColor = isPivot ? STATUS_COLORS.RED : isWatch ? STATUS_COLORS.YELLOW : STATUS_COLORS.GREEN
+                return (
+                  <div key={i} style={{
+                    display: "flex", justifyContent: "space-between", alignItems: "center",
+                    padding: "10px 14px", background: "rgba(255,255,255,0.02)", borderRadius: 10,
+                    border: isPivot ? "1px solid rgba(245,123,123,0.2)" : "1px solid transparent",
+                  }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <div style={{ width: 7, height: 7, borderRadius: "50%", background: dotColor, flexShrink: 0 }} />
+                      <div>
+                        <div style={{ fontSize: 13, fontWeight: 600 }}>{b.name}</div>
+                        <div style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginTop: 2 }}>{b.detail}</div>
+                      </div>
+                    </div>
+                    <span style={{
+                      fontSize: 10, fontWeight: 700, letterSpacing: "0.06em",
+                      color: dotColor, padding: "2px 8px", borderRadius: 100,
+                      background: isPivot ? "rgba(245,123,123,0.1)" : isWatch ? "rgba(245,176,123,0.1)" : "rgba(83,225,111,0.1)",
+                    }}>
+                      {isPivot ? "PIVOT" : isWatch ? "WATCH" : "OK"}
+                    </span>
+                  </div>
+                )
+              })}
             </div>
           </Card>
         </Reveal>

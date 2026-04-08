@@ -467,7 +467,7 @@
     },
     "proposalCount": 0,
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-04-08\n\n## Status: GREEN\n\n## Key Findings\n- Memory cluster consolidation candidate: feedback_xano (5 files, 5 recent)\n- ERROR: Phase B: Could not parse developer TC1 eval output\n- ERROR: Phase B: Could not parse chief-of-staff TC1 eval output\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- css: 2 sessions\n- dashboard: 2 sessions\n- git: 2 sessions\n- react: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 4 sessions\n- chief-of-staff: 3 sessions\n- fact-checker: 1 sessions\n- research: 1 sessions\n- reviewer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | ERROR | ? | — | parse error |\n| chief-of-staff | ERROR | ? | — | parse error |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n123 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNone — system healthy\n\n## Proposal Track Record\nNo history\n\n## Action Required: NO\n",
+    "briefingContent": "# Night Shift — 2026-04-08\n\n## Status: GREEN\n\n## Key Findings\n- Memory cluster consolidation candidate: feedback_xano (5 files, 5 recent)\n- ERROR: Phase B: Could not parse developer TC1 eval output\n- ERROR: Phase B: Could not parse chief-of-staff TC1 eval output\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- css: 2 sessions\n- dashboard: 2 sessions\n- git: 2 sessions\n- react: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 4 sessions\n- chief-of-staff: 3 sessions\n- fact-checker: 1 sessions\n- research: 1 sessions\n- reviewer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | ERROR | ? | — | parse error |\n| chief-of-staff | ERROR | ? | — | parse error |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n123 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNone — system healthy\n\n## Proposal Track Record\nNo history\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | Insufficient data | 0/0 accepted |\n| Eval Signal | OK | 0 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [
       {
         "domain": "agents",
@@ -536,7 +536,24 @@
         }
       ]
     },
-    "proposalTrackRecord": null
+    "proposalTrackRecord": null,
+    "benchmarks": [
+      {
+        "name": "Friction Rate",
+        "status": "OK",
+        "detail": "0 fix_attempts (14d)"
+      },
+      {
+        "name": "Proposal Hit Rate",
+        "status": "Insufficient data",
+        "detail": "0/0 accepted"
+      },
+      {
+        "name": "Eval Signal",
+        "status": "OK",
+        "detail": "0 consecutive all-pass runs"
+      }
+    ]
   },
-  "lastUpdated": "2026-04-08T05:28:02.803Z"
+  "lastUpdated": "2026-04-08T05:52:50.348Z"
 }

@@ -324,10 +324,23 @@ async function getNightShift() {
     proposalTrackRecord = { total: lines.length, accepted, pending, rejected: lines.filter(l => l.status === 'rejected').length };
   }
 
+  // Parse benchmarks from briefing
+  let benchmarks = null;
+  const benchmarkMatch = briefing.match(/## Benchmarks\n\|[^\n]+\n\|[^\n]+\n([\s\S]*?)(?=\n## )/);
+  if (benchmarkMatch) {
+    benchmarks = [];
+    for (const line of benchmarkMatch[1].split('\n')) {
+      const cols = line.split('|').map(c => c.trim()).filter(Boolean);
+      if (cols.length >= 3 && cols[0] !== '---') {
+        benchmarks.push({ name: cols[0], status: cols[1], detail: cols[2] });
+      }
+    }
+  }
+
   return {
     status, lastRun: dateDirs[0], findings, evalCanaries,
     frictionTrends, proposalCount, actionRequired, briefingContent: briefing,
-    domainFrequency, agentUsage, skillGaps, memoryHealth, proposalTrackRecord,
+    domainFrequency, agentUsage, skillGaps, memoryHealth, proposalTrackRecord, benchmarks,
   };
 }
 

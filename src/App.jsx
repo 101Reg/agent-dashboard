@@ -9,8 +9,9 @@ import MemoryGraph from './components/MemoryGraph'
 import SelfImprovementLog from './components/SelfImprovementLog'
 import Timeline from './components/Timeline'
 import SystemOverview from './components/SystemOverview'
+import Briefing from './components/Briefing'
 
-const NAV_ITEMS = ["Overview", "Metrics", "Log", "Timeline", "Brain", "Agents"]
+const NAV_ITEMS = ["Overview", "Briefing", "Metrics", "Log", "Timeline", "Brain", "Agents"]
 
 export default function App() {
   const [data, setData] = useState(null)
@@ -132,6 +133,9 @@ export default function App() {
 
         {/* System Overview */}
         <SystemOverview data={data} />
+
+        {/* Night Shift Briefing */}
+        <Briefing nightShift={data.nightShift} sessions={sessions} />
 
         {/* Metrics */}
         <section id="metrics" style={{ marginBottom: 100, scrollMarginTop: 80 }}>

@@ -57,7 +57,7 @@ async function countDirs(path, filter) {
 
 const AGENT_META = {
   'chief-of-staff': { alias: 'Hero', icon: '🎯', type: 'Strategic' },
-  'developer': { alias: null, icon: '⚡', type: 'Implementation' },
+  'developer': { alias: 'Tony', icon: '⚡', type: 'Implementation' },
   'debug': { alias: 'Gil', icon: '🔍', type: 'Diagnostic' },
   'product': { alias: 'Ye', icon: '🧭', type: 'Strategy' },
   'data': { alias: 'Elon', icon: '📊', type: 'Analytical' },
@@ -66,8 +66,9 @@ const AGENT_META = {
   'legal': { alias: 'Johnny', icon: '⚖️', type: 'Compliance' },
   'customer-success': { alias: 'Taylor', icon: '💬', type: 'Operations' },
   'research': { alias: null, icon: '🧬', type: 'Intelligence' },
-  'fact-checker': { alias: null, icon: '✅', type: 'Quality' },
+  'fact-checker': { alias: 'Tucker', icon: '✅', type: 'Quality' },
   'reviewer': { alias: null, icon: '🔎', type: 'Quality' },
+  'night-shift': { alias: 'Bruce', icon: '🌙', type: 'Autonomous' },
 };
 
 async function getAgents() {
@@ -223,6 +224,75 @@ async function getSystemCounts() {
   };
 }
 
+// ─── Night Shift ─────────────────────────────────────────────────────────────
+
+const NIGHT_SHIFT_DIR = join(CLAUDE_DIR, 'night-shift');
+
+async function getNightShift() {
+  const entries = await safeReaddir(NIGHT_SHIFT_DIR);
+  const dateDirs = entries.filter(e => /^\d{4}-\d{2}-\d{2}$/.test(e)).sort().reverse();
+  if (dateDirs.length === 0) return null;
+
+  const latestDir = join(NIGHT_SHIFT_DIR, dateDirs[0]);
+  const briefing = await safeReadFile(join(latestDir, 'briefing.md'));
+  const evalResults = await safeReadFile(join(latestDir, 'eval-results.json'));
+  const logAnalysis = await safeReadFile(join(latestDir, 'log-analysis.json'));
+  if (!briefing) return null;
+
+  const statusMatch = briefing.match(/## Status:\s*(GREEN|YELLOW|RED)/);
+  const status = statusMatch ? statusMatch[1] : 'GREEN';
+  const actionRequired = /Action Required:\s*YES/.test(briefing);
+
+  const findings = [];
+  const findingsMatch = briefing.match(/## Key Findings\n([\s\S]*?)(?=\n## )/);
+  if (findingsMatch) {
+    for (const line of findingsMatch[1].split('\n')) {
+      const trimmed = line.replace(/^- /, '').trim();
+      if (trimmed) findings.push(trimmed);
+    }
+  }
+
+  const evalCanaries = [];
+  if (evalResults) {
+    for (const line of evalResults.trim().split('\n')) {
+      try {
+        const entry = JSON.parse(line);
+        evalCanaries.push({
+          agent: entry.agent, score: entry.score || null,
+          baseline: entry.baseline || null, delta: entry.delta || 0,
+          status: entry.error ? 'error' : (entry.delta < -1.0 ? 'DEGRADED' : entry.delta < -0.5 ? 'watch' : 'ok'),
+          error: entry.error || null,
+        });
+      } catch {}
+    }
+  }
+
+  let frictionTrends = null;
+  if (logAnalysis) {
+    try {
+      const analysis = JSON.parse(logAnalysis);
+      if (analysis.seven_day) {
+        frictionTrends = {
+          fix_attempts: analysis.seven_day.fix_attempts || 0,
+          escalations: analysis.seven_day.escalations || 0,
+          hook_catches: analysis.seven_day.hook_catches || 0,
+        };
+      }
+    } catch {}
+  }
+
+  const proposals = await safeReadFile(join(latestDir, 'proposals.md'));
+  let proposalCount = 0;
+  if (proposals && !/No proposals needed/.test(proposals)) {
+    proposalCount = (proposals.match(/^## Proposal|^### Proposal|^[0-9]+\./gm) || []).length;
+  }
+
+  return {
+    status, lastRun: dateDirs[0], findings, evalCanaries,
+    frictionTrends, proposalCount, actionRequired, briefingContent: briefing,
+  };
+}
+
 // ─── Timeline ────────────────────────────────────────────────────────────────
 
 const TIMELINE = [
@@ -241,12 +311,13 @@ const TIMELINE = [
 async function main() {
   console.log('Syncing Agent OS data...');
 
-  const [agents, memory, metrics, selfImprovement, system] = await Promise.all([
+  const [agents, memory, metrics, selfImprovement, system, nightShift] = await Promise.all([
     getAgents(),
     getMemory(),
     getMetrics(),
     getSelfImprovement(),
     getSystemCounts(),
+    getNightShift(),
   ]);
 
   const data = {
@@ -258,6 +329,7 @@ async function main() {
     system,
     timeline: TIMELINE,
     selfImprovement,
+    nightShift,
     lastUpdated: new Date().toISOString(),
   };
 

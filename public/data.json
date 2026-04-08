@@ -436,9 +436,9 @@
   ],
   "nightShift": {
     "status": "GREEN",
-    "lastRun": "2026-04-07",
+    "lastRun": "2026-04-08",
     "findings": [
-      "System healthy — no issues detected",
+      "Memory cluster consolidation candidate: feedback_xano (5 files, 5 recent)",
       "ERROR: Phase B: Could not parse developer TC1 eval output",
       "ERROR: Phase B: Could not parse chief-of-staff TC1 eval output"
     ],
@@ -467,7 +467,76 @@
     },
     "proposalCount": 0,
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-04-07\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n- ERROR: Phase B: Could not parse developer TC1 eval output\n- ERROR: Phase B: Could not parse chief-of-staff TC1 eval output\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | ERROR | ? | — | parse error |\n| chief-of-staff | ERROR | ? | — | parse error |\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNone — system healthy\n\n## Action Required: NO\n"
+    "briefingContent": "# Night Shift — 2026-04-08\n\n## Status: GREEN\n\n## Key Findings\n- Memory cluster consolidation candidate: feedback_xano (5 files, 5 recent)\n- ERROR: Phase B: Could not parse developer TC1 eval output\n- ERROR: Phase B: Could not parse chief-of-staff TC1 eval output\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- css: 2 sessions\n- dashboard: 2 sessions\n- git: 2 sessions\n- react: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 4 sessions\n- chief-of-staff: 3 sessions\n- fact-checker: 1 sessions\n- research: 1 sessions\n- reviewer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | ERROR | ? | — | parse error |\n| chief-of-staff | ERROR | ? | — | parse error |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n123 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNone — system healthy\n\n## Proposal Track Record\nNo history\n\n## Action Required: NO\n",
+    "domainFrequency": [
+      {
+        "domain": "agents",
+        "count": 2
+      },
+      {
+        "domain": "css",
+        "count": 2
+      },
+      {
+        "domain": "dashboard",
+        "count": 2
+      },
+      {
+        "domain": "git",
+        "count": 2
+      },
+      {
+        "domain": "react",
+        "count": 2
+      },
+      {
+        "domain": "bash",
+        "count": 1
+      },
+      {
+        "domain": "career",
+        "count": 1
+      },
+      {
+        "domain": "cron",
+        "count": 1
+      }
+    ],
+    "agentUsage": [
+      {
+        "agent": "developer",
+        "sessions": 4
+      },
+      {
+        "agent": "chief-of-staff",
+        "sessions": 3
+      },
+      {
+        "agent": "fact-checker",
+        "sessions": 1
+      },
+      {
+        "agent": "research",
+        "sessions": 1
+      },
+      {
+        "agent": "reviewer",
+        "sessions": 1
+      }
+    ],
+    "skillGaps": [],
+    "memoryHealth": {
+      "total": 123,
+      "consolidationCandidates": [
+        {
+          "prefix": "feedback_xano",
+          "count": 5,
+          "recent_14d": 5,
+          "flag": "consolidation_candidate"
+        }
+      ]
+    },
+    "proposalTrackRecord": null
   },
-  "lastUpdated": "2026-04-08T04:38:43.902Z"
+  "lastUpdated": "2026-04-08T05:28:02.803Z"
 }

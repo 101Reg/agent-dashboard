@@ -287,9 +287,47 @@ async function getNightShift() {
     proposalCount = (proposals.match(/^## Proposal|^### Proposal|^[0-9]+\./gm) || []).length;
   }
 
+  // Parse new learning data
+  let domainFrequency = [];
+  let agentUsage = [];
+  let skillGaps = [];
+  let memoryHealth = null;
+  let proposalTrackRecord = null;
+
+  if (logAnalysis) {
+    try {
+      const analysis = JSON.parse(logAnalysis);
+      domainFrequency = (analysis.domain_frequency_7d || []).slice(0, 8);
+      agentUsage = (analysis.agent_usage_7d || []).slice(0, 8);
+    } catch {}
+  }
+
+  const skillGapsFile = await safeReadFile(join(latestDir, 'skill-gaps.json'));
+  if (skillGapsFile) {
+    try { skillGaps = JSON.parse(skillGapsFile).gaps || []; } catch {}
+  }
+
+  const memoryTrendsFile = await safeReadFile(join(latestDir, 'memory-trends.json'));
+  if (memoryTrendsFile) {
+    try {
+      const mt = JSON.parse(memoryTrendsFile);
+      const consolidation = (mt.clusters || []).filter(c => c.flag === 'consolidation_candidate');
+      memoryHealth = { total: mt.total_memories || 0, consolidationCandidates: consolidation };
+    } catch {}
+  }
+
+  const ledgerFile = await safeReadFile(join(NIGHT_SHIFT_DIR, 'proposal-ledger.jsonl'));
+  if (ledgerFile && ledgerFile.trim()) {
+    const lines = ledgerFile.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    const accepted = lines.filter(l => l.status?.startsWith('accepted')).length;
+    const pending = lines.filter(l => l.status === 'pending').length;
+    proposalTrackRecord = { total: lines.length, accepted, pending, rejected: lines.filter(l => l.status === 'rejected').length };
+  }
+
   return {
     status, lastRun: dateDirs[0], findings, evalCanaries,
     frictionTrends, proposalCount, actionRequired, briefingContent: briefing,
+    domainFrequency, agentUsage, skillGaps, memoryHealth, proposalTrackRecord,
   };
 }
 

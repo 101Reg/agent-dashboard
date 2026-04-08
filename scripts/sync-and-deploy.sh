@@ -11,7 +11,8 @@ cd "$DASHBOARD_DIR"
 echo "Syncing Agent OS data..."
 node scripts/sync-data.js
 
-echo "Deploying to Vercel..."
-vercel deploy --prod --yes 2>&1 | grep -E "(Production|Aliased|error)" || true
-
-echo "Dashboard deployed."
+echo "Committing and pushing to trigger Vercel deploy..."
+git add -A
+git diff --cached --quiet && echo "No changes to push." && exit 0
+git commit -m "Sync Agent OS data — $(date '+%Y-%m-%d %H:%M')"
+git push origin main 2>&1 && echo "Dashboard deployed via git push." || echo "WARNING: git push failed — Vercel deploy not triggered."

@@ -43,13 +43,13 @@ export default function App() {
   const sessions = data.metrics?.sessions || []
   const hasMetrics = sessions.length > 0
   const metricCards = hasMetrics ? [
-    { key: "fix", label: "Fix Attempts", current: sessions[sessions.length - 1].fixAttempts, history: sessions.map(s => s.fixAttempts), unit: "this session" },
-    { key: "esc", label: "Escalations", current: sessions[sessions.length - 1].escalations, history: sessions.map(s => s.escalations), unit: "this session" },
-    { key: "reex", label: "Re-explanations", current: sessions[sessions.length - 1].reExplanations, history: sessions.map(s => s.reExplanations), unit: "this session" },
-    { key: "gaps", label: "Capability Gaps", current: sessions[sessions.length - 1].capabilityGaps, history: sessions.map(s => s.capabilityGaps), unit: "identified" },
-    { key: "toil", label: "Toil Events", current: sessions[sessions.length - 1].toilEvents, history: sessions.map(s => s.toilEvents), unit: "this session" },
-    { key: "hooks", label: "Hook Catches", current: sessions[sessions.length - 1].hookCatches || 0, history: sessions.map(s => s.hookCatches || 0), unit: "this session" },
-  ] : []
+    { key: "fix", label: "Fix Attempts", history: sessions.map(s => s.fixAttempts) },
+    { key: "esc", label: "Escalations", history: sessions.map(s => s.escalations) },
+    { key: "reex", label: "Re-explanations", history: sessions.map(s => s.reExplanations) },
+    { key: "gaps", label: "Capability Gaps", history: sessions.map(s => s.capabilityGaps) },
+    { key: "toil", label: "Toil Events", history: sessions.map(s => s.toilEvents) },
+    { key: "hooks", label: "Hook Catches", history: sessions.map(s => s.hookCatches || 0) },
+  ].map(m => ({ ...m, current: m.history.reduce((a, b) => a + b, 0), unit: `across ${sessions.length} sessions` })) : []
 
   return (
     <div style={{
@@ -170,7 +170,7 @@ export default function App() {
               <Reveal delay={200}>
                 <Card style={{ padding: 32 }}>
                   <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 4, letterSpacing: "-0.01em" }}>Session-over-Session</h3>
-                  <p style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", marginBottom: 24 }}>All five metrics trending down. That's the story.</p>
+                  <p style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", marginBottom: 24 }}>All six metrics trending down. That's the story.</p>
                   <TrendChart sessions={sessions} />
                 </Card>
               </Reveal>

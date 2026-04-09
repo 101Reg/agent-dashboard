@@ -286,12 +286,12 @@
     "hasData": true
   },
   "memory": {
-    "total": 93,
+    "total": 95,
     "byType": {
       "feedback": 56,
       "project": 16,
       "user": 14,
-      "reference": 6,
+      "reference": 8,
       "other": 0
     },
     "labels": {
@@ -389,9 +389,11 @@
       ],
       "reference": [
         "reference_claude_cli",
+        "reference_dream_consolidation",
         "reference_edge_docs",
         "reference_electron",
         "reference_hooks",
+        "reference_instrument_hierarchy",
         "reference_key_decisions",
         "reference_workflow_tools"
       ]
@@ -405,10 +407,16 @@
   },
   "timeline": [
     {
+      "date": "Apr 9, 2026",
+      "title": "Library Reorganization",
+      "desc": "Reorganized Agent OS memory (124→92 files), Slimmed CLAUDE.md from 75 to 46 lines, Scoped 13 Mirror memories to project dir",
+      "active": true
+    },
+    {
       "date": "Apr 8, 2026",
       "title": "4 sessions",
       "desc": "Taught Bruce to learn from sessions, Added session digest pipeline to /learn, Built dynamic eval generation",
-      "active": true
+      "active": false
     },
     {
       "date": "Apr 7, 2026",
@@ -477,6 +485,12 @@
       "text": "Library reorganization baseline — measure against this in 2 weeks",
       "context": "Post-reorganization system metrics: CLAUDE.md=46 lines, rules=6 files, global_memory=92 files, mirror_memory=18 files, MEMORY_index=96 lines, hooks=5, skills=34, hook_catches_baseline=11, developer_eval=4.8, cos_eval=4.6",
       "high": true
+    },
+    {
+      "date": "2026-04-09",
+      "text": "Stop hook caught unverified research claims twice; stale Mac Mini memory required manual correction → 2 lessons saved",
+      "context": "library-reorganization",
+      "high": false
     },
     {
       "date": "2026-04-09",
@@ -652,5 +666,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-09T15:24:09.065Z"
+  "lastUpdated": "2026-04-09T15:31:48.804Z"
 }

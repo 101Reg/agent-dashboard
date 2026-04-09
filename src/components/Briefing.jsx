@@ -8,6 +8,16 @@ const STATUS_COLORS = {
   RED: "#F57B7B",
 }
 
+const PROPOSAL_CATEGORY_COLORS = {
+  self_improvement:     { color: "#7BB3F5", bg: "rgba(123,179,245,0.12)" },
+  regression:           { color: "#F57B7B", bg: "rgba(245,123,123,0.12)" },
+  skill_gap:            { color: "#F5B07B", bg: "rgba(245,176,123,0.12)" },
+  memory_consolidation: { color: "#53e16f", bg: "rgba(83,225,111,0.12)"  },
+  eval_evolution:       { color: "#C07BF5", bg: "rgba(192,123,245,0.12)" },
+  agent_methodology:    { color: "#7BE8F5", bg: "rgba(123,232,245,0.12)" },
+  default:              { color: "rgba(255,255,255,0.5)", bg: "rgba(255,255,255,0.06)" },
+}
+
 export default function Briefing({ nightShift, sessions }) {
   if (!nightShift || !nightShift.lastRun) {
     return (
@@ -31,7 +41,7 @@ export default function Briefing({ nightShift, sessions }) {
     )
   }
 
-  const { status, lastRun, findings, evalCanaries, proposalCount, actionRequired, frictionTrends, domainFrequency, agentUsage, skillGaps, memoryHealth, proposalTrackRecord, benchmarks } = nightShift
+  const { status, lastRun, findings, evalCanaries, proposalCount, proposals, actionRequired, frictionTrends, domainFrequency, agentUsage, skillGaps, memoryHealth, proposalTrackRecord, benchmarks } = nightShift
   const statusColor = STATUS_COLORS[status] || STATUS_COLORS.GREEN
 
   return (
@@ -286,17 +296,54 @@ export default function Briefing({ nightShift, sessions }) {
       )}
 
       {/* Proposals */}
-      {proposalCount > 0 && (
+      {proposals && proposals.length > 0 && (
         <Reveal delay={240}>
           <Card style={{ padding: 24, border: "1px solid rgba(245,176,123,0.15)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: STATUS_COLORS.YELLOW }}>
-                {proposalCount} Proposal{proposalCount > 1 ? "s" : ""} Pending
-              </div>
+            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: STATUS_COLORS.YELLOW, marginBottom: 16 }}>
+              {proposals.length} Proposal{proposals.length > 1 ? "s" : ""} Pending
             </div>
-            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.6, margin: 0 }}>
-              The Night Shift detected issues and drafted improvement proposals. Review in your next session.
-            </p>
+            <div style={{ display: "grid", gap: 12 }}>
+              {proposals.map((p, i) => {
+                const pill = PROPOSAL_CATEGORY_COLORS[p.category] || PROPOSAL_CATEGORY_COLORS.default
+                return (
+                  <div key={p.id || i} style={{
+                    padding: "14px 16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderRadius: 12,
+                    border: "1px solid rgba(255,255,255,0.04)",
+                  }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                      <span style={{
+                        fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase",
+                        padding: "2px 8px", borderRadius: 100,
+                        background: pill.bg, color: pill.color,
+                      }}>
+                        {p.category.replace(/_/g, " ")}
+                      </span>
+                      {p.id && (
+                        <span style={{ fontSize: 10, color: "rgba(255,255,255,0.2)", fontFamily: "monospace" }}>{p.id}</span>
+                      )}
+                    </div>
+                    {p.problem && (
+                      <div style={{ marginBottom: p.solution ? 6 : 0 }}>
+                        <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)" }}>Problem </span>
+                        <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>
+                          {p.problem.length > 120 ? p.problem.slice(0, 120) + "…" : p.problem}
+                        </span>
+                      </div>
+                    )}
+                    {p.solution && (
+                      <div>
+                        <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)" }}>Solution </span>
+                        <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>
+                          {p.solution.length > 120 ? p.solution.slice(0, 120) + "…" : p.solution}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
           </Card>
         </Reveal>
       )}

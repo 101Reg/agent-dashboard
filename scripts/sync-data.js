@@ -281,11 +281,28 @@ async function getNightShift() {
     } catch {}
   }
 
-  const proposals = await safeReadFile(join(latestDir, 'proposals.md'));
-  let proposalCount = 0;
-  if (proposals && !/No proposals needed/.test(proposals)) {
-    proposalCount = (proposals.match(/^## Proposal|^### Proposal|^[0-9]+\./gm) || []).length;
+  const proposalsMd = await safeReadFile(join(latestDir, 'proposals.md'));
+
+  // Parse proposals.md — split on Bruce's P-YYYY-MM-DD-NNN IDs
+  const parsedProposals = [];
+  if (proposalsMd && !/No proposals needed|failed to generate/i.test(proposalsMd)) {
+    const sections = proposalsMd.split(/(?=\bP-\d{4}-\d{2}-\d{2}-\d+\b)/);
+    for (const section of sections) {
+      const idMatch = section.match(/\bP-\d{4}-\d{2}-\d{2}-\d+\b/);
+      if (!idMatch) continue;
+      const id = idMatch[0];
+      const cat = (section.match(/\*{0,2}Category:\*{0,2}\s*(.+)/i) || [])[1];
+      const prob = (section.match(/\*{0,2}Problem:\*{0,2}\s*(.+)/i) || [])[1];
+      const sol = (section.match(/\*{0,2}Solution:\*{0,2}\s*(.+)/i) || [])[1];
+      parsedProposals.push({
+        id,
+        category: cat ? cat.trim() : 'unknown',
+        problem: prob ? prob.trim() : '',
+        solution: sol ? sol.trim() : '',
+      });
+    }
   }
+  const proposalCount = parsedProposals.length;
 
   // Parse new learning data
   let domainFrequency = [];
@@ -322,6 +339,12 @@ async function getNightShift() {
     const accepted = lines.filter(l => l.status?.startsWith('accepted')).length;
     const pending = lines.filter(l => l.status === 'pending').length;
     proposalTrackRecord = { total: lines.length, accepted, pending, rejected: lines.filter(l => l.status === 'rejected').length };
+    // Fall back to pending ledger entries if proposals.md had nothing
+    if (parsedProposals.length === 0) {
+      lines.filter(l => l.status === 'pending').forEach(l => {
+        parsedProposals.push({ id: l.id || '', category: l.category || 'unknown', problem: l.summary || '', solution: '' });
+      });
+    }
   }
 
   // Parse benchmarks from briefing
@@ -339,7 +362,7 @@ async function getNightShift() {
 
   return {
     status, lastRun: dateDirs[0], findings, evalCanaries,
-    frictionTrends, proposalCount, actionRequired, briefingContent: briefing,
+    frictionTrends, proposalCount, proposals: parsedProposals, actionRequired, briefingContent: briefing,
     domainFrequency, agentUsage, skillGaps, memoryHealth, proposalTrackRecord, benchmarks,
   };
 }

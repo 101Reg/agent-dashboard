@@ -251,14 +251,24 @@
         "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0
+      },
+      {
+        "name": "dashboard-gaps-fix",
+        "date": "2026-04-08",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 120,
+    "total": 122,
     "byType": {
-      "feedback": 78,
+      "feedback": 80,
       "project": 22,
       "user": 15,
       "reference": 4,
@@ -282,6 +292,7 @@
         "feedback_chat_rate_limits",
         "feedback_claude_p_testing",
         "feedback_claude_repo_gitignore",
+        "feedback_dashboard_staleness",
         "feedback_data_tagging",
         "feedback_description_routing",
         "feedback_design_concept_first",
@@ -329,6 +340,7 @@
         "feedback_schema_pressure_test",
         "feedback_secondary_sources",
         "feedback_skill_evals",
+        "feedback_ssh_setup",
         "feedback_strip_llm_markdown",
         "feedback_subagent_bash",
         "feedback_test_clear_paths",
@@ -403,7 +415,7 @@
   "timeline": [
     {
       "date": "Apr 8, 2026",
-      "title": "2 sessions",
+      "title": "3 sessions",
       "desc": "Taught Bruce to learn from sessions, Added session digest pipeline to /learn, Built dynamic eval generation",
       "active": true
     },
@@ -483,6 +495,12 @@
     },
     {
       "date": "2026-04-08",
+      "text": "SSH setup failed after 20+ minutes. Dashboard staleness not auto-detected — Hero caught it manually. → 2 lessons saved",
+      "context": "dashboard-gaps-fix",
+      "high": false
+    },
+    {
+      "date": "2026-04-08",
       "text": "Eval scoring regex produces score=0 for all responses, causing false RED system status",
       "context": "Bruce proposal P-2026-04-08-001",
       "high": true
@@ -537,15 +555,22 @@
     }
   ],
   "nightShift": {
-    "status": "RED",
+    "status": "YELLOW",
     "lastRun": "2026-04-08",
     "findings": [
-      "Memory cluster consolidation candidate: feedback_electron (5 files, 5 recent)",
-      "Memory cluster consolidation candidate: feedback_xano (5 files, 5 recent)",
-      "DEGRADED: developer TC1 scored 0 (baseline 5.0, delta -5.0)",
-      "DEGRADED: chief-of-staff TC1 scored 0 (baseline 5.0, delta -5.0)"
+      "Skill gap: hooks — Stop hook infinite loop and PreToolUse false-blocking of newly created files eac",
+      "Skill gap: external-data-access — Research agent earned a friction attribution in career-identity when LinkedIn re",
+      "Skill gap: bash-environment-compatibility — Bash 3.2 on the Mac Mini lacks associative arrays, requiring a full awk rewrite"
     ],
     "evalCanaries": [
+      {
+        "agent": "developer",
+        "score": 5,
+        "baseline": 5,
+        "delta": 0,
+        "status": "ok",
+        "error": null
+      },
       {
         "agent": "developer",
         "score": null,
@@ -569,9 +594,28 @@
       "hook_catches": 10
     },
     "proposalCount": 4,
-    "proposals": [],
-    "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-04-08\n\n## Status: RED\n\n## Key Findings\n- Memory cluster consolidation candidate: feedback_electron (5 files, 5 recent)\n- Memory cluster consolidation candidate: feedback_xano (5 files, 5 recent)\n- DEGRADED: developer TC1 scored 0 (baseline 5.0, delta -5.0)\n- DEGRADED: chief-of-staff TC1 scored 0 (baseline 5.0, delta -5.0)\n\n## What Hero Worked On (7-day)\n- agents: 3 sessions\n- dashboard: 3 sessions\n- git: 3 sessions\n- react: 3 sessions\n- bash: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 5 sessions\n- chief-of-staff: 4 sessions\n- reviewer: 2 sessions\n- fact-checker: 1 sessions\n- research: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n|  |  |  |  | ok |\n|  |  |  |  | ok |\n| developer | ? | ? | ? | ok |\n| developer | ? | ? | ? | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n127 total files, 2 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nThe night-shift agent is read-only — I cannot write files directly (`permissionMode: plan`). The proposals are my deliverable. Here they are in full:\n\n---\n\n# Proposals — 2026-04-08\n\n---\n\n## P-2026-04-08-001\n\n**Category:** `self_improvement`\n\n**Problem: Eval scoring regex produces score=0 for all responses, causing false RED system status**\n\nTonight's eval-results.json shows both developer and chief-of-staff TC1 scored `0` with delta `−5.0`. The raw criteria scores tell a completely different story:\n\n- **chief-of-staff TC1**: c1=5, c2=4, c3=5, c4=4, c5=5 → actual avg **4.6** (delta −0.4, GREEN)\n- **developer TC1**: c1=3, c2=5, c3=1, c4=1, c5=1 → actual avg **2.2** (delta −2.8, genuinely DEGRADED)\n\nThe root cause is in `run_canary_eval()` at `/Users/workshop/.claude/hooks/night-shift.sh` **line 428**:\n\n```bash\nSCORE_JSON=$(echo \"$RESULT\" | grep -o '{[^}]*}' | head -1 || echo \"\")\n```\n\nThe regex `{[^}]*}` matches from `{` to the **first** `}` it finds. Since the scoring response contains nested JSON (`\"scores\": {\"c1\": N, ...}`), the match ends at the *inner* object's closing brace — producing a truncated, invalid fragment. `jq -r '.avg // 0'` on line 432 then fails to parse and returns `0`.\n\nTwo real consequences:\n1. **False positive**: chief-of-staff is healthy (avg 4.6) but reported as catastrophically degraded\n2. **Masked real regression**: developer IS degraded (avg 2.2) but with wrong numbers (0/−5.0 instead of 2.2/−2.8)\n\n**Solution:** Replace line 428 in `night-shift.sh` with a Python-based nested JSON extractor, and update the AVG calculation on line 432 to compute from criteria scores if the `avg` field is absent:\n\n```bash\n# Line 428 replacement:\nSCORE_JSON=$(echo \"$RESULT\" | python3 -c \"\nimport sys, json\ntext = sys.stdin.read()\ni = 0\nwhile i < len(text):\n    if text[i] == '{':\n        depth = 0\n        for j in range(i, len(text)):\n            if text[j] == '{': depth += 1\n            elif text[j] == '}':\n                depth -= 1\n                if depth == 0:\n                    candidate = text[i:j+1]\n                    try:\n                        obj = json.loads(candidate)\n                        if 'scores' in obj:\n                            print(candidate)\n                            sys.exit(0)\n                    except json.JSONDecodeError:\n                        pass\n                    break\n    i += 1\n\" 2>/dev/null || echo \"\")\n\n# Line 432 replacement:\nAVG=$(echo \"$SCORE_JSON\" | python3 -c \"\nimport sys, json\ntry:\n    obj = json.load(sys.stdin)\n    avg = obj.get('avg') or (sum(obj['scores'].values()) / len(obj['scores']))\n    print(round(avg, 2))\nexcept:\n    print(0)\n\" 2>/dev/null || echo \"0\")\n```\n\n**Impact:** Eval scores reflect actual agent performance. FALSE RED nights eliminated. chief-of-staff correctly reads GREEN; developer's real regression (−2.8) is reported accurately. System status signal becomes trustworthy.\n\n**Risk:** `python3` availability assumed — confirmed present per the script's verified environment header. Adds ~5ms latency per eval. If Claude returns non-JSON prose, the `|| echo \"\"` fallback triggers the existing parse-error path cleanly.\n\n---\n\n## P-2026-04-08-002\n\n**Category:** `self_improvement`\n\n**Problem: Phase B2 skill gap detection has never worked — multi-line JSON always fails to parse**\n\nEvery run produces `{\"gaps\":[],\"summary\":\"Could not parse skill gap analysis\"}`. The parser at `/Users/workshop/.claude/hooks/night-shift.sh` lines 570–572:\n\n```bash\nGAP_JSON=$(echo \"$GAP_RESULT\" | grep -o '{[^}]*\"gaps\"[^}]*\\[.*\\][^}]*}' | head -1)\nif [ -z \"$GAP_JSON\" ]; then\n  GAP_JSON=$(echo \"$GAP_RESULT\" | grep -o '{.*}' | tail -1)\nfi\n```\n\nTwo failure modes:\n1. The primary pattern requires `\"gaps\"` inside `{[^}]*}` — structurally impossible with any nesting.\n2. The fallback `grep -o '{.*}'` is single-line only (no `-z` flag). Claude's JSON response spans multiple lines, so `{.*}` never matches the full object.\n\nPhase B2 has never returned a real result. With 5 digest sessions, 16 active domains, and `research` showing 100% friction attribution this week, there is meaningful signal available — it's just being discarded on every run.\n\n**Solution:** Replace lines 570–572 with a Python multi-line extractor (same pattern as P-001):\n\n```bash\nGAP_JSON=$(echo \"$GAP_RESULT\" | python3 -c \"\nimport sys, json\ntext = sys.stdin.read()\ni = 0\nwhile i < len(text):\n    if text[i] == '{':\n        depth = 0\n        for j in range(i, len(text)):\n            if text[j] == '{': depth += 1\n            elif text[j] == '}':\n                depth -= 1\n                if depth == 0:\n                    candidate = text[i:j+1]\n                    try:\n                        obj = json.loads(candidate)\n                        if 'gaps' in obj:\n                            print(candidate)\n                            sys.exit(0)\n                    except json.JSONDecodeError:\n                        pass\n                    break\n    i += 1\n\" 2>/dev/null || echo \"\")\n```\n\nFile: `/Users/workshop/.claude/hooks/night-shift.sh`, lines 570–572.\n\n**Impact:** Phase B2 becomes functional for the first time. A phase that has consumed budget on every run without producing output will begin delivering real skill gap analysis.\n\n**Risk:** If Claude wraps JSON in markdown fences, the extractor still works because it scans for `{` character by character, skipping any preamble. Same `python3` dependency as P-001.\n\n---\n\n## P-2026-04-08-003\n\n**Category:** `memory_consolidation`\n\n**Problem: `feedback_electron` and `feedback_xano` clusters have hit 5 files each with no synthesis**\n\nMemory analysis flags two consolidation candidates:\n- **`feedback_electron`** — 5 files, all created within the last 14 days\n- **`feedback_xano`** — 5 files, all created within the last 14 days\n\nAt 5 discrete feedback files each, both clusters indicate Hero has iterated on these topics repeatedly without a consolidation pass. Agents loading context must read 5 separate files to reconstruct what a single reference document would convey instantly. The threshold for flagging is `count ≥ 5 AND recent_14d ≥ 2` — both clusters meet it at 5/5.\n\n**Solution:** Hero consolidates each cluster into a canonical reference file:\n\n- `feedback_electron_*.md` (×5) → `reference_electron.md` in the project memory directory\n- `feedback_xano_*.md` (×5) → `reference_xano.md` in the project memory directory\n\nSuggested structure for each:\n```markdown\n# [Topic] Reference\n**Consolidated**: 2026-04-08 from 5 feedback files\n**Status**: active\n\n## What Works\n## Known Issues / Gotchas\n## Current Approach\n## Decisions Made\n## Open Questions\n```\n\nAfter consolidating and verifying the reference doc is complete, delete the 5 source files.\n\n**Impact:** Reduced memory load time per session. More coherent, durable guidance on Electron and Xano topics rather than five separate learnings that may conflict or repeat each other.\n\n**Risk:** Some specificity may be lost in synthesis. Mitigation: Hero reviews the consolidated doc before deleting source files and keeps originals for 7 days as backup before permanent deletion.\n\n---\n\n## P-2026-04-08-004\n\n**Category:** `regression`\n\n**Problem: Developer agent genuinely degraded on 3 of 5 TC1 criteria — requires investigation before next session**\n\nSetting aside the scoring bug (P-001), the developer TC1 raw criteria scores are real:\n\n| Criteria | Score | Baseline | Status |\n|----------|-------|----------|--------|\n| c1 | 3 | 5 | Degraded |\n| c2 | 5 | 5 | Healthy |\n| c3 | **1** | 5 | **Missing entirely** |\n| c4 | **1** | 5 | **Missing entirely** |\n| c5 | **1** | 5 | **Missing entirely** |\n\n**Actual avg: 2.2. Actual delta: −2.8. Actual status: DEGRADED** (threshold is >1.0 drop).\n\nThe canary prompt is `\"Add error handling to the main API route handler.\"` — a contained, well-scoped task. Criteria c3, c4, c5 correspond to pattern-matching before implementing, proposing a minimal solution, and enumerating dependencies before writing (per the developer eval file structure). These are the exact behaviors that prevent the 10 hook_catches we've seen this week (developer accounts for 4 of the 5 chief-of-staff + developer friction events).\n\nThe agent is passing clarifying questions (c2=5) but then skipping the pre-write verification sequence entirely on a task that appears simple. This pattern — good intake, degraded execution discipline — suggests the agent's methodology section may have been altered, or that a \"simple task\" prompt bypasses the verification heuristic.\n\n**Solution:**\n1. `git log --oneline /Users/workshop/.claude/agents/developer.md` — check for recent changes to the agent definition\n2. Run TC1 manually in a fresh session to confirm: use the exact canary prompt `\"Add error handling to the main API route handler.\"` and score against the developer eval criteria\n3. If confirmed, reinforce the pre-write checklist in `developer.md` — specifically c3 (pattern-match before implementing), c4 (propose minimal scope first), c5 (enumerate new dependencies explicitly before introducing them)\n\nFile: `/Users/workshop/.claude/agents/developer.md`\nEval: `/Users/workshop/.claude/agents/evals/developer-evals.md` (TC1)\n\n**Impact:** Restores developer to baseline. Directly reduces hook_catches — the 10 catches in 7 days align with the criteria that are failing (unverified writes, over-scoped solutions, surprise dependencies).\n\n**Risk:** Tightening the pre-write checklist may increase friction on genuinely trivial tasks. Suggested mitigation: add the qualification \"on any task touching existing production code\" to keep the verification discipline targeted rather than universal.\n\n## Proposal Track Record\n4 total, 0\n0 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | Insufficient data | 0/0 accepted |\n| Eval Signal | OK | 1 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "proposals": [
+      {
+        "id": "P-2026-04-08-001",
+        "category": "self_improvement",
+        "problem": "Dynamic evals are run but never scored — DYN_RESULT is silently discarded every night",
+        "solution": "Replace the manual `DYN_RESULT` block (lines 546–555 in `night-shift.sh`) with a call to the existing scoring infrastructure. Since `run_canary_eval` expects a static baseline, use `4.0` as the dynamic eval floor:"
+      },
+      {
+        "id": "P-2026-04-08-003",
+        "category": "agent_methodology",
+        "problem": "Developer agent re-learns the same hook edge cases from scratch every session — fixes exist in memory but not in operating context",
+        "solution": "Add a `## Hook Edge Cases` section to `/Users/workshop/.claude/agents/developer.md` that encodes both failure modes as pre-task awareness:"
+      },
+      {
+        "id": "P-2026-04-08-004",
+        "category": "memory_consolidation",
+        "problem": "Memory consolidation phase never finds candidates — threshold-based detection misses semantically related clusters with different key prefixes",
+        "solution": "Add a second consolidation detection pass to the memory trends phase in `night-shift.sh`. After the per-prefix count analysis, run a keyword overlap check across all `feedback_*` prefixes to identify clusters that share a meaningful substring:"
+      }
+    ],
+    "actionRequired": false,
+    "briefingContent": "# Night Shift — 2026-04-08\n\n## Status: YELLOW\n\n## Key Findings\n- Skill gap: hooks — Stop hook infinite loop and PreToolUse false-blocking of newly created files eac\n- Skill gap: external-data-access — Research agent earned a friction attribution in career-identity when LinkedIn re\n- Skill gap: bash-environment-compatibility — Bash 3.2 on the Mac Mini lacks associative arrays, requiring a full awk rewrite \n\n## What Hero Worked On (7-day)\n- agents: 3 sessions\n- dashboard: 3 sessions\n- git: 3 sessions\n- react: 3 sessions\n- bash: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 5 sessions\n- chief-of-staff: 4 sessions\n- reviewer: 2 sessions\n- fact-checker: 1 sessions\n- research: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 5.0 | 5.0 | 0 | ok |\n| chief-of-staff | 4.6 | 5.0 | -0.4 | ok |\n| developer | ? | ? | ? | ok |\n| developer | ? | ? | ? | ok |\n\n## Skill Gaps\n- **hooks** (high): Encode known hook edge cases (loop-prevention scoping, new-file exemption logic) into a shared hook configuration layer or spec document so the developer agent no longer encounters them cold each session — the fixes exist but aren't being retained operationally.\n- **external-data-access** (medium): Give the research agent an explicit fallback ladder for blocked domains (cached snapshots, alternative sources, structured screenshot escalation) so workarounds are codified protocol rather than improvised — and add a known-blocked-domains reference memory to prevent repeated re-discovery.\n- **bash-environment-compatibility** (low): Add a pre-execution environment checklist to the developer agent's context (target shell version, machine-specific usernames, PATH assumptions) so bash scripts default to POSIX-safe patterns and environment mismatches surface before runtime rather than causing mid-session rewrites.\n\n## Memory Health\n115 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\n---\n\n# Proposals — 2026-04-08\n\n---\n\n## P-2026-04-08-001\n\n**Category:** `self_improvement`\n\n**Problem: Dynamic evals are run but never scored — DYN_RESULT is silently discarded every night**\n\nIn `eval-results.json`, lines 3–4 show DYN-1 and DYN-2 with no `score`, `baseline`, or `delta` fields — just metadata. This isn't a display issue; it's the pipeline. In `night-shift.sh` lines 546–553:\n\n```bash\nDYN_RESULT=$($CLAUDE -p \"$DYN_PROMPT\" \\\n  --agent developer \\\n  --output-format text \\\n  --max-budget-usd \"$BUDGET_PER_EVAL\" \\\n  --bare 2>/dev/null | tail -20)\n\n# Score the result (simplified — full scoring needs a separate call)\necho \"{\\\"agent\\\":\\\"developer\\\",\\\"prompt_id\\\":\\\"DYN-$((i+1))\\\",\\\"source\\\":\\\"dynamic\\\"...}\" >> ...\n```\n\nThe comment says *\"full scoring needs a separate call\"* — that call was never added. `DYN_RESULT` is fetched (consuming budget), written to a variable, and then **thrown away**. The existing `run_canary_eval` function on line 403 does exactly what's needed: it takes a prompt, runs it, scores the response, and appends a scored JSON record. The dynamic phase just never calls it.\n\nThis means every dynamic eval generated since Phase B-Dynamic was introduced has been a budget expenditure with zero analytical return.\n\n**Solution:** Replace the manual `DYN_RESULT` block (lines 546–555 in `night-shift.sh`) with a call to the existing scoring infrastructure. Since `run_canary_eval` expects a static baseline, use `4.0` as the dynamic eval floor:\n\n```bash\n# Replace lines 546-554:\nif [ -n \"$DYN_PROMPT\" ] && [ \"$DYN_PROMPT\" != \"null\" ]; then\n  echo \"$(date):   Scoring dynamic eval $((i+1)): ${DYN_PROMPT:0:60}...\"\n  run_canary_eval \"developer\" \"$DYN_PROMPT\" \"DYN-$((i+1))\" \"4.0\"\nfi\n```\n\nThe `run_canary_eval` function already handles: running the agent, calling the judge, parsing the score, writing the scored JSON line, and appending to FINDINGS if degraded. No new infrastructure needed.\n\n**Impact:** Dynamic evals become real signal. Instead of 2 scored canaries per night (developer TC1, chief-of-staff TC1), we get 4. Regressions in recently-worked domains (agents, dashboard, hooks) are now catchable the same night they emerge.\n\n**Risk:** `run_canary_eval` uses a fixed 5-criteria scoring rubric against the developer eval file — dynamic prompts may not map cleanly to all 5 criteria, creating noise in per-criteria scores. Mitigation: interpret dynamic evals by overall avg only (not per-criterion), which the function already supports.\n\n---\n\n## P-2026-04-08-002\n\n**Category:** `self_improvement`\n\n**Problem: Dynamic eval domain selection ignores skill gaps — highest-severity gap domain \"hooks\" has zero eval coverage**\n\nPhase B-Dynamic selects domains from `domain_frequency_7d[:2]` (line 513 of `night-shift.sh`): the two most-used domains this week. Tonight that produced `agents, dashboard` — generating DYN-1 (retry mechanism) and DYN-2 (responsive layout). Both reasonable. Neither touches hooks.\n\nMeanwhile, `skill-gaps.json` flags **hooks** as **high severity**, with evidence spanning two sessions, three memory clusters (`feedback_hook ×2`, `feedback_hooks ×1`, `feedback_pretooluse ×1`), and 10 hook_catches in 7 days. The developer agent is reliably encountering this domain but the eval suite has no coverage for it. We won't know if the agent's hook handling is improving or degrading because we're never testing it.\n\nThe two data sources — domain frequency and skill gap severity — exist in the same `$OUT_DIR` directory and are never cross-referenced.\n\n**Solution:** Modify the domain selection block (lines 513–517 in `night-shift.sh`) to blend frequency with gap severity. Add the top skill gap domain to the generation prompt when gaps exist:\n\n```bash\n# After line 513:\nTOP_DOMAINS=$(jq -r '.domain_frequency_7d[:2][]?.domain // empty' \"$OUT_DIR/log-analysis.json\" 2>/dev/null)\nGAP_DOMAIN=$(jq -r '.gaps[0].domain // empty' \"$OUT_DIR/skill-gaps.json\" 2>/dev/null)\n\n# Inject gap domain into the list if it's not already present and a gap was detected\nif [ -n \"$GAP_DOMAIN\" ] && ! echo \"$TOP_DOMAINS\" | grep -q \"$GAP_DOMAIN\"; then\n  TOP_DOMAINS=$(printf \"%s\\n%s\" \"$TOP_DOMAINS\" \"$GAP_DOMAIN\" | head -3)\nfi\n```\n\nAlso update the generation prompt (line 520) to distinguish eval purpose: \"1 prompt testing $GAP_DOMAIN edge-case awareness, 1 prompt testing $DOMAIN_LIST task quality.\"\n\n**Impact:** Each night generates at least one eval in the domain where the agent is currently weakest. Skill gaps that are detected by B2 automatically get eval coverage in the same run — closing the loop between gap detection and eval validation. Over time, the eval suite naturally grows toward the system's real weaknesses rather than its most-frequent activities.\n\n**Risk:** If the skill gap domain is something abstract (e.g., \"external-data-access\"), the prompt generator may produce vague evals. Mitigation: keep the frequency-based prompts as the primary pair and treat the gap-domain prompt as a third bonus eval, only appended when `severity == \"high\"`.\n\n---\n\n## P-2026-04-08-003\n\n**Category:** `agent_methodology`\n\n**Problem: Developer agent re-learns the same hook edge cases from scratch every session — fixes exist in memory but not in operating context**\n\nSkill gap analysis (high severity, `skill-gaps.json` line 4–8) identifies two specific, recurring hook failures:\n1. **Stop hook infinite loop** — triggered when the developer agent's own tool calls satisfy the Stop hook condition\n2. **PreToolUse false-blocking of newly created files** — hook fires on files that don't exist yet, blocking creation\n\nThese have appeared in two separate sessions (`night-shift-build`, `night-shift-learning`). Memory clusters `feedback_hook (×2)`, `feedback_hooks (×1)`, and `feedback_pretooluse (×1)` confirm the lessons were learned — but they exist as scattered feedback files, not as operational guidance in the developer agent's working context. The agent encounters these edge cases fresh each session, re-solves them mid-session, creates another feedback memory, and the cycle repeats.\n\nThis is the root cause behind developer's 2/5 friction sessions and 10 hook_catches this week. The knowledge exists in the system; it's just not in the right place.\n\n**Solution:** Add a `## Hook Edge Cases` section to `/Users/workshop/.claude/agents/developer.md` that encodes both failure modes as pre-task awareness:\n\n```markdown\n## Hook Edge Cases\n\nBefore writing any hook-adjacent code, be aware of two known failure patterns:\n\n**1. Stop hook infinite loop**\n- Cause: The Stop hook condition matches on tool calls made during hook resolution itself\n- Prevention: Scope Stop hook triggers to user-turn events only, not internal tool calls. Add a `HOOK_RUNNING` env guard to prevent re-entrant execution.\n- Test: After writing a Stop hook, verify it cannot be triggered by its own Claude invocation.\n\n**2. PreToolUse false-blocking of new files**\n- Cause: PreToolUse hook fires before `Write` on a path that doesn't exist yet; existence checks fail\n- Prevention: Exempt paths from PreToolUse blocking when the tool is `Write` and the file does not currently exist (`[ ! -f \"$FILE\" ]`)\n- Test: Verify the hook allows first-write to a new path before enforcing read-before-write rules.\n```\n\nThese are permanent, structural lessons — not project-specific. They belong in the agent definition, not in transient memory.\n\n**Impact:** Developer agent stops re-discovering these edge cases mid-session. Friction attribution in the hooks domain trends down. Hook_catches that are caused by loop/blocking bugs (the majority this week) stop occurring. The 2 feedback_hook memory clusters stop growing, because the lesson is already in operating context.\n\n**Risk:** If hook behavior changes in a future Claude Code release, the documented edge case guidance could become stale. Mitigation: note the Claude Code version at time of documentation (`# Verified: Claude Code ~2026-04`), and flag for review if hook-related friction re-emerges after an update.\n\n---\n\n## P-2026-04-08-004\n\n**Category:** `memory_consolidation`\n\n**Problem: Memory consolidation phase never finds candidates — threshold-based detection misses semantically related clusters with different key prefixes**\n\n`memory-trends.json` shows 115 memories with every single cluster flagged `\"stable\"` — no consolidation candidates surfaced tonight or any prior night. The consolidation logic fires on `count ≥ N within a single prefix`. But the hook knowledge is distributed across **three separate prefixes** that the detector treats as unrelated:\n\n| Prefix | Count | Flag |\n|--------|-------|------|\n| `feedback_hook` | 2 | stable |\n| `feedback_hooks` | 1 | stable |\n| `feedback_pretooluse` | 1 | stable |\n\nThese four memories all address the same operational topic (Claude hook system edge cases). Individually, none crosses the consolidation threshold. Together, they're a clear candidate for synthesis into `reference_hooks.md` — a document that would immediately reduce per-session re-learning (see P-003 above).\n\nThe same pattern applies to the external-data cluster: `feedback_webflow (×3)` and `feedback_verify (×3)` are semantically adjacent (both concern unreliable external source access) but live under different prefixes.\n\nThe consolidation phase is blind to this because it operates on prefix-by-prefix counts with no semantic grouping pass.\n\n**Solution:** Add a second consolidation detection pass to the memory trends phase in `night-shift.sh`. After the per-prefix count analysis, run a keyword overlap check across all `feedback_*` prefixes to identify clusters that share a meaningful substring:\n\n```bash\n# After existing per-prefix analysis:\n# Group feedback_ prefixes by shared keyword (strip \"feedback_\" and look for overlap)\nFEEDBACK_KEYS=$(echo \"$CLUSTERS\" | jq -r '.[] | select(.prefix | startswith(\"feedback_\")) | .prefix' 2>/dev/null)\n\n# Flag groups where 2+ prefixes share a root keyword OR where combined count ≥ 4\n# e.g., feedback_hook + feedback_hooks + feedback_pretooluse → root \"hook\"\n# Output as consolidation candidates with suggested reference key\n```\n\nIn practice, the simplest reliable version: flag any set of `feedback_*` prefixes where stripping `feedback_` leaves a word that is a **prefix or substring** of another cluster's stripped name, and the combined count ≥ 3. This catches `hook`/`hooks`/`pretooluse` (where \"hook\" is root) without requiring LLM involvement.\n\nThe output should surface to the briefing as: *\"Consolidation candidate: feedback_hook + feedback_hooks + feedback_pretooluse (combined: 4, topic: hooks) → suggest reference_hooks.md\"*\n\n**Impact:** Consolidation phase starts finding real candidates after being blind for (apparently) the system's entire run history. The hook-related memories get synthesized into a single reference document, reducing context load and ending the re-learning cycle. The approach generalizes to any topic where memories accumulate under variant prefixes.\n\n**Risk:** Substring matching may produce false groupings (e.g., `feedback_agent` and `feedback_agency` would match on \"agent\"). Mitigation: require combined count ≥ 4 before flagging, and present candidates as human-review suggestions rather than automatic merges — the same model as the existing consolidation flow.\n\n## Proposal Track Record\n8 total, 4 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | ?% | 4/4 accepted |\n| Eval Signal | OK | 1 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [
       {
         "domain": "agents",
@@ -628,28 +672,34 @@
         "sessions": 1
       }
     ],
-    "skillGaps": [],
+    "skillGaps": [
+      {
+        "domain": "hooks",
+        "evidence": "Stop hook infinite loop and PreToolUse false-blocking of newly created files each appeared in two separate sessions (night-shift-build, night-shift-learning). Developer agent carries friction attribution in 2 of 5 sessions, and memory clusters feedback_hook (×2) and feedback_pretooluse (×1) confirm repeated re-learning of the same edge cases rather than durable fixes.",
+        "severity": "high",
+        "suggestion": "Encode known hook edge cases (loop-prevention scoping, new-file exemption logic) into a shared hook configuration layer or spec document so the developer agent no longer encounters them cold each session — the fixes exist but aren't being retained operationally."
+      },
+      {
+        "domain": "external-data-access",
+        "evidence": "Research agent earned a friction attribution in career-identity when LinkedIn returned HTTP 999 (bot-block), forcing improvised screenshot workarounds. Memory clusters feedback_webflow (×3) and feedback_verify (×3) suggest repeated uncertainty about which external sources are reachable, pointing to a systemic gap rather than a one-off incident.",
+        "severity": "medium",
+        "suggestion": "Give the research agent an explicit fallback ladder for blocked domains (cached snapshots, alternative sources, structured screenshot escalation) so workarounds are codified protocol rather than improvised — and add a known-blocked-domains reference memory to prevent repeated re-discovery."
+      },
+      {
+        "domain": "bash-environment-compatibility",
+        "evidence": "Bash 3.2 on the Mac Mini lacks associative arrays, requiring a full awk rewrite mid-session in night-shift-learning; a username mismatch required a sed fix. Bash, cron, and infrastructure domains appear across two recent sessions but no agent is designated for environment-compatibility concerns. feedback_bash32 is an isolated memory cluster, suggesting the lesson isn't propagating.",
+        "severity": "low",
+        "suggestion": "Add a pre-execution environment checklist to the developer agent's context (target shell version, machine-specific usernames, PATH assumptions) so bash scripts default to POSIX-safe patterns and environment mismatches surface before runtime rather than causing mid-session rewrites."
+      }
+    ],
     "memoryHealth": {
-      "total": 127,
-      "consolidationCandidates": [
-        {
-          "prefix": "feedback_electron",
-          "count": 5,
-          "recent_14d": 5,
-          "flag": "consolidation_candidate"
-        },
-        {
-          "prefix": "feedback_xano",
-          "count": 5,
-          "recent_14d": 5,
-          "flag": "consolidation_candidate"
-        }
-      ]
+      "total": 115,
+      "consolidationCandidates": []
     },
     "proposalTrackRecord": {
-      "total": 4,
+      "total": 7,
       "accepted": 4,
-      "pending": 0,
+      "pending": 3,
       "rejected": 0
     },
     "benchmarks": [
@@ -660,8 +710,8 @@
       },
       {
         "name": "Proposal Hit Rate",
-        "status": "Insufficient data",
-        "detail": "0/0 accepted"
+        "status": "?%",
+        "detail": "4/4 accepted"
       },
       {
         "name": "Eval Signal",
@@ -670,5 +720,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-09T02:01:30.360Z"
+  "lastUpdated": "2026-04-09T03:19:34.667Z"
 }

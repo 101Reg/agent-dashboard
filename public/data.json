@@ -189,7 +189,8 @@
         "escalations": 0,
         "reExplanations": 1,
         "capabilityGaps": 0,
-        "toilEvents": 0
+        "toilEvents": 0,
+        "hookCatches": 9
       },
       {
         "name": "career-identity",
@@ -198,7 +199,8 @@
         "escalations": 0,
         "reExplanations": 0,
         "capabilityGaps": 0,
-        "toilEvents": 0
+        "toilEvents": 0,
+        "hookCatches": 0
       },
       {
         "name": "agent-os-public",
@@ -207,7 +209,8 @@
         "escalations": 0,
         "reExplanations": 0,
         "capabilityGaps": 0,
-        "toilEvents": 0
+        "toilEvents": 0,
+        "hookCatches": 0
       },
       {
         "name": "night-shift-build",
@@ -216,7 +219,8 @@
         "escalations": 0,
         "reExplanations": 0,
         "capabilityGaps": 0,
-        "toilEvents": 0
+        "toilEvents": 0,
+        "hookCatches": 0
       },
       {
         "name": "agent-os-review",
@@ -225,7 +229,8 @@
         "escalations": 0,
         "reExplanations": 0,
         "capabilityGaps": 0,
-        "toilEvents": 0
+        "toilEvents": 0,
+        "hookCatches": 1
       },
       {
         "name": "night-shift-learning",
@@ -234,7 +239,8 @@
         "escalations": 0,
         "reExplanations": 0,
         "capabilityGaps": 0,
-        "toilEvents": 0
+        "toilEvents": 0,
+        "hookCatches": 0
       },
       {
         "name": "night-shift-setup",
@@ -243,7 +249,8 @@
         "escalations": 0,
         "reExplanations": 0,
         "capabilityGaps": 0,
-        "toilEvents": 0
+        "toilEvents": 0,
+        "hookCatches": 0
       }
     ],
     "hasData": true
@@ -663,5 +670,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-09T01:50:03.174Z"
+  "lastUpdated": "2026-04-09T01:54:01.899Z"
 }

@@ -48,6 +48,7 @@ export default function App() {
     { key: "reex", label: "Re-explanations", current: sessions[sessions.length - 1].reExplanations, history: sessions.map(s => s.reExplanations), unit: "this session" },
     { key: "gaps", label: "Capability Gaps", current: sessions[sessions.length - 1].capabilityGaps, history: sessions.map(s => s.capabilityGaps), unit: "identified" },
     { key: "toil", label: "Toil Events", current: sessions[sessions.length - 1].toilEvents, history: sessions.map(s => s.toilEvents), unit: "this session" },
+    { key: "hooks", label: "Hook Catches", current: sessions[sessions.length - 1].hookCatches || 0, history: sessions.map(s => s.hookCatches || 0), unit: "this session" },
   ] : []
 
   return (

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-const METRIC_LABELS = ["Fix Attempts", "Escalation Rate", "Re-explanations", "Capability Gaps", "Toil Events"]
-const COLORS = ["#7B9FF5", "#F5B07B", "#53e16f", "#F5D27B", "#B07BF5"]
+const METRIC_LABELS = ["Fix Attempts", "Escalations", "Re-explanations", "Capability Gaps", "Toil Events", "Hook Catches"]
+const COLORS = ["#7B9FF5", "#F5B07B", "#53e16f", "#F5D27B", "#B07BF5", "#F57B7B"]
 
 export default function TrendChart({ sessions }) {
   const [selected, setSelected] = useState(sessions.length - 1)
@@ -16,8 +16,8 @@ export default function TrendChart({ sessions }) {
   }
 
   const S = 320, cx = S / 2, cy = S / 2, R = 120
-  const n = 5
-  const keys = ['fixAttempts', 'escalations', 'reExplanations', 'capabilityGaps', 'toilEvents']
+  const n = 6
+  const keys = ['fixAttempts', 'escalations', 'reExplanations', 'capabilityGaps', 'toilEvents', 'hookCatches']
   const maxVals = keys.map(k => Math.max(...sessions.map(s => s[k]), 1))
 
   const getPoint = (metricIdx, val, radius) => {

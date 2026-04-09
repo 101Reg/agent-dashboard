@@ -147,7 +147,7 @@ async function getMetrics() {
       sessionMap.set(d.session, {
         name: d.session,
         date: d.date,
-        fixAttempts: 0, escalations: 0, reExplanations: 0, capabilityGaps: 0, toilEvents: 0,
+        fixAttempts: 0, escalations: 0, reExplanations: 0, capabilityGaps: 0, toilEvents: 0, hookCatches: 0,
       });
     }
   }
@@ -158,13 +158,14 @@ async function getMetrics() {
     const events = perfContent.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
     for (const e of events) {
       const s = e.session || 'unknown';
-      if (!sessionMap.has(s)) sessionMap.set(s, { name: s, date: e.date, fixAttempts: 0, escalations: 0, reExplanations: 0, capabilityGaps: 0, toilEvents: 0 });
+      if (!sessionMap.has(s)) sessionMap.set(s, { name: s, date: e.date, fixAttempts: 0, escalations: 0, reExplanations: 0, capabilityGaps: 0, toilEvents: 0, hookCatches: 0 });
       const entry = sessionMap.get(s);
       if (e.event === 'fix_attempt') entry.fixAttempts++;
       else if (e.event === 'escalation') entry.escalations++;
       else if (e.event === 're_explanation') entry.reExplanations++;
       else if (e.event === 'capability_gap') entry.capabilityGaps++;
       else if (e.event === 'toil') entry.toilEvents++;
+      else if (e.event === 'hook_catch') entry.hookCatches++;
     }
   }
 

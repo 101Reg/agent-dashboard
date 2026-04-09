@@ -474,26 +474,26 @@
     "proposals": [
       {
         "id": "P-2026-04-08-001",
-        "category": "`self_improvement`",
-        "problem": "Eval scoring regex produces score=0 for all responses, causing false RED system status**",
+        "category": "self_improvement",
+        "problem": "Eval scoring regex produces score=0 for all responses, causing false RED system status",
         "solution": "Replace line 428 in `night-shift.sh` with a Python-based nested JSON extractor, and update the AVG calculation on line 432 to compute from criteria scores if the `avg` field is absent:"
       },
       {
         "id": "P-2026-04-08-002",
-        "category": "`self_improvement`",
-        "problem": "Phase B2 skill gap detection has never worked — multi-line JSON always fails to parse**",
+        "category": "self_improvement",
+        "problem": "Phase B2 skill gap detection has never worked — multi-line JSON always fails to parse",
         "solution": "Replace lines 570–572 with a Python multi-line extractor (same pattern as P-001):"
       },
       {
         "id": "P-2026-04-08-003",
-        "category": "`memory_consolidation`",
-        "problem": "`feedback_electron` and `feedback_xano` clusters have hit 5 files each with no synthesis**",
+        "category": "memory_consolidation",
+        "problem": "feedback_electron` and `feedback_xano` clusters have hit 5 files each with no synthesis",
         "solution": "Hero consolidates each cluster into a canonical reference file:"
       },
       {
         "id": "P-2026-04-08-004",
-        "category": "`regression`",
-        "problem": "Developer agent genuinely degraded on 3 of 5 TC1 criteria — requires investigation before next session**",
+        "category": "regression",
+        "problem": "Developer agent genuinely degraded on 3 of 5 TC1 criteria — requires investigation before next session",
         "solution": "1. `git log --oneline /Users/workshop/.claude/agents/developer.md` — check for recent changes to the agent definition"
       }
     ],
@@ -597,5 +597,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-09T01:01:49.881Z"
+  "lastUpdated": "2026-04-09T01:04:04.312Z"
 }

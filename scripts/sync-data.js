@@ -294,11 +294,12 @@ async function getNightShift() {
       const cat = (section.match(/\*{0,2}Category:\*{0,2}\s*(.+)/i) || [])[1];
       const prob = (section.match(/\*{0,2}Problem:\*{0,2}\s*(.+)/i) || [])[1];
       const sol = (section.match(/\*{0,2}Solution:\*{0,2}\s*(.+)/i) || [])[1];
+      const clean = s => s ? s.trim().replace(/^[`*]+|[`*]+$/g, '').trim() : '';
       parsedProposals.push({
         id,
-        category: cat ? cat.trim() : 'unknown',
-        problem: prob ? prob.trim() : '',
-        solution: sol ? sol.trim() : '',
+        category: clean(cat) || 'unknown',
+        problem: clean(prob),
+        solution: clean(sol),
       });
     }
   }

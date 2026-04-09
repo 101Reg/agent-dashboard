@@ -444,27 +444,9 @@
     "findings": [
       "Memory cluster consolidation candidate: feedback_electron (5 files, 5 recent)",
       "Memory cluster consolidation candidate: feedback_xano (5 files, 5 recent)",
-      "ERROR: Phase B: Could not parse developer TC1 eval output",
-      "ERROR: Phase B: Could not parse chief-of-staff TC1 eval output"
+      "ERROR: Phase B: Claude not authenticated — skipping all evals"
     ],
-    "evalCanaries": [
-      {
-        "agent": "developer",
-        "score": null,
-        "baseline": null,
-        "delta": 0,
-        "status": "error",
-        "error": "Could not parse eval output"
-      },
-      {
-        "agent": "chief-of-staff",
-        "score": null,
-        "baseline": null,
-        "delta": 0,
-        "status": "error",
-        "error": "Could not parse eval output"
-      }
-    ],
+    "evalCanaries": [],
     "frictionTrends": {
       "fix_attempts": 0,
       "escalations": 0,
@@ -472,7 +454,7 @@
     },
     "proposalCount": 0,
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-04-08\n\n## Status: GREEN\n\n## Key Findings\n- Memory cluster consolidation candidate: feedback_electron (5 files, 5 recent)\n- Memory cluster consolidation candidate: feedback_xano (5 files, 5 recent)\n- ERROR: Phase B: Could not parse developer TC1 eval output\n- ERROR: Phase B: Could not parse chief-of-staff TC1 eval output\n\n## What Hero Worked On (7-day)\n- agents: 3 sessions\n- dashboard: 3 sessions\n- git: 3 sessions\n- react: 3 sessions\n- bash: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 5 sessions\n- chief-of-staff: 4 sessions\n- reviewer: 2 sessions\n- fact-checker: 1 sessions\n- research: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | ERROR | ? | — | parse error |\n| chief-of-staff | ERROR | ? | — | parse error |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n127 total files, 2 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNone — system healthy\n\n## Proposal Track Record\nNo history\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | Insufficient data | 0/0 accepted |\n| Eval Signal | OK | 0 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "briefingContent": "# Night Shift — 2026-04-08\n\n## Status: GREEN\n\n## Key Findings\n- Memory cluster consolidation candidate: feedback_electron (5 files, 5 recent)\n- Memory cluster consolidation candidate: feedback_xano (5 files, 5 recent)\n- ERROR: Phase B: Claude not authenticated — skipping all evals\n\n## What Hero Worked On (7-day)\n- agents: 3 sessions\n- dashboard: 3 sessions\n- git: 3 sessions\n- react: 3 sessions\n- bash: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 5 sessions\n- chief-of-staff: 4 sessions\n- reviewer: 2 sessions\n- fact-checker: 1 sessions\n- research: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n127 total files, 2 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNone — system healthy\n\n## Proposal Track Record\nNo history\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | Insufficient data | 0/0 accepted |\n| Eval Signal | OK | 0 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [
       {
         "domain": "agents",
@@ -566,5 +548,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-09T00:17:55.069Z"
+  "lastUpdated": "2026-04-09T00:30:23.176Z"
 }

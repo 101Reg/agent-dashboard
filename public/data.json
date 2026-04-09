@@ -192,8 +192,53 @@
         "toilEvents": 0
       },
       {
+        "name": "career-identity",
+        "date": "2026-04-05",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0
+      },
+      {
+        "name": "agent-os-public",
+        "date": "2026-04-06",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0
+      },
+      {
+        "name": "night-shift-build",
+        "date": "2026-04-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0
+      },
+      {
         "name": "agent-os-review",
         "date": "2026-04-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0
+      },
+      {
+        "name": "night-shift-learning",
+        "date": "2026-04-08",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0
+      },
+      {
+        "name": "night-shift-setup",
+        "date": "2026-04-08",
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
@@ -350,48 +395,109 @@
   },
   "timeline": [
     {
+      "date": "Apr 8, 2026",
+      "title": "2 sessions",
+      "desc": "Taught Bruce to learn from sessions, Added session digest pipeline to /learn, Built dynamic eval generation",
+      "active": true
+    },
+    {
+      "date": "Apr 7, 2026",
+      "title": "Night Shift Build",
+      "desc": "Built Night Shift agent (Bruce), Fixed stop hook infinite loop, Added dashboard Briefing tab",
+      "active": false
+    },
+    {
+      "date": "Apr 6, 2026",
+      "title": "Agent Os Public",
+      "desc": "Prepared Agent OS repo for public release, Cleaned README of proprietary details, Added AOPs and escalation docs",
+      "active": false
+    },
+    {
       "date": "Apr 4-5, 2026",
       "title": "Security Hardening",
       "desc": "Auth flow fixes, feedback system, Webflow security audit",
-      "active": true
+      "active": false
     },
     {
       "date": "Mar 31 – Apr 3, 2026",
       "title": "Mirror Build 3.0",
-      "desc": "Full app shipped in 4 parallel sessions — check-ins, budgets, insights, onboarding"
+      "desc": "Full app shipped in 4 parallel sessions — check-ins, budgets, insights, onboarding",
+      "active": false
     },
     {
       "date": "Mar 30, 2026",
       "title": "Mirror JS Migration",
-      "desc": "Embeds moved to Cloudflare Pages, eliminated Webflow inline script limits"
+      "desc": "Embeds moved to Cloudflare Pages, eliminated Webflow inline script limits",
+      "active": false
     },
     {
       "date": "Mar 29, 2026",
       "title": "Agent OS v2.0",
-      "desc": "Harness alignment — 22 fixes across 3 tiers, all agents on official spec"
+      "desc": "Harness alignment — 22 fixes across 3 tiers, all agents on official spec",
+      "active": false
     },
     {
       "date": "Mar 25-28, 2026",
       "title": "Edge MVP",
-      "desc": "Multi-agent trading intelligence PWA — 5,000 lines, 70 files, 8 sprints"
+      "desc": "Multi-agent trading intelligence PWA — 5,000 lines, 70 files, 8 sprints",
+      "active": false
     },
     {
       "date": "Mar 22-24, 2026",
       "title": "38twelve Agency Launch",
-      "desc": "AI agency brand, intake chatbot, email system — shipped in 3 days"
+      "desc": "AI agency brand, intake chatbot, email system — shipped in 3 days",
+      "active": false
     },
     {
       "date": "Mar 21, 2026",
       "title": "Orchard Terminal",
-      "desc": "Frosted glass Electron terminal — built and packaged as .app in one day"
+      "desc": "Frosted glass Electron terminal — built and packaged as .app in one day",
+      "active": false
     },
     {
       "date": "Mar 20, 2026",
       "title": "Mirror Research Phase",
-      "desc": "Deep behavioral research — 8 sources, 29-page strategy doc"
+      "desc": "Deep behavioral research — 8 sources, 29-page strategy doc",
+      "active": false
     }
   ],
   "selfImprovement": [
+    {
+      "date": "2026-04-08",
+      "text": "Stop hook infinite loop (fixed). PreToolUse blocked new file imports (workaround: Write instead of Edit). Bash 3.2 lacks associative arrays (rewrote with awk). Mac Mini username mismatch (sed fix). → 4 lessons saved",
+      "context": "night-shift-learning",
+      "high": false
+    },
+    {
+      "date": "2026-04-08",
+      "text": "Multiple git rebase conflicts from two machines pushing to same repo → 4 lessons saved",
+      "context": "night-shift-setup",
+      "high": false
+    },
+    {
+      "date": "2026-04-08",
+      "text": "Eval scoring regex produces score=0 for all responses, causing false RED system status",
+      "context": "Bruce proposal P-2026-04-08-001",
+      "high": true
+    },
+    {
+      "date": "2026-04-08",
+      "text": "Phase B2 skill gap detection has never worked — multi-line JSON always fails to parse",
+      "context": "Bruce proposal P-2026-04-08-002",
+      "high": true
+    },
+    {
+      "date": "2026-04-08",
+      "text": "feedback_electron and feedback_xano clusters consolidated into reference docs",
+      "context": "Bruce proposal P-2026-04-08-003",
+      "high": true
+    },
+    {
+      "date": "2026-04-08",
+      "text": "Developer TC1 regression was eval setup issue — canary needs project context, switched to TC2",
+      "context": "Bruce proposal P-2026-04-08-004",
+      "high": true
+    },
     {
       "date": "2026-04-07",
       "text": "Stop hook infinite loop: evaluates full transcript history, re-flags corrected historical violation on every new response. Hook should scope evaluation to current response only.",
@@ -405,29 +511,22 @@
       "high": true
     },
     {
-      "date": "2026-04-03",
-      "text": "Build 3.0 audit caught subscription filter bug → fixed before tester exposure",
+      "date": "2026-04-07",
+      "text": "Stop hook entered infinite loop re-flagging corrected violations — scoped to latest response. PreToolUse hook blocked edits for newly created files. → 0 lessons saved",
+      "context": "night-shift-build",
       "high": false
     },
     {
-      "date": "2026-03-30",
-      "text": "Mirror JS migration eliminated inline script limits → moved to Cloudflare Pages",
+      "date": "2026-04-05",
+      "text": "4 PreToolUse hook catches on developer (API verification), 5 Stop hook catches on chief-of-staff (false certainty) → 3 lessons saved",
+      "context": "dashboard-build-1",
       "high": false
     },
     {
-      "date": "2026-03-29",
-      "text": "Agent OS harness alignment — 22 fixes across 3 tiers, all agents aligned to official spec",
-      "high": true
-    },
-    {
-      "date": "2026-03-29",
-      "text": "Detected recurring debug loops across sessions → built dedicated Debug agent (Gil)",
-      "high": true
-    },
-    {
-      "date": "2026-03-22",
-      "text": "Setup audit revealed trigger conflicts and stale tester counts → comprehensive system fix",
-      "high": true
+      "date": "2026-04-05",
+      "text": "LinkedIn returns 999 on WebFetch — asked for screenshots instead → 3 lessons saved",
+      "context": "career-identity",
+      "high": false
     }
   ],
   "nightShift": {
@@ -564,5 +663,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-09T01:39:40.089Z"
+  "lastUpdated": "2026-04-09T01:50:03.174Z"
 }

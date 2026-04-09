@@ -10,7 +10,9 @@ const AGENTS_DIR = join(CLAUDE_DIR, 'agents');
 const SKILLS_DIR = join(CLAUDE_DIR, 'skills');
 const RULES_DIR = join(CLAUDE_DIR, 'rules');
 const PERF_LOG = join(MEMORY_DIR, 'logs/os-performance.jsonl');
+const DIGEST_LOG = join(MEMORY_DIR, 'logs/session-digests.jsonl');
 const SETTINGS = join(CLAUDE_DIR, 'settings.json');
+const LEDGER = join(CLAUDE_DIR, 'night-shift/proposal-ledger.jsonl');
 const OUTPUT = join(import.meta.dirname, '..', 'public', 'data.json');
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -135,51 +137,50 @@ async function getMemory() {
 // ─── Performance Metrics ─────────────────────────────────────────────────────
 
 async function getMetrics() {
-  const content = await safeReadFile(PERF_LOG);
-  if (!content || !content.trim()) {
-    return { sessions: [], hasData: false };
-  }
-
-  const events = content.trim().split('\n').map(line => {
-    try { return JSON.parse(line); } catch { return null; }
-  }).filter(Boolean);
-
-  // Group by session
+  // Start with every session from digests (includes clean sessions)
+  const digestContent = await safeReadFile(DIGEST_LOG);
   const sessionMap = new Map();
-  for (const e of events) {
-    const s = e.session || 'unknown';
-    if (!sessionMap.has(s)) sessionMap.set(s, []);
-    sessionMap.get(s).push(e);
+
+  if (digestContent && digestContent.trim()) {
+    const digests = digestContent.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    for (const d of digests) {
+      sessionMap.set(d.session, {
+        name: d.session,
+        date: d.date,
+        fixAttempts: 0, escalations: 0, reExplanations: 0, capabilityGaps: 0, toilEvents: 0,
+      });
+    }
   }
 
-  const sessions = [];
-  for (const [name, evts] of sessionMap) {
-    sessions.push({
-      name,
-      date: evts[0]?.date || null,
-      fixAttempts: evts.filter(e => e.event === 'fix_attempt').length,
-      escalations: evts.filter(e => e.event === 'escalation').length,
-      reExplanations: evts.filter(e => e.event === 're_explanation').length,
-      capabilityGaps: evts.filter(e => e.event === 'capability_gap').length,
-      toilEvents: evts.filter(e => e.event === 'toil').length,
-    });
+  // Overlay friction counts from performance log
+  const perfContent = await safeReadFile(PERF_LOG);
+  if (perfContent && perfContent.trim()) {
+    const events = perfContent.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    for (const e of events) {
+      const s = e.session || 'unknown';
+      if (!sessionMap.has(s)) sessionMap.set(s, { name: s, date: e.date, fixAttempts: 0, escalations: 0, reExplanations: 0, capabilityGaps: 0, toilEvents: 0 });
+      const entry = sessionMap.get(s);
+      if (e.event === 'fix_attempt') entry.fixAttempts++;
+      else if (e.event === 'escalation') entry.escalations++;
+      else if (e.event === 're_explanation') entry.reExplanations++;
+      else if (e.event === 'capability_gap') entry.capabilityGaps++;
+      else if (e.event === 'toil') entry.toilEvents++;
+    }
   }
 
+  const sessions = Array.from(sessionMap.values()).sort((a, b) => (a.date || '').localeCompare(b.date || ''));
   return { sessions, hasData: sessions.length > 0 };
 }
 
 // ─── Self-Improvement Log ────────────────────────────────────────────────────
 
 async function getSelfImprovement() {
-  const content = await safeReadFile(PERF_LOG);
   const entries = [];
 
-  // Pull from performance log
-  if (content && content.trim()) {
-    const events = content.trim().split('\n').map(line => {
-      try { return JSON.parse(line); } catch { return null; }
-    }).filter(Boolean);
-
+  // Pull pattern detections and capability gaps from performance log
+  const perfContent = await safeReadFile(PERF_LOG);
+  if (perfContent && perfContent.trim()) {
+    const events = perfContent.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
     for (const e of events) {
       if (e.event === 'pattern_detected' || e.event === 'capability_gap') {
         entries.push({ date: e.date, text: e.detail, context: e.context, high: e.event === 'pattern_detected' });
@@ -187,16 +188,29 @@ async function getSelfImprovement() {
     }
   }
 
-  // Always include verified system milestones
-  const milestones = [
-    { date: '2026-03-29', text: 'Agent OS harness alignment — 22 fixes across 3 tiers, all agents aligned to official spec', high: true },
-    { date: '2026-03-29', text: 'Detected recurring debug loops across sessions → built dedicated Debug agent (Gil)', high: true },
-    { date: '2026-03-22', text: 'Setup audit revealed trigger conflicts and stale tester counts → comprehensive system fix', high: true },
-    { date: '2026-03-30', text: 'Mirror JS migration eliminated inline script limits → moved to Cloudflare Pages', high: false },
-    { date: '2026-04-03', text: 'Build 3.0 audit caught subscription filter bug → fixed before tester exposure', high: false },
-  ];
+  // Pull lessons learned from session digests
+  const digestContent = await safeReadFile(DIGEST_LOG);
+  if (digestContent && digestContent.trim()) {
+    const digests = digestContent.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    for (const d of digests) {
+      if (d.friction_summary && d.friction_summary !== 'None') {
+        entries.push({ date: d.date, text: d.friction_summary + ' → ' + (d.lessons_saved?.length || 0) + ' lessons saved', context: d.session, high: false });
+      }
+    }
+  }
 
-  return [...entries, ...milestones].sort((a, b) => b.date.localeCompare(a.date));
+  // Pull accepted proposals from Bruce
+  const ledgerContent = await safeReadFile(LEDGER);
+  if (ledgerContent && ledgerContent.trim()) {
+    const lines = ledgerContent.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    for (const l of lines) {
+      if (l.status?.startsWith('accepted')) {
+        entries.push({ date: l.date, text: l.summary, context: 'Bruce proposal ' + l.id, high: true });
+      }
+    }
+  }
+
+  return entries.sort((a, b) => b.date.localeCompare(a.date));
 }
 
 // ─── System Counts ───────────────────────────────────────────────────────────
@@ -377,29 +391,57 @@ async function getNightShift() {
 
 // ─── Timeline ────────────────────────────────────────────────────────────────
 
-const TIMELINE = [
-  { date: 'Apr 4-5, 2026', title: 'Security Hardening', desc: 'Auth flow fixes, feedback system, Webflow security audit', active: true },
-  { date: 'Mar 31 – Apr 3, 2026', title: 'Mirror Build 3.0', desc: 'Full app shipped in 4 parallel sessions — check-ins, budgets, insights, onboarding' },
-  { date: 'Mar 30, 2026', title: 'Mirror JS Migration', desc: 'Embeds moved to Cloudflare Pages, eliminated Webflow inline script limits' },
-  { date: 'Mar 29, 2026', title: 'Agent OS v2.0', desc: 'Harness alignment — 22 fixes across 3 tiers, all agents on official spec' },
-  { date: 'Mar 25-28, 2026', title: 'Edge MVP', desc: 'Multi-agent trading intelligence PWA — 5,000 lines, 70 files, 8 sprints' },
-  { date: 'Mar 22-24, 2026', title: '38twelve Agency Launch', desc: 'AI agency brand, intake chatbot, email system — shipped in 3 days' },
-  { date: 'Mar 21, 2026', title: 'Orchard Terminal', desc: 'Frosted glass Electron terminal — built and packaged as .app in one day' },
-  { date: 'Mar 20, 2026', title: 'Mirror Research Phase', desc: 'Deep behavioral research — 8 sources, 29-page strategy doc' },
-];
+async function getTimeline() {
+  const milestones = [
+    { date: 'Apr 4-5, 2026', title: 'Security Hardening', desc: 'Auth flow fixes, feedback system, Webflow security audit', sortDate: '2026-04-05' },
+    { date: 'Mar 31 – Apr 3, 2026', title: 'Mirror Build 3.0', desc: 'Full app shipped in 4 parallel sessions — check-ins, budgets, insights, onboarding', sortDate: '2026-04-03' },
+    { date: 'Mar 30, 2026', title: 'Mirror JS Migration', desc: 'Embeds moved to Cloudflare Pages, eliminated Webflow inline script limits', sortDate: '2026-03-30' },
+    { date: 'Mar 29, 2026', title: 'Agent OS v2.0', desc: 'Harness alignment — 22 fixes across 3 tiers, all agents on official spec', sortDate: '2026-03-29' },
+    { date: 'Mar 25-28, 2026', title: 'Edge MVP', desc: 'Multi-agent trading intelligence PWA — 5,000 lines, 70 files, 8 sprints', sortDate: '2026-03-28' },
+    { date: 'Mar 22-24, 2026', title: '38twelve Agency Launch', desc: 'AI agency brand, intake chatbot, email system — shipped in 3 days', sortDate: '2026-03-24' },
+    { date: 'Mar 21, 2026', title: 'Orchard Terminal', desc: 'Frosted glass Electron terminal — built and packaged as .app in one day', sortDate: '2026-03-21' },
+    { date: 'Mar 20, 2026', title: 'Mirror Research Phase', desc: 'Deep behavioral research — 8 sources, 29-page strategy doc', sortDate: '2026-03-20' },
+  ];
+  const digestContent = await safeReadFile(DIGEST_LOG);
+  const existingSortDates = new Set(milestones.map(m => m.sortDate));
+  if (digestContent && digestContent.trim()) {
+    const digests = digestContent.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    const byDate = new Map();
+    for (const d of digests) {
+      if (!byDate.has(d.date)) byDate.set(d.date, []);
+      byDate.get(d.date).push(d);
+    }
+    for (const [date, sessions] of byDate) {
+      if (existingSortDates.has(date)) continue;
+      const allTasks = sessions.flatMap(s => s.tasks || []);
+      const title = sessions.length === 1
+        ? sessions[0].session.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+        : sessions.length + ' sessions';
+      const desc = allTasks.slice(0, 3).join(', ');
+      const d = new Date(date + 'T12:00:00');
+      const formatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      milestones.push({ date: formatted, title, desc, sortDate: date });
+    }
+  }
+  milestones.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
+  if (milestones.length > 0) { milestones.forEach(m => { m.active = false; }); milestones[0].active = true; }
+  return milestones.map(({ sortDate, ...rest }) => rest);
+}
 
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 async function main() {
   console.log('Syncing Agent OS data...');
 
-  const [agents, memory, metrics, selfImprovement, system, nightShift] = await Promise.all([
+  // getTimeline defined at line 394 of this file
+  const [agents, memory, metrics, selfImprovement, system, nightShift, timeline] = await Promise.all([
     getAgents(),
     getMemory(),
     getMetrics(),
     getSelfImprovement(),
     getSystemCounts(),
     getNightShift(),
+    getTimeline(),
   ]);
 
   const data = {
@@ -409,7 +451,7 @@ async function main() {
     metrics,
     memory,
     system,
-    timeline: TIMELINE,
+    timeline,
     selfImprovement,
     nightShift,
     lastUpdated: new Date().toISOString(),

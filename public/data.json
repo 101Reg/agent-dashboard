@@ -204,12 +204,12 @@
     "hasData": true
   },
   "memory": {
-    "total": 128,
+    "total": 120,
     "byType": {
-      "feedback": 88,
+      "feedback": 78,
       "project": 22,
       "user": 15,
-      "reference": 2,
+      "reference": 4,
       "other": 0
     },
     "labels": {
@@ -233,12 +233,6 @@
         "feedback_data_tagging",
         "feedback_description_routing",
         "feedback_design_concept_first",
-        "feedback_electron35_filepath",
-        "feedback_electron_debug",
-        "feedback_electron_drag",
-        "feedback_electron_ipc",
-        "feedback_electron_native",
-        "feedback_electron_tabs",
         "feedback_enumerate_states",
         "feedback_env_verify",
         "feedback_eval_design",
@@ -261,6 +255,7 @@
         "feedback_mcp_debug",
         "feedback_measure_after_trim",
         "feedback_mirror_not_hero_copy",
+        "feedback_multi_machine_git",
         "feedback_multi_machine_paths",
         "feedback_namespace_on_install",
         "feedback_nextjs14_deps",
@@ -282,6 +277,7 @@
         "feedback_schema_pressure_test",
         "feedback_secondary_sources",
         "feedback_skill_evals",
+        "feedback_strip_llm_markdown",
         "feedback_subagent_bash",
         "feedback_test_clear_paths",
         "feedback_test_isolation",
@@ -295,13 +291,7 @@
         "feedback_vite_scaffold",
         "feedback_webflow_auth_scripts",
         "feedback_webflow_complete_embed",
-        "feedback_webflow_no_link_tag",
-        "feedback_xano_add_table",
-        "feedback_xano_csv_crud",
-        "feedback_xano_csv_import",
-        "feedback_xano_filter_bug",
-        "feedback_xano_ui_claims",
-        "feedback_xanoscript_workflow"
+        "feedback_webflow_no_link_tag"
       ],
       "project": [
         "feedback_session_hook",
@@ -346,7 +336,9 @@
       ],
       "reference": [
         "reference_edge_docs",
-        "reference_workflow_tools"
+        "reference_electron",
+        "reference_workflow_tools",
+        "reference_xano"
       ]
     }
   },
@@ -575,8 +567,8 @@
     },
     "proposalTrackRecord": {
       "total": 4,
-      "accepted": 0,
-      "pending": 4,
+      "accepted": 4,
+      "pending": 0,
       "rejected": 0
     },
     "benchmarks": [
@@ -597,5 +589,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-09T01:04:04.312Z"
+  "lastUpdated": "2026-04-09T01:34:16.833Z"
 }

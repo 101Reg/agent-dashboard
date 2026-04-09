@@ -85,15 +85,6 @@ export default function App() {
           onMouseLeave={e => { e.target.style.background = "none"; e.target.style.color = "rgba(255,255,255,0.5)" }}
           >{t}</button>
         ))}
-        <a href="/careers.html" style={{
-          background: "none", border: "none", color: "rgba(201,251,0,0.6)",
-          fontSize: 12, fontWeight: 500, padding: "7px 14px", borderRadius: 100,
-          textDecoration: "none", fontFamily: "inherit", transition: "all 0.2s",
-          flexShrink: 0, whiteSpace: "nowrap",
-        }}
-        onMouseEnter={e => { e.target.style.background = "rgba(201,251,0,0.08)"; e.target.style.color = "#c9fb00" }}
-        onMouseLeave={e => { e.target.style.background = "none"; e.target.style.color = "rgba(201,251,0,0.6)" }}
-        >Careers</a>
       </nav>
 
       {/* Hero */}
@@ -226,31 +217,9 @@ export default function App() {
             </h2>
           </Reveal>
           <Reveal delay={120}>
-            <Card style={{ padding: 32, marginBottom: 16 }}>
+            <Card style={{ padding: 32 }}>
               <AgentMap agents={data.agents} escalationPaths={data.escalationPaths} />
             </Card>
-          </Reveal>
-          <Reveal delay={180}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 12 }}>
-              {data.agents.map(a => (
-                <Card key={a.file} style={{ padding: "20px 16px", textAlign: "center" }}>
-                  <div style={{
-                    width: 40, height: 40, borderRadius: "50%", margin: "0 auto 10px",
-                    background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 18, position: "relative",
-                  }}>
-                    {a.icon}
-                    <span style={{
-                      position: "absolute", top: -1, right: -1, width: 8, height: 8,
-                      borderRadius: "50%", background: "#53e16f", border: "2px solid #0a0a0a",
-                    }} />
-                  </div>
-                  <div style={{ fontSize: 13, fontWeight: 600 }}>{a.name}</div>
-                  <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", marginTop: 3, letterSpacing: "0.05em", textTransform: "uppercase" }}>{a.type}</div>
-                </Card>
-              ))}
-            </div>
           </Reveal>
         </section>
 

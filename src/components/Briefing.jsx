@@ -159,35 +159,6 @@ export default function Briefing({ nightShift, sessions }) {
         </Reveal>
       )}
 
-      {/* Work Domains + Agent Usage — simplified */}
-      {(domainFrequency?.length > 0 || agentUsage?.length > 0) && (
-        <Reveal delay={160}>
-          <Card style={{ padding: "16px 24px", marginBottom: 12 }}>
-            {domainFrequency?.length > 0 && (
-              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.8 }}>
-                <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginRight: 8 }}>7-day</span>
-                {domainFrequency.map((d, i) => (
-                  <span key={i}>
-                    {d.domain}
-                    {i < domainFrequency.length - 1 ? <span style={{ color: "rgba(255,255,255,0.15)", margin: "0 6px" }}>/</span> : ""}
-                  </span>
-                ))}
-              </div>
-            )}
-            {agentUsage?.length > 0 && (
-              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: domainFrequency?.length > 0 ? 6 : 0 }}>
-                {agentUsage.map((a, i) => (
-                  <span key={i}>
-                    <span style={{ color: "rgba(255,255,255,0.5)" }}>{a.agent}</span> {a.sessions}x
-                    {i < agentUsage.length - 1 ? <span style={{ margin: "0 6px" }}>&middot;</span> : ""}
-                  </span>
-                ))}
-              </div>
-            )}
-          </Card>
-        </Reveal>
-      )}
-
       {/* Skill Gaps */}
       {skillGaps && skillGaps.length > 0 && (
         <Reveal delay={170}>

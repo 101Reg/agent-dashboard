@@ -276,24 +276,21 @@
     "hasData": true
   },
   "memory": {
-    "total": 124,
+    "total": 92,
     "byType": {
-      "feedback": 81,
-      "project": 22,
-      "user": 16,
-      "reference": 4,
+      "feedback": 55,
+      "project": 16,
+      "user": 13,
+      "reference": 7,
       "other": 0
     },
     "labels": {
       "feedback": [
         "feedback_agent_eval_harness",
         "feedback_agent_reference_rules",
-        "feedback_agent_sandbox",
-        "feedback_ai_generated_context",
         "feedback_api_billing",
         "feedback_api_prompt_size",
         "feedback_apple_social",
-        "feedback_argue_both_sides",
         "feedback_ask_before_structure",
         "feedback_ask_for_spec",
         "feedback_bash32_macos",
@@ -301,7 +298,6 @@
         "feedback_canvas_mobile_labels",
         "feedback_capture_at_source",
         "feedback_chat_rate_limits",
-        "feedback_claude_p_testing",
         "feedback_claude_repo_gitignore",
         "feedback_dashboard_staleness",
         "feedback_data_tagging",
@@ -312,14 +308,9 @@
         "feedback_eval_design",
         "feedback_eval_preconditions",
         "feedback_factual_updates",
-        "feedback_fe_eval_framework",
-        "feedback_file_content_not_confirmed",
         "feedback_firewall_data",
         "feedback_flag_empty_state_risk",
         "feedback_frontmatter_spec",
-        "feedback_hook_e2e",
-        "feedback_hook_paths",
-        "feedback_hooks_hot_load",
         "feedback_incremental_migration",
         "feedback_iron_law_pattern",
         "feedback_jsx_artifact_source",
@@ -328,48 +319,30 @@
         "feedback_marketing_intake_fix",
         "feedback_mcp_debug",
         "feedback_measure_after_trim",
-        "feedback_mirror_not_hero_copy",
-        "feedback_multi_machine_git",
-        "feedback_multi_machine_paths",
         "feedback_namespace_on_install",
         "feedback_nextjs14_deps",
         "feedback_no_scripts_in_terminal",
         "feedback_no_sed_bypass",
-        "feedback_oauth_xano_gap",
         "feedback_opinions_as_opinions",
         "feedback_orchard_repackage",
         "feedback_parallel_agents",
         "feedback_parallel_audit_fix",
-        "feedback_pbcopy_embed",
-        "feedback_plan_before_build",
-        "feedback_plan_mode_eval",
         "feedback_pretooluse_friction",
-        "feedback_private_docs",
         "feedback_protect_secrets",
         "feedback_prototype_direct_convert",
         "feedback_research_before_build",
         "feedback_schema_pressure_test",
-        "feedback_secondary_sources",
         "feedback_skill_evals",
-        "feedback_ssh_setup",
         "feedback_strip_llm_markdown",
-        "feedback_subagent_bash",
-        "feedback_test_clear_paths",
-        "feedback_test_isolation",
         "feedback_ts_iteration",
         "feedback_type_check",
         "feedback_vercel_cli",
         "feedback_vercel_timeouts",
-        "feedback_verify_abbreviations",
+        "feedback_verification_rules",
         "feedback_verify_job_links",
-        "feedback_verify_research",
-        "feedback_vite_scaffold",
-        "feedback_webflow_auth_scripts",
-        "feedback_webflow_complete_embed",
-        "feedback_webflow_no_link_tag"
+        "feedback_vite_scaffold"
       ],
       "project": [
-        "feedback_session_hook",
         "project_agency_3stack",
         "project_agency_brand",
         "project_agent_dashboard",
@@ -380,17 +353,12 @@
         "project_debug_agent",
         "project_edge",
         "project_impeccable_install",
-        "project_mirror_budget_redesign",
-        "project_mirror_build3",
-        "project_mirror_js_migration",
-        "project_mirror_testing_window",
         "project_night_shift",
         "project_obsidian_vault",
+        "project_open_questions",
         "project_orchard",
         "project_orchard_next",
-        "project_os_scorecard",
-        "project_setup_audit",
-        "project_xano_audit"
+        "project_os_scorecard"
       ],
       "user": [
         "feedback_strategy_private",
@@ -405,22 +373,22 @@
         "user_identity",
         "user_learns_by_doing",
         "user_marathon_builder",
-        "user_mom_test_copy",
-        "user_multi_device",
-        "user_naming_style",
-        "user_tester_feedback_loop"
+        "user_naming_style"
       ],
       "reference": [
+        "reference_claude_cli",
         "reference_edge_docs",
         "reference_electron",
-        "reference_workflow_tools",
-        "reference_xano"
+        "reference_hooks",
+        "reference_key_decisions",
+        "reference_multi_machine",
+        "reference_workflow_tools"
       ]
     }
   },
   "system": {
     "skills": 17,
-    "rules": 7,
+    "rules": 6,
     "hooks": 5,
     "mcpServers": 2
   },
@@ -598,129 +566,43 @@
   ],
   "nightShift": {
     "status": "GREEN",
-    "lastRun": "2026-04-08",
+    "lastRun": "2026-04-09",
     "findings": [
       "System healthy — no issues detected"
     ],
-    "evalCanaries": [
+    "evalCanaries": [],
+    "frictionTrends": null,
+    "proposalCount": 6,
+    "proposals": [
       {
-        "agent": "developer",
-        "score": 5,
-        "baseline": 5,
-        "delta": 0,
-        "status": "ok",
-        "error": null
+        "id": "P-2026-04-09-001",
+        "category": "unknown",
+        "problem": "No summary extracted",
+        "solution": ""
       },
       {
-        "agent": "developer",
-        "score": null,
-        "baseline": null,
-        "delta": 0,
-        "status": "ok",
-        "error": null
+        "id": "P-2026-04-09-002",
+        "category": "unknown",
+        "problem": "No summary extracted",
+        "solution": ""
       },
       {
-        "agent": "developer",
-        "score": null,
-        "baseline": null,
-        "delta": 0,
-        "status": "ok",
-        "error": null
+        "id": "P-2026-04-09-003",
+        "category": "unknown",
+        "problem": "No summary extracted",
+        "solution": ""
       }
     ],
-    "frictionTrends": {
-      "fix_attempts": 0,
-      "escalations": 0,
-      "hook_catches": 10
-    },
-    "proposalCount": 8,
-    "proposals": [],
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-04-08\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- dashboard: 6 sessions\n- react: 6 sessions\n- agents: 5 sessions\n- bash: 5 sessions\n- git: 4 sessions\n\n## Agent Usage (7-day)\n- developer: 8 sessions\n- chief-of-staff: 5 sessions\n- debug: 3 sessions\n- reviewer: 2 sessions\n- fact-checker: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n123 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNow I have the full picture. Here are tonight's proposals:\n\n---\n\n# Proposals — 2026-04-08\n\n---\n\n## P-2026-04-08-005\n**Category:** `regression`\n\n**Problem:** Developer agent scored TC2 C2 = 3/5 (overall 4.0 vs baseline 5.0, delta -1.0). C2 tests \"no gold-plating — no docstrings, type hints, or comments beyond what's necessary.\" The evaluator notes: *\"Python agents habitually add type hints and docstrings even when not asked.\"*\n\nThe root cause is a loophole in the agent's existing rule. `/Users/reggie/.claude/agents/developer.md` line 53 says:\n\n> \"Don't add comments, docstrings, or type annotations to **code you didn't change**.\"\n\nThe qualifier \"code you didn't change\" only guards *existing* code. For **new** code being written from scratch (exactly the TC2 scenario: create `utils.py` from nothing), the rule is silent — leaving the agent free to add type hints and docstrings on new functions it writes itself.\n\n**Solution:** Update `/Users/reggie/.claude/agents/developer.md` line 53. Change:\n\n```\nDon't add comments, docstrings, or type annotations to code you didn't change.\n```\n\nto:\n\n```\nDon't add comments, docstrings, or type annotations unless explicitly asked — including on new code you write.\n```\n\n**Impact:** TC2 C2 recovers to 5/5. The developer agent stops gold-plating new Python functions with unsolicited annotations and docstrings, which is the most common over-engineering failure mode for Python agents.\n\n**Risk:** In rare cases where a user *implies* they want \"proper production code\" without saying so, suppressing type hints may disappoint. Acceptable: the rule is to ask when ambiguous, not to assume.\n\n---\n\n## P-2026-04-08-006\n**Category:** `self_improvement`\n\n**Problem:** `baselines.json` has no `TC2` entry for the developer agent. When P-2026-04-08-004 switched the developer canary from TC1 to TC2, nobody registered TC2's baseline. Tonight's comparison used `5.0` — the TC1 value via the `// 5.0` fallback in `b1-canary-evals.sh` line 71:\n\n```bash\nDEV_BASELINE=$(jq -r '.[\"developer\"].'\"$DEV_ID\"'.score // 5.0' \"$BASELINES\" 2>/dev/null || echo \"5.0\")\n```\n\nThis means delta `-1.0` tonight may be accurate *or* inflated — there's no way to know without a registered TC2 baseline. Every future night, TC2 will silently compare against TC1's calibration point.\n\n**Solution:** Add a TC2 entry to `/Users/reggie/.claude/night-shift/baselines.json`:\n\n```json\n\"developer\": {\n  \"TC1\": { ... existing ... },\n  \"TC2\": {\n    \"score\": 5.0,\n    \"date\": \"2026-04-08\",\n    \"notes\": \"Over-engineering resistance — 2-4 lines, no gold-plating, reads utils.py first, handles empty list only, reports briefly. C2 is highest-risk criterion (type hints/docstrings on new code).\"\n  }\n}\n```\n\n**Impact:** TC2 deltas are measured against TC2's own calibration. The `-1.0` tonight is confirmed as real regression (not fallback artifact). Future regressions trigger at the right threshold.\n\n**Risk:** If TC2 is fundamentally harder than TC1 and a true attainable score is 4.5, setting 5.0 creates permanently noisy WATCH alerts. Monitor for 2 weeks and adjust if needed.\n\n---\n\n## P-2026-04-08-007\n**Category:** `self_improvement`\n\n**Problem:** The proposal ledger (`proposal-ledger.jsonl`) contains **two separate sets of P-2026-04-08-001 through P-2026-04-08-004** — IDs 001–004 appear twice. This happens because `c0-proposals.sh` generates sequential IDs starting at `001` each run, without checking what IDs already exist in the ledger for today. When Night Shift ran twice on 2026-04-08, the second run overwrote the ID namespace.\n\nThis breaks the ledger's core function: unique, auditable proposal IDs. Any tooling that queries by ID will get ambiguous results.\n\n**Solution:** Update `/Users/reggie/.claude/night-shift/phases/c0-proposals.sh` to read the current maximum ID suffix from the ledger before assigning new IDs. Add before the proposal extraction loop (around line 88):\n\n```bash\n# Get next available ID suffix for today\nEXISTING_MAX=$(grep \"\\\"P-$DATE-\" \"$LEDGER\" 2>/dev/null \\\n  | grep -oE \"P-$DATE-[0-9]+\" \\\n  | sed \"s/P-$DATE-//\" \\\n  | sort -n | tail -1)\nNEXT_ID_NUM=$(( ${EXISTING_MAX:-0} + 1 ))\n```\n\nThen number new proposals from `NEXT_ID_NUM` upward instead of starting at `001`.\n\n**Impact:** Proposal IDs are globally unique within a date regardless of how many times Night Shift runs. The ledger stays auditable. Downstream tooling (briefings, dashboards) can reliably query by ID.\n\n**Risk:** If the ledger is missing or corrupt for today, `EXISTING_MAX` is empty and `NEXT_ID_NUM` defaults to `1` — correct fallback behavior. Low risk.\n\n---\n\n## P-2026-04-08-008\n**Category:** `self_improvement`\n\n**Problem:** Phase B3 (skill gap detection) flagged `hooks` as **HIGH severity** tonight — the same gap that generated P-2026-04-08-003 (accepted_implicit) in a prior run. But `developer.md` already contains a `## Hook Edge Cases` section (lines 129–142) documenting both known failure patterns (stop hook infinite loop, PreToolUse false-blocking). The fix was applied. B3 doesn't know this.\n\nB3's analysis prompt (`b3-skill-gaps.sh` line 28) gives Claude the session digests and memory findings, but **not the current contents of agent files**. So B3 correctly identifies \"hook edge cases recur in session memory\" but has no way to see \"but the fix is already in developer.md.\" The result: a HIGH-severity gap that's already been addressed keeps appearing, creating noise that dilutes attention toward genuine open gaps.\n\nThe same blind spot will affect any future skill gap that was fixed via an agent file update — the fix is invisible to B3.\n\n**Solution:** Update the `GAP_PROMPT` in `/Users/reggie/.claude/night-shift/phases/b3-skill-gaps.sh` to include a snapshot of agent file contents. Add a section before the prompt construction:\n\n```bash\n# Snapshot agent file summaries (first 20 lines = frontmatter + primary directive)\nAGENT_SUMMARIES=\"\"\nfor f in \"$HOME/.claude/agents/\"*.md; do\n  name=$(basename \"$f\" .md)\n  content=$(head -40 \"$f\" 2>/dev/null | tr '\\n' '|')\n  AGENT_SUMMARIES+=\"### $name\\n$content\\n\\n\"\ndone\n```\n\nThen add to the prompt:\n```\n## Current Agent File Summaries (first 40 lines each)\n$AGENT_SUMMARIES\n\nWhen identifying gaps, check whether the agent file already addresses the domain before flagging as open.\n```\n\n**Impact:** B3 stops re-surfacing addressed gaps as open findings. Skill gap reports reflect the genuine current state of the system, not just memory patterns. Bruce's attention (and Reggie's) goes to real open problems.\n\n**Risk:** Agent files can be large; head-40 may miss sections. Edge: a fix that exists in lines 41+ gets missed. Accept this for now — it covers the primary directives and most rules sections where fixes are typically placed.\n\n## Proposal Track Record\n8 total, 8 accepted, 0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 100% | 8/8 accepted |\n| Eval Signal | OK | 1 consecutive all-pass runs |\n\n## Action Required: NO\n",
-    "domainFrequency": [
-      {
-        "domain": "agents",
-        "count": 3
-      },
-      {
-        "domain": "dashboard",
-        "count": 3
-      },
-      {
-        "domain": "git",
-        "count": 3
-      },
-      {
-        "domain": "react",
-        "count": 3
-      },
-      {
-        "domain": "bash",
-        "count": 2
-      },
-      {
-        "domain": "cron",
-        "count": 2
-      },
-      {
-        "domain": "css",
-        "count": 2
-      },
-      {
-        "domain": "hooks",
-        "count": 2
-      }
-    ],
-    "agentUsage": [
-      {
-        "agent": "developer",
-        "sessions": 5
-      },
-      {
-        "agent": "chief-of-staff",
-        "sessions": 4
-      },
-      {
-        "agent": "reviewer",
-        "sessions": 2
-      },
-      {
-        "agent": "fact-checker",
-        "sessions": 1
-      },
-      {
-        "agent": "research",
-        "sessions": 1
-      }
-    ],
-    "skillGaps": [
-      {
-        "domain": "hooks",
-        "evidence": "Stop hook infinite loop and PreToolUse false-blocking of newly created files each appeared in two separate sessions (night-shift-build, night-shift-learning). Developer agent carries friction attribution in 2 of 5 sessions, and memory clusters feedback_hook (×2) and feedback_pretooluse (×1) confirm repeated re-learning of the same edge cases rather than durable fixes.",
-        "severity": "high",
-        "suggestion": "Encode known hook edge cases (loop-prevention scoping, new-file exemption logic) into a shared hook configuration layer or spec document so the developer agent no longer encounters them cold each session — the fixes exist but aren't being retained operationally."
-      },
-      {
-        "domain": "external-data-access",
-        "evidence": "Research agent earned a friction attribution in career-identity when LinkedIn returned HTTP 999 (bot-block), forcing improvised screenshot workarounds. Memory clusters feedback_webflow (×3) and feedback_verify (×3) suggest repeated uncertainty about which external sources are reachable, pointing to a systemic gap rather than a one-off incident.",
-        "severity": "medium",
-        "suggestion": "Give the research agent an explicit fallback ladder for blocked domains (cached snapshots, alternative sources, structured screenshot escalation) so workarounds are codified protocol rather than improvised — and add a known-blocked-domains reference memory to prevent repeated re-discovery."
-      },
-      {
-        "domain": "bash-environment-compatibility",
-        "evidence": "Bash 3.2 on the Mac Mini lacks associative arrays, requiring a full awk rewrite mid-session in night-shift-learning; a username mismatch required a sed fix. Bash, cron, and infrastructure domains appear across two recent sessions but no agent is designated for environment-compatibility concerns. feedback_bash32 is an isolated memory cluster, suggesting the lesson isn't propagating.",
-        "severity": "low",
-        "suggestion": "Add a pre-execution environment checklist to the developer agent's context (target shell version, machine-specific usernames, PATH assumptions) so bash scripts default to POSIX-safe patterns and environment mismatches surface before runtime rather than causing mid-session rewrites."
-      }
-    ],
-    "memoryHealth": {
-      "total": 115,
-      "consolidationCandidates": []
-    },
+    "briefingContent": "# Night Shift — 2026-04-09\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- dashboard: 6 sessions\n- react: 6 sessions\n- agents: 5 sessions\n- bash: 5 sessions\n- git: 4 sessions\n\n## Agent Usage (7-day)\n- developer: 8 sessions\n- chief-of-staff: 5 sessions\n- debug: 3 sessions\n- reviewer: 2 sessions\n- fact-checker: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 4.8 | 5.0 | -0.2 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n91 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNow I have everything I need. Let me analyze the full picture:\n\n- **Chief-of-staff scored 4.6/5.0 (delta -0.4)** — this is in the raw events but not surfaced in the system-prompt summary. C2=4 (opportunity cost implicit, not named per option), C4=4 (inter-option dependencies not enumerated). Larger regression than TC2.\n- **B3 still flagged claude-hook-system (medium)** — even though P-2026-04-08-008 was implemented with `head-40`. The Hook Edge Cases section is at developer.md line 128 — beyond the snapshot window. The risk was predicted in P-008's own notes.\n- **Infrastructure/devops HIGH severity** — SSH failures, multi-machine git conflicts, no specialized agent. Three sessions affected, unresolved.\n\n---\n\n# Proposals — 2026-04-09\n\n---\n\n## P-2026-04-09-009\n**Category:** `regression`\n\n**Problem:** Chief-of-staff scored **4.6/5.0 (delta -0.4)** on TC1 tonight — the largest regression in the system. Two criteria missed:\n\n- **C2 = 4**: Opportunity cost analysis is present but *implicit* — the agent contextually implies tradeoffs without labeling them explicitly per option. The evaluator notes: *\"opportunity cost may be implicit rather than explicitly named per option.\"*\n- **C4 = 4**: When presenting multiple options, the agent doesn't systematically enumerate inter-option dependencies (e.g., \"Option A makes Option B harder later,\" or \"these are mutually exclusive\").\n\nThe root cause is a format gap in the agent spec. The `## Decision Framework` section tells the agent to evaluate opportunity cost in step 1 (Validate), but says nothing about how to *surface* that analysis in the recommendation. When the agent writes \"Option A vs Option B,\" it describes each option but doesn't say \"choosing A costs you B\" or \"A blocks B if you need it later.\" The `## How You Think` section covers multi-dimensional analysis but doesn't require explicit dependency mapping across options.\n\n**Solution:** Add a \"Multi-option format\" micro-rule to `/Users/reggie/.claude/agents/chief-of-staff.md`. Insert after the `## Decision Framework` block (after line 80):\n\n```markdown\n## Multi-Option Recommendations\n\nWhen presenting 2+ options, always include:\n- **Opportunity cost per option** — explicitly name what you give up by choosing it (not just what you gain)\n- **Inter-option dependencies** — flag if options interact: mutually exclusive, sequentially dependent, or if one forecloses another\n- Keep it brief — one line per dimension is enough\n```\n\n**Impact:** C2 and C4 recover to 5/5. Reggie gets explicitly labeled trade-offs (e.g., \"Choosing A means you can't do B until Q3\") rather than implicit comparisons that require inference. Reduces decision ambiguity for a solo founder with no second opinion.\n\n**Risk:** Adds mild structural overhead to short recommendations where options are obviously independent. Acceptable: the agent spec already says \"Use structured thinking for complex decisions\" — this applies only to multi-option contexts.\n\n---\n\n## P-2026-04-09-010\n**Category:** `self_improvement`\n\n**Problem:** P-2026-04-08-008 was implemented: B3 now snapshots agent files before flagging skill gaps. But tonight B3 still flagged **claude-hook-system as medium severity** — even though `developer.md` contains an explicit `## Hook Edge Cases` section (lines 128–142) documenting both known failure patterns and their fixes.\n\nThe root cause: the snapshot uses `head -40`, and `## Hook Edge Cases` begins at **line 128**. The fix is working exactly as designed — but the depth is wrong. P-2026-04-08-008's own risk note predicted this: *\"a fix that exists in lines 41+ gets missed.\"* That risk is confirmed tonight.\n\nThe `developer.md` file has a density problem: frontmatter + primary directive + principles + workflow + rules + Iron Law all fall within lines 1–127, pushing specialized sections (Hook Edge Cases at 128, Debug Escalation at 144) well past the 40-line window.\n\n**Solution:** Update `/Users/reggie/.claude/night-shift/phases/b3-skill-gaps.sh` line 34. Change:\n\n```bash\ncontent=$(head -40 \"$f\" 2>/dev/null)\n```\n\nto:\n\n```bash\ncontent=$(head -160 \"$f\" 2>/dev/null)\n```\n\nAlso update the prompt label on line 52 from `(first 40 lines each)` to `(first 160 lines each)`.\n\n160 lines covers all current agent files: `developer.md` is 181 lines total — this captures Hook Edge Cases (128), Debug Escalation (144), and Communication Style (165). Other agent files are shorter and fully covered.\n\n**Impact:** B3 stops re-flagging `claude-hook-system` as an open gap. The skill gap report reflects genuine open problems. Bruce's attention (and Reggie's review time) is spent on real gaps, not already-fixed ones.\n\n**Risk:** Slightly larger prompt token count per B3 run (~4× the current agent snapshots). At 6 agent files × 160 lines × ~10 tokens/line ≈ 9,600 additional tokens per run — within budget. If agent files grow significantly, revisit with section-targeted grep (`grep -n \"^##\"`).\n\n---\n\n## P-2026-04-09-011\n**Category:** `skill_gap`\n\n**Problem:** B3 rated **infrastructure/devops as HIGH severity** tonight — the highest severity gap in the system and the only unresolved HIGH. Evidence across three separate sessions:\n\n- SSH setup failed after 20+ minutes in `dashboard-gaps-fix` — unresolved\n- SSH setup failed again in `bruce-refactor` — unresolved  \n- Multi-machine git rebase conflicts blocked `night-shift-setup`\n- Mac Mini username mismatch required manual workaround in `night-shift-learning`\n- B3 evidence: *\"Developer carries all infrastructure work but is rated 'friction' in all three affected sessions. No infrastructure-specialized agent exists.\"*\n\nThe developer agent is a code-first agent — it writes software but has no specific competence in SSH key management, multi-machine git workflows, cron/systemd, or server configuration. When Hero hits these problems, the developer spends time guessing rather than drawing on documented patterns. There's no escalation path either: the debug agent handles software bugs, not infra failures.\n\n**Solution:** Create `/Users/reggie/.claude/agents/infra.md` — a specialized infrastructure agent scoped to SSH, multi-machine workflows, cron/systemd, and server configuration. Minimum viable spec includes:\n\n- **SSH key management**: keygen, ssh-config multi-host setup, agent forwarding, known_hosts debugging\n- **Multi-machine git**: tracking remote branches across machines, rebase conflicts from diverged histories, machine-specific `.gitignore` patterns\n- **Cron/launchd**: macOS LaunchAgent vs cron trade-offs, path environment issues (the most common cron failure), log inspection\n- **Server config**: basic process management, environment variable injection, deployment sanity checks\n\nThe agent should be Sonnet (not Opus), scoped narrowly to avoid overreach into application code.\n\n**Impact:** SSH and multi-machine git failures get a specialist path instead of falling to the developer agent as guesswork. Expected: friction rating drops from the infrastructure domain sessions. HIGH severity gap becomes covered.\n\n**Risk:** New agent adds maintenance surface. Mitigation: scope the spec narrowly to the exact failure patterns documented in B3's evidence — no speculative features. If the infra domain stays quiet for 30 days after creation, the agent can be archived.\n\n## Proposal Track Record\n11 total, 8 accepted, 3 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 100% | 8/8 accepted |\n| Eval Signal | OK | 2 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "domainFrequency": [],
+    "agentUsage": [],
+    "skillGaps": [],
+    "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 8,
+      "total": 11,
       "accepted": 8,
-      "pending": 0,
+      "pending": 3,
       "rejected": 0
     },
     "benchmarks": [
@@ -737,9 +619,9 @@
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "1 consecutive all-pass runs"
+        "detail": "2 consecutive all-pass runs"
       }
     ]
   },
-  "lastUpdated": "2026-04-09T04:32:35.308Z"
+  "lastUpdated": "2026-04-09T14:56:17.630Z"
 }

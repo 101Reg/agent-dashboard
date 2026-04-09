@@ -204,11 +204,11 @@
     "hasData": true
   },
   "memory": {
-    "total": 124,
+    "total": 128,
     "byType": {
-      "feedback": 86,
-      "project": 21,
-      "user": 14,
+      "feedback": 88,
+      "project": 22,
+      "user": 15,
       "reference": 2,
       "other": 0
     },
@@ -223,6 +223,7 @@
         "feedback_apple_social",
         "feedback_ask_before_structure",
         "feedback_ask_for_spec",
+        "feedback_bash32_macos",
         "feedback_batch_features",
         "feedback_canvas_mobile_labels",
         "feedback_capture_at_source",
@@ -260,6 +261,7 @@
         "feedback_mcp_debug",
         "feedback_measure_after_trim",
         "feedback_mirror_not_hero_copy",
+        "feedback_multi_machine_paths",
         "feedback_namespace_on_install",
         "feedback_nextjs14_deps",
         "feedback_no_scripts_in_terminal",
@@ -317,6 +319,7 @@
         "project_mirror_build3",
         "project_mirror_js_migration",
         "project_mirror_testing_window",
+        "project_night_shift",
         "project_obsidian_vault",
         "project_orchard",
         "project_orchard_next",
@@ -337,6 +340,7 @@
         "user_learns_by_doing",
         "user_marathon_builder",
         "user_mom_test_copy",
+        "user_multi_device",
         "user_naming_style",
         "user_tester_feedback_loop"
       ],
@@ -468,10 +472,30 @@
     },
     "proposalCount": 0,
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-04-08\n\n## Status: GREEN\n\n## Key Findings\n- Memory cluster consolidation candidate: feedback_electron (5 files, 5 recent)\n- Memory cluster consolidation candidate: feedback_xano (5 files, 5 recent)\n- ERROR: Phase B: Could not parse developer TC1 eval output\n- ERROR: Phase B: Could not parse chief-of-staff TC1 eval output\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- css: 2 sessions\n- dashboard: 2 sessions\n- git: 2 sessions\n- react: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 4 sessions\n- chief-of-staff: 3 sessions\n- fact-checker: 1 sessions\n- research: 1 sessions\n- reviewer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | ERROR | ? | — | parse error |\n| chief-of-staff | ERROR | ? | — | parse error |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n123 total files, 2 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNone — system healthy\n\n## Proposal Track Record\nNo history\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | Insufficient data | 0/0 accepted |\n| Eval Signal | OK | 0 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "briefingContent": "# Night Shift — 2026-04-08\n\n## Status: GREEN\n\n## Key Findings\n- Memory cluster consolidation candidate: feedback_electron (5 files, 5 recent)\n- Memory cluster consolidation candidate: feedback_xano (5 files, 5 recent)\n- ERROR: Phase B: Could not parse developer TC1 eval output\n- ERROR: Phase B: Could not parse chief-of-staff TC1 eval output\n\n## What Hero Worked On (7-day)\n- agents: 3 sessions\n- dashboard: 3 sessions\n- git: 3 sessions\n- react: 3 sessions\n- bash: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 5 sessions\n- chief-of-staff: 4 sessions\n- reviewer: 2 sessions\n- fact-checker: 1 sessions\n- research: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | ERROR | ? | — | parse error |\n| chief-of-staff | ERROR | ? | — | parse error |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n127 total files, 2 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNone — system healthy\n\n## Proposal Track Record\nNo history\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | Insufficient data | 0/0 accepted |\n| Eval Signal | OK | 0 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [
       {
         "domain": "agents",
+        "count": 3
+      },
+      {
+        "domain": "dashboard",
+        "count": 3
+      },
+      {
+        "domain": "git",
+        "count": 3
+      },
+      {
+        "domain": "react",
+        "count": 3
+      },
+      {
+        "domain": "bash",
+        "count": 2
+      },
+      {
+        "domain": "cron",
         "count": 2
       },
       {
@@ -479,38 +503,22 @@
         "count": 2
       },
       {
-        "domain": "dashboard",
+        "domain": "hooks",
         "count": 2
-      },
-      {
-        "domain": "git",
-        "count": 2
-      },
-      {
-        "domain": "react",
-        "count": 2
-      },
-      {
-        "domain": "bash",
-        "count": 1
-      },
-      {
-        "domain": "career",
-        "count": 1
-      },
-      {
-        "domain": "cron",
-        "count": 1
       }
     ],
     "agentUsage": [
       {
         "agent": "developer",
-        "sessions": 4
+        "sessions": 5
       },
       {
         "agent": "chief-of-staff",
-        "sessions": 3
+        "sessions": 4
+      },
+      {
+        "agent": "reviewer",
+        "sessions": 2
       },
       {
         "agent": "fact-checker",
@@ -519,15 +527,11 @@
       {
         "agent": "research",
         "sessions": 1
-      },
-      {
-        "agent": "reviewer",
-        "sessions": 1
       }
     ],
     "skillGaps": [],
     "memoryHealth": {
-      "total": 123,
+      "total": 127,
       "consolidationCandidates": [
         {
           "prefix": "feedback_electron",
@@ -562,5 +566,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-08T12:47:35.854Z"
+  "lastUpdated": "2026-04-09T00:12:01.936Z"
 }

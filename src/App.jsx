@@ -18,7 +18,7 @@ export default function App() {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    fetch('/data.json')
+    fetch('/data.json?t=' + Date.now())
       .then(r => r.json())
       .then(d => { setData(d); setTimeout(() => setLoaded(true), 80) })
       .catch(() => setLoaded(true))

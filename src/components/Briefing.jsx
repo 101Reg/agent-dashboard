@@ -41,7 +41,7 @@ export default function Briefing({ nightShift, sessions }) {
     )
   }
 
-  const { status, lastRun, findings, evalCanaries, proposalCount, proposals, actionRequired, frictionTrends, domainFrequency, agentUsage, skillGaps, memoryHealth, proposalTrackRecord, benchmarks } = nightShift
+  const { status, lastRun, findings, evalCanaries, proposals, actionRequired, frictionTrends, domainFrequency, agentUsage, skillGaps, memoryHealth, benchmarks } = nightShift
   const statusColor = STATUS_COLORS[status] || STATUS_COLORS.GREEN
 
   return (
@@ -106,35 +106,82 @@ export default function Briefing({ nightShift, sessions }) {
         </Reveal>
       )}
 
-      {/* Work Domains + Agent Usage */}
-      {domainFrequency && domainFrequency.length > 0 && (
-        <Reveal delay={120}>
-          <Card style={{ padding: 24, marginBottom: 12 }}>
-            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: 16 }}>
-              What Hero Worked On (7-day)
+      {/* Proposals — right after findings */}
+      {proposals && proposals.length > 0 && (
+        <Reveal delay={140}>
+          <Card style={{ padding: 24, marginBottom: 12, border: "1px solid rgba(245,176,123,0.15)" }}>
+            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: STATUS_COLORS.YELLOW, marginBottom: 16 }}>
+              {proposals.length} Proposal{proposals.length > 1 ? "s" : ""} Pending
             </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-              {domainFrequency.map((d, i) => (
-                <div key={i} style={{
-                  padding: "6px 14px", borderRadius: 100,
-                  background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)",
-                  fontSize: 12, color: "rgba(255,255,255,0.6)",
-                }}>
-                  {d.domain} <span style={{ color: "rgba(255,255,255,0.25)", marginLeft: 4 }}>{d.count}</span>
-                </div>
-              ))}
-            </div>
-            {agentUsage && agentUsage.length > 0 && (
-              <div style={{ marginTop: 16 }}>
-                <div style={{ fontSize: 10, color: "rgba(255,255,255,0.2)", marginBottom: 8, letterSpacing: "0.04em" }}>AGENTS USED</div>
-                <div style={{ display: "flex", gap: 16 }}>
-                  {agentUsage.map((a, i) => (
-                    <div key={i} style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>
-                      <span style={{ fontWeight: 600, color: "rgba(255,255,255,0.7)" }}>{a.agent}</span>
-                      <span style={{ color: "rgba(255,255,255,0.25)", marginLeft: 4 }}>{a.sessions}x</span>
+            <div style={{ display: "grid", gap: 12 }}>
+              {proposals.map((p, i) => {
+                const pill = PROPOSAL_CATEGORY_COLORS[p.category] || PROPOSAL_CATEGORY_COLORS.default
+                return (
+                  <div key={p.id || i} style={{
+                    padding: "14px 16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderRadius: 12,
+                    border: "1px solid rgba(255,255,255,0.04)",
+                  }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                      <span style={{
+                        fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase",
+                        padding: "2px 8px", borderRadius: 100,
+                        background: pill.bg, color: pill.color,
+                      }}>
+                        {p.category.replace(/_/g, " ")}
+                      </span>
+                      {p.id && (
+                        <span style={{ fontSize: 10, color: "rgba(255,255,255,0.2)", fontFamily: "monospace" }}>{p.id}</span>
+                      )}
                     </div>
-                  ))}
-                </div>
+                    {p.problem && (
+                      <div style={{ marginBottom: p.solution ? 6 : 0 }}>
+                        <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)" }}>Problem </span>
+                        <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>
+                          {p.problem.length > 120 ? p.problem.slice(0, 120) + "…" : p.problem}
+                        </span>
+                      </div>
+                    )}
+                    {p.solution && (
+                      <div>
+                        <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)" }}>Solution </span>
+                        <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>
+                          {p.solution.length > 120 ? p.solution.slice(0, 120) + "…" : p.solution}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </Card>
+        </Reveal>
+      )}
+
+      {/* Work Domains + Agent Usage — simplified */}
+      {(domainFrequency?.length > 0 || agentUsage?.length > 0) && (
+        <Reveal delay={160}>
+          <Card style={{ padding: "16px 24px", marginBottom: 12 }}>
+            {domainFrequency?.length > 0 && (
+              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.8 }}>
+                <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginRight: 8 }}>7-day</span>
+                {domainFrequency.map((d, i) => (
+                  <span key={i}>
+                    {d.domain}
+                    {i < domainFrequency.length - 1 ? <span style={{ color: "rgba(255,255,255,0.15)", margin: "0 6px" }}>/</span> : ""}
+                  </span>
+                ))}
+              </div>
+            )}
+            {agentUsage?.length > 0 && (
+              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: domainFrequency?.length > 0 ? 6 : 0 }}>
+                {agentUsage.map((a, i) => (
+                  <span key={i}>
+                    <span style={{ color: "rgba(255,255,255,0.5)" }}>{a.agent}</span> {a.sessions}x
+                    {i < agentUsage.length - 1 ? <span style={{ margin: "0 6px" }}>&middot;</span> : ""}
+                  </span>
+                ))}
               </div>
             )}
           </Card>
@@ -143,7 +190,7 @@ export default function Briefing({ nightShift, sessions }) {
 
       {/* Skill Gaps */}
       {skillGaps && skillGaps.length > 0 && (
-        <Reveal delay={140}>
+        <Reveal delay={170}>
           <Card style={{ padding: 24, marginBottom: 12, border: "1px solid rgba(245,176,123,0.1)" }}>
             <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: STATUS_COLORS.YELLOW, marginBottom: 12 }}>
               Skill Gaps Detected
@@ -170,7 +217,7 @@ export default function Briefing({ nightShift, sessions }) {
 
       {/* Memory Health */}
       {memoryHealth && (
-        <Reveal delay={150}>
+        <Reveal delay={180}>
           <Card style={{ padding: 24, marginBottom: 12 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div>
@@ -196,7 +243,7 @@ export default function Briefing({ nightShift, sessions }) {
 
       {/* Eval Canaries */}
       {evalCanaries && evalCanaries.length > 0 && (
-        <Reveal delay={160}>
+        <Reveal delay={190}>
           <Card style={{ padding: 24, marginBottom: 12 }}>
             <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: 16 }}>
               Eval Canaries
@@ -257,7 +304,7 @@ export default function Briefing({ nightShift, sessions }) {
 
       {/* Benchmarks */}
       {benchmarks && benchmarks.length > 0 && (
-        <Reveal delay={230}>
+        <Reveal delay={210}>
           <Card style={{ padding: 24, marginBottom: 12 }}>
             <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: 16 }}>
               Benchmarks
@@ -290,83 +337,6 @@ export default function Briefing({ nightShift, sessions }) {
                   </div>
                 )
               })}
-            </div>
-          </Card>
-        </Reveal>
-      )}
-
-      {/* Proposals */}
-      {proposals && proposals.length > 0 && (
-        <Reveal delay={240}>
-          <Card style={{ padding: 24, border: "1px solid rgba(245,176,123,0.15)" }}>
-            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: STATUS_COLORS.YELLOW, marginBottom: 16 }}>
-              {proposals.length} Proposal{proposals.length > 1 ? "s" : ""} Pending
-            </div>
-            <div style={{ display: "grid", gap: 12 }}>
-              {proposals.map((p, i) => {
-                const pill = PROPOSAL_CATEGORY_COLORS[p.category] || PROPOSAL_CATEGORY_COLORS.default
-                return (
-                  <div key={p.id || i} style={{
-                    padding: "14px 16px",
-                    background: "rgba(255,255,255,0.02)",
-                    borderRadius: 12,
-                    border: "1px solid rgba(255,255,255,0.04)",
-                  }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                      <span style={{
-                        fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase",
-                        padding: "2px 8px", borderRadius: 100,
-                        background: pill.bg, color: pill.color,
-                      }}>
-                        {p.category.replace(/_/g, " ")}
-                      </span>
-                      {p.id && (
-                        <span style={{ fontSize: 10, color: "rgba(255,255,255,0.2)", fontFamily: "monospace" }}>{p.id}</span>
-                      )}
-                    </div>
-                    {p.problem && (
-                      <div style={{ marginBottom: p.solution ? 6 : 0 }}>
-                        <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)" }}>Problem </span>
-                        <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>
-                          {p.problem.length > 120 ? p.problem.slice(0, 120) + "…" : p.problem}
-                        </span>
-                      </div>
-                    )}
-                    {p.solution && (
-                      <div>
-                        <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)" }}>Solution </span>
-                        <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>
-                          {p.solution.length > 120 ? p.solution.slice(0, 120) + "…" : p.solution}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          </Card>
-        </Reveal>
-      )}
-
-      {/* Proposal Track Record */}
-      {proposalTrackRecord && proposalTrackRecord.total > 0 && (
-        <Reveal delay={260}>
-          <Card style={{ padding: 24, marginTop: 12 }}>
-            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: 12 }}>
-              Proposal Track Record
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 12 }}>
-              {[
-                { label: "total", value: proposalTrackRecord.total },
-                { label: "accepted", value: proposalTrackRecord.accepted, color: STATUS_COLORS.GREEN },
-                { label: "pending", value: proposalTrackRecord.pending, color: STATUS_COLORS.YELLOW },
-                { label: "rejected", value: proposalTrackRecord.rejected, color: STATUS_COLORS.RED },
-              ].map(m => (
-                <div key={m.label} style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: 20, fontWeight: 700, color: m.color || "rgba(255,255,255,0.7)" }}>{m.value}</div>
-                  <div style={{ fontSize: 10, color: "rgba(255,255,255,0.25)", marginTop: 4, letterSpacing: "0.04em" }}>{m.label}</div>
-                </div>
-              ))}
             </div>
           </Card>
         </Reveal>

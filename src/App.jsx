@@ -11,7 +11,7 @@ import Timeline from './components/Timeline'
 import SystemOverview from './components/SystemOverview'
 import Briefing from './components/Briefing'
 
-const NAV_ITEMS = ["Overview", "Briefing", "Metrics", "Log", "Timeline", "Brain", "Agents"]
+const NAV_ITEMS = ["Overview", "Briefing", "Metrics", "Log", "Timeline", "Brain"]
 
 export default function App() {
   const [data, setData] = useState(null)
@@ -217,7 +217,7 @@ export default function App() {
           </Reveal>
         </section>
 
-        {/* Agent Map */}
+        {/* Agent Map + Grid */}
         <section id="agents" style={{ marginBottom: 100, scrollMarginTop: 80 }}>
           <Reveal>
             <p style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: 12 }}>Agent Map</p>
@@ -226,19 +226,11 @@ export default function App() {
             </h2>
           </Reveal>
           <Reveal delay={120}>
-            <Card style={{ padding: 32 }}>
+            <Card style={{ padding: 32, marginBottom: 16 }}>
               <AgentMap agents={data.agents} escalationPaths={data.escalationPaths} />
             </Card>
           </Reveal>
-        </section>
-
-        {/* System Grid */}
-        <section id="system" style={{ marginBottom: 60, scrollMarginTop: 80 }}>
-          <Reveal>
-            <p style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: 12 }}>Agents</p>
-            <h2 style={{ fontSize: 32, fontWeight: 700, letterSpacing: "-0.03em", marginBottom: 40, lineHeight: 1.2 }}>The team underneath.</h2>
-          </Reveal>
-          <Reveal delay={120}>
+          <Reveal delay={180}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 12 }}>
               {data.agents.map(a => (
                 <Card key={a.file} style={{ padding: "20px 16px", textAlign: "center" }}>

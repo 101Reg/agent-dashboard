@@ -340,6 +340,13 @@ async function getNightShift() {
     const accepted = lines.filter(l => l.status?.startsWith('accepted')).length;
     const pending = lines.filter(l => l.status === 'pending').length;
     proposalTrackRecord = { total: lines.length, accepted, pending, rejected: lines.filter(l => l.status === 'rejected').length };
+    // Filter out accepted/rejected proposals from display — only show pending
+    const pendingIds = new Set(lines.filter(l => l.status === 'pending').map(l => l.id));
+    if (parsedProposals.length > 0) {
+      const filtered = parsedProposals.filter(p => pendingIds.has(p.id));
+      parsedProposals.length = 0;
+      filtered.forEach(p => parsedProposals.push(p));
+    }
     // Fall back to pending ledger entries if proposals.md had nothing
     if (parsedProposals.length === 0) {
       lines.filter(l => l.status === 'pending').forEach(l => {

@@ -286,9 +286,9 @@
     "hasData": true
   },
   "memory": {
-    "total": 94,
+    "total": 95,
     "byType": {
-      "feedback": 54,
+      "feedback": 55,
       "project": 16,
       "user": 14,
       "reference": 9,
@@ -305,6 +305,7 @@
         "feedback_ask_for_spec",
         "feedback_bash32_macos",
         "feedback_batch_features",
+        "feedback_bruce_proposal_staleness",
         "feedback_canvas_mobile_labels",
         "feedback_capture_at_source",
         "feedback_chat_rate_limits",
@@ -615,20 +616,7 @@
     "evalCanaries": [],
     "frictionTrends": null,
     "proposalCount": 6,
-    "proposals": [
-      {
-        "id": "P-2026-04-09-010",
-        "category": "self_improvement",
-        "problem": "",
-        "solution": ""
-      },
-      {
-        "id": "P-2026-04-09-011",
-        "category": "skill_gap",
-        "problem": "B3 rated **infrastructure/devops as HIGH severity** tonight — the highest severity gap in the system and the only unresolved HIGH. Evidence across three separate sessions:",
-        "solution": "Create `/Users/reggie/.claude/agents/infra.md` — a specialized infrastructure agent scoped to SSH, multi-machine workflows, cron/systemd, and server configuration. Minimum viable spec includes:"
-      }
-    ],
+    "proposals": [],
     "actionRequired": false,
     "briefingContent": "# Night Shift — 2026-04-09\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- dashboard: 6 sessions\n- react: 6 sessions\n- agents: 5 sessions\n- bash: 5 sessions\n- git: 4 sessions\n\n## Agent Usage (7-day)\n- developer: 8 sessions\n- chief-of-staff: 5 sessions\n- debug: 3 sessions\n- reviewer: 2 sessions\n- fact-checker: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 4.8 | 5.0 | -0.2 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n91 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNow I have everything I need. Let me analyze the full picture:\n\n- **Chief-of-staff scored 4.6/5.0 (delta -0.4)** — this is in the raw events but not surfaced in the system-prompt summary. C2=4 (opportunity cost implicit, not named per option), C4=4 (inter-option dependencies not enumerated). Larger regression than TC2.\n- **B3 still flagged claude-hook-system (medium)** — even though P-2026-04-08-008 was implemented with `head-40`. The Hook Edge Cases section is at developer.md line 128 — beyond the snapshot window. The risk was predicted in P-008's own notes.\n- **Infrastructure/devops HIGH severity** — SSH failures, multi-machine git conflicts, no specialized agent. Three sessions affected, unresolved.\n\n---\n\n# Proposals — 2026-04-09\n\n---\n\n## P-2026-04-09-009\n**Category:** `regression`\n\n**Problem:** Chief-of-staff scored **4.6/5.0 (delta -0.4)** on TC1 tonight — the largest regression in the system. Two criteria missed:\n\n- **C2 = 4**: Opportunity cost analysis is present but *implicit* — the agent contextually implies tradeoffs without labeling them explicitly per option. The evaluator notes: *\"opportunity cost may be implicit rather than explicitly named per option.\"*\n- **C4 = 4**: When presenting multiple options, the agent doesn't systematically enumerate inter-option dependencies (e.g., \"Option A makes Option B harder later,\" or \"these are mutually exclusive\").\n\nThe root cause is a format gap in the agent spec. The `## Decision Framework` section tells the agent to evaluate opportunity cost in step 1 (Validate), but says nothing about how to *surface* that analysis in the recommendation. When the agent writes \"Option A vs Option B,\" it describes each option but doesn't say \"choosing A costs you B\" or \"A blocks B if you need it later.\" The `## How You Think` section covers multi-dimensional analysis but doesn't require explicit dependency mapping across options.\n\n**Solution:** Add a \"Multi-option format\" micro-rule to `/Users/reggie/.claude/agents/chief-of-staff.md`. Insert after the `## Decision Framework` block (after line 80):\n\n```markdown\n## Multi-Option Recommendations\n\nWhen presenting 2+ options, always include:\n- **Opportunity cost per option** — explicitly name what you give up by choosing it (not just what you gain)\n- **Inter-option dependencies** — flag if options interact: mutually exclusive, sequentially dependent, or if one forecloses another\n- Keep it brief — one line per dimension is enough\n```\n\n**Impact:** C2 and C4 recover to 5/5. Reggie gets explicitly labeled trade-offs (e.g., \"Choosing A means you can't do B until Q3\") rather than implicit comparisons that require inference. Reduces decision ambiguity for a solo founder with no second opinion.\n\n**Risk:** Adds mild structural overhead to short recommendations where options are obviously independent. Acceptable: the agent spec already says \"Use structured thinking for complex decisions\" — this applies only to multi-option contexts.\n\n---\n\n## P-2026-04-09-010\n**Category:** `self_improvement`\n\n**Problem:** P-2026-04-08-008 was implemented: B3 now snapshots agent files before flagging skill gaps. But tonight B3 still flagged **claude-hook-system as medium severity** — even though `developer.md` contains an explicit `## Hook Edge Cases` section (lines 128–142) documenting both known failure patterns and their fixes.\n\nThe root cause: the snapshot uses `head -40`, and `## Hook Edge Cases` begins at **line 128**. The fix is working exactly as designed — but the depth is wrong. P-2026-04-08-008's own risk note predicted this: *\"a fix that exists in lines 41+ gets missed.\"* That risk is confirmed tonight.\n\nThe `developer.md` file has a density problem: frontmatter + primary directive + principles + workflow + rules + Iron Law all fall within lines 1–127, pushing specialized sections (Hook Edge Cases at 128, Debug Escalation at 144) well past the 40-line window.\n\n**Solution:** Update `/Users/reggie/.claude/night-shift/phases/b3-skill-gaps.sh` line 34. Change:\n\n```bash\ncontent=$(head -40 \"$f\" 2>/dev/null)\n```\n\nto:\n\n```bash\ncontent=$(head -160 \"$f\" 2>/dev/null)\n```\n\nAlso update the prompt label on line 52 from `(first 40 lines each)` to `(first 160 lines each)`.\n\n160 lines covers all current agent files: `developer.md` is 181 lines total — this captures Hook Edge Cases (128), Debug Escalation (144), and Communication Style (165). Other agent files are shorter and fully covered.\n\n**Impact:** B3 stops re-flagging `claude-hook-system` as an open gap. The skill gap report reflects genuine open problems. Bruce's attention (and Reggie's review time) is spent on real gaps, not already-fixed ones.\n\n**Risk:** Slightly larger prompt token count per B3 run (~4× the current agent snapshots). At 6 agent files × 160 lines × ~10 tokens/line ≈ 9,600 additional tokens per run — within budget. If agent files grow significantly, revisit with section-targeted grep (`grep -n \"^##\"`).\n\n---\n\n## P-2026-04-09-011\n**Category:** `skill_gap`\n\n**Problem:** B3 rated **infrastructure/devops as HIGH severity** tonight — the highest severity gap in the system and the only unresolved HIGH. Evidence across three separate sessions:\n\n- SSH setup failed after 20+ minutes in `dashboard-gaps-fix` — unresolved\n- SSH setup failed again in `bruce-refactor` — unresolved  \n- Multi-machine git rebase conflicts blocked `night-shift-setup`\n- Mac Mini username mismatch required manual workaround in `night-shift-learning`\n- B3 evidence: *\"Developer carries all infrastructure work but is rated 'friction' in all three affected sessions. No infrastructure-specialized agent exists.\"*\n\nThe developer agent is a code-first agent — it writes software but has no specific competence in SSH key management, multi-machine git workflows, cron/systemd, or server configuration. When Hero hits these problems, the developer spends time guessing rather than drawing on documented patterns. There's no escalation path either: the debug agent handles software bugs, not infra failures.\n\n**Solution:** Create `/Users/reggie/.claude/agents/infra.md` — a specialized infrastructure agent scoped to SSH, multi-machine workflows, cron/systemd, and server configuration. Minimum viable spec includes:\n\n- **SSH key management**: keygen, ssh-config multi-host setup, agent forwarding, known_hosts debugging\n- **Multi-machine git**: tracking remote branches across machines, rebase conflicts from diverged histories, machine-specific `.gitignore` patterns\n- **Cron/launchd**: macOS LaunchAgent vs cron trade-offs, path environment issues (the most common cron failure), log inspection\n- **Server config**: basic process management, environment variable injection, deployment sanity checks\n\nThe agent should be Sonnet (not Opus), scoped narrowly to avoid overreach into application code.\n\n**Impact:** SSH and multi-machine git failures get a specialist path instead of falling to the developer agent as guesswork. Expected: friction rating drops from the infrastructure domain sessions. HIGH severity gap becomes covered.\n\n**Risk:** New agent adds maintenance surface. Mitigation: scope the spec narrowly to the exact failure patterns documented in B3's evidence — no speculative features. If the infra domain stays quiet for 30 days after creation, the agent can be archived.\n\n## Proposal Track Record\n14 total, 10 accepted, 3 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 100% | 8/8 accepted |\n| Eval Signal | OK | 2 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
@@ -636,9 +624,9 @@
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 18,
+      "total": 11,
       "accepted": 10,
-      "pending": 7,
+      "pending": 0,
       "rejected": 1
     },
     "benchmarks": [
@@ -659,5 +647,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-10T01:19:31.252Z"
+  "lastUpdated": "2026-04-10T02:50:07.589Z"
 }

@@ -286,12 +286,12 @@
     "hasData": true
   },
   "memory": {
-    "total": 95,
+    "total": 94,
     "byType": {
-      "feedback": 56,
+      "feedback": 54,
       "project": 16,
       "user": 14,
-      "reference": 8,
+      "reference": 9,
       "other": 0
     },
     "labels": {
@@ -348,9 +348,7 @@
         "feedback_type_check",
         "feedback_vercel_cli",
         "feedback_vercel_timeouts",
-        "feedback_verification_rules",
-        "feedback_verify_job_links",
-        "feedback_verify_memory_freshness",
+        "feedback_verification",
         "feedback_vite_scaffold"
       ],
       "project": [
@@ -395,6 +393,7 @@
         "reference_hooks",
         "reference_instrument_hierarchy",
         "reference_key_decisions",
+        "reference_lottery_ticket",
         "reference_workflow_tools"
       ]
     }
@@ -618,22 +617,16 @@
     "proposalCount": 6,
     "proposals": [
       {
-        "id": "P-2026-04-09-001",
-        "category": "unknown",
-        "problem": "No summary extracted",
+        "id": "P-2026-04-09-010",
+        "category": "self_improvement",
+        "problem": "",
         "solution": ""
       },
       {
-        "id": "P-2026-04-09-002",
-        "category": "unknown",
-        "problem": "No summary extracted",
-        "solution": ""
-      },
-      {
-        "id": "P-2026-04-09-003",
-        "category": "unknown",
-        "problem": "No summary extracted",
-        "solution": ""
+        "id": "P-2026-04-09-011",
+        "category": "skill_gap",
+        "problem": "B3 rated **infrastructure/devops as HIGH severity** tonight — the highest severity gap in the system and the only unresolved HIGH. Evidence across three separate sessions:",
+        "solution": "Create `/Users/reggie/.claude/agents/infra.md` — a specialized infrastructure agent scoped to SSH, multi-machine workflows, cron/systemd, and server configuration. Minimum viable spec includes:"
       }
     ],
     "actionRequired": false,
@@ -643,9 +636,9 @@
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 14,
+      "total": 18,
       "accepted": 10,
-      "pending": 3,
+      "pending": 7,
       "rejected": 1
     },
     "benchmarks": [
@@ -666,5 +659,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-09T15:31:48.804Z"
+  "lastUpdated": "2026-04-10T01:19:31.252Z"
 }

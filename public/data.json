@@ -296,7 +296,7 @@
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 0,
+        "capabilityGaps": 1,
         "toilEvents": 0,
         "hookCatches": 0
       }
@@ -304,9 +304,9 @@
     "hasData": true
   },
   "memory": {
-    "total": 68,
+    "total": 69,
     "byType": {
-      "feedback": 31,
+      "feedback": 32,
       "project": 13,
       "user": 14,
       "reference": 9,
@@ -334,6 +334,7 @@
         "feedback_iron_law_pattern",
         "feedback_live_testing",
         "feedback_mcp_debug",
+        "feedback_metric_honesty",
         "feedback_nextjs14_deps",
         "feedback_parallel_batching",
         "feedback_protect_secrets",
@@ -476,6 +477,11 @@
       "text": "Vercel GitHub auto-deploy has silently broken 3-4 times across sessions — git push succeeds but Vercel webhook does not fire, leaving live dashboard stale while script claims success",
       "context": "agent-dashboard sync-and-deploy.sh",
       "high": true
+    },
+    {
+      "date": "2026-04-10",
+      "text": "Session-briefing hook does not inject durable corrections — facts Hero has had to repeat across multiple sessions. Two recurring examples: (1) Bruce is /bruce slash command not cron, (2) Vercel GitHub auto-deploy is broken, use CLI. Memory files for both exist but are not auto-loaded at session start, so each new session begins with a stale mental model until Hero corrects it. This is the core OS problem — recurring corrections should be prevented by injection, not re-learned by correction.",
+      "high": false
     },
     {
       "date": "2026-04-10",
@@ -821,5 +827,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-11T03:18:38.213Z"
+  "lastUpdated": "2026-04-11T03:33:26.019Z"
 }

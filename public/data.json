@@ -289,6 +289,16 @@
         "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0
+      },
+      {
+        "name": "agent-os-score-64-to-97",
+        "date": "2026-04-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0
       }
     ],
     "hasData": true
@@ -461,6 +471,12 @@
     }
   ],
   "selfImprovement": [
+    {
+      "date": "2026-04-10",
+      "text": "Vercel GitHub auto-deploy has silently broken 3-4 times across sessions — git push succeeds but Vercel webhook does not fire, leaving live dashboard stale while script claims success",
+      "context": "agent-dashboard sync-and-deploy.sh",
+      "high": true
+    },
     {
       "date": "2026-04-10",
       "text": "B3 head -40 → head -160",
@@ -805,5 +821,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-11T03:04:18.360Z"
+  "lastUpdated": "2026-04-11T03:18:38.213Z"
 }

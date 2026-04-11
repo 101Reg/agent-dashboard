@@ -294,9 +294,9 @@
     "hasData": true
   },
   "memory": {
-    "total": 67,
+    "total": 68,
     "byType": {
-      "feedback": 30,
+      "feedback": 31,
       "project": 13,
       "user": 14,
       "reference": 9,
@@ -309,6 +309,7 @@
         "feedback_apple_social",
         "feedback_ask_before_structure",
         "feedback_bash32_macos",
+        "feedback_bruce_is_slash_command",
         "feedback_bruce_proposal_staleness",
         "feedback_build_hygiene",
         "feedback_canvas_mobile_labels",
@@ -804,5 +805,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-11T02:47:56.450Z"
+  "lastUpdated": "2026-04-11T03:04:18.360Z"
 }

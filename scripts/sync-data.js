@@ -250,9 +250,36 @@ async function getNightShift() {
 
   const latestDir = join(NIGHT_SHIFT_DIR, dateDirs[0]);
   const briefing = await safeReadFile(join(latestDir, 'briefing.md'));
-  const evalResults = await safeReadFile(join(latestDir, 'eval-results.json'));
   const logAnalysis = await safeReadFile(join(latestDir, 'log-analysis.json'));
   if (!briefing) return null;
+
+  // Coverage = agents with canary config + baseline score.
+  // Walk dated dirs newest→oldest to find the most recent actual run score per agent.
+  const configRaw = await safeReadFile(join(NIGHT_SHIFT_DIR, 'config.json'));
+  const baselinesRaw = await safeReadFile(join(NIGHT_SHIFT_DIR, 'baselines.json'));
+  let canaryConfig = {};
+  let baselines = {};
+  try { canaryConfig = JSON.parse(configRaw || '{}').canary_evals || {}; } catch {}
+  try { baselines = JSON.parse(baselinesRaw || '{}'); } catch {}
+
+  const mostRecentScores = {}; // agent -> { score, baseline, delta, date, stale }
+  for (const dir of dateDirs) {
+    const evalFile = await safeReadFile(join(NIGHT_SHIFT_DIR, dir, 'eval-results.json'));
+    if (!evalFile) continue;
+    for (const line of evalFile.trim().split('\n')) {
+      try {
+        const entry = JSON.parse(line);
+        if (entry.score == null || entry.score === 'null') continue;
+        if (mostRecentScores[entry.agent]) continue; // already have a newer entry
+        mostRecentScores[entry.agent] = {
+          score: parseFloat(entry.score),
+          baseline: parseFloat(entry.baseline) || null,
+          delta: parseFloat(entry.delta) || 0,
+          date: dir,
+        };
+      } catch {}
+    }
+  }
 
   const statusMatch = briefing.match(/## Status:\s*(GREEN|YELLOW|RED)/);
   const status = statusMatch ? statusMatch[1] : 'GREEN';
@@ -267,18 +294,45 @@ async function getNightShift() {
     }
   }
 
+  // Uses canaryConfig (line 262), baselines (line 263), mostRecentScores (line 265) — all defined above.
+  // One evalCanary per configured agent. Prefer most recent run score; fall back to baseline.
   const evalCanaries = [];
-  if (evalResults) {
-    for (const line of evalResults.trim().split('\n')) {
-      try {
-        const entry = JSON.parse(line);
-        evalCanaries.push({
-          agent: entry.agent, score: entry.score || null,
-          baseline: entry.baseline || null, delta: entry.delta || 0,
-          status: entry.error ? 'error' : (entry.delta < -1.0 ? 'DEGRADED' : entry.delta < -0.5 ? 'watch' : 'ok'),
-          error: entry.error || null,
-        });
-      } catch {}
+  const today = new Date();
+  const configuredAgents = Object.keys(canaryConfig);
+  for (const agent of configuredAgents) {
+    const recent = mostRecentScores[agent];
+    const promptId = canaryConfig[agent].prompt_id || 'TC1';
+    const baselineEntry = baselines[agent] && baselines[agent][promptId];
+    const baselineScore = baselineEntry ? baselineEntry.score : null;
+
+    if (recent) {
+      const ageDays = Math.floor((today - new Date(recent.date)) / 86400000);
+      evalCanaries.push({
+        agent,
+        score: recent.score,
+        baseline: recent.baseline != null ? recent.baseline : baselineScore,
+        delta: recent.delta,
+        status: recent.delta < -1.0 ? 'DEGRADED' : recent.delta < -0.5 ? 'watch' : 'ok',
+        lastRun: recent.date,
+        stale: ageDays > 14,
+        source: 'run',
+      });
+    } else if (baselineScore != null) {
+      evalCanaries.push({
+        agent,
+        score: baselineScore,
+        baseline: baselineScore,
+        delta: 0,
+        status: 'baseline',
+        lastRun: baselineEntry.date || null,
+        stale: true,
+        source: 'baseline',
+      });
+    } else {
+      evalCanaries.push({
+        agent, score: null, baseline: null, delta: 0,
+        status: 'unscored', stale: true, source: 'none',
+      });
     }
   }
 
@@ -351,7 +405,11 @@ async function getNightShift() {
 
   const ledgerFile = await safeReadFile(join(NIGHT_SHIFT_DIR, 'proposal-ledger.jsonl'));
   if (ledgerFile && ledgerFile.trim()) {
-    const lines = ledgerFile.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    const rawLines = ledgerFile.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    // Dedupe by id — latest line per id wins (ledger is append-only; newer status supersedes older)
+    const latestById = new Map();
+    for (const l of rawLines) { if (l.id) latestById.set(l.id, l); }
+    const lines = Array.from(latestById.values());
     const accepted = lines.filter(l => l.status?.startsWith('accepted')).length;
     const pending = lines.filter(l => l.status === 'pending').length;
     proposalTrackRecord = { total: lines.length, accepted, pending, rejected: lines.filter(l => l.status === 'rejected').length };

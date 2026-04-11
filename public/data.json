@@ -57,6 +57,14 @@
       "status": "active"
     },
     {
+      "name": "infra",
+      "file": "infra",
+      "role": "Infrastructure specialist for SSH key management, multi-machine git workflows, cron/launchd scheduling, and server configuration. Use when setting up remote access, diagnosing multi-machine git conflicts, debugging cron/launchd failures, or fixing server environment issues.",
+      "icon": "🤖",
+      "type": "General",
+      "status": "active"
+    },
+    {
       "name": "Johnny",
       "file": "legal",
       "role": "Legal and compliance specialist for fintech and behavioral wellness. Use proactively for privacy, Plaid compliance, financial data regulations, terms of service, and user consent.",
@@ -105,7 +113,7 @@
       "status": "active"
     }
   ],
-  "agentCount": 13,
+  "agentCount": 14,
   "escalationPaths": [
     {
       "from": "developer",
@@ -286,79 +294,51 @@
     "hasData": true
   },
   "memory": {
-    "total": 95,
+    "total": 67,
     "byType": {
-      "feedback": 55,
-      "project": 16,
+      "feedback": 30,
+      "project": 13,
       "user": 14,
       "reference": 9,
       "other": 0
     },
     "labels": {
       "feedback": [
-        "feedback_agent_eval_harness",
-        "feedback_agent_reference_rules",
+        "feedback_agent_skill_install",
         "feedback_api_billing",
-        "feedback_api_prompt_size",
         "feedback_apple_social",
         "feedback_ask_before_structure",
-        "feedback_ask_for_spec",
         "feedback_bash32_macos",
-        "feedback_batch_features",
         "feedback_bruce_proposal_staleness",
+        "feedback_build_hygiene",
         "feedback_canvas_mobile_labels",
-        "feedback_capture_at_source",
-        "feedback_chat_rate_limits",
         "feedback_claude_repo_gitignore",
         "feedback_dashboard_staleness",
-        "feedback_data_tagging",
-        "feedback_description_routing",
-        "feedback_design_concept_first",
+        "feedback_data_handling",
         "feedback_enumerate_states",
         "feedback_env_verify",
-        "feedback_eval_design",
-        "feedback_eval_preconditions",
-        "feedback_factual_updates",
-        "feedback_firewall_data",
-        "feedback_flag_empty_state_risk",
-        "feedback_frontmatter_spec",
+        "feedback_evals",
+        "feedback_external_limits",
         "feedback_incremental_migration",
         "feedback_iron_law_pattern",
-        "feedback_jsx_artifact_source",
-        "feedback_linkedin_no_fetch",
         "feedback_live_testing",
-        "feedback_marketing_intake_fix",
         "feedback_mcp_debug",
-        "feedback_measure_after_trim",
-        "feedback_namespace_on_install",
         "feedback_nextjs14_deps",
-        "feedback_no_scripts_in_terminal",
-        "feedback_no_sed_bypass",
-        "feedback_opinions_as_opinions",
-        "feedback_orchard_repackage",
-        "feedback_parallel_agents",
-        "feedback_parallel_audit_fix",
-        "feedback_pretooluse_friction",
+        "feedback_parallel_batching",
         "feedback_protect_secrets",
-        "feedback_prototype_direct_convert",
         "feedback_research_before_build",
         "feedback_schema_pressure_test",
-        "feedback_skill_evals",
-        "feedback_strip_llm_markdown",
+        "feedback_spec_first",
         "feedback_ts_iteration",
         "feedback_type_check",
         "feedback_vercel_cli",
         "feedback_vercel_timeouts",
-        "feedback_verification",
-        "feedback_vite_scaffold"
+        "feedback_verification"
       ],
       "project": [
         "project_agency_3stack",
         "project_agency_brand",
-        "project_agent_dashboard",
-        "project_agent_os_evolution",
-        "project_agent_os_repo",
-        "project_agent_upgrades",
+        "project_agent_os",
         "project_ai_agency",
         "project_debug_agent",
         "project_edge",
@@ -481,6 +461,18 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-04-10",
+      "text": "B3 head -40 → head -160",
+      "context": "Bruce proposal P-2026-04-09-010",
+      "high": true
+    },
+    {
+      "date": "2026-04-10",
+      "text": "Create infra agent",
+      "context": "Bruce proposal P-2026-04-09-011",
+      "high": true
+    },
+    {
       "date": "2026-04-09",
       "text": "Library reorganization baseline — measure against this in 2 weeks",
       "context": "Post-reorganization system metrics: CLAUDE.md=46 lines, rules=6 files, global_memory=92 files, mirror_memory=18 files, MEMORY_index=96 lines, hooks=5, skills=34, hook_catches_baseline=11, developer_eval=4.8, cos_eval=4.6",
@@ -502,6 +494,30 @@
       "date": "2026-04-09",
       "text": "Increase b3-skill-gaps.sh agent snapshot from 40 to 160 lines",
       "context": "Bruce proposal P-2026-04-09-010",
+      "high": true
+    },
+    {
+      "date": "2026-04-09",
+      "text": "Merge 4 project_agent_* files into project_agent_os.md",
+      "context": "Bruce proposal P-2026-04-09-012",
+      "high": true
+    },
+    {
+      "date": "2026-04-09",
+      "text": "Add post-eval audit to b1 — detect silent canary eval failures",
+      "context": "Bruce proposal P-2026-04-09-013",
+      "high": true
+    },
+    {
+      "date": "2026-04-09",
+      "text": "Add TC6 adversarial rule compliance eval to developer, replace TC2 canary",
+      "context": "Bruce proposal P-2026-04-09-014",
+      "high": true
+    },
+    {
+      "date": "2026-04-09",
+      "text": "Add evidence age filtering to B3 and C0 — prevent stale evidence proposals",
+      "context": "Bruce proposal P-2026-04-09-015",
       "high": true
     },
     {
@@ -613,23 +629,151 @@
     "findings": [
       "System healthy — no issues detected"
     ],
-    "evalCanaries": [],
-    "frictionTrends": null,
-    "proposalCount": 6,
-    "proposals": [
+    "evalCanaries": [
       {
-        "id": "P-2026-04-09-010",
-        "category": "self_improvement",
-        "problem": "",
-        "solution": ""
+        "agent": "infra",
+        "score": 4.5,
+        "baseline": 4.5,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-10",
+        "stale": true,
+        "source": "baseline"
       },
       {
-        "id": "P-2026-04-09-011",
-        "category": "skill_gap",
-        "problem": "B3 rated **infrastructure/devops as HIGH severity** tonight — the highest severity gap in the system and the only unresolved HIGH. Evidence across three separate sessions:",
-        "solution": "Create `/Users/reggie/.claude/agents/infra.md` — a specialized infrastructure agent scoped to SSH, multi-machine workflows, cron/systemd, and server configuration. Minimum viable spec includes:"
+        "agent": "developer",
+        "score": 5,
+        "baseline": 5,
+        "delta": 0,
+        "status": "ok",
+        "lastRun": "2026-04-08",
+        "stale": false,
+        "source": "run"
+      },
+      {
+        "agent": "chief-of-staff",
+        "score": 5,
+        "baseline": 5,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-02",
+        "stale": true,
+        "source": "baseline"
+      },
+      {
+        "agent": "customer-success",
+        "score": 4.8,
+        "baseline": 4.8,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-09",
+        "stale": true,
+        "source": "baseline"
+      },
+      {
+        "agent": "data",
+        "score": 4.4,
+        "baseline": 4.4,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-09",
+        "stale": true,
+        "source": "baseline"
+      },
+      {
+        "agent": "debug",
+        "score": 5,
+        "baseline": 5,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-09",
+        "stale": true,
+        "source": "baseline"
+      },
+      {
+        "agent": "fact-checker",
+        "score": 4.6,
+        "baseline": 4.6,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-09",
+        "stale": true,
+        "source": "baseline"
+      },
+      {
+        "agent": "finance",
+        "score": 4.6,
+        "baseline": 4.6,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-09",
+        "stale": true,
+        "source": "baseline"
+      },
+      {
+        "agent": "legal",
+        "score": 5,
+        "baseline": 5,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-09",
+        "stale": true,
+        "source": "baseline"
+      },
+      {
+        "agent": "marketer",
+        "score": 4.6,
+        "baseline": 4.6,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-09",
+        "stale": true,
+        "source": "baseline"
+      },
+      {
+        "agent": "night-shift",
+        "score": 5,
+        "baseline": 5,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-09",
+        "stale": true,
+        "source": "baseline"
+      },
+      {
+        "agent": "product",
+        "score": 4.8,
+        "baseline": 4.8,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-09",
+        "stale": true,
+        "source": "baseline"
+      },
+      {
+        "agent": "research",
+        "score": 4.6,
+        "baseline": 4.6,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-09",
+        "stale": true,
+        "source": "baseline"
+      },
+      {
+        "agent": "reviewer",
+        "score": 5,
+        "baseline": 5,
+        "delta": 0,
+        "status": "baseline",
+        "lastRun": "2026-04-09",
+        "stale": true,
+        "source": "baseline"
       }
     ],
+    "frictionTrends": null,
+    "proposalCount": 6,
+    "proposals": [],
     "actionRequired": false,
     "briefingContent": "# Night Shift — 2026-04-09\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- dashboard: 6 sessions\n- react: 6 sessions\n- agents: 5 sessions\n- bash: 5 sessions\n- git: 4 sessions\n\n## Agent Usage (7-day)\n- developer: 8 sessions\n- chief-of-staff: 5 sessions\n- debug: 3 sessions\n- reviewer: 2 sessions\n- fact-checker: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 4.8 | 5.0 | -0.2 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n91 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 1\n- patterns_detected: 2\n\n## Proposals\nNow I have everything I need. Let me analyze the full picture:\n\n- **Chief-of-staff scored 4.6/5.0 (delta -0.4)** — this is in the raw events but not surfaced in the system-prompt summary. C2=4 (opportunity cost implicit, not named per option), C4=4 (inter-option dependencies not enumerated). Larger regression than TC2.\n- **B3 still flagged claude-hook-system (medium)** — even though P-2026-04-08-008 was implemented with `head-40`. The Hook Edge Cases section is at developer.md line 128 — beyond the snapshot window. The risk was predicted in P-008's own notes.\n- **Infrastructure/devops HIGH severity** — SSH failures, multi-machine git conflicts, no specialized agent. Three sessions affected, unresolved.\n\n---\n\n# Proposals — 2026-04-09\n\n---\n\n## P-2026-04-09-009\n**Category:** `regression`\n\n**Problem:** Chief-of-staff scored **4.6/5.0 (delta -0.4)** on TC1 tonight — the largest regression in the system. Two criteria missed:\n\n- **C2 = 4**: Opportunity cost analysis is present but *implicit* — the agent contextually implies tradeoffs without labeling them explicitly per option. The evaluator notes: *\"opportunity cost may be implicit rather than explicitly named per option.\"*\n- **C4 = 4**: When presenting multiple options, the agent doesn't systematically enumerate inter-option dependencies (e.g., \"Option A makes Option B harder later,\" or \"these are mutually exclusive\").\n\nThe root cause is a format gap in the agent spec. The `## Decision Framework` section tells the agent to evaluate opportunity cost in step 1 (Validate), but says nothing about how to *surface* that analysis in the recommendation. When the agent writes \"Option A vs Option B,\" it describes each option but doesn't say \"choosing A costs you B\" or \"A blocks B if you need it later.\" The `## How You Think` section covers multi-dimensional analysis but doesn't require explicit dependency mapping across options.\n\n**Solution:** Add a \"Multi-option format\" micro-rule to `/Users/reggie/.claude/agents/chief-of-staff.md`. Insert after the `## Decision Framework` block (after line 80):\n\n```markdown\n## Multi-Option Recommendations\n\nWhen presenting 2+ options, always include:\n- **Opportunity cost per option** — explicitly name what you give up by choosing it (not just what you gain)\n- **Inter-option dependencies** — flag if options interact: mutually exclusive, sequentially dependent, or if one forecloses another\n- Keep it brief — one line per dimension is enough\n```\n\n**Impact:** C2 and C4 recover to 5/5. Reggie gets explicitly labeled trade-offs (e.g., \"Choosing A means you can't do B until Q3\") rather than implicit comparisons that require inference. Reduces decision ambiguity for a solo founder with no second opinion.\n\n**Risk:** Adds mild structural overhead to short recommendations where options are obviously independent. Acceptable: the agent spec already says \"Use structured thinking for complex decisions\" — this applies only to multi-option contexts.\n\n---\n\n## P-2026-04-09-010\n**Category:** `self_improvement`\n\n**Problem:** P-2026-04-08-008 was implemented: B3 now snapshots agent files before flagging skill gaps. But tonight B3 still flagged **claude-hook-system as medium severity** — even though `developer.md` contains an explicit `## Hook Edge Cases` section (lines 128–142) documenting both known failure patterns and their fixes.\n\nThe root cause: the snapshot uses `head -40`, and `## Hook Edge Cases` begins at **line 128**. The fix is working exactly as designed — but the depth is wrong. P-2026-04-08-008's own risk note predicted this: *\"a fix that exists in lines 41+ gets missed.\"* That risk is confirmed tonight.\n\nThe `developer.md` file has a density problem: frontmatter + primary directive + principles + workflow + rules + Iron Law all fall within lines 1–127, pushing specialized sections (Hook Edge Cases at 128, Debug Escalation at 144) well past the 40-line window.\n\n**Solution:** Update `/Users/reggie/.claude/night-shift/phases/b3-skill-gaps.sh` line 34. Change:\n\n```bash\ncontent=$(head -40 \"$f\" 2>/dev/null)\n```\n\nto:\n\n```bash\ncontent=$(head -160 \"$f\" 2>/dev/null)\n```\n\nAlso update the prompt label on line 52 from `(first 40 lines each)` to `(first 160 lines each)`.\n\n160 lines covers all current agent files: `developer.md` is 181 lines total — this captures Hook Edge Cases (128), Debug Escalation (144), and Communication Style (165). Other agent files are shorter and fully covered.\n\n**Impact:** B3 stops re-flagging `claude-hook-system` as an open gap. The skill gap report reflects genuine open problems. Bruce's attention (and Reggie's review time) is spent on real gaps, not already-fixed ones.\n\n**Risk:** Slightly larger prompt token count per B3 run (~4× the current agent snapshots). At 6 agent files × 160 lines × ~10 tokens/line ≈ 9,600 additional tokens per run — within budget. If agent files grow significantly, revisit with section-targeted grep (`grep -n \"^##\"`).\n\n---\n\n## P-2026-04-09-011\n**Category:** `skill_gap`\n\n**Problem:** B3 rated **infrastructure/devops as HIGH severity** tonight — the highest severity gap in the system and the only unresolved HIGH. Evidence across three separate sessions:\n\n- SSH setup failed after 20+ minutes in `dashboard-gaps-fix` — unresolved\n- SSH setup failed again in `bruce-refactor` — unresolved  \n- Multi-machine git rebase conflicts blocked `night-shift-setup`\n- Mac Mini username mismatch required manual workaround in `night-shift-learning`\n- B3 evidence: *\"Developer carries all infrastructure work but is rated 'friction' in all three affected sessions. No infrastructure-specialized agent exists.\"*\n\nThe developer agent is a code-first agent — it writes software but has no specific competence in SSH key management, multi-machine git workflows, cron/systemd, or server configuration. When Hero hits these problems, the developer spends time guessing rather than drawing on documented patterns. There's no escalation path either: the debug agent handles software bugs, not infra failures.\n\n**Solution:** Create `/Users/reggie/.claude/agents/infra.md` — a specialized infrastructure agent scoped to SSH, multi-machine workflows, cron/systemd, and server configuration. Minimum viable spec includes:\n\n- **SSH key management**: keygen, ssh-config multi-host setup, agent forwarding, known_hosts debugging\n- **Multi-machine git**: tracking remote branches across machines, rebase conflicts from diverged histories, machine-specific `.gitignore` patterns\n- **Cron/launchd**: macOS LaunchAgent vs cron trade-offs, path environment issues (the most common cron failure), log inspection\n- **Server config**: basic process management, environment variable injection, deployment sanity checks\n\nThe agent should be Sonnet (not Opus), scoped narrowly to avoid overreach into application code.\n\n**Impact:** SSH and multi-machine git failures get a specialist path instead of falling to the developer agent as guesswork. Expected: friction rating drops from the infrastructure domain sessions. HIGH severity gap becomes covered.\n\n**Risk:** New agent adds maintenance surface. Mitigation: scope the spec narrowly to the exact failure patterns documented in B3's evidence — no speculative features. If the infra domain stays quiet for 30 days after creation, the agent can be archived.\n\n## Proposal Track Record\n14 total, 10 accepted, 3 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 100% | 8/8 accepted |\n| Eval Signal | OK | 2 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
@@ -637,10 +781,10 @@
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 16,
-      "accepted": 10,
-      "pending": 5,
-      "rejected": 1
+      "total": 15,
+      "accepted": 15,
+      "pending": 0,
+      "rejected": 0
     },
     "benchmarks": [
       {
@@ -660,5 +804,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-10T03:14:13.974Z"
+  "lastUpdated": "2026-04-11T02:47:56.450Z"
 }

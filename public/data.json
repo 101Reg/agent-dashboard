@@ -301,9 +301,29 @@
         "hookCatches": 0
       },
       {
+        "name": "38twelve-daily-strategic-build",
+        "date": "2026-04-11",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0
+      },
+      {
         "name": "38twelve-daily-build",
         "date": "2026-04-11",
         "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0
+      },
+      {
+        "name": "38twelve-pipeline-build",
+        "date": "2026-04-12",
+        "fixAttempts": 3,
         "escalations": 0,
         "reExplanations": 0,
         "capabilityGaps": 0,
@@ -409,15 +429,27 @@
   "system": {
     "skills": 17,
     "rules": 11,
-    "hooks": 5,
+    "hooks": 6,
     "mcpServers": 2
   },
   "timeline": [
     {
+      "date": "Apr 12, 2026",
+      "title": "38twelve Pipeline Build",
+      "desc": "Built full Cloudflare Workers pipeline (ingestion, drafting, accuracy filter, publishing), Created approval dashboard with dual X + website previews, Deployed to Cloudflare with D1, KV, cron triggers",
+      "active": true
+    },
+    {
+      "date": "Apr 11, 2026",
+      "title": "38twelve Daily Strategic Build",
+      "desc": "Pressure-tested Loggr spec across 10 strategic concerns, Rebranded to 38twelveDaily under 38twelve umbrella, Transformed agency site to publication-first homepage",
+      "active": false
+    },
+    {
       "date": "Apr 10, 2026",
       "title": "Agent Os Score 64 To 97",
       "desc": "Diagnosed and fixed canary coverage metric (sync-data.js) — agent score 39→99, Memory consolidation via /dream: 92→67 files across 8 clusters, Built infra agent (SSH, multi-machine git, cron/launchd, server config) + eval file + canary config + baseline",
-      "active": true
+      "active": false
     },
     {
       "date": "Apr 9, 2026",
@@ -493,6 +525,30 @@
     }
   ],
   "selfImprovement": [
+    {
+      "date": "2026-04-12",
+      "text": "All 3 fix attempts were caused by not verifying external dependencies before coding. Updated code-accuracy.md rule.",
+      "context": "deployment pipeline",
+      "high": true
+    },
+    {
+      "date": "2026-04-12",
+      "text": "Hero had to manually catch 3 inline loop failures: agent deployment summary not presented, surprises not logged inline, fixes not applied inline. The rules existed but were not followed. This is the 2nd+ session where Hero catches what the system should catch automatically.",
+      "context": "system discipline",
+      "high": true
+    },
+    {
+      "date": "2026-04-12",
+      "text": "3 deploy failures from unverified external dependencies (model ID, RSS URLs, JSON parsing). Hero caught 3 inline loop failures (agent summary, surprise logging, inline fixes not triggered automatically). → 4 lessons saved",
+      "context": "38twelve-pipeline-build",
+      "high": false
+    },
+    {
+      "date": "2026-04-11",
+      "text": "3 accuracy violations caught by stop hook and Hero directly. Both subagent calls returned empty. Verify-before-ship repeated from prior session. → 5 lessons saved",
+      "context": "38twelve-daily-strategic-build",
+      "high": false
+    },
     {
       "date": "2026-04-10",
       "text": "Vercel GitHub auto-deploy has silently broken 3-4 times across sessions — git push succeeds but Vercel webhook does not fire, leaving live dashboard stale while script claims success",
@@ -854,5 +910,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-12T04:52:06.485Z"
+  "lastUpdated": "2026-04-12T07:28:26.000Z"
 }

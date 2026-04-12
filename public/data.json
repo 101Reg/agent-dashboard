@@ -334,12 +334,12 @@
     "hasData": true
   },
   "memory": {
-    "total": 74,
+    "total": 77,
     "byType": {
-      "feedback": 34,
+      "feedback": 35,
       "project": 14,
       "user": 16,
-      "reference": 9,
+      "reference": 11,
       "other": 0
     },
     "labels": {
@@ -377,7 +377,8 @@
         "feedback_vercel_cli",
         "feedback_vercel_timeouts",
         "feedback_verification",
-        "feedback_verify_before_ship"
+        "feedback_verify_before_ship",
+        "feedback_verify_domain_state"
       ],
       "project": [
         "project_38twelve_daily",
@@ -414,6 +415,7 @@
         "user_visual_decider"
       ],
       "reference": [
+        "reference_beehiiv_embeds",
         "reference_claude_cli",
         "reference_dream_consolidation",
         "reference_edge_docs",
@@ -422,7 +424,8 @@
         "reference_instrument_hierarchy",
         "reference_key_decisions",
         "reference_lottery_ticket",
-        "reference_workflow_tools"
+        "reference_workflow_tools",
+        "reference_x_api_2026"
       ]
     }
   },
@@ -910,5 +913,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-12T07:28:26.000Z"
+  "lastUpdated": "2026-04-12T20:09:38.533Z"
 }

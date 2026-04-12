@@ -299,16 +299,26 @@
         "capabilityGaps": 1,
         "toilEvents": 0,
         "hookCatches": 0
+      },
+      {
+        "name": "38twelve-daily-build",
+        "date": "2026-04-11",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 69,
+    "total": 74,
     "byType": {
-      "feedback": 32,
-      "project": 13,
-      "user": 14,
+      "feedback": 34,
+      "project": 14,
+      "user": 16,
       "reference": 9,
       "other": 0
     },
@@ -340,14 +350,17 @@
         "feedback_protect_secrets",
         "feedback_research_before_build",
         "feedback_schema_pressure_test",
+        "feedback_source_opinions",
         "feedback_spec_first",
         "feedback_ts_iteration",
         "feedback_type_check",
         "feedback_vercel_cli",
         "feedback_vercel_timeouts",
-        "feedback_verification"
+        "feedback_verification",
+        "feedback_verify_before_ship"
       ],
       "project": [
+        "project_38twelve_daily",
         "project_agency_3stack",
         "project_agency_brand",
         "project_agent_os",
@@ -376,7 +389,9 @@
         "user_learns_by_doing",
         "user_marathon_builder",
         "user_naming_style",
-        "user_single_machine"
+        "user_revenue_first",
+        "user_single_machine",
+        "user_visual_decider"
       ],
       "reference": [
         "reference_claude_cli",
@@ -393,16 +408,22 @@
   },
   "system": {
     "skills": 17,
-    "rules": 7,
+    "rules": 11,
     "hooks": 5,
     "mcpServers": 2
   },
   "timeline": [
     {
+      "date": "Apr 10, 2026",
+      "title": "Agent Os Score 64 To 97",
+      "desc": "Diagnosed and fixed canary coverage metric (sync-data.js) — agent score 39→99, Memory consolidation via /dream: 92→67 files across 8 clusters, Built infra agent (SSH, multi-machine git, cron/launchd, server config) + eval file + canary config + baseline",
+      "active": true
+    },
+    {
       "date": "Apr 9, 2026",
       "title": "Library Reorganization",
       "desc": "Reorganized Agent OS memory (124→92 files), Slimmed CLAUDE.md from 75 to 46 lines, Scoped 13 Mirror memories to project dir",
-      "active": true
+      "active": false
     },
     {
       "date": "Apr 8, 2026",
@@ -481,6 +502,12 @@
     {
       "date": "2026-04-10",
       "text": "Session-briefing hook does not inject durable corrections — facts Hero has had to repeat across multiple sessions. Two recurring examples: (1) Bruce is /bruce slash command not cron, (2) Vercel GitHub auto-deploy is broken, use CLI. Memory files for both exist but are not auto-loaded at session start, so each new session begins with a stale mental model until Hero corrects it. This is the core OS problem — recurring corrections should be prevented by injection, not re-learned by correction.",
+      "high": false
+    },
+    {
+      "date": "2026-04-10",
+      "text": "Claimed Bruce 3 AM cron would populate evals AND that Vercel auto-deploy would pick up git push — both wrong, corrected by Hero. Root cause: stale mental model at session start + no enforcement of verification-before-claim. Fixed systemically via Stop hook check 7 + session-briefing pinned corrections. → 6 lessons saved",
+      "context": "agent-os-score-64-to-97",
       "high": false
     },
     {
@@ -827,5 +854,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-11T03:33:26.019Z"
+  "lastUpdated": "2026-04-12T04:52:06.485Z"
 }

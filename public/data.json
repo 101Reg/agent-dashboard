@@ -195,7 +195,7 @@
         "date": "2026-04-05",
         "fixAttempts": 0,
         "escalations": 0,
-        "reExplanations": 1,
+        "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 9
@@ -296,7 +296,7 @@
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 1,
+        "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0
       },
@@ -323,7 +323,7 @@
       {
         "name": "38twelve-pipeline-build",
         "date": "2026-04-12",
-        "fixAttempts": 3,
+        "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
         "capabilityGaps": 0,
@@ -346,7 +346,7 @@
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 4,
+        "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0
       },
@@ -356,7 +356,7 @@
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 2,
+        "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0
       },
@@ -366,17 +366,7 @@
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 1,
-        "toilEvents": 0,
-        "hookCatches": 0
-      },
-      {
-        "name": "bruce-proposal-review",
-        "date": "2026-04-16",
-        "fixAttempts": 0,
-        "escalations": 0,
-        "reExplanations": 0,
-        "capabilityGaps": 1,
+        "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0
       },
@@ -477,7 +467,7 @@
   "system": {
     "skills": 17,
     "rules": 13,
-    "hooks": 6,
+    "hooks": 7,
     "mcpServers": 2
   },
   "timeline": [
@@ -1100,5 +1090,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-16T16:57:07.847Z"
+  "lastUpdated": "2026-04-16T17:11:28.260Z"
 }

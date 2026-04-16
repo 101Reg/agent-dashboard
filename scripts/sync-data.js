@@ -152,12 +152,25 @@ async function getMetrics() {
     }
   }
 
-  // Overlay friction counts from performance log
+  // Overlay friction counts from performance log (skipping resolved events)
   const perfContent = await safeReadFile(PERF_LOG);
   if (perfContent && perfContent.trim()) {
     const events = perfContent.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+
+    // Build resolved-key set from friction_resolved events.
+    // Key = `${target_session}::${target_event}::${target_detail}` — exact match required.
+    const resolved = new Set();
     for (const e of events) {
+      if (e.event === 'friction_resolved' && e.target_session && e.target_event && e.target_detail) {
+        resolved.add(`${e.target_session}::${e.target_event}::${e.target_detail}`);
+      }
+    }
+
+    for (const e of events) {
+      if (e.event === 'friction_resolved') continue;
       const s = e.session || 'unknown';
+      // Skip if this specific event has been marked resolved
+      if (resolved.has(`${s}::${e.event}::${e.detail || ''}`)) continue;
       if (!sessionMap.has(s)) sessionMap.set(s, { name: s, date: e.date, fixAttempts: 0, escalations: 0, reExplanations: 0, capabilityGaps: 0, toilEvents: 0, hookCatches: 0 });
       const entry = sessionMap.get(s);
       if (e.event === 'fix_attempt') entry.fixAttempts++;

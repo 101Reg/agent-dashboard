@@ -379,73 +379,57 @@
         "capabilityGaps": 1,
         "toilEvents": 0,
         "hookCatches": 0
+      },
+      {
+        "name": "bruce-review-2026-04-16",
+        "date": "2026-04-16",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 88,
+    "total": 62,
     "byType": {
-      "feedback": 44,
-      "project": 15,
+      "feedback": 20,
+      "project": 13,
       "user": 16,
       "reference": 12,
       "other": 0
     },
     "labels": {
       "feedback": [
-        "feedback_agent_skill_install",
-        "feedback_api_billing",
+        "feedback_agents_skills",
+        "feedback_api_external",
         "feedback_apple_social",
-        "feedback_ask_before_structure",
-        "feedback_bash32_macos",
         "feedback_bruce_is_slash_command",
         "feedback_bruce_proposal_staleness",
-        "feedback_build_hygiene",
+        "feedback_build_deploy",
         "feedback_canvas_mobile_labels",
-        "feedback_cf_worker_limits",
-        "feedback_claude_repo_gitignore",
+        "feedback_cloudflare_38twelve",
         "feedback_config_sourced_rules",
-        "feedback_dashboard_staleness",
         "feedback_data_handling",
         "feedback_enumerate_states",
-        "feedback_env_verify",
         "feedback_evals",
-        "feedback_external_limits",
-        "feedback_fk_guard_deletes",
-        "feedback_incremental_migration",
         "feedback_iron_law_pattern",
         "feedback_live_testing",
-        "feedback_mcp_debug",
-        "feedback_memory_as_fabrication",
         "feedback_metric_honesty",
-        "feedback_nextjs14_deps",
-        "feedback_nextjs_canonical",
-        "feedback_parallel_batching",
-        "feedback_protect_secrets",
-        "feedback_research_before_build",
-        "feedback_rss_parsing",
+        "feedback_research_planning",
         "feedback_schema_pressure_test",
-        "feedback_scope_check_first",
-        "feedback_source_opinions",
-        "feedback_spec_first",
-        "feedback_ts_iteration",
-        "feedback_ts_runtime_verify",
-        "feedback_type_check",
+        "feedback_setup_hygiene",
         "feedback_ui_always_visible_controls",
-        "feedback_vercel_cli",
-        "feedback_vercel_timeouts",
-        "feedback_verification",
-        "feedback_verify_before_ship",
-        "feedback_verify_domain_state"
+        "feedback_verification"
       ],
       "project": [
         "project_38twelve_daily",
         "project_38twelve_next",
-        "project_agency_3stack",
-        "project_agency_brand",
+        "project_agency",
         "project_agent_os",
-        "project_ai_agency",
         "project_debug_agent",
         "project_edge",
         "project_impeccable_install",
@@ -1116,5 +1100,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-16T16:12:06.747Z"
+  "lastUpdated": "2026-04-16T16:48:22.123Z"
 }

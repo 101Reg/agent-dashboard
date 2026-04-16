@@ -8,12 +8,14 @@ const NAV = ["Score", "Areas", "Activity", "Timeline"]
 
 function computeAORs(data) {
   const sessions = data.metrics?.sessions || []
-  const totalSessions = sessions.length || 1
-  const totalFix = sessions.reduce((a, s) => a + s.fixAttempts, 0)
-  const totalEsc = sessions.reduce((a, s) => a + s.escalations, 0)
-  const totalReex = sessions.reduce((a, s) => a + s.reExplanations, 0)
-  const totalGaps = sessions.reduce((a, s) => a + s.capabilityGaps, 0)
-  const totalToil = sessions.reduce((a, s) => a + s.toilEvents, 0)
+  const cutoff = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+  const recent = sessions.filter(s => s.date >= cutoff)
+  const totalSessions = recent.length || 1
+  const totalFix = recent.reduce((a, s) => a + s.fixAttempts, 0)
+  const totalEsc = recent.reduce((a, s) => a + s.escalations, 0)
+  const totalReex = recent.reduce((a, s) => a + s.reExplanations, 0)
+  const totalGaps = recent.reduce((a, s) => a + s.capabilityGaps, 0)
+  const totalToil = recent.reduce((a, s) => a + s.toilEvents, 0)
 
   const ns = data.nightShift || {}
   const proposals = ns.proposalTrackRecord || { total: 0, accepted: 0, pending: 0, rejected: 0 }

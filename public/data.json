@@ -379,16 +379,26 @@
         "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0
+      },
+      {
+        "name": "bruce-full-review-and-fix",
+        "date": "2026-04-16",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 62,
+    "total": 63,
     "byType": {
       "feedback": 20,
       "project": 13,
-      "user": 16,
+      "user": 17,
       "reference": 12,
       "other": 0
     },
@@ -446,6 +456,7 @@
         "user_naming_style",
         "user_revenue_first",
         "user_single_machine",
+        "user_solve_immediately",
         "user_visual_decider"
       ],
       "reference": [
@@ -466,7 +477,7 @@
   },
   "system": {
     "skills": 17,
-    "rules": 13,
+    "rules": 14,
     "hooks": 7,
     "mcpServers": 2
   },
@@ -765,12 +776,6 @@
       "date": "2026-04-09",
       "text": "Add Multi-Option Recommendations micro-rule to chief-of-staff.md",
       "context": "Bruce proposal P-2026-04-09-009",
-      "high": true
-    },
-    {
-      "date": "2026-04-09",
-      "text": "Increase b3-skill-gaps.sh agent snapshot from 40 to 160 lines",
-      "context": "Bruce proposal P-2026-04-09-010",
       "high": true
     },
     {
@@ -1090,5 +1095,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-16T17:11:28.260Z"
+  "lastUpdated": "2026-04-16T17:40:02.424Z"
 }

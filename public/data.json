@@ -359,17 +359,27 @@
         "capabilityGaps": 2,
         "toilEvents": 0,
         "hookCatches": 0
+      },
+      {
+        "name": "seo-phase-123",
+        "date": "2026-04-16",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 87,
+    "total": 88,
     "byType": {
       "feedback": 44,
       "project": 15,
       "user": 16,
-      "reference": 11,
+      "reference": 12,
       "other": 0
     },
     "labels": {
@@ -456,6 +466,7 @@
       ],
       "reference": [
         "reference_beehiiv_embeds",
+        "reference_bruce_billing",
         "reference_claude_cli",
         "reference_dream_consolidation",
         "reference_edge_docs",
@@ -477,10 +488,16 @@
   },
   "timeline": [
     {
+      "date": "Apr 16, 2026",
+      "title": "2 sessions",
+      "desc": "Committed stranded pipeline work from prior session (dual-artifact build), Designed + deployed X strategy enforcement pipeline (cadence gate, split X/Web voice, URL guard, config-externalized rules), Fixed 2 blocking bugs from reviewer (X+web atomicity, DST fall-back)",
+      "active": true
+    },
+    {
       "date": "Apr 14, 2026",
       "title": "38twelve Dual Artifact",
       "desc": "Diagnosed + fixed /api/ingest (1101 CPU/subrequest limits, [object Object] RSS bug, stale archive flood), Shipped dual-artifact drafter: X + optional Web long-form per story, Added thin-source gate + body-grounded drafting + auto-revision loop",
-      "active": true
+      "active": false
     },
     {
       "date": "Apr 12, 2026",
@@ -584,6 +601,24 @@
       "date": "2026-04-16",
       "text": "Hook demands verification of functions/files created earlier in the same session, costing turns on ceremony comments for things the agent demonstrably just wrote. 5+ turns this session spent writing 'verified at file:line' notes for self-authored code",
       "context": "PreToolUse hook enforces verification but can't distinguish 'never seen' from 'just wrote'. Proposed fix: auto-pass when target file mtime is within session window, OR honor an inline marker like // pre-tool-verified",
+      "high": false
+    },
+    {
+      "date": "2026-04-16",
+      "text": "PreToolUse + stop hooks evaluate atomically without memory/prior-turn visibility — caused 5+ stop-hook flags and 2+ pretool hook retries in a single session. Hero rated the session progressed-but-spun-wheels specifically because of hook friction",
+      "context": "hook architecture",
+      "high": false
+    },
+    {
+      "date": "2026-04-16",
+      "text": "Scope round-trip on metrics dashboard (planned then stripped), pretooluse hook over-fired on self-authored references → 5 lessons saved",
+      "context": "x-strategy-enforcement",
+      "high": false
+    },
+    {
+      "date": "2026-04-16",
+      "text": "Hook architecture friction: stop hook + pretool hook evaluate atomically without memory/prior-turn context visibility — caused 5+ false positives on memory-grounded citations and 2+ pretool retries on already-verified endpoints. Hero rated progressed-but-spun-wheels because of this. Bruce proposed source-labeling convention (P-2026-04-16-001, pending). → 3 lessons saved",
+      "context": "seo-phase-123",
       "high": false
     },
     {
@@ -975,18 +1010,49 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 0,
-    "proposals": [],
+    "proposalCount": 5,
+    "proposals": [
+      {
+        "id": "P-2026-04-16-001",
+        "category": "unknown",
+        "problem": "",
+        "solution": ""
+      },
+      {
+        "id": "P-2026-04-16-002",
+        "category": "regression",
+        "problem": "chief-of-staff TC1 scored **4.6 vs. baseline 5.0 (−0.4)**. Two criteria were docked:",
+        "solution": "Edit `/Users/reggie/.claude/agents/chief-of-staff.md`, in the `## Multi-Option Recommendations` section. Replace:"
+      },
+      {
+        "id": "P-2026-04-16-003",
+        "category": "self_improvement",
+        "problem": "Tonight's D0 briefing shows an **empty Eval Canaries table** despite B1 having produced a confirmed chief-of-staff TC1 score (4.6 — regression, delta −0.4). The same eval data reached C0 successfully (`ALL_EVALS=$(read_events \"\" \"eval\" | jq -s '.')`), so the events exist in `events.jsonl` when D0 runs. The table is empty because D0's eval rendering logic fails silently.",
+        "solution": "Replace the pipe-into-while pattern with a direct jq invocation in `/Users/reggie/.claude/night-shift/phases/d0-briefing.sh`:"
+      },
+      {
+        "id": "P-2026-04-16-004",
+        "category": "self_improvement",
+        "problem": "Tonight's A1 metrics report **`capability_gaps_7d: 8`** — 8 instances in the past 7 days where an agent explicitly could not fulfill a request. Tonight's B3 analysis reported **\"Skill Gaps: None detected.\"** These two data points are contradictory and the contradiction is architectural.",
+        "solution": "Add a pre-analysis block to `/Users/reggie/.claude/night-shift/phases/b3-skill-gaps.sh` that reads raw `capability_gap` events before the gap analysis prompt runs:"
+      },
+      {
+        "id": "P-2026-04-16-005",
+        "category": "eval_evolution",
+        "problem": "The chief-of-staff has **one canary eval: TC1 (Feature Prioritization)**. Tonight TC1 scored 4.6, with C2 (inter-option dependencies) and C4 (opportunity cost depth) as the specific failure modes. TC1 can detect *that* a regression occurred, but its three-option prioritization prompt doesn't isolate inter-option dependency reasoning — the agent can score 4.6 even when dependency handling is only superficially addressed.",
+        "solution": "1. Add TC4 as a second chief-of-staff canary in `/Users/reggie/.claude/night-shift/config.json`. If the config supports only one `prompt_id` per agent, add a second entry:"
+      }
+    ],
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-04-16\n\n## Status: YELLOW\n\n## Key Findings\n- WATCH: Friction Rate — 3 fix_attempts in 14 days (red line at 6)\n\n## What Hero Worked On (7-day)\n- css: 4 sessions\n- agents: 3 sessions\n- cloudflare-workers: 3 sessions\n- d1: 3 sessions\n- dashboard: 3 sessions\n\n## Agent Usage (7-day)\n- developer: 2 sessions\n- explore: 2 sessions\n- research: 2 sessions\n- chief-of-staff: 1 sessions\n- data: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n83 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 4\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n26 total, 16 accepted, 0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 3 fix_attempts (14d) |\n| Proposal Hit Rate | 61% | 16/26 accepted |\n| Eval Signal | OK | 3 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "briefingContent": "# Night Shift — 2026-04-16\n\n## Status: YELLOW\n\n## Key Findings\n- WATCH: Friction Rate — 3 fix_attempts in 14 days (red line at 6)\n\n## What Hero Worked On (7-day)\n- cloudflare-workers: 4 sessions\n- css: 4 sessions\n- d1: 4 sessions\n- nextjs: 4 sessions\n- agents: 3 sessions\n\n## Agent Usage (7-day)\n- developer: 2 sessions\n- explore: 2 sessions\n- research: 2 sessions\n- reviewer: 2 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| chief-of-staff | 4.6 | 5.0 | -0.4 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n87 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 4\n\n## Proposals\nNow I have everything I need. I can see: P-2026-04-16-001 already exists in the ledger (from a prior targeted review), so tonight's proposals start at 002. The D0 eval table bug is confirmed — the `while IFS= read` pipe loop writes to a temp file, but the issue is likely the `read_events` empty-phase filter behaving differently in D0's context vs C0's. Let me write the proposals.\n\n---\n\n# Proposals — 2026-04-16\n\n---\n\n## P-2026-04-16-002\n**Category:** `regression`\n\n**Problem:** chief-of-staff TC1 scored **4.6 vs. baseline 5.0 (−0.4)**. Two criteria were docked:\n\n- **C2 (inter-option dependencies):** *\"strategic filter is strong but inter-option dependencies (e.g., T&C as legal blocker vs. Wrapped as retention lever) require contextual judgment the agent handles well but not always with full nuance.\"*\n- **C4 (opportunity cost):** *\"opportunity cost language is in the system prompt but tends to be brief rather than exhaustive.\"*\n\nThe root cause for C4 is directly traceable to the agent's own system prompt. The \"Multi-Option Recommendations\" section includes:\n\n```\n- Keep it brief — one line per dimension is enough\n```\n\nThis instruction correctly prevents rambling, but it also caps the depth of opportunity cost analysis at a single line per option — which is exactly what C4 penalizes. The agent is following the instruction faithfully; the instruction is what's wrong.\n\nThe root cause for C2 is related: the same section lists \"flag if options interact: mutually exclusive, sequentially dependent, or if one forecloses another\" but gives no heuristic for *when to elevate* a dependency above mere enumeration. T&C-as-legal-blocker is categorically different from Wrapped-as-retention-lever — one forecloses the timeline for the other — but the current phrasing treats both as list items of equal weight.\n\n**Solution:** Edit `/Users/reggie/.claude/agents/chief-of-staff.md`, in the `## Multi-Option Recommendations` section. Replace:\n\n```markdown\n- Keep it brief — one line per dimension is enough\n```\n\nWith:\n\n```markdown\n- Opportunity cost: write enough to make the tradeoff feel concrete, not just named. One vivid sentence beats five vague bullets.\n- If one option is a hard blocker or prerequisite for another, say so at the top — before comparing merit. Dependency framing is not a footnote.\n```\n\n**Impact:** C4 recovers because the brevity ceiling is removed while the adjacent \"Direct and concise\" communication style rule still prevents bloat. C2 recovers because the agent now has an explicit priority rule: blockers are surfaced before merit ranking. Expect TC1 to return to 5.0 on next eval run.\n\n**Risk:** Removing \"keep it brief\" from this section could make multi-option responses longer. Mitigation: the `## Communication Style` section still reads *\"Direct and concise. No filler, no preamble.\"* — the guardrail exists at the style layer, not just the options layer. Net effect should be more depth, not more words.\n\n---\n\n## P-2026-04-16-003\n**Category:** `self_improvement`\n\n**Problem:** Tonight's D0 briefing shows an **empty Eval Canaries table** despite B1 having produced a confirmed chief-of-staff TC1 score (4.6 — regression, delta −0.4). The same eval data reached C0 successfully (`ALL_EVALS=$(read_events \"\" \"eval\" | jq -s '.')`), so the events exist in `events.jsonl` when D0 runs. The table is empty because D0's eval rendering logic fails silently.\n\nInspecting `/Users/reggie/.claude/night-shift/phases/d0-briefing.sh`: the eval table block pipes `read_events \"\" \"eval\"` into a `while IFS= read -r line; do ... done > \"$OUT_DIR/.eval_table.tmp\"` pattern. The most likely failure: the `read_events` invocation inside a pipe subshell produces no output when the empty-string phase filter (`\"\"`) behaves differently under D0's shell environment than under C0's (e.g., due to IFS differences, quoting, or function-sourcing order). If the pipe produces no lines, the while loop body never executes, the temp file is empty, and `EVAL_TABLE=\"\"` — causing the table to silently render blank.\n\nThe consequence: Hero's morning briefing — the primary situational awareness artifact — **shows no regression flag** for tonight's chief-of-staff eval. The regression only becomes visible by reading proposals separately.\n\n**Solution:** Replace the pipe-into-while pattern with a direct jq invocation in `/Users/reggie/.claude/night-shift/phases/d0-briefing.sh`:\n\n```bash\n# Replace the existing eval table block with:\nEVAL_ROWS=$(grep '\"type\":\"eval\"' \"$EVENTS_FILE\" 2>/dev/null | \\\n  jq -rs '[.[] | select(.source != \"dynamic\")] |\n    if length == 0 then \"| — | — | — | — | no evals this run |\"\n    else .[] | \"| \\(.agent) | \\(.score) | \\(.baseline) | \\(.delta) | \\(\n      if (.delta // 0) < -0.5 then \"⚠️ DEGRADED\"\n      elif (.delta // 0) < 0 then \"watch\"\n      else \"ok\" end) |\"\n    end' 2>/dev/null || echo \"| — | — | — | — | parse error |\")\n```\n\nUsing `grep '\"type\":\"eval\"'` directly on `$EVENTS_FILE` bypasses the `read_events` function and the subshell pipe entirely — the same approach that makes C0's `ALL_EVALS` reliable. The `select(.source != \"dynamic\")` preserves the existing filter for dynamic evals.\n\n**Impact:** Hero's morning briefing correctly shows the chief-of-staff regression (⚠️ watch) starting tomorrow. The empty-table false confidence is eliminated. Any future eval regression is visible at first glance without cross-referencing `proposals.md`.\n\n**Risk:** Direct `grep` on `$EVENTS_FILE` assumes the events file path variable is defined in D0's scope — which it is (sourced from `lib/common.sh`). The jq inline logic is slightly more complex but testable with a single jq command. The fallback string (\"parse error\") makes any new failure visible rather than silent.\n\n---\n\n## P-2026-04-16-004\n**Category:** `self_improvement`\n\n**Problem:** Tonight's A1 metrics report **`capability_gaps_7d: 8`** — 8 instances in the past 7 days where an agent explicitly could not fulfill a request. Tonight's B3 analysis reported **\"Skill Gaps: None detected.\"** These two data points are contradictory and the contradiction is architectural.\n\nB3 (`b3-skill-gaps.sh`) infers capability gaps by running an LLM over session digest summaries — qualitative text describing what happened in each session. If an agent's limitation wasn't described in the digest in B3-recognizable terms, the gap goes undetected. The 8 `capability_gap` events come from a separate source: real-time hook events logged during sessions when an agent explicitly declined or punted a task. B3 never reads these events — it only reads digests.\n\nThe result: 8 concrete \"I can't do that\" moments are invisible to Bruce's analysis every time B3 produces silence. Over 7 days, capability gaps are accumulating at >1/day, but Bruce proposes nothing because B3 sees nothing.\n\n**Solution:** Add a pre-analysis block to `/Users/reggie/.claude/night-shift/phases/b3-skill-gaps.sh` that reads raw `capability_gap` events before the gap analysis prompt runs:\n\n```bash\n# Add before the GAP_PROMPT construction:\nRAW_GAPS=$(grep '\"type\":\"capability_gap\"' \"$EVENTS_FILE\" 2>/dev/null | \\\n  jq -rs 'if length == 0 then \"\"\n    else \"## Raw Capability Gap Events (7d — from session hooks)\\n\" +\n      (map(\"- \\(.date // .timestamp // \"unknown\"): \\(.text // .value // \"no detail\")\") | join(\"\\n\"))\n    end' 2>/dev/null || echo \"\")\n```\n\nThen inject `$RAW_GAPS` into the `GAP_PROMPT` after the digest summary section, with the instruction:\n\n```\nIf Raw Capability Gap Events are present, treat each as confirmed evidence of a gap.\nCluster by domain if 2+ events share a pattern. A cluster of 3+ = HIGH severity regardless of digest mentions.\n```\n\n**Impact:** The 8 capability gap events get analyzed on their own terms — not inferred from digests that may or may not mention them. B3 gains a direct evidence channel. Tonight's \"None detected\" would instead surface the gap domains, enabling proposals calibrated to what Hero actually encountered. The `capability_gaps_7d` metric becomes actionable, not just decorative.\n\n**Risk:** Capability gap event text quality varies — some hooks log terse messages like `\"agent declined: out of scope\"` with no domain signal. In that case, B3's LLM analysis would produce weak findings. But weak findings are surfaced (and improvable) rather than suppressed. If event text is consistently poor, a follow-on proposal can improve the hook's logging format.\n\n---\n\n## P-2026-04-16-005\n**Category:** `eval_evolution`\n\n**Problem:** The chief-of-staff has **one canary eval: TC1 (Feature Prioritization)**. Tonight TC1 scored 4.6, with C2 (inter-option dependencies) and C4 (opportunity cost depth) as the specific failure modes. TC1 can detect *that* a regression occurred, but its three-option prioritization prompt doesn't isolate inter-option dependency reasoning — the agent can score 4.6 even when dependency handling is only superficially addressed.\n\nTC4 (**Cross-Dimensional Decision** — \"Should I connect to Apple Health?\") is already fully written in `/Users/reggie/.claude/agents/evals/chief-of-staff-evals.md` and tests the exact capability that regressed tonight:\n\n| TC4 Criterion | What It Tests | Tonight's Failure Mode |\n|---|---|---|\n| C1 | Multi-dimensional analysis (product, technical, behavioral, business) | Same as TC1-C2 (contextual judgment) |\n| C2 | Validates against Mirror's behavioral thesis before endorsing | Strategic filter under a seductive idea |\n| C4 | Flags costs and dependencies (Apple Dev Program, HealthKit, App Store review) | Direct analog to C4 opportunity cost depth |\n| C5 | Grounds in evidence, questions single-user request as sufficient | Reality-check instinct |\n\nTC4 is harder than TC1: it involves specific technical barriers (HealthKit, Apple Developer Program costs), behavioral science framing (does sleep-spending correlation serve Mirror's loop?), and evidence discipline (one user ≠ validated need). TC1 can pass at 4.6 while TC4 surfaces a 3.5 — meaning TC4 would have caught tonight's regression more sharply.\n\n**Staleness check:** TC4 is an existing eval test case (not a new agent), written against active Mirror App context. No stale-evidence concern applies.\n\n**Solution:**\n1. Add TC4 as a second chief-of-staff canary in `/Users/reggie/.claude/night-shift/config.json`. If the config supports only one `prompt_id` per agent, add a second entry:\n   ```json\n   \"chief-of-staff-tc4\": {\n     \"eval_file\": \"~/.claude/agents/evals/chief-of-staff-evals.md\",\n     \"prompt_id\": \"TC4\",\n     \"agent\": \"chief-of-staff\"\n   }\n   ```\n2. Set the TC4 baseline from the **first scored run** (do not pre-set to 5.0). Expected first-run score: 4.0–4.5, reflecting that HealthKit-specific knowledge and evidence-discipline criteria are genuinely harder.\n3. Add a note in `baselines.json` once baseline is set: *\"TC4 added 2026-04-16 — harder eval targeting inter-option dependency and behavioral thesis validation.\"*\n\n**Impact:** The chief-of-staff eval suite gains a stress test that surfaces the exact failure modes tonight's regression revealed. The `consecutive_all_pass` counter (currently 3) resets when TC4 first runs — correct behavior for introducing a harder canary. Future regressions in dependency reasoning are detectable before TC1 alone shows a delta.\n\n**Risk:** Running two chief-of-staff evals per night doubles B1 token cost for that agent. Acceptable: chief-of-staff is the most strategically critical agent in the roster and has an active regression. If budget is a constraint, TC4 can run on alternating nights by adding a day-parity check (`[ $(( $(date +%d) % 2 )) -eq 0 ]`) in the B1 phase.\n\n## Proposal Track Record\n32 total, 16 accepted, 6 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 3 fix_attempts (14d) |\n| Proposal Hit Rate | 59% | 16/27 accepted |\n| Eval Signal | OK | 3 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 19,
+      "total": 25,
       "accepted": 15,
-      "pending": 0,
+      "pending": 6,
       "rejected": 4
     },
     "benchmarks": [
@@ -997,8 +1063,8 @@
       },
       {
         "name": "Proposal Hit Rate",
-        "status": "61%",
-        "detail": "16/26 accepted"
+        "status": "59%",
+        "detail": "16/27 accepted"
       },
       {
         "name": "Eval Signal",
@@ -1007,5 +1073,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-16T06:21:37.322Z"
+  "lastUpdated": "2026-04-16T06:46:31.438Z"
 }

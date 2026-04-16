@@ -369,6 +369,16 @@
         "capabilityGaps": 1,
         "toilEvents": 0,
         "hookCatches": 0
+      },
+      {
+        "name": "bruce-proposal-review",
+        "date": "2026-04-16",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0
       }
     ],
     "hasData": true
@@ -482,7 +492,7 @@
   },
   "system": {
     "skills": 17,
-    "rules": 12,
+    "rules": 13,
     "hooks": 6,
     "mcpServers": 2
   },
@@ -611,6 +621,12 @@
     },
     {
       "date": "2026-04-16",
+      "text": "C0 phase emitted a ledger entry with summary=\"No summary extracted\" and category=\"unknown\" — parser silently failed on one of 4 proposals in the LLM output but still recorded a stub. Purged as P-2026-04-16-006 during review.",
+      "context": "c0-proposals.sh extract/parse is fragile when LLM output varies in formatting",
+      "high": false
+    },
+    {
+      "date": "2026-04-16",
       "text": "Scope round-trip on metrics dashboard (planned then stripped), pretooluse hook over-fired on self-authored references → 5 lessons saved",
       "context": "x-strategy-enforcement",
       "high": false
@@ -620,6 +636,35 @@
       "text": "Hook architecture friction: stop hook + pretool hook evaluate atomically without memory/prior-turn context visibility — caused 5+ false positives on memory-grounded citations and 2+ pretool retries on already-verified endpoints. Hero rated progressed-but-spun-wheels because of this. Bruce proposed source-labeling convention (P-2026-04-16-001, pending). → 3 lessons saved",
       "context": "seo-phase-123",
       "high": false
+    },
+    {
+      "date": "2026-04-16",
+      "context": "Bruce proposal P-2026-04-16-001",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "** chief-of-staff TC1 scored **4.6 vs. baseline 5.0 (−0.4)**. Two criteria were docked:",
+      "context": "Bruce proposal P-2026-04-16-002",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "** Tonight's D0 briefing shows an **empty Eval Canaries table** despite B1 having produced a confirmed chief-of-staff TC",
+      "context": "Bruce proposal P-2026-04-16-003",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "** Tonight's A1 metrics report **`capability_gaps_7d: 8`** — 8 instances in the past 7 days where an agent explicitly ",
+      "context": "Bruce proposal P-2026-04-16-004",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "** The chief-of-staff has **one canary eval: TC1 (Feature Prioritization)**. Tonight TC1 scored 4.6, with C2 (inter-opti",
+      "context": "Bruce proposal P-2026-04-16-005",
+      "high": true
     },
     {
       "date": "2026-04-14",
@@ -899,6 +944,15 @@
         "source": "baseline"
       },
       {
+        "agent": "chief-of-staff-tc4",
+        "score": null,
+        "baseline": null,
+        "delta": 0,
+        "status": "unscored",
+        "stale": true,
+        "source": "none"
+      },
+      {
         "agent": "customer-success",
         "score": 4.8,
         "baseline": 4.8,
@@ -1013,46 +1067,40 @@
     "proposalCount": 5,
     "proposals": [
       {
-        "id": "P-2026-04-16-001",
-        "category": "unknown",
-        "problem": "",
+        "id": "P-2026-04-16-006",
+        "category": "agent_methodology",
+        "problem": "Chief-of-staff TC1 scored 4.6/5.0 (baseline 5.0, delta −0.4). C2 was specifically cited: *\"T&C dependency (legal/Plaid blocker) is embedded in the option breakdown rather than surfaced at the top before merit comparison, per the agent's own multi-option instruction.\"",
+        "solution": "In `~/.claude/agents/chief-of-staff.md`, under `## Multi-Option Recommendations`, add a required response template immediately after the \"Inter-option dependencies\" bullet:"
+      },
+      {
+        "id": "P-2026-04-16-007",
+        "category": "self_improvement",
+        "problem": "Tonight I received `capability_gaps_7d: 9` — a single opaque integer. This is the highest-signal metric in tonight's data (9 gaps in 7 sessions = >1 gap per session), yet I cannot generate a targeted proposal because I don't know which agent triggered each gap, in which domain, or whether any gap type has recurred 3+ times (the threshold that would trigger Gap Diagnosis Protocol).",
         "solution": ""
       },
       {
-        "id": "P-2026-04-16-002",
-        "category": "regression",
-        "problem": "chief-of-staff TC1 scored **4.6 vs. baseline 5.0 (−0.4)**. Two criteria were docked:",
-        "solution": "Edit `/Users/reggie/.claude/agents/chief-of-staff.md`, in the `## Multi-Option Recommendations` section. Replace:"
-      },
-      {
-        "id": "P-2026-04-16-003",
-        "category": "self_improvement",
-        "problem": "Tonight's D0 briefing shows an **empty Eval Canaries table** despite B1 having produced a confirmed chief-of-staff TC1 score (4.6 — regression, delta −0.4). The same eval data reached C0 successfully (`ALL_EVALS=$(read_events \"\" \"eval\" | jq -s '.')`), so the events exist in `events.jsonl` when D0 runs. The table is empty because D0's eval rendering logic fails silently.",
-        "solution": "Replace the pipe-into-while pattern with a direct jq invocation in `/Users/reggie/.claude/night-shift/phases/d0-briefing.sh`:"
-      },
-      {
-        "id": "P-2026-04-16-004",
-        "category": "self_improvement",
-        "problem": "Tonight's A1 metrics report **`capability_gaps_7d: 8`** — 8 instances in the past 7 days where an agent explicitly could not fulfill a request. Tonight's B3 analysis reported **\"Skill Gaps: None detected.\"** These two data points are contradictory and the contradiction is architectural.",
-        "solution": "Add a pre-analysis block to `/Users/reggie/.claude/night-shift/phases/b3-skill-gaps.sh` that reads raw `capability_gap` events before the gap analysis prompt runs:"
-      },
-      {
-        "id": "P-2026-04-16-005",
+        "id": "P-2026-04-16-008",
         "category": "eval_evolution",
-        "problem": "The chief-of-staff has **one canary eval: TC1 (Feature Prioritization)**. Tonight TC1 scored 4.6, with C2 (inter-option dependencies) and C4 (opportunity cost depth) as the specific failure modes. TC1 can detect *that* a regression occurred, but its three-option prioritization prompt doesn't isolate inter-option dependency reasoning — the agent can score 4.6 even when dependency handling is only superficially addressed.",
-        "solution": "1. Add TC4 as a second chief-of-staff canary in `/Users/reggie/.claude/night-shift/config.json`. If the config supports only one `prompt_id` per agent, add a second entry:"
+        "problem": "TC1 raw scores: `{c1:5, c2:4, c3:5, c4:4, c5:5}`. Two criteria were docked. The eval notes explain only C2 in detail. C4 (opportunity cost analysis — *\"explicitly names what gets delayed by each choice\"*) was also docked to 4, but the notes say only *\"Strong performance across the board\"* without identifying what was missing in C4.",
+        "solution": "In `~/.claude/agents/evals/chief-of-staff-evals.md`, add the following line to the **Scoring Rubric** section:"
+      },
+      {
+        "id": "P-2026-04-16-009",
+        "category": "skill_gap",
+        "problem": "Sessions in the last 7 days are concentrated in `cloudflare-workers` (4 sessions) and `d1` (4 sessions). Dynamic evals DYN-1 and DYN-2 — drawn directly from recent session work — are both tagged `cloudflare-workers,css`. `capability_gaps_7d` is 9. `fix_attempts_7d` is 3.",
+        "solution": "Create `~/Claude-Projects/[cloudflare-project]/.claude/rules/cloudflare-rules.md` with the following structure:"
       }
     ],
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-04-16\n\n## Status: YELLOW\n\n## Key Findings\n- WATCH: Friction Rate — 3 fix_attempts in 14 days (red line at 6)\n\n## What Hero Worked On (7-day)\n- cloudflare-workers: 4 sessions\n- css: 4 sessions\n- d1: 4 sessions\n- nextjs: 4 sessions\n- agents: 3 sessions\n\n## Agent Usage (7-day)\n- developer: 2 sessions\n- explore: 2 sessions\n- research: 2 sessions\n- reviewer: 2 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| chief-of-staff | 4.6 | 5.0 | -0.4 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n87 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 4\n\n## Proposals\nNow I have everything I need. I can see: P-2026-04-16-001 already exists in the ledger (from a prior targeted review), so tonight's proposals start at 002. The D0 eval table bug is confirmed — the `while IFS= read` pipe loop writes to a temp file, but the issue is likely the `read_events` empty-phase filter behaving differently in D0's context vs C0's. Let me write the proposals.\n\n---\n\n# Proposals — 2026-04-16\n\n---\n\n## P-2026-04-16-002\n**Category:** `regression`\n\n**Problem:** chief-of-staff TC1 scored **4.6 vs. baseline 5.0 (−0.4)**. Two criteria were docked:\n\n- **C2 (inter-option dependencies):** *\"strategic filter is strong but inter-option dependencies (e.g., T&C as legal blocker vs. Wrapped as retention lever) require contextual judgment the agent handles well but not always with full nuance.\"*\n- **C4 (opportunity cost):** *\"opportunity cost language is in the system prompt but tends to be brief rather than exhaustive.\"*\n\nThe root cause for C4 is directly traceable to the agent's own system prompt. The \"Multi-Option Recommendations\" section includes:\n\n```\n- Keep it brief — one line per dimension is enough\n```\n\nThis instruction correctly prevents rambling, but it also caps the depth of opportunity cost analysis at a single line per option — which is exactly what C4 penalizes. The agent is following the instruction faithfully; the instruction is what's wrong.\n\nThe root cause for C2 is related: the same section lists \"flag if options interact: mutually exclusive, sequentially dependent, or if one forecloses another\" but gives no heuristic for *when to elevate* a dependency above mere enumeration. T&C-as-legal-blocker is categorically different from Wrapped-as-retention-lever — one forecloses the timeline for the other — but the current phrasing treats both as list items of equal weight.\n\n**Solution:** Edit `/Users/reggie/.claude/agents/chief-of-staff.md`, in the `## Multi-Option Recommendations` section. Replace:\n\n```markdown\n- Keep it brief — one line per dimension is enough\n```\n\nWith:\n\n```markdown\n- Opportunity cost: write enough to make the tradeoff feel concrete, not just named. One vivid sentence beats five vague bullets.\n- If one option is a hard blocker or prerequisite for another, say so at the top — before comparing merit. Dependency framing is not a footnote.\n```\n\n**Impact:** C4 recovers because the brevity ceiling is removed while the adjacent \"Direct and concise\" communication style rule still prevents bloat. C2 recovers because the agent now has an explicit priority rule: blockers are surfaced before merit ranking. Expect TC1 to return to 5.0 on next eval run.\n\n**Risk:** Removing \"keep it brief\" from this section could make multi-option responses longer. Mitigation: the `## Communication Style` section still reads *\"Direct and concise. No filler, no preamble.\"* — the guardrail exists at the style layer, not just the options layer. Net effect should be more depth, not more words.\n\n---\n\n## P-2026-04-16-003\n**Category:** `self_improvement`\n\n**Problem:** Tonight's D0 briefing shows an **empty Eval Canaries table** despite B1 having produced a confirmed chief-of-staff TC1 score (4.6 — regression, delta −0.4). The same eval data reached C0 successfully (`ALL_EVALS=$(read_events \"\" \"eval\" | jq -s '.')`), so the events exist in `events.jsonl` when D0 runs. The table is empty because D0's eval rendering logic fails silently.\n\nInspecting `/Users/reggie/.claude/night-shift/phases/d0-briefing.sh`: the eval table block pipes `read_events \"\" \"eval\"` into a `while IFS= read -r line; do ... done > \"$OUT_DIR/.eval_table.tmp\"` pattern. The most likely failure: the `read_events` invocation inside a pipe subshell produces no output when the empty-string phase filter (`\"\"`) behaves differently under D0's shell environment than under C0's (e.g., due to IFS differences, quoting, or function-sourcing order). If the pipe produces no lines, the while loop body never executes, the temp file is empty, and `EVAL_TABLE=\"\"` — causing the table to silently render blank.\n\nThe consequence: Hero's morning briefing — the primary situational awareness artifact — **shows no regression flag** for tonight's chief-of-staff eval. The regression only becomes visible by reading proposals separately.\n\n**Solution:** Replace the pipe-into-while pattern with a direct jq invocation in `/Users/reggie/.claude/night-shift/phases/d0-briefing.sh`:\n\n```bash\n# Replace the existing eval table block with:\nEVAL_ROWS=$(grep '\"type\":\"eval\"' \"$EVENTS_FILE\" 2>/dev/null | \\\n  jq -rs '[.[] | select(.source != \"dynamic\")] |\n    if length == 0 then \"| — | — | — | — | no evals this run |\"\n    else .[] | \"| \\(.agent) | \\(.score) | \\(.baseline) | \\(.delta) | \\(\n      if (.delta // 0) < -0.5 then \"⚠️ DEGRADED\"\n      elif (.delta // 0) < 0 then \"watch\"\n      else \"ok\" end) |\"\n    end' 2>/dev/null || echo \"| — | — | — | — | parse error |\")\n```\n\nUsing `grep '\"type\":\"eval\"'` directly on `$EVENTS_FILE` bypasses the `read_events` function and the subshell pipe entirely — the same approach that makes C0's `ALL_EVALS` reliable. The `select(.source != \"dynamic\")` preserves the existing filter for dynamic evals.\n\n**Impact:** Hero's morning briefing correctly shows the chief-of-staff regression (⚠️ watch) starting tomorrow. The empty-table false confidence is eliminated. Any future eval regression is visible at first glance without cross-referencing `proposals.md`.\n\n**Risk:** Direct `grep` on `$EVENTS_FILE` assumes the events file path variable is defined in D0's scope — which it is (sourced from `lib/common.sh`). The jq inline logic is slightly more complex but testable with a single jq command. The fallback string (\"parse error\") makes any new failure visible rather than silent.\n\n---\n\n## P-2026-04-16-004\n**Category:** `self_improvement`\n\n**Problem:** Tonight's A1 metrics report **`capability_gaps_7d: 8`** — 8 instances in the past 7 days where an agent explicitly could not fulfill a request. Tonight's B3 analysis reported **\"Skill Gaps: None detected.\"** These two data points are contradictory and the contradiction is architectural.\n\nB3 (`b3-skill-gaps.sh`) infers capability gaps by running an LLM over session digest summaries — qualitative text describing what happened in each session. If an agent's limitation wasn't described in the digest in B3-recognizable terms, the gap goes undetected. The 8 `capability_gap` events come from a separate source: real-time hook events logged during sessions when an agent explicitly declined or punted a task. B3 never reads these events — it only reads digests.\n\nThe result: 8 concrete \"I can't do that\" moments are invisible to Bruce's analysis every time B3 produces silence. Over 7 days, capability gaps are accumulating at >1/day, but Bruce proposes nothing because B3 sees nothing.\n\n**Solution:** Add a pre-analysis block to `/Users/reggie/.claude/night-shift/phases/b3-skill-gaps.sh` that reads raw `capability_gap` events before the gap analysis prompt runs:\n\n```bash\n# Add before the GAP_PROMPT construction:\nRAW_GAPS=$(grep '\"type\":\"capability_gap\"' \"$EVENTS_FILE\" 2>/dev/null | \\\n  jq -rs 'if length == 0 then \"\"\n    else \"## Raw Capability Gap Events (7d — from session hooks)\\n\" +\n      (map(\"- \\(.date // .timestamp // \"unknown\"): \\(.text // .value // \"no detail\")\") | join(\"\\n\"))\n    end' 2>/dev/null || echo \"\")\n```\n\nThen inject `$RAW_GAPS` into the `GAP_PROMPT` after the digest summary section, with the instruction:\n\n```\nIf Raw Capability Gap Events are present, treat each as confirmed evidence of a gap.\nCluster by domain if 2+ events share a pattern. A cluster of 3+ = HIGH severity regardless of digest mentions.\n```\n\n**Impact:** The 8 capability gap events get analyzed on their own terms — not inferred from digests that may or may not mention them. B3 gains a direct evidence channel. Tonight's \"None detected\" would instead surface the gap domains, enabling proposals calibrated to what Hero actually encountered. The `capability_gaps_7d` metric becomes actionable, not just decorative.\n\n**Risk:** Capability gap event text quality varies — some hooks log terse messages like `\"agent declined: out of scope\"` with no domain signal. In that case, B3's LLM analysis would produce weak findings. But weak findings are surfaced (and improvable) rather than suppressed. If event text is consistently poor, a follow-on proposal can improve the hook's logging format.\n\n---\n\n## P-2026-04-16-005\n**Category:** `eval_evolution`\n\n**Problem:** The chief-of-staff has **one canary eval: TC1 (Feature Prioritization)**. Tonight TC1 scored 4.6, with C2 (inter-option dependencies) and C4 (opportunity cost depth) as the specific failure modes. TC1 can detect *that* a regression occurred, but its three-option prioritization prompt doesn't isolate inter-option dependency reasoning — the agent can score 4.6 even when dependency handling is only superficially addressed.\n\nTC4 (**Cross-Dimensional Decision** — \"Should I connect to Apple Health?\") is already fully written in `/Users/reggie/.claude/agents/evals/chief-of-staff-evals.md` and tests the exact capability that regressed tonight:\n\n| TC4 Criterion | What It Tests | Tonight's Failure Mode |\n|---|---|---|\n| C1 | Multi-dimensional analysis (product, technical, behavioral, business) | Same as TC1-C2 (contextual judgment) |\n| C2 | Validates against Mirror's behavioral thesis before endorsing | Strategic filter under a seductive idea |\n| C4 | Flags costs and dependencies (Apple Dev Program, HealthKit, App Store review) | Direct analog to C4 opportunity cost depth |\n| C5 | Grounds in evidence, questions single-user request as sufficient | Reality-check instinct |\n\nTC4 is harder than TC1: it involves specific technical barriers (HealthKit, Apple Developer Program costs), behavioral science framing (does sleep-spending correlation serve Mirror's loop?), and evidence discipline (one user ≠ validated need). TC1 can pass at 4.6 while TC4 surfaces a 3.5 — meaning TC4 would have caught tonight's regression more sharply.\n\n**Staleness check:** TC4 is an existing eval test case (not a new agent), written against active Mirror App context. No stale-evidence concern applies.\n\n**Solution:**\n1. Add TC4 as a second chief-of-staff canary in `/Users/reggie/.claude/night-shift/config.json`. If the config supports only one `prompt_id` per agent, add a second entry:\n   ```json\n   \"chief-of-staff-tc4\": {\n     \"eval_file\": \"~/.claude/agents/evals/chief-of-staff-evals.md\",\n     \"prompt_id\": \"TC4\",\n     \"agent\": \"chief-of-staff\"\n   }\n   ```\n2. Set the TC4 baseline from the **first scored run** (do not pre-set to 5.0). Expected first-run score: 4.0–4.5, reflecting that HealthKit-specific knowledge and evidence-discipline criteria are genuinely harder.\n3. Add a note in `baselines.json` once baseline is set: *\"TC4 added 2026-04-16 — harder eval targeting inter-option dependency and behavioral thesis validation.\"*\n\n**Impact:** The chief-of-staff eval suite gains a stress test that surfaces the exact failure modes tonight's regression revealed. The `consecutive_all_pass` counter (currently 3) resets when TC4 first runs — correct behavior for introducing a harder canary. Future regressions in dependency reasoning are detectable before TC1 alone shows a delta.\n\n**Risk:** Running two chief-of-staff evals per night doubles B1 token cost for that agent. Acceptable: chief-of-staff is the most strategically critical agent in the roster and has an active regression. If budget is a constraint, TC4 can run on alternating nights by adding a day-parity check (`[ $(( $(date +%d) % 2 )) -eq 0 ]`) in the B1 phase.\n\n## Proposal Track Record\n32 total, 16 accepted, 6 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 3 fix_attempts (14d) |\n| Proposal Hit Rate | 59% | 16/27 accepted |\n| Eval Signal | OK | 3 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "briefingContent": "# Night Shift — 2026-04-16\n\n## Status: YELLOW\n\n## Key Findings\n- WATCH: Friction Rate — 3 fix_attempts in 14 days (red line at 6)\n\n## What Hero Worked On (7-day)\n- cloudflare-workers: 4 sessions\n- css: 4 sessions\n- d1: 4 sessions\n- nextjs: 4 sessions\n- agents: 3 sessions\n\n## Agent Usage (7-day)\n- developer: 2 sessions\n- explore: 2 sessions\n- research: 2 sessions\n- reviewer: 2 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| chief-of-staff | 4.6 | 5.0 | -0.40 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n87 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 4\n\n## Proposals\nI now have everything I need. Here are tonight's proposals:\n\n---\n\n# Proposals — 2026-04-16\n\n---\n\n## P-2026-04-16-006\n\n**Category:** `agent_methodology`\n\n**Problem:** Chief-of-staff TC1 scored 4.6/5.0 (baseline 5.0, delta −0.4). C2 was specifically cited: *\"T&C dependency (legal/Plaid blocker) is embedded in the option breakdown rather than surfaced at the top before merit comparison, per the agent's own multi-option instruction.\"*\n\nThe instruction is already present in `~/.claude/agents/chief-of-staff.md`:\n> *\"If one option is a hard blocker or prerequisite for another, say so at the top — before comparing merit. Dependency framing is not a footnote.\"*\n\nThe rule failed in practice despite being in the file. This is a structural compliance problem, not a missing rule. When the agent processes a multi-option prompt, the cognitive default is to analyze each option in parallel — which naturally buries blockers inside option bodies. Text instructions describing *what* to do don't override that generation pattern as reliably as a required *template* specifying *how the output must be structured*. The fix is to replace the prose instruction with a concrete required output skeleton.\n\n**Solution:** In `~/.claude/agents/chief-of-staff.md`, under `## Multi-Option Recommendations`, add a required response template immediately after the \"Inter-option dependencies\" bullet:\n\n```markdown\n**Required format for any multi-option response:**\n\n> **⚠️ Blockers & Dependencies** *(skip section if none)*\n> [Hard blockers, legal requirements, or sequencing constraints that change the comparison]\n> \n> **Option A — [Name]**\n> Recommendation: [yes/no/conditional]\n> Opportunity cost: [one vivid sentence on what you give up]\n> \n> **Option B — [Name]**\n> ...\n> \n> **Recommendation:** [single option] — [one-line reason]\n```\n\nThe section header `⚠️ Blockers & Dependencies` appearing *before* any option heading forces structural compliance — the agent must populate or explicitly skip the section before it reaches option analysis.\n\n**Impact:** C2 and the structural compliance gap are addressed at the format layer, not the instruction layer. TC1 expected to return to 5.0. The template also standardizes CoS multi-option responses, making them easier for Hero to scan at a glance.\n\n**Risk:** Low. The template is additive and scoped only to the multi-option case. The risk is verbosity if Hero asks for a quick informal comparison — mitigated by the `(skip section if none)` annotation on the blockers header and the existing `## Communication Style` guardrail against preamble.\n\n---\n\n## P-2026-04-16-007\n\n**Category:** `self_improvement`\n\n**Problem:** Tonight I received `capability_gaps_7d: 9` — a single opaque integer. This is the highest-signal metric in tonight's data (9 gaps in 7 sessions = >1 gap per session), yet I cannot generate a targeted proposal because I don't know which agent triggered each gap, in which domain, or whether any gap type has recurred 3+ times (the threshold that would trigger Gap Diagnosis Protocol).\n\nP-2026-04-16-004 (accepted earlier tonight) fixed B3's analysis — it now ingests raw capability_gap events from the performance log. But B3 is an LLM-over-text step that runs during the night and produces prose findings. By the time I'm writing proposals, I only see the count in the A1 metrics payload.\n\nSeparately, tonight's dynamic evals (DYN-1, DYN-2) were drawn from `cloudflare-workers,css` domain sessions — confirming that the capability gaps and the high-activity domain cluster are related. Without per-agent gap attribution in the metrics, I can't connect these two signals in a single proposal.\n\n**Solution:** In `~/.claude/night-shift/phases/a1-log-analysis.sh`, after emitting `capability_gaps_7d`, add a second metric emit for a structured gap attribution summary:\n\n```bash\n# After the existing capability_gaps_7d emit:\nGAP_ATTR=$(grep '\"event\":\"capability_gap\"' \"$PERF_LOG\" 2>/dev/null | \\\n  jq -rsc --arg cutoff \"$SEVEN_DAYS_AGO\" \\\n    '[.[] | select(.date >= $cutoff)] |\n     group_by(.agent) |\n     map({agent: .[0].agent, count: length,\n          top_domain: (group_by(.context) | max_by(length) | .[0].context // \"unknown\")})' \\\n  2>/dev/null || echo \"[]\")\n\nemit_event \"{\\\"phase\\\":\\\"a1\\\",\\\"type\\\":\\\"data\\\",\\\"key\\\":\\\"capability_gap_attribution\\\",\\\"value\\\":$GAP_ATTR}\"\n```\n\nThen pass `capability_gap_attribution` alongside `capability_gaps_7d` in the C0 (proposal generation) data payload — same as how `domain_frequency_7d` and `agent_usage_7d` are currently passed.\n\n**Impact:** Tonight's 9 gaps become *\"developer: 6 gaps (cloudflare-workers), research: 2 gaps (unknown), reviewer: 1 gap (css)\"* — or whatever the actual breakdown is. I can generate a targeted `skill_gap` or `agent_methodology` proposal for the high-count agent instead of a generic observation. The gap metric goes from decorative to actionable on the night it spikes.\n\n**Risk:** Medium. Depends on capability_gap events having a consistent `agent` field in the performance log. If the field is absent or misnamed, the jq produces an empty array — same as today, no regression. If `$PERF_LOG` has no capability_gap events at all (e.g., event naming changes), the emit produces `[]` and the proposal context is no worse than tonight.\n\n---\n\n## P-2026-04-16-008\n\n**Category:** `eval_evolution`\n\n**Problem:** TC1 raw scores: `{c1:5, c2:4, c3:5, c4:4, c5:5}`. Two criteria were docked. The eval notes explain only C2 in detail. C4 (opportunity cost analysis — *\"explicitly names what gets delayed by each choice\"*) was also docked to 4, but the notes say only *\"Strong performance across the board\"* without identifying what was missing in C4.\n\nNight Shift's proposal process is evidence-driven: without a one-line note on why C4 was docked, I can't generate a targeted fix. The current eval entry gives me the score, the criterion text, and the rubric — but not which specific output behavior fell short. For C4, I don't know if the agent: (a) named opportunity cost for only the recommended option and not all options, (b) used abstract language instead of concrete tradeoffs, or (c) was docked for a different reason entirely. Each diagnosis leads to a different AOP change.\n\nThis blind spot compounds over time: as the eval suite grows and criteria multiply, any undocumented docking becomes a ghost regression — visible in the score, invisible in the diagnosis.\n\n**Solution:** In `~/.claude/agents/evals/chief-of-staff-evals.md`, add the following line to the **Scoring Rubric** section:\n\n```markdown\n**Required:** For any criterion scored below 5, write one sentence explaining what was missing\nor wrong in the agent's response. Format: `C[N] docked: [reason].`\nUndocumented dockings are invalid — rescore or add a note before logging results.\n```\n\nAdditionally, update the **Score Tracker** template row to include a notes column structured for per-criterion explanations:\n\n```markdown\n| YYYY-MM-DD | model | prompt# | C1 | C2 | C3 | C4 | C5 | avg | C2 docked: [reason]. C4 docked: [reason]. |\n```\n\n**Impact:** Every future eval run produces a complete diagnostic record. Night Shift gains a full failure inventory per run — not just the most prominent regression. The C4 mystery tonight becomes a specific, actionable finding tomorrow. Applies to all chief-of-staff evals and, when replicated, to all agent eval files.\n\n**Risk:** Low. The rubric change adds friction to the scoring step — the evaluator must write notes for docked criteria rather than just logging numbers. This is the desired friction: undocumented regressions are more expensive than the 30 seconds it takes to note them.\n\n---\n\n## P-2026-04-16-009\n\n**Category:** `skill_gap`\n\n**Problem:** Sessions in the last 7 days are concentrated in `cloudflare-workers` (4 sessions) and `d1` (4 sessions). Dynamic evals DYN-1 and DYN-2 — drawn directly from recent session work — are both tagged `cloudflare-workers,css`. `capability_gaps_7d` is 9. `fix_attempts_7d` is 3.\n\nCloudflare Workers and D1 have hard runtime constraints that differ from standard Node.js/Postgres environments that agents' training skews toward:\n\n| Constraint | Workers/D1 behavior | Standard Node assumption |\n|---|---|---|\n| Runtime APIs | No `fs`, `net`, `crypto` (Node.js built-ins blocked) | Node.js globals available |\n| Response model | `Response` object required; `res.send()` doesn't exist | Express-style response |\n| D1 SQL dialect | SQLite semantics; no `RETURNING` in older D1 versions; batch API required for multi-statement | Postgres `RETURNING` works |\n| Bundle size | 1MB compressed limit on Worker scripts | No relevant limit |\n| Cold start | `waitUntil()` for background tasks; awaiting after response is dropped | Async after response is valid |\n\nMirror avoided equivalent friction with `.claude/rules/xano-rules.md` — 15 critical rules codifying patterns that caused real bugs. That file is cited directly in the mirror-developer agent as a required pre-flight read. The Cloudflare stack has no equivalent.\n\n**Staleness check:** `cloudflare-workers` and `d1` sessions: 4 each in the past 7 days. Evidence is current. This is not a new agent proposal — it's a rules file for an existing developer agent context.\n\n**Solution:** Create `~/Claude-Projects/[cloudflare-project]/.claude/rules/cloudflare-rules.md` with the following structure:\n\n```markdown\n# Cloudflare Workers + D1 — Critical Rules\n\n## Workers Runtime\n- Rule 1: No Node.js built-in modules (fs, net, path, crypto). Use Web APIs only.\n- Rule 2: Response must be a `Response` object — never call `res.send()` or `res.json()`.\n- Rule 3: Background work after response: use `ctx.waitUntil(promise)`. Any async work\n  awaited after `return new Response(...)` is silently dropped.\n- Rule 4: Bundle size limit is 1MB compressed. Flag any import that pulls in large deps.\n\n## D1 Database\n- Rule 5: D1 uses SQLite semantics, not Postgres. `RETURNING` clause unavailable\n  in D1 bindings prior to 2024. Use `.run()` then a follow-up `.first()` to return inserted rows.\n- Rule 6: Multi-statement transactions require `db.batch([...])`, not sequential awaits.\n- Rule 7: D1 `prepare().bind()` — parameters are 1-indexed (`?1`, `?2`), not `$1`/`$2`.\n- Rule 8: Never use `SELECT *` in D1 production queries — column drift causes silent failures.\n```\n\nThen add a `@cloudflare-rules.md` reference to the project's CLAUDE.md (or to the developer agent for that project) so it's loaded as a required pre-flight check.\n\n**Impact:** Reduces capability_gaps and fix_attempts in cloudflare-workers/d1 sessions by giving the developer agent the same runtime-specific awareness that `.claude/rules/xano-rules.md` provides for Mirror. The 15-rule Mirror pattern reduced friction on Xano endpoints to near-zero after the file was established.\n\n**Risk:** Medium. Rules must be verified against the actual Cloudflare Workers/D1 versions in use — some rules (especially D1 `RETURNING` behavior) changed across D1 beta versions. Incorrect rules are worse than no rules. Mitigation: mark each rule with a version note and add `[VERIFY AGAINST LIVE ENDPOINT]` for any D1 behavioral claim before committing the file.\n\n## Proposal Track Record\n36 total, 21 accepted, 6 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 3 fix_attempts (14d) |\n| Proposal Hit Rate | 67% | 21/31 accepted |\n| Eval Signal | OK | 3 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 25,
-      "accepted": 15,
-      "pending": 6,
+      "total": 29,
+      "accepted": 20,
+      "pending": 5,
       "rejected": 4
     },
     "benchmarks": [
@@ -1063,8 +1111,8 @@
       },
       {
         "name": "Proposal Hit Rate",
-        "status": "59%",
-        "detail": "16/27 accepted"
+        "status": "67%",
+        "detail": "21/31 accepted"
       },
       {
         "name": "Eval Signal",
@@ -1073,5 +1121,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-16T06:46:31.438Z"
+  "lastUpdated": "2026-04-16T16:02:55.154Z"
 }

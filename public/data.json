@@ -667,6 +667,26 @@
       "high": true
     },
     {
+      "date": "2026-04-16",
+      "context": "Bruce proposal P-2026-04-16-006",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "context": "Bruce proposal P-2026-04-16-007",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "context": "Bruce proposal P-2026-04-16-008",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "context": "Bruce proposal P-2026-04-16-009",
+      "high": true
+    },
+    {
       "date": "2026-04-14",
       "text": "[object Object] RSS parser bug took 3 iterations in main thread — debug agent's root-cause discipline would have isolated faster",
       "context": "manual decision to not delegate",
@@ -1065,32 +1085,7 @@
     ],
     "frictionTrends": null,
     "proposalCount": 5,
-    "proposals": [
-      {
-        "id": "P-2026-04-16-006",
-        "category": "agent_methodology",
-        "problem": "Chief-of-staff TC1 scored 4.6/5.0 (baseline 5.0, delta −0.4). C2 was specifically cited: *\"T&C dependency (legal/Plaid blocker) is embedded in the option breakdown rather than surfaced at the top before merit comparison, per the agent's own multi-option instruction.\"",
-        "solution": "In `~/.claude/agents/chief-of-staff.md`, under `## Multi-Option Recommendations`, add a required response template immediately after the \"Inter-option dependencies\" bullet:"
-      },
-      {
-        "id": "P-2026-04-16-007",
-        "category": "self_improvement",
-        "problem": "Tonight I received `capability_gaps_7d: 9` — a single opaque integer. This is the highest-signal metric in tonight's data (9 gaps in 7 sessions = >1 gap per session), yet I cannot generate a targeted proposal because I don't know which agent triggered each gap, in which domain, or whether any gap type has recurred 3+ times (the threshold that would trigger Gap Diagnosis Protocol).",
-        "solution": ""
-      },
-      {
-        "id": "P-2026-04-16-008",
-        "category": "eval_evolution",
-        "problem": "TC1 raw scores: `{c1:5, c2:4, c3:5, c4:4, c5:5}`. Two criteria were docked. The eval notes explain only C2 in detail. C4 (opportunity cost analysis — *\"explicitly names what gets delayed by each choice\"*) was also docked to 4, but the notes say only *\"Strong performance across the board\"* without identifying what was missing in C4.",
-        "solution": "In `~/.claude/agents/evals/chief-of-staff-evals.md`, add the following line to the **Scoring Rubric** section:"
-      },
-      {
-        "id": "P-2026-04-16-009",
-        "category": "skill_gap",
-        "problem": "Sessions in the last 7 days are concentrated in `cloudflare-workers` (4 sessions) and `d1` (4 sessions). Dynamic evals DYN-1 and DYN-2 — drawn directly from recent session work — are both tagged `cloudflare-workers,css`. `capability_gaps_7d` is 9. `fix_attempts_7d` is 3.",
-        "solution": "Create `~/Claude-Projects/[cloudflare-project]/.claude/rules/cloudflare-rules.md` with the following structure:"
-      }
-    ],
+    "proposals": [],
     "actionRequired": false,
     "briefingContent": "# Night Shift — 2026-04-16\n\n## Status: YELLOW\n\n## Key Findings\n- WATCH: Friction Rate — 3 fix_attempts in 14 days (red line at 6)\n\n## What Hero Worked On (7-day)\n- cloudflare-workers: 4 sessions\n- css: 4 sessions\n- d1: 4 sessions\n- nextjs: 4 sessions\n- agents: 3 sessions\n\n## Agent Usage (7-day)\n- developer: 2 sessions\n- explore: 2 sessions\n- research: 2 sessions\n- reviewer: 2 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| chief-of-staff | 4.6 | 5.0 | -0.40 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n87 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 4\n\n## Proposals\nI now have everything I need. Here are tonight's proposals:\n\n---\n\n# Proposals — 2026-04-16\n\n---\n\n## P-2026-04-16-006\n\n**Category:** `agent_methodology`\n\n**Problem:** Chief-of-staff TC1 scored 4.6/5.0 (baseline 5.0, delta −0.4). C2 was specifically cited: *\"T&C dependency (legal/Plaid blocker) is embedded in the option breakdown rather than surfaced at the top before merit comparison, per the agent's own multi-option instruction.\"*\n\nThe instruction is already present in `~/.claude/agents/chief-of-staff.md`:\n> *\"If one option is a hard blocker or prerequisite for another, say so at the top — before comparing merit. Dependency framing is not a footnote.\"*\n\nThe rule failed in practice despite being in the file. This is a structural compliance problem, not a missing rule. When the agent processes a multi-option prompt, the cognitive default is to analyze each option in parallel — which naturally buries blockers inside option bodies. Text instructions describing *what* to do don't override that generation pattern as reliably as a required *template* specifying *how the output must be structured*. The fix is to replace the prose instruction with a concrete required output skeleton.\n\n**Solution:** In `~/.claude/agents/chief-of-staff.md`, under `## Multi-Option Recommendations`, add a required response template immediately after the \"Inter-option dependencies\" bullet:\n\n```markdown\n**Required format for any multi-option response:**\n\n> **⚠️ Blockers & Dependencies** *(skip section if none)*\n> [Hard blockers, legal requirements, or sequencing constraints that change the comparison]\n> \n> **Option A — [Name]**\n> Recommendation: [yes/no/conditional]\n> Opportunity cost: [one vivid sentence on what you give up]\n> \n> **Option B — [Name]**\n> ...\n> \n> **Recommendation:** [single option] — [one-line reason]\n```\n\nThe section header `⚠️ Blockers & Dependencies` appearing *before* any option heading forces structural compliance — the agent must populate or explicitly skip the section before it reaches option analysis.\n\n**Impact:** C2 and the structural compliance gap are addressed at the format layer, not the instruction layer. TC1 expected to return to 5.0. The template also standardizes CoS multi-option responses, making them easier for Hero to scan at a glance.\n\n**Risk:** Low. The template is additive and scoped only to the multi-option case. The risk is verbosity if Hero asks for a quick informal comparison — mitigated by the `(skip section if none)` annotation on the blockers header and the existing `## Communication Style` guardrail against preamble.\n\n---\n\n## P-2026-04-16-007\n\n**Category:** `self_improvement`\n\n**Problem:** Tonight I received `capability_gaps_7d: 9` — a single opaque integer. This is the highest-signal metric in tonight's data (9 gaps in 7 sessions = >1 gap per session), yet I cannot generate a targeted proposal because I don't know which agent triggered each gap, in which domain, or whether any gap type has recurred 3+ times (the threshold that would trigger Gap Diagnosis Protocol).\n\nP-2026-04-16-004 (accepted earlier tonight) fixed B3's analysis — it now ingests raw capability_gap events from the performance log. But B3 is an LLM-over-text step that runs during the night and produces prose findings. By the time I'm writing proposals, I only see the count in the A1 metrics payload.\n\nSeparately, tonight's dynamic evals (DYN-1, DYN-2) were drawn from `cloudflare-workers,css` domain sessions — confirming that the capability gaps and the high-activity domain cluster are related. Without per-agent gap attribution in the metrics, I can't connect these two signals in a single proposal.\n\n**Solution:** In `~/.claude/night-shift/phases/a1-log-analysis.sh`, after emitting `capability_gaps_7d`, add a second metric emit for a structured gap attribution summary:\n\n```bash\n# After the existing capability_gaps_7d emit:\nGAP_ATTR=$(grep '\"event\":\"capability_gap\"' \"$PERF_LOG\" 2>/dev/null | \\\n  jq -rsc --arg cutoff \"$SEVEN_DAYS_AGO\" \\\n    '[.[] | select(.date >= $cutoff)] |\n     group_by(.agent) |\n     map({agent: .[0].agent, count: length,\n          top_domain: (group_by(.context) | max_by(length) | .[0].context // \"unknown\")})' \\\n  2>/dev/null || echo \"[]\")\n\nemit_event \"{\\\"phase\\\":\\\"a1\\\",\\\"type\\\":\\\"data\\\",\\\"key\\\":\\\"capability_gap_attribution\\\",\\\"value\\\":$GAP_ATTR}\"\n```\n\nThen pass `capability_gap_attribution` alongside `capability_gaps_7d` in the C0 (proposal generation) data payload — same as how `domain_frequency_7d` and `agent_usage_7d` are currently passed.\n\n**Impact:** Tonight's 9 gaps become *\"developer: 6 gaps (cloudflare-workers), research: 2 gaps (unknown), reviewer: 1 gap (css)\"* — or whatever the actual breakdown is. I can generate a targeted `skill_gap` or `agent_methodology` proposal for the high-count agent instead of a generic observation. The gap metric goes from decorative to actionable on the night it spikes.\n\n**Risk:** Medium. Depends on capability_gap events having a consistent `agent` field in the performance log. If the field is absent or misnamed, the jq produces an empty array — same as today, no regression. If `$PERF_LOG` has no capability_gap events at all (e.g., event naming changes), the emit produces `[]` and the proposal context is no worse than tonight.\n\n---\n\n## P-2026-04-16-008\n\n**Category:** `eval_evolution`\n\n**Problem:** TC1 raw scores: `{c1:5, c2:4, c3:5, c4:4, c5:5}`. Two criteria were docked. The eval notes explain only C2 in detail. C4 (opportunity cost analysis — *\"explicitly names what gets delayed by each choice\"*) was also docked to 4, but the notes say only *\"Strong performance across the board\"* without identifying what was missing in C4.\n\nNight Shift's proposal process is evidence-driven: without a one-line note on why C4 was docked, I can't generate a targeted fix. The current eval entry gives me the score, the criterion text, and the rubric — but not which specific output behavior fell short. For C4, I don't know if the agent: (a) named opportunity cost for only the recommended option and not all options, (b) used abstract language instead of concrete tradeoffs, or (c) was docked for a different reason entirely. Each diagnosis leads to a different AOP change.\n\nThis blind spot compounds over time: as the eval suite grows and criteria multiply, any undocumented docking becomes a ghost regression — visible in the score, invisible in the diagnosis.\n\n**Solution:** In `~/.claude/agents/evals/chief-of-staff-evals.md`, add the following line to the **Scoring Rubric** section:\n\n```markdown\n**Required:** For any criterion scored below 5, write one sentence explaining what was missing\nor wrong in the agent's response. Format: `C[N] docked: [reason].`\nUndocumented dockings are invalid — rescore or add a note before logging results.\n```\n\nAdditionally, update the **Score Tracker** template row to include a notes column structured for per-criterion explanations:\n\n```markdown\n| YYYY-MM-DD | model | prompt# | C1 | C2 | C3 | C4 | C5 | avg | C2 docked: [reason]. C4 docked: [reason]. |\n```\n\n**Impact:** Every future eval run produces a complete diagnostic record. Night Shift gains a full failure inventory per run — not just the most prominent regression. The C4 mystery tonight becomes a specific, actionable finding tomorrow. Applies to all chief-of-staff evals and, when replicated, to all agent eval files.\n\n**Risk:** Low. The rubric change adds friction to the scoring step — the evaluator must write notes for docked criteria rather than just logging numbers. This is the desired friction: undocumented regressions are more expensive than the 30 seconds it takes to note them.\n\n---\n\n## P-2026-04-16-009\n\n**Category:** `skill_gap`\n\n**Problem:** Sessions in the last 7 days are concentrated in `cloudflare-workers` (4 sessions) and `d1` (4 sessions). Dynamic evals DYN-1 and DYN-2 — drawn directly from recent session work — are both tagged `cloudflare-workers,css`. `capability_gaps_7d` is 9. `fix_attempts_7d` is 3.\n\nCloudflare Workers and D1 have hard runtime constraints that differ from standard Node.js/Postgres environments that agents' training skews toward:\n\n| Constraint | Workers/D1 behavior | Standard Node assumption |\n|---|---|---|\n| Runtime APIs | No `fs`, `net`, `crypto` (Node.js built-ins blocked) | Node.js globals available |\n| Response model | `Response` object required; `res.send()` doesn't exist | Express-style response |\n| D1 SQL dialect | SQLite semantics; no `RETURNING` in older D1 versions; batch API required for multi-statement | Postgres `RETURNING` works |\n| Bundle size | 1MB compressed limit on Worker scripts | No relevant limit |\n| Cold start | `waitUntil()` for background tasks; awaiting after response is dropped | Async after response is valid |\n\nMirror avoided equivalent friction with `.claude/rules/xano-rules.md` — 15 critical rules codifying patterns that caused real bugs. That file is cited directly in the mirror-developer agent as a required pre-flight read. The Cloudflare stack has no equivalent.\n\n**Staleness check:** `cloudflare-workers` and `d1` sessions: 4 each in the past 7 days. Evidence is current. This is not a new agent proposal — it's a rules file for an existing developer agent context.\n\n**Solution:** Create `~/Claude-Projects/[cloudflare-project]/.claude/rules/cloudflare-rules.md` with the following structure:\n\n```markdown\n# Cloudflare Workers + D1 — Critical Rules\n\n## Workers Runtime\n- Rule 1: No Node.js built-in modules (fs, net, path, crypto). Use Web APIs only.\n- Rule 2: Response must be a `Response` object — never call `res.send()` or `res.json()`.\n- Rule 3: Background work after response: use `ctx.waitUntil(promise)`. Any async work\n  awaited after `return new Response(...)` is silently dropped.\n- Rule 4: Bundle size limit is 1MB compressed. Flag any import that pulls in large deps.\n\n## D1 Database\n- Rule 5: D1 uses SQLite semantics, not Postgres. `RETURNING` clause unavailable\n  in D1 bindings prior to 2024. Use `.run()` then a follow-up `.first()` to return inserted rows.\n- Rule 6: Multi-statement transactions require `db.batch([...])`, not sequential awaits.\n- Rule 7: D1 `prepare().bind()` — parameters are 1-indexed (`?1`, `?2`), not `$1`/`$2`.\n- Rule 8: Never use `SELECT *` in D1 production queries — column drift causes silent failures.\n```\n\nThen add a `@cloudflare-rules.md` reference to the project's CLAUDE.md (or to the developer agent for that project) so it's loaded as a required pre-flight check.\n\n**Impact:** Reduces capability_gaps and fix_attempts in cloudflare-workers/d1 sessions by giving the developer agent the same runtime-specific awareness that `.claude/rules/xano-rules.md` provides for Mirror. The 15-rule Mirror pattern reduced friction on Xano endpoints to near-zero after the file was established.\n\n**Risk:** Medium. Rules must be verified against the actual Cloudflare Workers/D1 versions in use — some rules (especially D1 `RETURNING` behavior) changed across D1 beta versions. Incorrect rules are worse than no rules. Mitigation: mark each rule with a version note and add `[VERIFY AGAINST LIVE ENDPOINT]` for any D1 behavioral claim before committing the file.\n\n## Proposal Track Record\n36 total, 21 accepted, 6 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 3 fix_attempts (14d) |\n| Proposal Hit Rate | 67% | 21/31 accepted |\n| Eval Signal | OK | 3 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
@@ -1099,9 +1094,9 @@
     "memoryHealth": null,
     "proposalTrackRecord": {
       "total": 29,
-      "accepted": 20,
-      "pending": 5,
-      "rejected": 4
+      "accepted": 24,
+      "pending": 0,
+      "rejected": 5
     },
     "benchmarks": [
       {
@@ -1121,5 +1116,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-16T16:02:55.154Z"
+  "lastUpdated": "2026-04-16T16:12:06.747Z"
 }

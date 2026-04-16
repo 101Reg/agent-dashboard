@@ -349,14 +349,24 @@
         "capabilityGaps": 4,
         "toilEvents": 0,
         "hookCatches": 0
+      },
+      {
+        "name": "x-strategy-enforcement",
+        "date": "2026-04-16",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 2,
+        "toilEvents": 0,
+        "hookCatches": 0
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 84,
+    "total": 87,
     "byType": {
-      "feedback": 41,
+      "feedback": 44,
       "project": 15,
       "user": 16,
       "reference": 11,
@@ -387,13 +397,16 @@
         "feedback_iron_law_pattern",
         "feedback_live_testing",
         "feedback_mcp_debug",
+        "feedback_memory_as_fabrication",
         "feedback_metric_honesty",
         "feedback_nextjs14_deps",
+        "feedback_nextjs_canonical",
         "feedback_parallel_batching",
         "feedback_protect_secrets",
         "feedback_research_before_build",
         "feedback_rss_parsing",
         "feedback_schema_pressure_test",
+        "feedback_scope_check_first",
         "feedback_source_opinions",
         "feedback_spec_first",
         "feedback_ts_iteration",
@@ -561,6 +574,18 @@
     }
   ],
   "selfImprovement": [
+    {
+      "date": "2026-04-16",
+      "text": "Presented full metrics + strategy plan without asking the foundational scoping question: 'what does the existing toolset (X native analytics) already solve, and what's the minimum new work needed to close the gap?' Resulted in ~60% of Plan v1 being discarded after Hero pushed back",
+      "context": "38twelveDaily strategy enforcement — first plan included metrics pipeline + dashboard that got fully dropped",
+      "high": false
+    },
+    {
+      "date": "2026-04-16",
+      "text": "Hook demands verification of functions/files created earlier in the same session, costing turns on ceremony comments for things the agent demonstrably just wrote. 5+ turns this session spent writing 'verified at file:line' notes for self-authored code",
+      "context": "PreToolUse hook enforces verification but can't distinguish 'never seen' from 'just wrote'. Proposed fix: auto-pass when target file mtime is within session window, OR honor an inline marker like // pre-tool-verified",
+      "high": false
+    },
     {
       "date": "2026-04-14",
       "text": "[object Object] RSS parser bug took 3 iterations in main thread — debug agent's root-cause discipline would have isolated faster",
@@ -982,5 +1007,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-16T06:15:51.694Z"
+  "lastUpdated": "2026-04-16T06:21:37.322Z"
 }

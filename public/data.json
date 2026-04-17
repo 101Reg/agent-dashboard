@@ -198,7 +198,54 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 9
+        "hookCatches": 9,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "developer",
+            "detail": "PreToolUse hook blocked Reveal.jsx write — required verification that useReveal hook existed before importing"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "developer",
+            "detail": "PreToolUse hook blocked Num.jsx write — same useReveal verification requirement"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "developer",
+            "detail": "PreToolUse hook caught Canvas roundRect API — flagged as newer API needing browser support verification, rewrote with manual arcTo path"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "developer",
+            "detail": "PreToolUse hook flagged env(safe-area-inset-top) CSS — required verification of browser support before writing"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "chief-of-staff",
+            "detail": "Stop hook caught false certainty — stated recruiter behavior as fact without evidence"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "chief-of-staff",
+            "detail": "Stop hook caught assumed context — treated Claude online generated content as user-confirmed facts (coaching system, Interlink, Sentinel)"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "chief-of-staff",
+            "detail": "Stop hook caught assumed context again — asked user to confirm fabricated projects instead of recognizing they were never user-provided"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "chief-of-staff",
+            "detail": "Stop hook caught false certainty — claimed very few people document agent architectures and asserted what hiring managers value without evid"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "chief-of-staff",
+            "detail": "Stop hook flagged invented names — agent names and personality anchors in README not confirmed by user in conversation"
+          }
+        ]
       },
       {
         "name": "career-identity",
@@ -208,7 +255,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "agent-os-public",
@@ -218,7 +266,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "night-shift-build",
@@ -228,7 +277,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "agent-os-review",
@@ -238,7 +288,24 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 1
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "main",
+            "detail": "Stop hook caught fabricated agent names in initial response — names listed without file verification"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "main",
+            "detail": "Stop hook infinite loop: evaluates full transcript history, re-flags corrected historical violation on every new response. Hook should scope"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "main",
+            "detail": "Stop hook evaluated full transcript instead of latest response — caused infinite rejection loop after a corrected violation. Self-corrected "
+          }
+        ]
       },
       {
         "name": "night-shift-learning",
@@ -248,7 +315,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "night-shift-setup",
@@ -258,7 +326,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "dashboard-gaps-fix",
@@ -268,7 +337,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "bruce-refactor",
@@ -278,7 +348,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "library-reorganization",
@@ -288,7 +359,14 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "pattern_detected",
+            "agent": "main",
+            "detail": "Library reorganization baseline — measure against this in 2 weeks"
+          }
+        ]
       },
       {
         "name": "agent-os-score-64-to-97",
@@ -298,7 +376,14 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "pattern_detected",
+            "agent": "developer",
+            "detail": "Vercel GitHub auto-deploy has silently broken 3-4 times across sessions — git push succeeds but Vercel webhook does not fire, leaving live d"
+          }
+        ]
       },
       {
         "name": "38twelve-daily-strategic-build",
@@ -308,7 +393,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "38twelve-daily-build",
@@ -318,7 +404,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "38twelve-pipeline-build",
@@ -328,7 +415,19 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "pattern_detected",
+            "agent": "developer",
+            "detail": "All 3 fix attempts were caused by not verifying external dependencies before coding. Updated code-accuracy.md rule."
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "developer",
+            "detail": "Hero had to manually catch 3 inline loop failures: agent deployment summary not presented, surprises not logged inline, fixes not applied in"
+          }
+        ]
       },
       {
         "name": "38twelve-website-beehiiv",
@@ -338,7 +437,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "38twelve-dual-artifact",
@@ -348,7 +448,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "x-strategy-enforcement",
@@ -358,7 +459,8 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
         "name": "seo-phase-123",
@@ -368,7 +470,25 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "bruce-full-review-and-fix",
+        "date": "2026-04-16",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Hero feedback: 'We need to self improve in the moment if things continue to pop up.' During this session, stop-hook false positives fired 3+"
+          }
+        ]
       },
       {
         "name": "bruce-review-2026-04-16",
@@ -378,25 +498,249 @@
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": []
       },
       {
-        "name": "bruce-full-review-and-fix",
+        "name": "unknown",
         "date": "2026-04-16",
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 0
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, pattern_detected x3"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, pattern_detected x4"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, pattern_detected x5"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, pattern_detected x6"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, pattern_detected x7"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, pattern_detected x8"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, pattern_detected x9"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, pattern_detected x10"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, pattern_detected x11"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, pattern_detected x12"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x3, pattern_detected x13"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x3, pattern_detected x14"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x3, pattern_detected x15"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x3, pattern_detected x16"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x3, pattern_detected x17"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x4, pattern_detected x18"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x4, pattern_detected x19"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x4, pattern_detected x20"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x4, pattern_detected x21"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x4, pattern_detected x22"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x4, pattern_detected x23"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x4, pattern_detected x24"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x4"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "main",
+            "detail": "Stop-hook schema bug: hookSpecificOutput.additionalContext not valid for Stop hooks; commit-gate missing hookEventName for PreToolUse; patte"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x4"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "main",
+            "detail": "Gap diagnosis complete: 4 hook_catches = 2 hook FPs + 2 my discipline gaps; 5 capability_gaps = 1 solved by today's Stop-hook fix + 2 hook-a"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x4"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "pattern-detector-hook",
+            "detail": "capability_gap x5, hook_catch x4"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "main",
+            "detail": "pattern-detector Stop hook was re-firing on every stop today regardless of state changes (threshold-once-crossed-stays-fired bug)"
+          },
+          {
+            "event": "pattern_detected",
+            "agent": "main",
+            "detail": "Built Option A: hook_catch events now carry valid (true/false) + rule fields; Phase A1 computes per-rule FP rate and flags rules with >=50% "
+          }
+        ]
+      },
+      {
+        "name": "38twelve-force-publish",
+        "date": "2026-04-16",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 2,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "PreToolUse flagged force-param edit despite same-turn verification (router.ts:217-220 read in-transcript)"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Flagged future-tense phrasing (\"I'll proceed once it returns\") despite being exception 7a (stated future intent)"
+          }
+        ]
+      },
+      {
+        "name": "38twelve-pullup",
+        "date": "2026-04-16",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Cited project_38twelve_next.md content without [memory:] tag; git status/log from prior turn not re-shown"
+          }
+        ]
+      },
+      {
+        "name": "38twelve-article-overflow",
+        "date": "2026-04-16",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Claimed Vercel will auto-deploy without verifying Vercel integration; also failed to re-quote git push output inline"
+          }
+        ]
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 63,
+    "total": 65,
     "byType": {
-      "feedback": 20,
+      "feedback": 22,
       "project": 13,
       "user": 17,
       "reference": 12,
@@ -414,8 +758,10 @@
         "feedback_cloudflare_38twelve",
         "feedback_config_sourced_rules",
         "feedback_data_handling",
+        "feedback_detail_page_mobile_padding",
         "feedback_enumerate_states",
         "feedback_evals",
+        "feedback_identify_deploy_source",
         "feedback_iron_law_pattern",
         "feedback_live_testing",
         "feedback_metric_honesty",
@@ -478,13 +824,13 @@
   "system": {
     "skills": 17,
     "rules": 14,
-    "hooks": 7,
+    "hooks": 9,
     "mcpServers": 2
   },
   "timeline": [
     {
       "date": "Apr 16, 2026",
-      "title": "2 sessions",
+      "title": "3 sessions",
       "desc": "Committed stranded pipeline work from prior session (dual-artifact build), Designed + deployed X strategy enforcement pipeline (cadence gate, split X/Web voice, URL guard, config-externalized rules), Fixed 2 blocking bugs from reviewer (X+web atomicity, DST fall-back)",
       "active": true
     },
@@ -612,6 +958,210 @@
     },
     {
       "date": "2026-04-16",
+      "text": "Hero feedback: 'We need to self improve in the moment if things continue to pop up.' During this session, stop-hook false positives fired 3+ times. The self-improvement rule (rules/self-improvement.md) says pattern detection should trigger immediate systemic fix, but I kept one-off-correcting until Hero pushed for a solve. Built pre-response-claim-audit.md + /check-claims as the fix — but only at hit #4, after Hero's explicit intervention.",
+      "context": "In-session pattern-to-fix pivot is not enforced; current rules describe it but don't require it. Candidate fix: a mid-session hook or Stop-hook augmentation that counts same-type events and forces a systemic-fix pause when count >= 3.",
+      "high": false
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, pattern_detected x3",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, pattern_detected x4",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, pattern_detected x5",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, pattern_detected x6",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, pattern_detected x7",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, pattern_detected x8",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, pattern_detected x9",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, pattern_detected x10",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, pattern_detected x11",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, pattern_detected x12",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x3, pattern_detected x13",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x3, pattern_detected x14",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x3, pattern_detected x15",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x3, pattern_detected x16",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x3, pattern_detected x17",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x4, pattern_detected x18",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x4, pattern_detected x19",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x4, pattern_detected x20",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x4, pattern_detected x21",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x4, pattern_detected x22",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x4, pattern_detected x23",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x4, pattern_detected x24",
+      "context": "Stop hook fired mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x4",
+      "context": "Stop hook blocked — mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "Stop-hook schema bug: hookSpecificOutput.additionalContext not valid for Stop hooks; commit-gate missing hookEventName for PreToolUse; pattern-detector self-amplifying loop",
+      "context": "Systemic fix: corrected both hooks to use correct schema, added stop_hook_active guard, excluded pattern_detected from self-count. Lesson added to reference_hooks.md.",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x4",
+      "context": "Stop hook blocked — mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "Gap diagnosis complete: 4 hook_catches = 2 hook FPs + 2 my discipline gaps; 5 capability_gaps = 1 solved by today's Stop-hook fix + 2 hook-architecture friction + 2 one-off bugs",
+      "context": "Proposed options A/B/C for hook-judge context issue; awaiting Hero decision. Stop-hook schema fix already shipped (d50c236) addresses enforcement gap.",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x4",
+      "context": "Stop hook blocked — mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x4",
+      "context": "Stop hook blocked — mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "pattern-detector Stop hook was re-firing on every stop today regardless of state changes (threshold-once-crossed-stays-fired bug)",
+      "context": "Systemic fix: added marker-file de-spam guard. Hook only re-fires when ALERT string changes (new events cross threshold), not on every stop.",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "Built Option A: hook_catch events now carry valid (true/false) + rule fields; Phase A1 computes per-rule FP rate and flags rules with >=50% FP as candidates for prompt sharpening",
+      "context": "Systemic fix for hook false-positive friction. Initial data from today's 4 catches already flagged pre-response-claim-audit rule (2/3 FP) for review.",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
       "text": "Scope round-trip on metrics dashboard (planned then stripped), pretooluse hook over-fired on self-authored references → 5 lessons saved",
       "context": "x-strategy-enforcement",
       "high": false
@@ -620,6 +1170,12 @@
       "date": "2026-04-16",
       "text": "Hook architecture friction: stop hook + pretool hook evaluate atomically without memory/prior-turn context visibility — caused 5+ false positives on memory-grounded citations and 2+ pretool retries on already-verified endpoints. Hero rated progressed-but-spun-wheels because of this. Bruce proposed source-labeling convention (P-2026-04-16-001, pending). → 3 lessons saved",
       "context": "seo-phase-123",
+      "high": false
+    },
+    {
+      "date": "2026-04-16",
+      "text": "4 stop-hook false positives on cited facts (2 genuine fabrications + 2 missing inline evidence). Triggered the pre-response-claim-audit rule + pattern-detector enforcement as the solve. camelCase vs snake_case field-naming drift cost 1 round trip when Hero screenshotted 85 vs my claimed 98. → 9 lessons saved",
+      "context": "bruce-full-review-and-fix",
       "high": false
     },
     {
@@ -1095,5 +1651,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-16T17:40:02.424Z"
+  "lastUpdated": "2026-04-17T01:33:31.720Z"
 }

@@ -166,21 +166,31 @@ async function getMetrics() {
       }
     }
 
+    // Lane-renderable event types — skip noise like attribution/agent_deployment
+    const LANE_EVENTS = new Set(['fix_attempt', 'escalation', 're_explanation', 'capability_gap', 'toil', 'hook_catch', 'pattern_detected']);
+
     for (const e of events) {
       if (e.event === 'friction_resolved') continue;
       const s = e.session || 'unknown';
       // Skip if this specific event has been marked resolved
       if (resolved.has(`${s}::${e.event}::${e.detail || ''}`)) continue;
-      if (!sessionMap.has(s)) sessionMap.set(s, { name: s, date: e.date, fixAttempts: 0, escalations: 0, reExplanations: 0, capabilityGaps: 0, toilEvents: 0, hookCatches: 0 });
+      if (!sessionMap.has(s)) sessionMap.set(s, { name: s, date: e.date, fixAttempts: 0, escalations: 0, reExplanations: 0, capabilityGaps: 0, toilEvents: 0, hookCatches: 0, events: [] });
       const entry = sessionMap.get(s);
+      if (!entry.events) entry.events = [];
       if (e.event === 'fix_attempt') entry.fixAttempts++;
       else if (e.event === 'escalation') entry.escalations++;
       else if (e.event === 're_explanation') entry.reExplanations++;
       else if (e.event === 'capability_gap') entry.capabilityGaps++;
       else if (e.event === 'toil') entry.toilEvents++;
       else if (e.event === 'hook_catch') entry.hookCatches++;
+      if (LANE_EVENTS.has(e.event)) {
+        entry.events.push({ event: e.event, agent: e.agent || null, detail: (e.detail || '').slice(0, 140) });
+      }
     }
   }
+
+  // Ensure every session has an events array (digest-only sessions have none)
+  for (const s of sessionMap.values()) { if (!s.events) s.events = []; }
 
   const sessions = Array.from(sessionMap.values()).sort((a, b) => (a.date || '').localeCompare(b.date || ''));
   return { sessions, hasData: sessions.length > 0 };

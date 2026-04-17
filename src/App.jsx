@@ -6,6 +6,66 @@ import Timeline from './components/Timeline'
 
 const NAV = ["Score", "Areas", "Activity", "Timeline"]
 
+const EVENT_COLORS = {
+  fix_attempt: '#f55',
+  escalation: '#F5B07B',
+  re_explanation: '#e17bf5',
+  capability_gap: '#7b9ff5',
+  toil: '#8a8a8a',
+  hook_catch: '#f5e17b',
+  pattern_detected: '#f5557b',
+}
+const EVENT_LABEL = {
+  fix_attempt: 'Fix Attempt',
+  escalation: 'Escalation',
+  re_explanation: 'Re-explanation',
+  capability_gap: 'Capability Gap',
+  toil: 'Toil',
+  hook_catch: 'Hook Catch',
+  pattern_detected: 'Pattern Detected',
+}
+
+function SwimLanes({ sessions }) {
+  const withEvents = [...sessions].reverse().filter(s => (s.events || []).length > 0).slice(0, 10)
+  if (withEvents.length === 0) {
+    return <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', padding: '12px 0', textAlign: 'center' }}>No event data — clean sessions only</div>
+  }
+  const types = Array.from(new Set(withEvents.flatMap(s => (s.events || []).map(e => e.event))))
+  return (
+    <div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        {withEvents.map(s => {
+          const friction = s.fixAttempts + s.escalations + s.reExplanations + s.capabilityGaps + s.toilEvents
+          return (
+            <div key={s.name} style={{
+              background: 'rgba(255,255,255,0.03)', borderRadius: 10,
+              border: '1px solid rgba(255,255,255,0.06)', padding: '10px 12px',
+            }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.85)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{s.name}</div>
+              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', marginTop: 2 }}>{s.date} · {friction} friction · {(s.events || []).length} events</div>
+              <div style={{ marginTop: 8, display: 'flex', gap: 3, flexWrap: 'wrap' }}>
+                {(s.events || []).map((e, i) => (
+                  <span key={i}
+                    title={(EVENT_LABEL[e.event] || e.event) + (e.agent ? ' · ' + e.agent : '') + (e.detail ? '\n' + e.detail : '')}
+                    style={{ width: 10, height: 10, borderRadius: 5, background: EVENT_COLORS[e.event] || '#666', display: 'inline-block', cursor: 'help' }} />
+                ))}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+      <div style={{ marginTop: 16, paddingTop: 12, borderTop: '1px solid rgba(255,255,255,0.04)', display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+        {types.map(t => (
+          <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <span style={{ width: 8, height: 8, borderRadius: 4, background: EVENT_COLORS[t] || '#666', display: 'inline-block', flexShrink: 0 }} />
+            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)' }}>{EVENT_LABEL[t] || t}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function computeAORs(data) {
   const sessions = data.metrics?.sessions || []
   const cutoff = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
@@ -349,6 +409,16 @@ export default function App() {
                 )
               })}
             </div>
+
+            {/* Swim Lanes — per-session event timeline */}
+            <Reveal delay={150}>
+              <div style={{ marginBottom: 32 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.2)', marginBottom: 12 }}>
+                  Session Lanes
+                </div>
+                <SwimLanes sessions={sessions} />
+              </div>
+            </Reveal>
 
             {/* Self-Improvement highlights — only non-proposal entries */}
             <Reveal delay={200}>

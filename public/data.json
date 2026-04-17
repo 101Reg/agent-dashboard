@@ -294,16 +294,6 @@
             "event": "hook_catch",
             "agent": "main",
             "detail": "Stop hook caught fabricated agent names in initial response — names listed without file verification"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "main",
-            "detail": "Stop hook infinite loop: evaluates full transcript history, re-flags corrected historical violation on every new response. Hook should scope"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "main",
-            "detail": "Stop hook evaluated full transcript instead of latest response — caused infinite rejection loop after a corrected violation. Self-corrected "
           }
         ]
       },
@@ -360,13 +350,7 @@
         "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0,
-        "events": [
-          {
-            "event": "pattern_detected",
-            "agent": "main",
-            "detail": "Library reorganization baseline — measure against this in 2 weeks"
-          }
-        ]
+        "events": []
       },
       {
         "name": "agent-os-score-64-to-97",
@@ -377,13 +361,7 @@
         "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0,
-        "events": [
-          {
-            "event": "pattern_detected",
-            "agent": "developer",
-            "detail": "Vercel GitHub auto-deploy has silently broken 3-4 times across sessions — git push succeeds but Vercel webhook does not fire, leaving live d"
-          }
-        ]
+        "events": []
       },
       {
         "name": "38twelve-daily-strategic-build",
@@ -416,18 +394,7 @@
         "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0,
-        "events": [
-          {
-            "event": "pattern_detected",
-            "agent": "developer",
-            "detail": "All 3 fix attempts were caused by not verifying external dependencies before coding. Updated code-accuracy.md rule."
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "developer",
-            "detail": "Hero had to manually catch 3 inline loop failures: agent deployment summary not presented, surprises not logged inline, fixes not applied in"
-          }
-        ]
+        "events": []
       },
       {
         "name": "38twelve-website-beehiiv",
@@ -510,173 +477,7 @@
         "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0,
-        "events": [
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, pattern_detected x3"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, pattern_detected x4"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, pattern_detected x5"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, pattern_detected x6"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, pattern_detected x7"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, pattern_detected x8"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, pattern_detected x9"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, pattern_detected x10"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, pattern_detected x11"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, pattern_detected x12"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x3, pattern_detected x13"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x3, pattern_detected x14"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x3, pattern_detected x15"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x3, pattern_detected x16"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x3, pattern_detected x17"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x4, pattern_detected x18"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x4, pattern_detected x19"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x4, pattern_detected x20"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x4, pattern_detected x21"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x4, pattern_detected x22"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x4, pattern_detected x23"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x4, pattern_detected x24"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x4"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "main",
-            "detail": "Stop-hook schema bug: hookSpecificOutput.additionalContext not valid for Stop hooks; commit-gate missing hookEventName for PreToolUse; patte"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x4"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "main",
-            "detail": "Gap diagnosis complete: 4 hook_catches = 2 hook FPs + 2 my discipline gaps; 5 capability_gaps = 1 solved by today's Stop-hook fix + 2 hook-a"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x4"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "pattern-detector-hook",
-            "detail": "capability_gap x5, hook_catch x4"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "main",
-            "detail": "pattern-detector Stop hook was re-firing on every stop today regardless of state changes (threshold-once-crossed-stays-fired bug)"
-          },
-          {
-            "event": "pattern_detected",
-            "agent": "main",
-            "detail": "Built Option A: hook_catch events now carry valid (true/false) + rule fields; Phase A1 computes per-rule FP rate and flags rules with >=50% "
-          }
-        ]
+        "events": []
       },
       {
         "name": "38twelve-force-publish",
@@ -731,6 +532,28 @@
             "event": "hook_catch",
             "agent": "stop-hook",
             "detail": "Claimed Vercel will auto-deploy without verifying Vercel integration; also failed to re-quote git push output inline"
+          }
+        ]
+      },
+      {
+        "name": "weekly-scan-a3",
+        "date": "2026-04-16",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 2,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "pretooluse-hook",
+            "detail": "PreToolUse blocked import of SwimLanes.jsx from App.jsx despite file existing; Write succeeded seconds earlier in same turn"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "pretooluse-hook",
+            "detail": "PreToolUse blocked App.jsx SwimLanes import x3 after Read+ls verification in same turn — audit model cannot cross-reference filesystem"
           }
         ]
       }
@@ -1158,6 +981,24 @@
       "date": "2026-04-16",
       "text": "Built Option A: hook_catch events now carry valid (true/false) + rule fields; Phase A1 computes per-rule FP rate and flags rules with >=50% FP as candidates for prompt sharpening",
       "context": "Systemic fix for hook false-positive friction. Initial data from today's 4 catches already flagged pre-response-claim-audit rule (2/3 FP) for review.",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "capability_gap x5, hook_catch x6",
+      "context": "Stop hook blocked — mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "Prompt-audit hooks (PreToolUse Write|Edit + Stop) evaluate atomically and cannot see prior tool output as evidence. 4/6 hook_catches + 2/5 capability_gaps today trace to this cause. Proposed fix: sharpen both hook prompts to honor (1) relative-path imports as trusted, (2) in-transcript tool output as evidence. Awaiting Hero approval before editing settings.json.",
+      "context": "pattern-detector Stop-hook fired threshold",
+      "high": true
+    },
+    {
+      "date": "2026-04-16",
+      "text": "RESOLVED: Sharpened PreToolUse Write|Edit prompt (3 exceptions: relative-import, same-file-symbol, in-session-evidence) + Stop hook #7 exceptions (widened future-tense, any-position tool output, source-tagged prior turns). Expected effect: kills relative-import FPs and in-transcript evidence FPs without removing real hallucination catches.",
+      "context": "settings.json hooks sharpened",
       "high": true
     },
     {
@@ -1651,5 +1492,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-17T01:33:31.720Z"
+  "lastUpdated": "2026-04-17T02:06:11.277Z"
 }

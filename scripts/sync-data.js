@@ -167,7 +167,9 @@ async function getMetrics() {
     }
 
     // Lane-renderable event types — skip noise like attribution/agent_deployment
-    const LANE_EVENTS = new Set(['fix_attempt', 'escalation', 're_explanation', 'capability_gap', 'toil', 'hook_catch', 'pattern_detected']);
+    // pattern_detected is cross-session by design (fires on recurrence across sessions) —
+    // surfaced in Bruce briefing, not in per-session lanes.
+    const LANE_EVENTS = new Set(['fix_attempt', 'escalation', 're_explanation', 'capability_gap', 'toil', 'hook_catch']);
 
     for (const e of events) {
       if (e.event === 'friction_resolved') continue;

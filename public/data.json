@@ -569,11 +569,11 @@
       },
       {
         "name": "design-principles-v2",
-        "date": "2026-04-18",
+        "date": "2026-04-19",
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 1,
+        "capabilityGaps": 2,
         "toilEvents": 1,
         "hookCatches": 2,
         "events": [
@@ -596,6 +596,60 @@
             "event": "capability_gap",
             "agent": "reviewer",
             "detail": "Reviewer NOT spawned before commit. Reason: commit is pure markdown (rules/design-principles.md, rules/system-reminder-citation.md, skills/d"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "reviewer",
+            "detail": "Reviewer NOT spawned before second commit (Post-/learn refresh). Reason: commit contains only Bruce-phase output refresh (briefing.md, event"
+          }
+        ]
+      },
+      {
+        "name": "claude-design-clone",
+        "date": "2026-04-19",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 2,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Flagged PostToolUse hook specifics + Orchard reference. PostToolUse implementation details were unverified (valid catch). Orchard is in CLAU"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Assumed localhost:3000 + Vite/Next.js HMR without Hero specifying stack. Also cited Orchard with plain-language 'per CLAUDE.md' instead of f"
+          }
+        ]
+      },
+      {
+        "name": "design-view-build",
+        "date": "2026-04-19",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 3,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "posttooluse-bash",
+            "detail": "PostToolUse hook flagged 'Swift compilation errors' but errors were in macOS 26.2 SDK swiftinterface (~Copyable, ~Escapable, InlineArray) th"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Claimed 'Icon built and Dock refreshed' + predicted user-visible icon appearance without verifying the .app bundle contained the icon resour"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Hook flagged my observations of Hero's screenshot ('DV icon in Dock', '80% zoom', 'iPhone 17 Pro Max shell') as ASSUMED CONTEXT. But Hero di"
           }
         ]
       }
@@ -603,12 +657,12 @@
     "hasData": true
   },
   "memory": {
-    "total": 67,
+    "total": 70,
     "byType": {
-      "feedback": 22,
-      "project": 13,
+      "feedback": 23,
+      "project": 14,
       "user": 17,
-      "reference": 14,
+      "reference": 15,
       "other": 0
     },
     "labels": {
@@ -629,6 +683,7 @@
         "feedback_identify_deploy_source",
         "feedback_iron_law_pattern",
         "feedback_live_testing",
+        "feedback_macos_native",
         "feedback_metric_honesty",
         "feedback_research_planning",
         "feedback_schema_pressure_test",
@@ -642,6 +697,7 @@
         "project_agency",
         "project_agent_os",
         "project_debug_agent",
+        "project_design_view",
         "project_edge",
         "project_impeccable_install",
         "project_night_shift",
@@ -684,7 +740,8 @@
         "reference_lottery_ticket",
         "reference_pdf_extraction",
         "reference_workflow_tools",
-        "reference_x_api_2026"
+        "reference_x_api_2026",
+        "reference_xcode_setup"
       ]
     }
   },
@@ -696,10 +753,16 @@
   },
   "timeline": [
     {
+      "date": "Apr 19, 2026",
+      "title": "Design Principles V2",
+      "desc": "Built design-principles.md rule v2 (244 lines) from 10-book corpus, Extracted 10 design books via 10 parallel agents with pdftotext + tesseract OCR pipeline, Built /design-audit skill + eval file (4-pass checklist with principle citations)",
+      "active": true
+    },
+    {
       "date": "Apr 16, 2026",
       "title": "3 sessions",
       "desc": "Committed stranded pipeline work from prior session (dual-artifact build), Designed + deployed X strategy enforcement pipeline (cadence gate, split X/Web voice, URL guard, config-externalized rules), Fixed 2 blocking bugs from reviewer (X+web atomicity, DST fall-back)",
-      "active": true
+      "active": false
     },
     {
       "date": "Apr 14, 2026",
@@ -803,6 +866,42 @@
       "date": "2026-04-19",
       "text": "Reviewer NOT spawned before commit. Reason: commit is pure markdown (rules/design-principles.md, rules/system-reminder-citation.md, skills/design-audit/, design-library/ corpus, memory files) with zero code logic — falls under the explicit config/docs/memory exception in agent-delegation-triggers.md",
       "context": "session-learning commit",
+      "high": false
+    },
+    {
+      "date": "2026-04-19",
+      "text": "Reviewer NOT spawned before second commit (Post-/learn refresh). Reason: commit contains only Bruce-phase output refresh (briefing.md, events.jsonl) + JSONL log appends (session-digests, os-performance) — zero code logic, pure telemetry/reporting. Falls under config/docs/memory exception in agent-delegation-triggers.md",
+      "context": "post-/learn refresh commit",
+      "high": false
+    },
+    {
+      "date": "2026-04-19",
+      "text": "hook_catch x3",
+      "context": "Stop hook blocked — mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-19",
+      "text": "pattern-detector.sh was counting all hook_catch events regardless of valid field — a valid:false false-positive could tip the threshold and force a systemic-fix pause on noise. Fixed by filtering select(.event != 'hook_catch' or .valid != false). Jq `//` alternative operator treats false as 'use default' so initial fix was buggy and required the .valid != false form.",
+      "context": "Gap Diagnosis Protocol triggered by pattern-detector firing on 3 hook_catches today (2 valid main-thread drift, 1 invalid SDK false-positive)",
+      "high": true
+    },
+    {
+      "date": "2026-04-19",
+      "text": "hook_catch x3",
+      "context": "Stop hook blocked — mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-19",
+      "text": "3 valid hook_catches today across 3 different rules (source-before-stating, source-labeling-convention, verify-before-presenting) — all same root pattern: asserting specifics at response-composition time without per-claim grounding. Earlier in session I chose 'option 1 — defer until recurring'; recurrence crossed threshold. Systemic fix: added TL;DR Ritual section at top of pre-response-claim-audit.md condensing the three rules into a single per-claim check (quote/tag/soften/verify-first) that fires while writing, not after.",
+      "context": "pattern-detector re-fired after hook_catch count reached 3 valid following icon-verify catch",
+      "high": true
+    },
+    {
+      "date": "2026-04-19",
+      "text": "4 stop-hook false positives on system-reminder-sourced citations triggered pattern-detector; fixed inline with new rule. 1 PDF-extraction failure (32MB Read limit) recovered via pdftotext pipeline. → 5 lessons saved",
+      "context": "design-principles-v2",
       "high": false
     },
     {
@@ -1590,5 +1689,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-19T05:11:08.343Z"
+  "lastUpdated": "2026-04-19T06:40:51.943Z"
 }

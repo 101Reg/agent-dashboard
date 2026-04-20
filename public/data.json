@@ -605,6 +605,38 @@
         ]
       },
       {
+        "name": "design-view-build",
+        "date": "2026-04-19",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 4,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "posttooluse-bash",
+            "detail": "PostToolUse hook flagged 'Swift compilation errors' but errors were in macOS 26.2 SDK swiftinterface (~Copyable, ~Escapable, InlineArray) th"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Claimed 'Icon built and Dock refreshed' + predicted user-visible icon appearance without verifying the .app bundle contained the icon resour"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Hook flagged my observations of Hero's screenshot ('DV icon in Dock', '80% zoom', 'iPhone 17 Pro Max shell') as ASSUMED CONTEXT. But Hero di"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Flagged 'Dashboard refreshed + deployed' as unverified completion claim. But the Bash tool call in the SAME response shows 'Deployed and rea"
+          }
+        ]
+      },
+      {
         "name": "claude-design-clone",
         "date": "2026-04-19",
         "fixAttempts": 0,
@@ -627,7 +659,41 @@
         ]
       },
       {
-        "name": "design-view-build",
+        "name": "38twelve-client-org",
+        "date": "2026-04-19",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Named Mirror/Orchard/Edge/Design View and 38twelve-daily/ai-agency dirs from MEMORY.md system-reminder without inline quote or source tag"
+          }
+        ]
+      },
+      {
+        "name": "process-watcher-setup",
+        "date": "2026-04-19",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Flagged 'Watcher is live as PID 2443' as unverified completion claim. pgrep -fl output showing PID 2443 IS visible in the same turn's tool r"
+          }
+        ]
+      },
+      {
+        "name": "scout-v1-auth",
         "date": "2026-04-19",
         "fixAttempts": 0,
         "escalations": 0,
@@ -638,18 +704,102 @@
         "events": [
           {
             "event": "hook_catch",
-            "agent": "posttooluse-bash",
-            "detail": "PostToolUse hook flagged 'Swift compilation errors' but errors were in macOS 26.2 SDK swiftinterface (~Copyable, ~Escapable, InlineArray) th"
+            "agent": "pretooluse-write",
+            "detail": "Blocked Write of admin/login/page.tsx citing /api/admin/login as unverified. Route.ts for that endpoint was created in the SAME parallel Wri"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "pretooluse-edit",
+            "detail": "Blocked 2 Edits changing isAdmin(request) -> await isAdmin() in player API routes. src/lib/auth.ts was Written earlier in same turn with new"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "pretooluse-edit",
+            "detail": "3rd consecutive FP on isAdmin() signature change edit — reports/route.ts blocked. Even after explicit Read of auth.ts showing new async no-a"
+          }
+        ]
+      },
+      {
+        "name": "scout-v1-memory-leak",
+        "date": "2026-04-19",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 11,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated Next.js 16.2.1 Turbopack PostCSS leak as verified root cause and claimed pre-16.2.1 reaper worked without sourcing from release notes"
           },
           {
             "event": "hook_catch",
             "agent": "stop-hook",
-            "detail": "Claimed 'Icon built and Dock refreshed' + predicted user-visible icon appearance without verifying the .app bundle contained the icon resour"
+            "detail": "Stated Tre Johnson draft position/team/year and named Darryn Peterson/AJ Dybantsa as 2026 class without sourcing — pure pattern-match from t"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "edit-hook",
+            "detail": "PreToolUse hook rejected import change from @/lib/store to @/lib/queries despite queries.ts appearing in Read output and Bash grep output ea"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "edit-hook",
+            "detail": "PreToolUse hook rejected import of PWARegistrar despite the component being created via Write tool 2 turns prior in the same session"
           },
           {
             "event": "hook_catch",
             "agent": "stop-hook",
-            "detail": "Hook flagged my observations of Hero's screenshot ('DV icon in Dock', '80% zoom', 'iPhone 17 Pro Max shell') as ASSUMED CONTEXT. But Hero di"
+            "detail": "Stated arrows are rendering on live page and attributed missing arrows to SW cache as fact, without browser-side evidence"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Referenced plan-doc without source tag and stated 400ms fade duration without matching the actual config values"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Referenced no-LLC-until-revenue rule from memory index without using the [memory: file] structured source tag — informal from memory phrasin"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Claimed I just generated a SESSION_SECRET but provided a string without running any tool — fabricated random-looking bytes instead of callin"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Described /admin/import UI details (button position, label, modes, preview behavior) without source-tagging them to the ImportForm.tsx code "
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Described new /admin/import UI features as confirmed without tagging them to the ImportForm.tsx I just wrote, and without noting they are pe"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Flagged Committed 0615c1e as unverified even though git commit tool output showing [main 0615c1e] was visible in the same response — excepti"
+          }
+        ]
+      },
+      {
+        "name": "scout-v1-mobile-polish",
+        "date": "2026-04-20",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Presented aspect-ratio table with computed pixel values (326px, 84%, 45px) without showing derivation or flagging assumed viewport width"
           }
         ]
       }
@@ -657,9 +807,9 @@
     "hasData": true
   },
   "memory": {
-    "total": 70,
+    "total": 74,
     "byType": {
-      "feedback": 23,
+      "feedback": 27,
       "project": 14,
       "user": 17,
       "reference": 15,
@@ -677,6 +827,7 @@
         "feedback_cloudflare_38twelve",
         "feedback_config_sourced_rules",
         "feedback_data_handling",
+        "feedback_designview_preset_url",
         "feedback_detail_page_mobile_padding",
         "feedback_enumerate_states",
         "feedback_evals",
@@ -685,10 +836,13 @@
         "feedback_live_testing",
         "feedback_macos_native",
         "feedback_metric_honesty",
+        "feedback_mobile_device_default",
+        "feedback_no_pricing_talk",
         "feedback_research_planning",
         "feedback_schema_pressure_test",
         "feedback_setup_hygiene",
         "feedback_ui_always_visible_controls",
+        "feedback_ui_first_pass",
         "feedback_verification"
       ],
       "project": [
@@ -754,7 +908,7 @@
   "timeline": [
     {
       "date": "Apr 19, 2026",
-      "title": "Design Principles V2",
+      "title": "2 sessions",
       "desc": "Built design-principles.md rule v2 (244 lines) from 10-book corpus, Extracted 10 design books via 10 parallel agents with pdftotext + tesseract OCR pipeline, Built /design-audit skill + eval file (4-pass checklist with principle citations)",
       "active": true
     },
@@ -902,6 +1056,12 @@
       "date": "2026-04-19",
       "text": "4 stop-hook false positives on system-reminder-sourced citations triggered pattern-detector; fixed inline with new rule. 1 PDF-extraction failure (32MB Read limit) recovered via pdftotext pipeline. → 5 lessons saved",
       "context": "design-principles-v2",
+      "high": false
+    },
+    {
+      "date": "2026-04-19",
+      "text": "3 valid response-time discipline drifts across source-before-stating/source-labeling-convention/verify-before-presenting rules; icon PNGs initially 2x wrong size due to NSImage+lockFocus scale; jq // operator misbehavior on boolean fallback. All fixed inline. → 7 lessons saved",
+      "context": "design-view-build",
       "high": false
     },
     {
@@ -1689,5 +1849,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-19T06:40:51.943Z"
+  "lastUpdated": "2026-04-20T02:00:36.151Z"
 }

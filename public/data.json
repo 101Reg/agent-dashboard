@@ -888,6 +888,17 @@
         ]
       },
       {
+        "name": "agent-os-v2-sprints-1-2-3-plus-38twelve-pipeline-fix",
+        "date": "2026-04-20",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "agent-os-v2-sprint-3",
         "date": "2026-04-20",
         "fixAttempts": 1,
@@ -948,6 +959,55 @@
             "event": "capability_gap",
             "agent": "commit-gate",
             "detail": "Commit includes 2 post-reviewer changes: rss.ts (1-char logic change, processEntities: true→false with comment block) + wrangler.toml (1-lin"
+          }
+        ]
+      },
+      {
+        "name": "agent-os-v2-sprints-1-2-3",
+        "date": "2026-04-20",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "slash-commands",
+            "detail": "Hero flagged: /learn and /bruce are BATCH patterns (nightly review, end-of-session debrief) designed for Agent OS v1 (correctness-after-the-"
+          }
+        ]
+      },
+      {
+        "name": "bianca-tracker-ship",
+        "date": "2026-04-20",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 4,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated Oura Gen3/Ring 4 Membership API gate as fact without attribution; source was BUILD_GUIDE.md paste, not verified this session"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated 'OAuth is talking to empty Oura account' as fact when it was strongest-hypothesis inference; also 'should return rows > 0' / 'we remo"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Invented specific Oura developer portal UI labels (Sandbox Users, Promote to Production, Make live, etc) as if verified — actually guessed f"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated 'cron will fire tomorrow at 11 UTC and pull last-night's data automatically' as future system behavior without 'I will' framing; also"
           }
         ]
       }
@@ -1057,7 +1117,7 @@
   "timeline": [
     {
       "date": "Apr 20, 2026",
-      "title": "Scout V1 Mobile Polish",
+      "title": "2 sessions",
       "desc": "Changed admin password to southside, Closed git drift on headless URL importer, Fixed mobile admin board layout (5 rounds)",
       "active": true
     },
@@ -1233,8 +1293,26 @@
     },
     {
       "date": "2026-04-20",
+      "text": "Hero flagged: /learn and /bruce are BATCH patterns (nightly review, end-of-session debrief) designed for Agent OS v1 (correctness-after-the-fact). Agent OS v2 is continuous-loop (Layer 3 auto-install, Layer 4 continuous efficacy, Layer 5 consolidation, Layer 6 intent preservation). Question to carry forward: once all 7 layers built, do these commands retain batch structure OR shrink to human-checkpoint role with automatic work migrated to continuous hooks? Candidate for Bruce proposal cycle after Sprint 4+.",
+      "context": "/learn Step 7b voice-of-customer",
+      "high": false
+    },
+    {
+      "date": "2026-04-20",
+      "text": "Vibe-coded external-API integrations can ship with correct-looking code that silently fails due to API quirks (Oura v2 same-day range). Debug via wide-window probe revealed it immediately. Systemic fix: when integrating any time-ranged API, first test [date,date] vs [date, date+1) to check for this pattern before assuming code is correct.",
+      "context": "Spent ~45 min diagnosing as if it were an account/subscription/scope issue before testing the date-range itself",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
       "text": "5-round mobile UI iteration, 2 stop-hook catches (tail-truncated deploy output, unverified aspect-ratio math), Mac Air multiple hard shutdowns from node process memory, zero agents spawned on a multi-deploy session. → 3 lessons saved",
       "context": "scout-v1-mobile-polish",
+      "high": false
+    },
+    {
+      "date": "2026-04-20",
+      "text": "Two reviewer-specified fixes had semantic errors (bash 4 syntax on 3.2 macOS; // JSON comments). PostToolUse Bash hooks caught both. 4 stop-hook catches on recurring source-tag lapses (existing rule, enforcement failure). 3 pretooluse commit-gate advisories on cross-day review-freshness. Inline loop failure: surprises not logged until /learn → 2 lessons saved",
+      "context": "agent-os-v2-sprints-1-2-3-plus-38twelve-pipeline-fix",
       "high": false
     },
     {
@@ -2089,5 +2167,5 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-20T13:40:46.164Z"
+  "lastUpdated": "2026-04-20T17:46:41.387Z"
 }

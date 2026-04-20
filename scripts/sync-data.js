@@ -14,6 +14,7 @@ const DIGEST_LOG = join(MEMORY_DIR, 'logs/session-digests.jsonl');
 const SETTINGS = join(CLAUDE_DIR, 'settings.json');
 const LEDGER = join(CLAUDE_DIR, 'night-shift/proposal-ledger.jsonl');
 const PATTERN_REPORT = join(CLAUDE_DIR, 'pattern-report.md');
+const CONSOLIDATION_REPORT = join(CLAUDE_DIR, 'consolidation-report.md');
 const OUTPUT = join(import.meta.dirname, '..', 'public', 'data.json');
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -534,13 +535,34 @@ async function getPatterns() {
   return { hasData: true, findings: findings.slice(0, 10), generated };
 }
 
+// ─── Consolidation (Layer 5) ─────────────────────────────────────────────────
+
+async function getConsolidation() {
+  const content = await safeReadFile(CONSOLIDATION_REPORT);
+  if (!content) return { hasData: false, findings: [], generated: null };
+
+  const generated = (content.match(/# Consolidation Report — generated (.+)/) || [])[1] || null;
+  const findings = [];
+  const sections = content.split(/^### /m).slice(1);
+  for (const sec of sections) {
+    const lines = sec.split('\n');
+    const heading = lines[0].trim();
+    const bullets = lines.filter(l => l.startsWith('- ')).map(l => l.slice(2));
+    const ratio = (bullets.find(b => b.startsWith('Overlap ratio:')) || bullets.find(b => b.startsWith('Similarity:')) || '').replace(/^[^:]+:\s*/, '').trim();
+    const merge = (bullets.find(b => b.startsWith('Merge safety:')) || '').replace('Merge safety:', '').trim();
+    const action = (bullets.find(b => b.startsWith('Suggested action:')) || '').replace('Suggested action:', '').trim();
+    findings.push({ heading, ratio, merge, action });
+  }
+  return { hasData: true, findings: findings.slice(0, 10), generated };
+}
+
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 async function main() {
   console.log('Syncing Agent OS data...');
 
   // getTimeline defined at line 394 of this file
-  const [agents, memory, metrics, selfImprovement, system, nightShift, timeline, patterns] = await Promise.all([
+  const [agents, memory, metrics, selfImprovement, system, nightShift, timeline, patterns, consolidation] = await Promise.all([
     getAgents(),
     getMemory(),
     getMetrics(),
@@ -549,6 +571,7 @@ async function main() {
     getNightShift(),
     getTimeline(),
     getPatterns(),
+    getConsolidation(),
   ]);
 
   const data = {
@@ -562,6 +585,7 @@ async function main() {
     selfImprovement,
     nightShift,
     patterns,
+    consolidation,
     lastUpdated: new Date().toISOString(),
   };
 
@@ -573,6 +597,7 @@ async function main() {
   console.log(`  Metrics: ${metrics.hasData ? metrics.sessions.length + ' sessions' : 'no data yet'}`);
   console.log(`  Self-improvement entries: ${selfImprovement.length}`);
   console.log(`  Patterns: ${patterns.hasData ? patterns.findings.length + ' finding(s)' : 'no report yet'}`);
+  console.log(`  Consolidation: ${consolidation.hasData ? consolidation.findings.length + ' candidate(s)' : 'no report yet'}`);
 }
 
 main().catch(err => { console.error(err); process.exit(1); });

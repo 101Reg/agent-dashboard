@@ -463,6 +463,33 @@ export default function App() {
                 </div>
               </Reveal>
             )}
+
+            {/* Layer 5 — Consolidation candidates (duplicates, overlaps, stale) */}
+            {data.consolidation?.hasData && data.consolidation.findings.length > 0 && (
+              <Reveal delay={400}>
+                <div style={{ marginTop: 32 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.2)', marginBottom: 12 }}>
+                    Consolidation Candidates
+                  </div>
+                  {data.consolidation.findings.slice(0, 3).map((c, i) => (
+                    <div key={i} style={{
+                      padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    }}>
+                      <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', lineHeight: 1.5, marginBottom: 4 }}>{c.heading}</div>
+                      {c.ratio && (
+                        <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', lineHeight: 1.5 }}>{c.ratio}</div>
+                      )}
+                      {c.merge && c.merge.includes('MANUAL') && (
+                        <div style={{ fontSize: 11, color: 'rgba(245,176,123,0.7)', lineHeight: 1.5, marginTop: 4 }}>{c.merge}</div>
+                      )}
+                      {c.action && (
+                        <div style={{ fontSize: 11, color: 'rgba(123,159,245,0.6)', lineHeight: 1.5, marginTop: 4 }}>{c.action}</div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            )}
           </>
         )}
 

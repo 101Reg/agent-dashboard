@@ -1043,6 +1043,17 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "consolidation-scan",
+        "date": "2026-04-20",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
@@ -2741,5 +2752,41 @@
     ],
     "generated": "2026-04-20 14:54"
   },
-  "lastUpdated": "2026-04-20T19:55:47.243Z"
+  "consolidation": {
+    "hasData": true,
+    "findings": [
+      {
+        "heading": "Memory Duplicates",
+        "ratio": "",
+        "merge": "",
+        "action": ""
+      },
+      {
+        "heading": "Rule Overlap: learn-discipline.md <-> pre-response-claim-audit.md (40% shared directives)",
+        "ratio": "0.40 (2 shared directives)",
+        "merge": "",
+        "action": "review for consolidation candidate"
+      },
+      {
+        "heading": "Rule Overlap: source-before-stating.md <-> verify-before-presenting.md (33% shared directives)",
+        "ratio": "0.33 (2 shared directives)",
+        "merge": "",
+        "action": "review for consolidation candidate"
+      },
+      {
+        "heading": "Stale Hooks",
+        "ratio": "",
+        "merge": "",
+        "action": ""
+      },
+      {
+        "heading": "Contradiction Detection",
+        "ratio": "",
+        "merge": "",
+        "action": ""
+      }
+    ],
+    "generated": "2026-04-20 17:48"
+  },
+  "lastUpdated": "2026-04-20T22:48:45.274Z"
 }

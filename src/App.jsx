@@ -439,6 +439,30 @@ export default function App() {
                 ))}
               </div>
             </Reveal>
+
+            {/* Layer 2 — Patterns (cross-session detections) */}
+            {data.patterns?.hasData && data.patterns.findings.length > 0 && (
+              <Reveal delay={300}>
+                <div style={{ marginTop: 32 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.2)', marginBottom: 12 }}>
+                    Active Patterns
+                  </div>
+                  {data.patterns.findings.slice(0, 3).map((p, i) => (
+                    <div key={i} style={{
+                      padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    }}>
+                      <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', lineHeight: 1.5, marginBottom: 4 }}>{p.heading}</div>
+                      {p.observed && (
+                        <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', lineHeight: 1.5 }}>{p.observed}</div>
+                      )}
+                      {p.suggested && (
+                        <div style={{ fontSize: 11, color: 'rgba(123,159,245,0.6)', lineHeight: 1.5, marginTop: 4 }}>{p.suggested}</div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            )}
           </>
         )}
 

@@ -899,6 +899,43 @@
         "events": []
       },
       {
+        "name": "bianca-tracker-ship",
+        "date": "2026-04-20",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 4,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated Oura Gen3/Ring 4 Membership API gate as fact without attribution; source was BUILD_GUIDE.md paste, not verified this session"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated 'OAuth is talking to empty Oura account' as fact when it was strongest-hypothesis inference; also 'should return rows > 0' / 'we remo"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Invented specific Oura developer portal UI labels (Sandbox Users, Promote to Production, Make live, etc) as if verified — actually guessed f"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated 'cron will fire tomorrow at 11 UTC and pull last-night's data automatically' as future system behavior without 'I will' framing; also"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "main",
+            "detail": "Declared Oura sync unfixable and proposed deferring ('I've run out of non-destructive diagnostics'); Hero pushed back with 'wow that sucks i"
+          }
+        ]
+      },
+      {
         "name": "agent-os-v2-sprint-3",
         "date": "2026-04-20",
         "fixAttempts": 1,
@@ -980,44 +1017,40 @@
         ]
       },
       {
-        "name": "bianca-tracker-ship",
+        "name": "agent-os-v2-status-review",
         "date": "2026-04-20",
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 4,
+        "hookCatches": 1,
         "events": [
           {
             "event": "hook_catch",
             "agent": "stop-hook",
-            "detail": "Stated Oura Gen3/Ring 4 Membership API gate as fact without attribution; source was BUILD_GUIDE.md paste, not verified this session"
-          },
-          {
-            "event": "hook_catch",
-            "agent": "stop-hook",
-            "detail": "Stated 'OAuth is talking to empty Oura account' as fact when it was strongest-hypothesis inference; also 'should return rows > 0' / 'we remo"
-          },
-          {
-            "event": "hook_catch",
-            "agent": "stop-hook",
-            "detail": "Invented specific Oura developer portal UI labels (Sandbox Users, Promote to Production, Make live, etc) as if verified — actually guessed f"
-          },
-          {
-            "event": "hook_catch",
-            "agent": "stop-hook",
-            "detail": "Stated 'cron will fire tomorrow at 11 UTC and pull last-night's data automatically' as future system behavior without 'I will' framing; also"
+            "detail": "Claimed 'Sprint 3 committed yesterday' and 'we're ~1 day in' — both wrong. Log shows Sprint 3 events dated 2026-04-20, same as today. Sprint"
           }
         ]
+      },
+      {
+        "name": "pattern-scan",
+        "date": "2026-04-20",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 75,
+    "total": 76,
     "byType": {
-      "feedback": 28,
+      "feedback": 29,
       "project": 14,
       "user": 17,
       "reference": 15,
@@ -1039,6 +1072,7 @@
         "feedback_detail_page_mobile_padding",
         "feedback_enumerate_states",
         "feedback_evals",
+        "feedback_exhaust_diagnostics",
         "feedback_identify_deploy_source",
         "feedback_iron_law_pattern",
         "feedback_live_testing",
@@ -1117,7 +1151,7 @@
   "timeline": [
     {
       "date": "Apr 20, 2026",
-      "title": "2 sessions",
+      "title": "3 sessions",
       "desc": "Changed admin password to southside, Closed git drift on headless URL importer, Fixed mobile admin board layout (5 rounds)",
       "active": true
     },
@@ -1305,6 +1339,486 @@
     },
     {
       "date": "2026-04-20",
+      "text": "Declared Oura sync unfixable and proposed deferring ('I've run out of non-destructive diagnostics'); Hero pushed back with 'wow that sucks i really want us to figure out why'; bug resolved in 5 min after running wide-window probe. Pattern: giving up on diagnosis before exhausting test categories (wider time window, alternate endpoints, richer metadata).",
+      "context": "Oura sync returning 200+empty — had hypothesized account mismatch, subscription gate, sandbox mode but hadn't tested query-shape itself",
+      "high": false
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=9",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=14",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 2 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
       "text": "5-round mobile UI iteration, 2 stop-hook catches (tail-truncated deploy output, unverified aspect-ratio math), Mac Air multiple hard shutdowns from node process memory, zero agents spawned on a multi-deploy session. → 3 lessons saved",
       "context": "scout-v1-mobile-polish",
       "high": false
@@ -1313,6 +1827,12 @@
       "date": "2026-04-20",
       "text": "Two reviewer-specified fixes had semantic errors (bash 4 syntax on 3.2 macOS; // JSON comments). PostToolUse Bash hooks caught both. 4 stop-hook catches on recurring source-tag lapses (existing rule, enforcement failure). 3 pretooluse commit-gate advisories on cross-day review-freshness. Inline loop failure: surprises not logged until /learn → 2 lessons saved",
       "context": "agent-os-v2-sprints-1-2-3-plus-38twelve-pipeline-fix",
+      "high": false
+    },
+    {
+      "date": "2026-04-20",
+      "text": "Wrangler config walk-up hijacked deploy from wrong cwd; wrangler account ID cached after logout/login; spent ~45min chasing wrong Oura hypotheses before testing query shape itself → 3 lessons saved",
+      "context": "bianca-tracker-ship",
       "high": false
     },
     {
@@ -2167,5 +2687,59 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-20T17:46:41.387Z"
+  "patterns": {
+    "hasData": true,
+    "findings": [
+      {
+        "heading": "Cross-session: agent:capability_gap repeating across sessions",
+        "observed": "3x (2026-04-20)",
+        "signature": "commit-gate",
+        "suggested": "[hook] — gap diagnosis: recurring agent:capability_gap pattern across sessions without resolution"
+      },
+      {
+        "heading": "Cross-session: agent:hook_catch repeating across sessions",
+        "observed": "2x (2026-04-19, 2026-04-20)",
+        "signature": "posttooluse-bash",
+        "suggested": "[hook] — gap diagnosis: recurring agent:hook_catch pattern across sessions without resolution"
+      },
+      {
+        "heading": "Similarity cluster: pattern_detected (22 events, trigram)",
+        "observed": "22x (2026-04-16)",
+        "signature": "",
+        "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
+      },
+      {
+        "heading": "Similarity cluster: pattern_detected (6 events, trigram)",
+        "observed": "6x (2026-04-16)",
+        "signature": "",
+        "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
+      },
+      {
+        "heading": "Similarity cluster: pattern_detected (4 events, trigram)",
+        "observed": "4x (2026-04-16, 2026-04-18, 2026-04-19)",
+        "signature": "",
+        "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
+      },
+      {
+        "heading": "Similarity cluster: pattern_detected (3 events, trigram)",
+        "observed": "3x (2026-04-16)",
+        "signature": "",
+        "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
+      },
+      {
+        "heading": "Same-file churn",
+        "observed": "",
+        "signature": "",
+        "suggested": ""
+      },
+      {
+        "heading": "Unused-agent scanner",
+        "observed": "",
+        "signature": "",
+        "suggested": ""
+      }
+    ],
+    "generated": "2026-04-20 14:54"
+  },
+  "lastUpdated": "2026-04-20T19:55:47.243Z"
 }

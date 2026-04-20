@@ -13,6 +13,7 @@ const PERF_LOG = join(MEMORY_DIR, 'logs/os-performance.jsonl');
 const DIGEST_LOG = join(MEMORY_DIR, 'logs/session-digests.jsonl');
 const SETTINGS = join(CLAUDE_DIR, 'settings.json');
 const LEDGER = join(CLAUDE_DIR, 'night-shift/proposal-ledger.jsonl');
+const PATTERN_REPORT = join(CLAUDE_DIR, 'pattern-report.md');
 const OUTPUT = join(import.meta.dirname, '..', 'public', 'data.json');
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -512,13 +513,34 @@ async function getTimeline() {
   return milestones.map(({ sortDate, ...rest }) => rest);
 }
 
+// ─── Patterns (Layer 2) ──────────────────────────────────────────────────────
+
+async function getPatterns() {
+  const content = await safeReadFile(PATTERN_REPORT);
+  if (!content) return { hasData: false, findings: [], generated: null };
+
+  const generated = (content.match(/# Pattern Report — generated (.+)/) || [])[1] || null;
+  const findings = [];
+  const sections = content.split(/^### /m).slice(1);
+  for (const sec of sections) {
+    const lines = sec.split('\n');
+    const heading = lines[0].trim();
+    const bullets = lines.filter(l => l.startsWith('- ')).map(l => l.slice(2));
+    const observed = (bullets.find(b => b.startsWith('Observed:')) || '').replace('Observed:', '').trim();
+    const signature = (bullets.find(b => b.startsWith('Signature:')) || '').replace('Signature:', '').trim();
+    const suggested = (bullets.find(b => b.startsWith('Suggested fix:')) || '').replace('Suggested fix:', '').trim();
+    findings.push({ heading, observed, signature, suggested });
+  }
+  return { hasData: true, findings: findings.slice(0, 10), generated };
+}
+
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 async function main() {
   console.log('Syncing Agent OS data...');
 
   // getTimeline defined at line 394 of this file
-  const [agents, memory, metrics, selfImprovement, system, nightShift, timeline] = await Promise.all([
+  const [agents, memory, metrics, selfImprovement, system, nightShift, timeline, patterns] = await Promise.all([
     getAgents(),
     getMemory(),
     getMetrics(),
@@ -526,6 +548,7 @@ async function main() {
     getSystemCounts(),
     getNightShift(),
     getTimeline(),
+    getPatterns(),
   ]);
 
   const data = {
@@ -538,6 +561,7 @@ async function main() {
     timeline,
     selfImprovement,
     nightShift,
+    patterns,
     lastUpdated: new Date().toISOString(),
   };
 
@@ -548,6 +572,7 @@ async function main() {
   console.log(`  Skills: ${system.skills}, Rules: ${system.rules}, Hooks: ${system.hooks}, MCPs: ${system.mcpServers}`);
   console.log(`  Metrics: ${metrics.hasData ? metrics.sessions.length + ' sessions' : 'no data yet'}`);
   console.log(`  Self-improvement entries: ${selfImprovement.length}`);
+  console.log(`  Patterns: ${patterns.hasData ? patterns.findings.length + ' finding(s)' : 'no report yet'}`);
 }
 
 main().catch(err => { console.error(err); process.exit(1); });

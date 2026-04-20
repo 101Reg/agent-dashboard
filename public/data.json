@@ -792,7 +792,7 @@
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 0,
+        "capabilityGaps": 4,
         "toilEvents": 0,
         "hookCatches": 1,
         "events": [
@@ -800,6 +800,26 @@
             "event": "hook_catch",
             "agent": "stop-hook",
             "detail": "Presented aspect-ratio table with computed pixel values (326px, 84%, 45px) without showing derivation or flagging assumed viewport width"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "system",
+            "detail": "Mac Air required multiple hard shutdowns during session — node/bun/wrangler processes accumulated memory pressure. No build hygiene check ca"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "developer",
+            "detail": "Zero agents spawned on a new build. agent-delegation-triggers.md mandates reviewer before prod deploy — violated 6 times in one session. Chr"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "design",
+            "detail": "Hero flagged that scout-v1, Mirror, Edge, and 38twelve all use the same neutral gray/cream/black palette. Products are not visually distinct"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "workflow",
+            "detail": "Easy build (single stack, no API) consumed a full day due to 5-round iteration and no agent delegation."
           }
         ]
       }
@@ -907,10 +927,16 @@
   },
   "timeline": [
     {
+      "date": "Apr 20, 2026",
+      "title": "Scout V1 Mobile Polish",
+      "desc": "Changed admin password to southside, Closed git drift on headless URL importer, Fixed mobile admin board layout (5 rounds)",
+      "active": true
+    },
+    {
       "date": "Apr 19, 2026",
       "title": "2 sessions",
       "desc": "Built design-principles.md rule v2 (244 lines) from 10-book corpus, Extracted 10 design books via 10 parallel agents with pdftotext + tesseract OCR pipeline, Built /design-audit skill + eval file (4-pass checklist with principle citations)",
-      "active": true
+      "active": false
     },
     {
       "date": "Apr 16, 2026",
@@ -1016,6 +1042,36 @@
     }
   ],
   "selfImprovement": [
+    {
+      "date": "2026-04-20",
+      "text": "Mac Air required multiple hard shutdowns during session — node/bun/wrangler processes accumulated memory pressure. No build hygiene check caught it.",
+      "context": "opennext build + wrangler deploy run 6 times; no process cleanup between runs",
+      "high": false
+    },
+    {
+      "date": "2026-04-20",
+      "text": "Zero agents spawned on a new build. agent-delegation-triggers.md mandates reviewer before prod deploy — violated 6 times in one session. Chronic pattern.",
+      "context": "scout-v1 admin mobile polish — main thread did all work",
+      "high": false
+    },
+    {
+      "date": "2026-04-20",
+      "text": "Hero flagged that scout-v1, Mirror, Edge, and 38twelve all use the same neutral gray/cream/black palette. Products are not visually distinct.",
+      "context": "product differentiation — no design system or palette strategy per project",
+      "high": false
+    },
+    {
+      "date": "2026-04-20",
+      "text": "Easy build (single stack, no API) consumed a full day due to 5-round iteration and no agent delegation.",
+      "context": "scout-v1 mobile polish",
+      "high": false
+    },
+    {
+      "date": "2026-04-20",
+      "text": "5-round mobile UI iteration, 2 stop-hook catches (tail-truncated deploy output, unverified aspect-ratio math), Mac Air multiple hard shutdowns from node process memory, zero agents spawned on a multi-deploy session. → 3 lessons saved",
+      "context": "scout-v1-mobile-polish",
+      "high": false
+    },
     {
       "date": "2026-04-19",
       "text": "Reviewer NOT spawned before commit. Reason: commit is pure markdown (rules/design-principles.md, rules/system-reminder-citation.md, skills/design-audit/, design-library/ corpus, memory files) with zero code logic — falls under the explicit config/docs/memory exception in agent-delegation-triggers.md",
@@ -1660,10 +1716,10 @@
     }
   ],
   "nightShift": {
-    "status": "YELLOW",
-    "lastRun": "2026-04-16",
+    "status": "GREEN",
+    "lastRun": "2026-04-19",
     "findings": [
-      "WATCH: Friction Rate — 3 fix_attempts in 14 days (red line at 6)"
+      "System healthy — no issues detected"
     ],
     "evalCanaries": [
       {
@@ -1817,37 +1873,56 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 5,
-    "proposals": [],
+    "proposalCount": 3,
+    "proposals": [
+      {
+        "id": "P-2026-04-19-001",
+        "category": "regression",
+        "problem": "chief-of-staff TC1 scored **4.6/5.0 (delta -0.40, baseline 5.0)**. The two docked criteria are:",
+        "solution": "Add a mandatory pre-submit self-audit checklist directly inside the `Multi-Option Recommendations` section of `/Users/reggie/.claude/agents/chief-of-staff.md`, immediately after the required format block. Replace the trailing sentence at line 113 with:"
+      },
+      {
+        "id": "P-2026-04-19-002",
+        "category": "self_improvement",
+        "problem": "Tonight marks **4 consecutive GREEN runs** with every friction metric at zero: fix_attempts=0, escalations=0, re_explanations=0, capability_gaps=0, toil=0, hook_catches=0, patterns_detected=0. This is genuinely good news — but it exposes a gap in my own design. In quiet periods, I currently produce output that is mostly structural (`\"System healthy — no issues detected\"`) with proposals that are reactive to the one piece of signal available (tonight: the TC1 eval delta). I have no proactive intelligence mode for healthy periods.",
+        "solution": "Add a **Domain Coverage Cross-Reference** step to my own operating procedure in `/Users/reggie/.claude/agents/night-shift.md`, triggered when: status=GREEN AND all friction metrics=0 AND consecutive_all_pass ≥ 3. When triggered, I should:"
+      },
+      {
+        "id": "P-2026-04-19-003",
+        "category": "eval_evolution",
+        "problem": "The chief-of-staff eval suite (`/Users/reggie/.claude/agents/evals/chief-of-staff-evals.md`) has **five test prompts but only one canary (TC1 — Feature Prioritization)**. A high-stakes requirement was added to the agent definition on or around 2026-04-16: the **Existing Toolset Scan** (lines 82–91 of chief-of-staff.md). The agent definition itself documents the cost of skipping it: *\"Skipping it produced a ~60% plan discard rate on 2026-04-16.\"",
+        "solution": "Add **TC1-B: Toolset Scan Before Proposal** as a second canary prompt to `/Users/reggie/.claude/agents/evals/chief-of-staff-evals.md`. Place it after the existing TC1 Score Tracker entry. Proposed prompt and rubric:"
+      }
+    ],
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-04-16\n\n## Status: YELLOW\n\n## Key Findings\n- WATCH: Friction Rate — 3 fix_attempts in 14 days (red line at 6)\n\n## What Hero Worked On (7-day)\n- cloudflare-workers: 4 sessions\n- css: 4 sessions\n- d1: 4 sessions\n- nextjs: 4 sessions\n- agents: 3 sessions\n\n## Agent Usage (7-day)\n- developer: 2 sessions\n- explore: 2 sessions\n- research: 2 sessions\n- reviewer: 2 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| chief-of-staff | 4.6 | 5.0 | -0.40 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n87 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 4\n\n## Proposals\nI now have everything I need. Here are tonight's proposals:\n\n---\n\n# Proposals — 2026-04-16\n\n---\n\n## P-2026-04-16-006\n\n**Category:** `agent_methodology`\n\n**Problem:** Chief-of-staff TC1 scored 4.6/5.0 (baseline 5.0, delta −0.4). C2 was specifically cited: *\"T&C dependency (legal/Plaid blocker) is embedded in the option breakdown rather than surfaced at the top before merit comparison, per the agent's own multi-option instruction.\"*\n\nThe instruction is already present in `~/.claude/agents/chief-of-staff.md`:\n> *\"If one option is a hard blocker or prerequisite for another, say so at the top — before comparing merit. Dependency framing is not a footnote.\"*\n\nThe rule failed in practice despite being in the file. This is a structural compliance problem, not a missing rule. When the agent processes a multi-option prompt, the cognitive default is to analyze each option in parallel — which naturally buries blockers inside option bodies. Text instructions describing *what* to do don't override that generation pattern as reliably as a required *template* specifying *how the output must be structured*. The fix is to replace the prose instruction with a concrete required output skeleton.\n\n**Solution:** In `~/.claude/agents/chief-of-staff.md`, under `## Multi-Option Recommendations`, add a required response template immediately after the \"Inter-option dependencies\" bullet:\n\n```markdown\n**Required format for any multi-option response:**\n\n> **⚠️ Blockers & Dependencies** *(skip section if none)*\n> [Hard blockers, legal requirements, or sequencing constraints that change the comparison]\n> \n> **Option A — [Name]**\n> Recommendation: [yes/no/conditional]\n> Opportunity cost: [one vivid sentence on what you give up]\n> \n> **Option B — [Name]**\n> ...\n> \n> **Recommendation:** [single option] — [one-line reason]\n```\n\nThe section header `⚠️ Blockers & Dependencies` appearing *before* any option heading forces structural compliance — the agent must populate or explicitly skip the section before it reaches option analysis.\n\n**Impact:** C2 and the structural compliance gap are addressed at the format layer, not the instruction layer. TC1 expected to return to 5.0. The template also standardizes CoS multi-option responses, making them easier for Hero to scan at a glance.\n\n**Risk:** Low. The template is additive and scoped only to the multi-option case. The risk is verbosity if Hero asks for a quick informal comparison — mitigated by the `(skip section if none)` annotation on the blockers header and the existing `## Communication Style` guardrail against preamble.\n\n---\n\n## P-2026-04-16-007\n\n**Category:** `self_improvement`\n\n**Problem:** Tonight I received `capability_gaps_7d: 9` — a single opaque integer. This is the highest-signal metric in tonight's data (9 gaps in 7 sessions = >1 gap per session), yet I cannot generate a targeted proposal because I don't know which agent triggered each gap, in which domain, or whether any gap type has recurred 3+ times (the threshold that would trigger Gap Diagnosis Protocol).\n\nP-2026-04-16-004 (accepted earlier tonight) fixed B3's analysis — it now ingests raw capability_gap events from the performance log. But B3 is an LLM-over-text step that runs during the night and produces prose findings. By the time I'm writing proposals, I only see the count in the A1 metrics payload.\n\nSeparately, tonight's dynamic evals (DYN-1, DYN-2) were drawn from `cloudflare-workers,css` domain sessions — confirming that the capability gaps and the high-activity domain cluster are related. Without per-agent gap attribution in the metrics, I can't connect these two signals in a single proposal.\n\n**Solution:** In `~/.claude/night-shift/phases/a1-log-analysis.sh`, after emitting `capability_gaps_7d`, add a second metric emit for a structured gap attribution summary:\n\n```bash\n# After the existing capability_gaps_7d emit:\nGAP_ATTR=$(grep '\"event\":\"capability_gap\"' \"$PERF_LOG\" 2>/dev/null | \\\n  jq -rsc --arg cutoff \"$SEVEN_DAYS_AGO\" \\\n    '[.[] | select(.date >= $cutoff)] |\n     group_by(.agent) |\n     map({agent: .[0].agent, count: length,\n          top_domain: (group_by(.context) | max_by(length) | .[0].context // \"unknown\")})' \\\n  2>/dev/null || echo \"[]\")\n\nemit_event \"{\\\"phase\\\":\\\"a1\\\",\\\"type\\\":\\\"data\\\",\\\"key\\\":\\\"capability_gap_attribution\\\",\\\"value\\\":$GAP_ATTR}\"\n```\n\nThen pass `capability_gap_attribution` alongside `capability_gaps_7d` in the C0 (proposal generation) data payload — same as how `domain_frequency_7d` and `agent_usage_7d` are currently passed.\n\n**Impact:** Tonight's 9 gaps become *\"developer: 6 gaps (cloudflare-workers), research: 2 gaps (unknown), reviewer: 1 gap (css)\"* — or whatever the actual breakdown is. I can generate a targeted `skill_gap` or `agent_methodology` proposal for the high-count agent instead of a generic observation. The gap metric goes from decorative to actionable on the night it spikes.\n\n**Risk:** Medium. Depends on capability_gap events having a consistent `agent` field in the performance log. If the field is absent or misnamed, the jq produces an empty array — same as today, no regression. If `$PERF_LOG` has no capability_gap events at all (e.g., event naming changes), the emit produces `[]` and the proposal context is no worse than tonight.\n\n---\n\n## P-2026-04-16-008\n\n**Category:** `eval_evolution`\n\n**Problem:** TC1 raw scores: `{c1:5, c2:4, c3:5, c4:4, c5:5}`. Two criteria were docked. The eval notes explain only C2 in detail. C4 (opportunity cost analysis — *\"explicitly names what gets delayed by each choice\"*) was also docked to 4, but the notes say only *\"Strong performance across the board\"* without identifying what was missing in C4.\n\nNight Shift's proposal process is evidence-driven: without a one-line note on why C4 was docked, I can't generate a targeted fix. The current eval entry gives me the score, the criterion text, and the rubric — but not which specific output behavior fell short. For C4, I don't know if the agent: (a) named opportunity cost for only the recommended option and not all options, (b) used abstract language instead of concrete tradeoffs, or (c) was docked for a different reason entirely. Each diagnosis leads to a different AOP change.\n\nThis blind spot compounds over time: as the eval suite grows and criteria multiply, any undocumented docking becomes a ghost regression — visible in the score, invisible in the diagnosis.\n\n**Solution:** In `~/.claude/agents/evals/chief-of-staff-evals.md`, add the following line to the **Scoring Rubric** section:\n\n```markdown\n**Required:** For any criterion scored below 5, write one sentence explaining what was missing\nor wrong in the agent's response. Format: `C[N] docked: [reason].`\nUndocumented dockings are invalid — rescore or add a note before logging results.\n```\n\nAdditionally, update the **Score Tracker** template row to include a notes column structured for per-criterion explanations:\n\n```markdown\n| YYYY-MM-DD | model | prompt# | C1 | C2 | C3 | C4 | C5 | avg | C2 docked: [reason]. C4 docked: [reason]. |\n```\n\n**Impact:** Every future eval run produces a complete diagnostic record. Night Shift gains a full failure inventory per run — not just the most prominent regression. The C4 mystery tonight becomes a specific, actionable finding tomorrow. Applies to all chief-of-staff evals and, when replicated, to all agent eval files.\n\n**Risk:** Low. The rubric change adds friction to the scoring step — the evaluator must write notes for docked criteria rather than just logging numbers. This is the desired friction: undocumented regressions are more expensive than the 30 seconds it takes to note them.\n\n---\n\n## P-2026-04-16-009\n\n**Category:** `skill_gap`\n\n**Problem:** Sessions in the last 7 days are concentrated in `cloudflare-workers` (4 sessions) and `d1` (4 sessions). Dynamic evals DYN-1 and DYN-2 — drawn directly from recent session work — are both tagged `cloudflare-workers,css`. `capability_gaps_7d` is 9. `fix_attempts_7d` is 3.\n\nCloudflare Workers and D1 have hard runtime constraints that differ from standard Node.js/Postgres environments that agents' training skews toward:\n\n| Constraint | Workers/D1 behavior | Standard Node assumption |\n|---|---|---|\n| Runtime APIs | No `fs`, `net`, `crypto` (Node.js built-ins blocked) | Node.js globals available |\n| Response model | `Response` object required; `res.send()` doesn't exist | Express-style response |\n| D1 SQL dialect | SQLite semantics; no `RETURNING` in older D1 versions; batch API required for multi-statement | Postgres `RETURNING` works |\n| Bundle size | 1MB compressed limit on Worker scripts | No relevant limit |\n| Cold start | `waitUntil()` for background tasks; awaiting after response is dropped | Async after response is valid |\n\nMirror avoided equivalent friction with `.claude/rules/xano-rules.md` — 15 critical rules codifying patterns that caused real bugs. That file is cited directly in the mirror-developer agent as a required pre-flight read. The Cloudflare stack has no equivalent.\n\n**Staleness check:** `cloudflare-workers` and `d1` sessions: 4 each in the past 7 days. Evidence is current. This is not a new agent proposal — it's a rules file for an existing developer agent context.\n\n**Solution:** Create `~/Claude-Projects/[cloudflare-project]/.claude/rules/cloudflare-rules.md` with the following structure:\n\n```markdown\n# Cloudflare Workers + D1 — Critical Rules\n\n## Workers Runtime\n- Rule 1: No Node.js built-in modules (fs, net, path, crypto). Use Web APIs only.\n- Rule 2: Response must be a `Response` object — never call `res.send()` or `res.json()`.\n- Rule 3: Background work after response: use `ctx.waitUntil(promise)`. Any async work\n  awaited after `return new Response(...)` is silently dropped.\n- Rule 4: Bundle size limit is 1MB compressed. Flag any import that pulls in large deps.\n\n## D1 Database\n- Rule 5: D1 uses SQLite semantics, not Postgres. `RETURNING` clause unavailable\n  in D1 bindings prior to 2024. Use `.run()` then a follow-up `.first()` to return inserted rows.\n- Rule 6: Multi-statement transactions require `db.batch([...])`, not sequential awaits.\n- Rule 7: D1 `prepare().bind()` — parameters are 1-indexed (`?1`, `?2`), not `$1`/`$2`.\n- Rule 8: Never use `SELECT *` in D1 production queries — column drift causes silent failures.\n```\n\nThen add a `@cloudflare-rules.md` reference to the project's CLAUDE.md (or to the developer agent for that project) so it's loaded as a required pre-flight check.\n\n**Impact:** Reduces capability_gaps and fix_attempts in cloudflare-workers/d1 sessions by giving the developer agent the same runtime-specific awareness that `.claude/rules/xano-rules.md` provides for Mirror. The 15-rule Mirror pattern reduced friction on Xano endpoints to near-zero after the file was established.\n\n**Risk:** Medium. Rules must be verified against the actual Cloudflare Workers/D1 versions in use — some rules (especially D1 `RETURNING` behavior) changed across D1 beta versions. Incorrect rules are worse than no rules. Mitigation: mark each rule with a version note and add `[VERIFY AGAINST LIVE ENDPOINT]` for any D1 behavioral claim before committing the file.\n\n## Proposal Track Record\n36 total, 21 accepted, 6 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 3 fix_attempts (14d) |\n| Proposal Hit Rate | 67% | 21/31 accepted |\n| Eval Signal | OK | 3 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "briefingContent": "# Night Shift — 2026-04-19\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- cloudflare-workers: 6 sessions\n- d1: 4 sessions\n- agents: 3 sessions\n- css: 3 sessions\n- hooks: 3 sessions\n\n## Agent Usage (7-day)\n- reviewer: 3 sessions\n- developer: 2 sessions\n- claude-code-guide: 1 sessions\n- explore: 1 sessions\n- general-purpose: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| chief-of-staff | 4.6 | 5.0 | -0.40 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n73 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 0\n\n## Proposals\nNow I have everything I need. Let me write tonight's proposals.\n\n---\n\n# Proposals — 2026-04-19\n\n---\n\n## P-2026-04-19-001\n**Category:** `regression`\n\n**Problem:** chief-of-staff TC1 scored **4.6/5.0 (delta -0.40, baseline 5.0)**. The two docked criteria are:\n\n- **C2 (4/5):** \"inter-option dependencies aren't framed as hard prerequisites before the comparison — ⚠️ Blockers & Dependencies section absent\"\n- **C4 (4/5):** \"opportunity cost is explicit and vivid for T&C… but asymmetric — what you give up by choosing Wrapped or JS migration over T&C is only implied, not named directly for each option\"\n\nThe critical finding: **both rules already exist in the agent definition.** The `Multi-Option Recommendations` section at `/Users/reggie/.claude/agents/chief-of-staff.md` (lines 93–113) explicitly requires the `⚠️ Blockers & Dependencies` header to appear before any option heading (\"never skip silently\"), and requires \"one vivid sentence\" of opportunity cost per option. The 2026-03-22 v2 baseline run docked the same C2 and C4 — meaning this pattern predates the rule additions. The rules were written *in response to* the problem but haven't changed the behavior. The agent is still doing the right *thinking* (identifying T&C as a legal blocker, naming opportunity cost for the recommended option) without following the required *format*.\n\n**Root cause:** The Multi-Option format block is deep in the document (~line 93 of 162) and reads as an output template, not as an active checklist the agent runs before submitting. The agent prioritizes reasoning correctly but skips the structural enforcement step.\n\n**Solution:** Add a mandatory pre-submit self-audit checklist directly inside the `Multi-Option Recommendations` section of `/Users/reggie/.claude/agents/chief-of-staff.md`, immediately after the required format block. Replace the trailing sentence at line 113 with:\n\n```markdown\nThe `⚠️ Blockers & Dependencies` header must appear before any option heading. Populate it or explicitly write \"None\" — never skip silently.\n\n**Before submitting any multi-option response, run this checklist:**\n- [ ] Does the response contain an `⚠️ Blockers & Dependencies` section *before* the first option heading? (Even if empty — write \"None.\")\n- [ ] Does *every* option have an explicit, vivid opportunity cost sentence? Not implied — named directly.\n- [ ] Are all three items (blockers, per-option cost, final recommendation) present? If any are missing, add them before responding.\n```\n\n**Impact:** Converts a passive format rule into an active pre-flight check. C2 and C4 deductions stop being structural misses. TC1 returns to 5.0 on next canary run.\n\n**Risk:** Adds 3 lines of checklist overhead per multi-option response. Risk of over-triggering on simple 2-option responses — mitigation: the checklist is inside `Multi-Option Recommendations` which already applies only to 2+ option responses. No behavioral change for single-recommendation outputs.\n\n---\n\n## P-2026-04-19-002\n**Category:** `self_improvement`\n\n**Problem:** Tonight marks **4 consecutive GREEN runs** with every friction metric at zero: fix_attempts=0, escalations=0, re_explanations=0, capability_gaps=0, toil=0, hook_catches=0, patterns_detected=0. This is genuinely good news — but it exposes a gap in my own design. In quiet periods, I currently produce output that is mostly structural (`\"System healthy — no issues detected\"`) with proposals that are reactive to the one piece of signal available (tonight: the TC1 eval delta). I have no proactive intelligence mode for healthy periods.\n\nThe domain_frequency_7d data tonight contains real signal I'm not using: **49 distinct domains touched across 155 events in 7 days**, with cloudflare-workers (6), d1 (4), agents (3), css (3), hooks (3), nextjs (3), and react (3) as the leading clusters. I can see *what Hero is working in* — but I have no mechanism to cross-reference those domains against existing system coverage (rules, skills, agent memory) to identify documentation or knowledge gaps before they become friction events.\n\n**Solution:** Add a **Domain Coverage Cross-Reference** step to my own operating procedure in `/Users/reggie/.claude/agents/night-shift.md`, triggered when: status=GREEN AND all friction metrics=0 AND consecutive_all_pass ≥ 3. When triggered, I should:\n\n1. Take the top 5 domains from `domain_frequency_7d`\n2. Cross-reference each against the existing rules directory (`~/.claude/rules/`), skills inventory, and agent memory files\n3. Flag any domain in the top 5 that has **no dedicated rule file, no skill file, and no memory coverage** — that's a documentation gap that predicts future friction\n4. Include results as a `## Domain Coverage` section in the briefing\n\nExample output for tonight: cloudflare-workers (rank 1, 6 sessions) → check `/Users/reggie/Claude-Projects/38twelve-daily/.claude/rules/cloudflare-rules.md` exists (it does) → OK. d1 (rank 2, 4 sessions) → no dedicated rule file found → flag as \"no documented rules.\"\n\nThis gives Hero actionable intelligence even when the system is clean: not \"what broke\" but \"what might break next.\"\n\n**Impact:** Night Shift produces genuine signal on GREEN nights rather than near-empty briefings. Quiet periods become growth periods — surfacing documentation gaps proactively, before they register as friction events.\n\n**Risk:** Cross-reference logic must be conservative — a missing rule file is a \"soft flag,\" not a YELLOW status trigger. Risk of generating noise if I flag domains that are well-covered in memory but not in standalone rule files. Mitigation: downgrade domain coverage flags to informational only; they appear in a dedicated briefing section but don't affect status color.\n\n---\n\n## P-2026-04-19-003\n**Category:** `eval_evolution`\n\n**Problem:** The chief-of-staff eval suite (`/Users/reggie/.claude/agents/evals/chief-of-staff-evals.md`) has **five test prompts but only one canary (TC1 — Feature Prioritization)**. A high-stakes requirement was added to the agent definition on or around 2026-04-16: the **Existing Toolset Scan** (lines 82–91 of chief-of-staff.md). The agent definition itself documents the cost of skipping it: *\"Skipping it produced a ~60% plan discard rate on 2026-04-16.\"*\n\nThis requirement — which demands the agent explicitly name existing tools before recommending anything new — has **zero eval coverage**. TC1 (Wrapped vs. T&C vs. JS migration) is a pure prioritization prompt; it doesn't require a toolset inventory. None of TC2–TC5 target this behavior either. If the Existing Toolset Scan rule degrades or gets overridden by context drift, Night Shift has no mechanism to detect it.\n\n**Solution:** Add **TC1-B: Toolset Scan Before Proposal** as a second canary prompt to `/Users/reggie/.claude/agents/evals/chief-of-staff-evals.md`. Place it after the existing TC1 Score Tracker entry. Proposed prompt and rubric:\n\n```markdown\n## Test Prompt 1-B (Canary): Existing Toolset Scan\n\n**Prompt:**\n> \"I want to add a weekly email digest to Mirror — something that shows users their spending summary and streak status. What's the best way to build this?\"\n\n**Expected Behaviors:**\n\n| # | Criteria | Pass | Fail |\n|---|----------|------|------|\n| 1 | Runs Toolset Scan first | Names existing tools (Beehiiv, Vercel, Claude API, etc.) before recommending anything new. This section appears before any build recommendation. | Jumps straight to a build recommendation without inventorying existing tools |\n| 2 | Identifies coverage delta | Explicitly names what the existing toolset already handles vs. what the minimum new work is | Treats the whole problem as a from-scratch build |\n| 3 | Minimum new work | Recommends the smallest additional thing on top of what exists (e.g., a new Beehiiv segment, a cron job) not a full custom system | Proposes building infrastructure that already exists |\n| 4 | Flags cost | Notes any paid tier requirements for the recommended path | Ignores cost implications of toolset extension |\n| 5 | Protects focus | Calibrates recommendation to solo founder scope — one integration, not a platform | Suggests multi-system orchestration for a one-person team |\n\n**Baseline:** Set from first scored run.\n```\n\n**Impact:** The Existing Toolset Scan — a rule added after a documented 60% plan discard rate — gets active monitoring. Future drift is detectable before it causes the same discard rate again. Chief-of-staff now has two canaries covering distinct failure modes: TC1 (multi-option structure) and TC1-B (toolset inventory discipline).\n\n**Risk:** Adding a second chief-of-staff canary doubles eval cost for that agent. Mitigation: run TC1 and TC1-B on alternate nights (even/odd date), not simultaneously. Note this schedule in the eval file header so the pipeline alternates correctly.\n\n## Proposal Track Record\n32 total, 24 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 82% | 24/29 accepted |\n| Eval Signal | OK | 4 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 29,
+      "total": 32,
       "accepted": 24,
-      "pending": 0,
+      "pending": 3,
       "rejected": 5
     },
     "benchmarks": [
       {
         "name": "Friction Rate",
-        "status": "WATCH",
-        "detail": "3 fix_attempts (14d)"
+        "status": "OK",
+        "detail": "0 fix_attempts (14d)"
       },
       {
         "name": "Proposal Hit Rate",
-        "status": "67%",
-        "detail": "21/31 accepted"
+        "status": "82%",
+        "detail": "24/29 accepted"
       },
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "3 consecutive all-pass runs"
+        "detail": "4 consecutive all-pass runs"
       }
     ]
   },
-  "lastUpdated": "2026-04-20T02:00:36.151Z"
+  "lastUpdated": "2026-04-20T02:25:53.059Z"
 }

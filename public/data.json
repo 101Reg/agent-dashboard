@@ -1071,14 +1071,36 @@
             "detail": "Stated 'Vercel will redeploy' as external-system future fact without verification. Distinction: future intent about my actions ('I'll X') is"
           }
         ]
+      },
+      {
+        "name": "gmail-godaddy",
+        "date": "2026-04-20",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 2,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Referenced 38twelve business by name without source tag or user prompt for it"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Speculated about active mail services (SendGrid/Resend/Mailgun/beehiiv) and current Cloudflare serving without user confirmation"
+          }
+        ]
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 76,
+    "total": 77,
     "byType": {
-      "feedback": 29,
+      "feedback": 30,
       "project": 14,
       "user": 17,
       "reference": 15,
@@ -1110,6 +1132,7 @@
         "feedback_no_pricing_talk",
         "feedback_research_planning",
         "feedback_reviewer_fallibility",
+        "feedback_scanner_threshold_density",
         "feedback_schema_pressure_test",
         "feedback_setup_hygiene",
         "feedback_ui_always_visible_controls",
@@ -1172,7 +1195,7 @@
   },
   "system": {
     "skills": 18,
-    "rules": 14,
+    "rules": 15,
     "hooks": 10,
     "mcpServers": 2
   },
@@ -2799,5 +2822,5 @@
     ],
     "generated": "2026-04-20 18:11"
   },
-  "lastUpdated": "2026-04-20T23:12:42.167Z"
+  "lastUpdated": "2026-04-20T23:41:40.742Z"
 }

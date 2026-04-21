@@ -1,30 +1,6 @@
 {
   "agents": [
     {
-      "name": "Hero",
-      "file": "chief-of-staff",
-      "role": "Trusted Chief of Staff for Hero (Reggie) — strategic thinking, coordination, and decision support across Mirror App and future products. Thinks before building. Use proactively on \"should we build\", \"help me think through\", \"prioritize\", \"what are my options\", \"chief of staff\", \"cos\".",
-      "icon": "🎯",
-      "type": "Strategic",
-      "status": "active"
-    },
-    {
-      "name": "Taylor",
-      "file": "customer-success",
-      "role": "Customer success specialist. Use proactively for tester feedback analysis, churn signal detection, behavioral pattern synthesis, and tester communications.",
-      "icon": "💬",
-      "type": "Operations",
-      "status": "active"
-    },
-    {
-      "name": "Elon",
-      "file": "data",
-      "role": "Data analysis specialist. Use proactively for Plaid transaction patterns, retention metrics, behavioral data, user engagement, and quantitative analysis.",
-      "icon": "📊",
-      "type": "Analytical",
-      "status": "active"
-    },
-    {
       "name": "Gil",
       "file": "debug",
       "role": "Forensic debugger and root cause investigator. Use when a bug resists 3 fix attempts, when root cause is unknown, when reproduction is inconsistent, when the Developer escalates, or when Hero invokes directly for any debugging task. Finds the problem — does not write the fix.",
@@ -41,22 +17,6 @@
       "status": "active"
     },
     {
-      "name": "Tucker",
-      "file": "fact-checker",
-      "role": "Reviews any output for hallucinated claims, fabricated statistics, and unsupported assertions. Use for investor materials, regulatory content, published docs, or any high-stakes deliverable.",
-      "icon": "✅",
-      "type": "Quality",
-      "status": "active"
-    },
-    {
-      "name": "Warren",
-      "file": "finance",
-      "role": "Financial strategy specialist. Use proactively for pricing models, unit economics, runway projections, revenue analysis, and monetization decisions.",
-      "icon": "💰",
-      "type": "Strategy",
-      "status": "active"
-    },
-    {
       "name": "infra",
       "file": "infra",
       "role": "Infrastructure specialist for SSH key management, multi-machine git workflows, cron/launchd scheduling, and server configuration. Use when setting up remote access, diagnosing multi-machine git conflicts, debugging cron/launchd failures, or fixing server environment issues.",
@@ -67,7 +27,7 @@
     {
       "name": "Johnny",
       "file": "legal",
-      "role": "Legal and compliance specialist for fintech and behavioral wellness. Use proactively for privacy, Plaid compliance, financial data regulations, terms of service, and user consent.",
+      "role": "Legal and compliance specialist for newsletter publishing and agency services. Use for CAN-SPAM, FTC disclosures, GDPR/CCPA, and client contract review across 38twelve operations.",
       "icon": "⚖️",
       "type": "Compliance",
       "status": "active"
@@ -75,7 +35,7 @@
     {
       "name": "Sky",
       "file": "marketer",
-      "role": "Marketing orchestrator for Mirror. Use proactively for copy, content, campaigns, conversions, email sequences, SEO, and any marketing execution task.",
+      "role": "Marketing orchestrator for 38twelve (newsletter + agency). Use for copy, content, campaigns, conversions, email sequences, SEO, newsletter growth, and agency positioning work.",
       "icon": "📣",
       "type": "Marketing",
       "status": "active"
@@ -86,14 +46,6 @@
       "role": "Autonomous nightly system reviewer. Analyzes performance logs, runs canary evals, detects agent degradation, and drafts improvement proposals for Hero's morning review. Read-only — never modifies system files.",
       "icon": "🌙",
       "type": "Autonomous",
-      "status": "active"
-    },
-    {
-      "name": "Ye",
-      "file": "product",
-      "role": "Product strategy specialist. Use proactively for feature validation, roadmap prioritization, product-market fit analysis, and build/don't-build decisions.",
-      "icon": "🧭",
-      "type": "Strategy",
       "status": "active"
     },
     {
@@ -113,7 +65,7 @@
       "status": "active"
     }
   ],
-  "agentCount": 14,
+  "agentCount": 8,
   "escalationPaths": [
     {
       "from": "developer",
@@ -1114,17 +1066,78 @@
             "detail": "Invented specific Google Workspace admin console menu paths (Account > Account Settings > Transfer/Unaccept) and stated reversibility of con"
           }
         ]
+      },
+      {
+        "name": "bruce-2026-04-20",
+        "date": "2026-04-21",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "bruce-b7",
+        "date": "2026-04-21",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "agent-os-v2-parallel-sprint6",
+        "date": "2026-04-21",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Flagged 77 memory files + CLAUDE.md phrasing as ASSUMED CONTEXT — both facts are real from SessionStart block but I did not quote or tag the"
+          }
+        ]
+      },
+      {
+        "name": "agent-os-v2-sprint6-sprint7",
+        "date": "2026-04-21",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 2,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "reviewer",
+            "detail": "Sprint 7 legal+marketer rewrites were written and verified-by-grep but not reviewed by reviewer agent. Voice consistency and CFR/USC citatio"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Stop-hook meta-commentary pattern recurred 7/7 times across 3 parallel rounds without inline correction. Known pattern after round 1, should"
+          }
+        ]
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 77,
+    "total": 79,
     "byType": {
-      "feedback": 30,
+      "feedback": 31,
       "project": 14,
       "user": 17,
-      "reference": 15,
+      "reference": 16,
       "other": 0
     },
     "labels": {
@@ -1151,6 +1164,7 @@
         "feedback_metric_honesty",
         "feedback_mobile_device_default",
         "feedback_no_pricing_talk",
+        "feedback_parallel_execution_bounds",
         "feedback_research_planning",
         "feedback_reviewer_fallibility",
         "feedback_scanner_threshold_density",
@@ -1196,6 +1210,7 @@
         "user_visual_decider"
       ],
       "reference": [
+        "reference_agent_lifecycle",
         "reference_beehiiv_embeds",
         "reference_bruce_billing",
         "reference_claude_cli",
@@ -1216,7 +1231,7 @@
   },
   "system": {
     "skills": 18,
-    "rules": 15,
+    "rules": 16,
     "hooks": 10,
     "mcpServers": 2
   },
@@ -1337,6 +1352,18 @@
     }
   ],
   "selfImprovement": [
+    {
+      "date": "2026-04-21",
+      "text": "Sprint 7 legal+marketer rewrites were written and verified-by-grep but not reviewed by reviewer agent. Voice consistency and CFR/USC citation accuracy would have benefited from fresh eyes.",
+      "context": "parallel developer spawns for agent rewrites — main-thread did grep verification only",
+      "high": false
+    },
+    {
+      "date": "2026-04-21",
+      "text": "Stop-hook meta-commentary pattern recurred 7/7 times across 3 parallel rounds without inline correction. Known pattern after round 1, should have updated prompt template before round 2 — did not. Inline loop discipline failure.",
+      "context": "agent briefing prompt template",
+      "high": false
+    },
     {
       "date": "2026-04-20",
       "text": "Mac Air required multiple hard shutdowns during session — node/bun/wrangler processes accumulated memory pressure. No build hygiene check caught it.",
@@ -1912,6 +1939,18 @@
       "text": "Reviewer agent returned mid-audit twice (Sprint 4, Sprint 5), required SendMessage to resume. Sprint 5 rule-overlap required 3 tuning iterations after reviewer SHOULD FIX broke acceptance test. → 3 lessons saved",
       "context": "agent-os-v2-sprints-4-5-plus-consolidation",
       "high": false
+    },
+    {
+      "date": "2026-04-20",
+      "text": "** `reviewer` is the **most-used agent this week** — 5 sessions out of 15 (33% of all agent activity) — yet there is",
+      "context": "Bruce proposal P-2026-04-20-003",
+      "high": true
+    },
+    {
+      "date": "2026-04-20",
+      "text": "** Two hooks are generating substantial noise per the B4 efficacy scan:",
+      "context": "Bruce proposal P-2026-04-20-004",
+      "high": true
     },
     {
       "date": "2026-04-19",
@@ -2558,11 +2597,9 @@
   ],
   "nightShift": {
     "status": "GREEN",
-    "lastRun": "2026-04-20",
+    "lastRun": "2026-04-21",
     "findings": [
-      "CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate",
-      "CONCERN: pre-response-claim-audit has 84% FP rate (13 fires in 30d) — Sprint 4 refinement candidate",
-      "STALE: chief-of-staff last fired 2026-04-05 — retirement candidate"
+      "System healthy — no issues detected"
     ],
     "evalCanaries": [
       {
@@ -2716,55 +2753,37 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 6,
+    "proposalCount": 0,
     "proposals": [
       {
-        "id": "P-2026-04-19-003",
-        "category": "unknown",
-        "problem": "",
-        "solution": ""
-      },
-      {
-        "id": "P-2026-04-20-001",
-        "category": "unknown",
-        "problem": "",
-        "solution": ""
-      },
-      {
-        "id": "P-2026-04-20-001",
+        "id": "P-2026-04-19-001",
         "category": "regression",
-        "problem": "Chief-of-staff TC1 scored **3.8 / 5.0** tonight (Δ −1.20 from baseline 5.0), driven primarily by a **C5 score of 1 — a complete miss**. The eval notes: *\"response ends with a directive monologue with zero alignment question or follow-up engagement.\"* The agent's `Communication Style` section says *\"Ask clarifying questions before going deep on the wrong thing\"* — but that instruction is scoped to the *start* of an interaction. There is no rule mandating an alignment question at the **end** of a multi-option recommendation. Without that explicit close, the agent's natural posture is to conclude with its own synthesis, which reads as a lecture rather than a conversation.",
-        "solution": "Two targeted edits to `/Users/reggie/.claude/agents/chief-of-staff.md`:"
+        "problem": "** chief-of-staff TC1 scored **4.6/5.0 (delta -0.40, baseline 5.0)**. The two docked criteria are:",
+        "solution": ""
       },
       {
-        "id": "P-2026-04-20-002",
+        "id": "P-2026-04-19-002",
         "category": "self_improvement",
-        "problem": "patterns_detected_7d = 0` tonight — despite **15 sessions**, **1,523 events**, and a clearly dominant domain cluster in the frequency data. Cloudflare-ecosystem domains (cloudflare-workers: 6, d1: 3, cloudflare: 1, cloudflare-kv: 1, cloudflare-pages: 1, opennext: 1) account for **13 of ~55 distinct domain occurrences** — roughly 24% of all domain activity this week. This is a coherent technology cluster signaling an active, deep workstream. Bruce produced no finding about it.",
-        "solution": "Add a domain cluster detection step **inside** `b5-pattern-scan.sh` (before the existing pattern scanner call), operating directly on the `domain_frequency_7d` structured data already emitted by phase A1:"
+        "problem": "** Tonight marks **4 consecutive GREEN runs** with every friction metric at zero: fix_attempts=0, escalations=0, re_expl",
+        "solution": ""
       },
       {
-        "id": "P-2026-04-20-003",
+        "id": "P-2026-04-19-003",
         "category": "eval_evolution",
-        "problem": "reviewer` is the **most-used agent this week** — 5 sessions out of 15 (33% of all agent activity) — yet there is **no canary eval result for reviewer in tonight's B1 run**. The eval file (`/Users/reggie/.claude/agents/evals/reviewer-evals.md`) exists and has five well-defined test prompts with scoring criteria and a boundary compliance matrix. But `b1-canary-evals.sh` is not calling it.",
-        "solution": "Add a `run_canary_eval` call for the reviewer agent in `/Users/reggie/.claude/night-shift/phases/b1-canary-evals.sh`, using TC2 (Clear FAIL Case) as the canary prompt — it's the sharpest signal for reviewer drift since it requires catching a specific failure:"
-      },
-      {
-        "id": "P-2026-04-20-004",
-        "category": "eval_evolution",
-        "problem": "Two hooks are generating substantial noise per the B4 efficacy scan:",
-        "solution": "1. **`code-accuracy`** (`/Users/reggie/.claude/rules/code-accuracy.md`): Add a front-matter flag marking this rule as **enforce-via-prompt-only** (no hook detector). Remove from the hook scan rotation. The rule's value is as a behavioral guardrail read at session start, not as a post-response pattern match. Log a `hook_catch_false_positive` retrospectively for the 5 fires so the ledger is accurate."
+        "problem": "** The chief-of-staff eval suite (`/Users/reggie/.claude/agents/evals/chief-of-staff-evals.md`) has **five test prompts ",
+        "solution": ""
       }
     ],
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-04-20\n\n## Status: GREEN\n\n## Key Findings\n- CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate\n- CONCERN: pre-response-claim-audit has 84% FP rate (13 fires in 30d) — Sprint 4 refinement candidate\n- STALE: chief-of-staff last fired 2026-04-05 — retirement candidate\n\n## What Hero Worked On (7-day)\n- cloudflare-workers: 6 sessions\n- agents: 5 sessions\n- bash: 5 sessions\n- hooks: 5 sessions\n- react: 5 sessions\n\n## Agent Usage (7-day)\n- reviewer: 5 sessions\n- developer: 3 sessions\n- Explore: 2 sessions\n- chief-of-staff: 1 sessions\n- claude-code-guide: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| chief-of-staff | 3.8 | 5.0 | -1.20 | DEGRADED |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n76 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 0\n\n## Proposals\nGood. Last night's final ID was `P-2026-04-19-003`. Tonight's proposals start at `P-2026-04-20-001`.\n\n---\n\n# Proposals — 2026-04-20\n\n---\n\n## P-2026-04-20-001\n\n**Category:** `regression`\n\n**Problem:** Chief-of-staff TC1 scored **3.8 / 5.0** tonight (Δ −1.20 from baseline 5.0), driven primarily by a **C5 score of 1 — a complete miss**. The eval notes: *\"response ends with a directive monologue with zero alignment question or follow-up engagement.\"* The agent's `Communication Style` section says *\"Ask clarifying questions before going deep on the wrong thing\"* — but that instruction is scoped to the *start* of an interaction. There is no rule mandating an alignment question at the **end** of a multi-option recommendation. Without that explicit close, the agent's natural posture is to conclude with its own synthesis, which reads as a lecture rather than a conversation.\n\nC4 was also docked: opportunity cost was named per option but phrased passively — *\"choosing X delays Y\"* language was absent. The existing `Multi-Option Recommendations` section requires naming opportunity cost but doesn't specify the **voice** (active vs. passive), leaving room for watered-down framing.\n\n**Solution:** Two targeted edits to `/Users/reggie/.claude/agents/chief-of-staff.md`:\n\n1. In the `## How You Operate` section, add a rule:\n   > **Always close with an alignment question.** After any recommendation, multi-option analysis, or strategy output, end with one specific question to confirm you're solving the right problem — e.g., *\"Does this match your current constraint, or has something changed?\"* or *\"Want me to scope this down further before handing off?\"* No response ends with a monologue.\n\n2. In the `## Multi-Option Recommendations` section, tighten the opportunity cost instruction:\n   > **Opportunity cost per option** — write one vivid sentence using active voice: *\"Choosing X delays Y by Z weeks\"* or *\"Picking X forecloses Y until [condition].\"* Passive framing (*\"Y would be delayed\"*) does not meet this requirement.\n\n**Impact:** Eliminates the recurring C5 miss. Brings TC1 back toward its 5.0 baseline on next eval run. The C4 fix also closes the ambiguity that caused partial credit last cycle.\n\n**Risk:** Over-prescribing the closing question could make responses feel formulaic in short, low-stakes exchanges. Mitigation: the instruction says \"one specific question\" — brevity is already implied.\n\n---\n\n## P-2026-04-20-002\n\n**Category:** `self_improvement`\n\n**Problem:** `patterns_detected_7d = 0` tonight — despite **15 sessions**, **1,523 events**, and a clearly dominant domain cluster in the frequency data. Cloudflare-ecosystem domains (cloudflare-workers: 6, d1: 3, cloudflare: 1, cloudflare-kv: 1, cloudflare-pages: 1, opennext: 1) account for **13 of ~55 distinct domain occurrences** — roughly 24% of all domain activity this week. This is a coherent technology cluster signaling an active, deep workstream. Bruce produced no finding about it.\n\nThe root cause is architectural: `b5-pattern-scan.sh` delegates entirely to the external `$HOME/.claude/scripts/pattern-scan.sh` script and then parses its markdown output for cross-session repeat-friction patterns. That script is optimized for *friction recurrence* (same error type appearing multiple times), not *domain co-occurrence clustering*. A week of heavy cloudflare-workers + d1 work is invisible to friction-pattern logic because none of it generated errors — it was normal, successful work. Bruce has no mechanism to detect \"this domain cluster is dominating right now → worth checking if memory/skills coverage is adequate.\"\n\n**Solution:** Add a domain cluster detection step **inside** `b5-pattern-scan.sh` (before the existing pattern scanner call), operating directly on the `domain_frequency_7d` structured data already emitted by phase A1:\n\n```bash\n# At the top of b5-pattern-scan.sh, after sourcing common.sh:\nDOMAIN_DATA=$(read_events \"a1\" \"data\" | jq -r 'select(.key==\"domain_frequency_7d\") | .value' | jq -c '.' 2>/dev/null || echo \"[]\")\n\npython3 - \"$DOMAIN_DATA\" <<'PYEOF'\nimport sys, json\ndata = json.loads(sys.argv[1])\ntotal = sum(d[\"count\"] for d in data)\nclusters = [d for d in data if d[\"count\"] >= 3]\nif clusters and total > 0:\n    top = clusters[0]\n    share = top[\"count\"] / total * 100\n    if share >= 15:\n        print(json.dumps({\"heading\": f\"Domain cluster: {top['domain']} ({top['count']} sessions, {share:.0f}% of activity)\",\n                          \"summary\": f\"Top domain this week — verify memory and skills coverage is current.\"}))\nPYEOF\n```\n\nEmit any result as a finding via `emit_finding`. This is additive — the existing friction-pattern scanner still runs unchanged.\n\n**Impact:** Bruce surfaces actionable domain-cluster intelligence even in healthy, low-error weeks. A cluster like \"cloudflare-workers at 24% of activity\" is a prompt to check whether memory files for that domain are current — useful maintenance signal that currently goes unseen.\n\n**Risk:** Low. The new logic is read-only, runs before the existing scanner, and only emits findings when a single domain exceeds 15% of total session activity. The threshold prevents noise from normal domain diversity.\n\n---\n\n## P-2026-04-20-003\n\n**Category:** `eval_evolution`\n\n**Problem:** `reviewer` is the **most-used agent this week** — 5 sessions out of 15 (33% of all agent activity) — yet there is **no canary eval result for reviewer in tonight's B1 run**. The eval file (`/Users/reggie/.claude/agents/evals/reviewer-evals.md`) exists and has five well-defined test prompts with scoring criteria and a boundary compliance matrix. But `b1-canary-evals.sh` is not calling it.\n\nThis is a coverage blind spot proportional to usage: the agent running in one-third of all sessions has zero automated quality monitoring. If the reviewer agent degrades — starts rubber-stamping failing tests, missing regressions, or caving to pressure (TC5) — Bruce won't know until a human escalation surfaces it.\n\n**Solution:** Add a `run_canary_eval` call for the reviewer agent in `/Users/reggie/.claude/night-shift/phases/b1-canary-evals.sh`, using TC2 (Clear FAIL Case) as the canary prompt — it's the sharpest signal for reviewer drift since it requires catching a specific failure:\n\n```bash\nrun_canary_eval \"reviewer\" \\\n  \"Review this implementation. The sprint contract says: 'API returns JSON with status field. Tests pass.' [Provide code with off-by-one error and failing test]\" \\\n  \"TC2\" \\\n  \"4.5\"\n```\n\nSet baseline at **4.5** (conservative first-run baseline; adjust after 3 runs establish a real baseline). Register in `baselines.json`.\n\n**Impact:** Reviewer degradation becomes detectable within one night-shift cycle. Given reviewer's 33% session share, early detection of drift pays back immediately — a rubber-stamping reviewer is worse than no reviewer.\n\n**Risk:** TC2 requires injecting actual code-with-failure as context. If the prompt is too abstract (no real failing code), the eval may score erratically. Mitigation: use a minimal, self-contained example (a 5-line function with a known off-by-one) embedded directly in the prompt string.\n\n---\n\n## P-2026-04-20-004\n\n**Category:** `eval_evolution`\n\n**Problem:** Two hooks are generating substantial noise per the B4 efficacy scan:\n\n- **`code-accuracy`**: 100% false positive rate across 5 fires in 30 days. Every single fire was a false positive.\n- **`pre-response-claim-audit`**: 84% false positive rate across 13 fires in 30 days (~11 of 13 were noise).\n\nTogether these account for 18 hook fires in 30 days with ~17 false positives — a combined FP rate of **94%**. At this rate, the hooks are training the wrong instinct: every `hook_catch` that turns out to be a false positive erodes signal confidence in the entire hook system.\n\nThe `code-accuracy` rule has broad path matching (`src/**`, `**/*.ts`, `**/*.tsx`, `**/*.js`, `**/*.jsx`, `**/*.py`, `**/*.swift`) — it fires on nearly any code session. Its requirements (verify npm packages exist, don't guess API shapes, verify RSS URLs before use) are sound principles but hard to hook mechanically — they require semantic judgment, not pattern matching. The detector is likely triggering on any session involving the listed file types, regardless of whether an unverified claim was actually made.\n\nThe `pre-response-claim-audit` rule was just consolidated today (2026-04-20) to absorb two previously separate rules. That consolidation is the right direction — but the hook detector's trigger condition likely hasn't been updated to match the new rule scope, which means it's still firing on patterns that the new rule explicitly carves out as exceptions (e.g., general reasoning, UX statements, tool-call-visible actions).\n\n**Solution:**\n\n1. **`code-accuracy`** (`/Users/reggie/.claude/rules/code-accuracy.md`): Add a front-matter flag marking this rule as **enforce-via-prompt-only** (no hook detector). Remove from the hook scan rotation. The rule's value is as a behavioral guardrail read at session start, not as a post-response pattern match. Log a `hook_catch_false_positive` retrospectively for the 5 fires so the ledger is accurate.\n\n2. **`pre-response-claim-audit`** hook detector: Review the pattern-detector trigger conditions against the rule's `## What does NOT need evidence` section. The exceptions (general reasoning, UX statements, recaps of user-stated context, tool-call-visible actions) should be explicitly excluded from the detector's match logic. A one-week monitoring window post-update will confirm whether the FP rate drops below 30%.\n\n**Impact:** Removes ~17 false-positive hook fires per 30-day window. Restores signal integrity — when a hook fires, it means something. Reduces `hook_catches_false_positive_7d` toward zero, which currently masks whether real violations are being caught.\n\n**Risk:** Removing `code-accuracy` from hook scan means genuine violations (unverified model IDs, fake RSS URLs) go undetected by the hook. However, at 100% FP rate, the hook is currently catching zero real violations anyway — the net change in real-violation detection is zero. The risk is accepted.\n\n## Proposal Track Record\n36 total, 24 accepted, 8 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 75% | 24/32 accepted |\n| Eval Signal | OK | 5 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "briefingContent": "# Night Shift — 2026-04-21\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- cloudflare-workers: 6 sessions\n- agents: 5 sessions\n- bash: 5 sessions\n- hooks: 5 sessions\n- react: 5 sessions\n\n## Agent Usage (7-day)\n- reviewer: 5 sessions\n- developer: 3 sessions\n- Explore: 2 sessions\n- chief-of-staff: 1 sessions\n- claude-code-guide: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n78 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 0\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n36 total, 26 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 72% | 26/36 accepted |\n| Eval Signal | OK | 6 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
       "total": 36,
-      "accepted": 24,
-      "pending": 7,
+      "accepted": 26,
+      "pending": 3,
       "rejected": 5
     },
     "benchmarks": [
@@ -2775,13 +2794,13 @@
       },
       {
         "name": "Proposal Hit Rate",
-        "status": "75%",
-        "detail": "24/32 accepted"
+        "status": "72%",
+        "detail": "26/36 accepted"
       },
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "5 consecutive all-pass runs"
+        "detail": "6 consecutive all-pass runs"
       }
     ]
   },
@@ -2869,5 +2888,5 @@
     ],
     "generated": "2026-04-20 18:11"
   },
-  "lastUpdated": "2026-04-21T04:20:08.103Z"
+  "lastUpdated": "2026-04-21T21:25:06.489Z"
 }

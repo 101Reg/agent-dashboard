@@ -1068,6 +1068,17 @@
         ]
       },
       {
+        "name": "agent-os-v2-sprint6-sprint7-roster-trim",
+        "date": "2026-04-21",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "bruce-2026-04-20",
         "date": "2026-04-21",
         "fixAttempts": 0,
@@ -1127,14 +1138,112 @@
             "detail": "Stop-hook meta-commentary pattern recurred 7/7 times across 3 parallel rounds without inline correction. Known pattern after round 1, should"
           }
         ]
+      },
+      {
+        "name": "cloudflare-multi-account-setup",
+        "date": "2026-04-21",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 2,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Listed CF permission scopes (Workers Scripts/Workers KV/D1/Workers Tail/User Details with Edit/Read levels) as exact form-field selections w"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "main",
+            "detail": "Ran direnv export bash as diagnostic — output included full CF_TOKEN_PERSONAL and CF_TOKEN_CLIENT values in tool_result block, leaking both "
+          }
+        ]
+      },
+      {
+        "name": "pre-tool-hook",
+        "date": "2026-04-21",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "post-tool-hook",
+        "date": "2026-04-21",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "bianca-tracker-update",
+        "date": "2026-04-22",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Cited README content (installed on iPhone, cron running, 7 days back-synced) as live runtime state without verifying current state"
+          }
+        ]
+      },
+      {
+        "name": "bianca-tracker-v2",
+        "date": "2026-04-22",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 2,
+        "toilEvents": 0,
+        "hookCatches": 3,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "pretooluse-hook",
+            "detail": "Flagged computeMacroPcts as unverified same-file symbol; grep output at line 64 was in transcript one turn prior"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "pretooluse-hook",
+            "detail": "Flagged actualPct as unverified despite being a destructured prop added in same session and visible in grep output"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "pretooluse-hook",
+            "detail": "Flagged directedCount as unverified; was defined one edit prior at line 175 of same file"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "pretooluse-hook",
+            "detail": "Commit gate fired on polish commit 49ad2e1, but reviewer WAS invoked earlier this session (on 4d648b5) and this commit applies its non-block"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "pretooluse-hook",
+            "detail": "Commit gate fired on 64a1539 day-scrubber commit. Reviewer WAS spawned on the exact diff moments before this commit (returned PASS). Gate do"
+          }
+        ]
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 79,
+    "total": 81,
     "byType": {
-      "feedback": 31,
+      "feedback": 33,
       "project": 14,
       "user": 17,
       "reference": 16,
@@ -1154,6 +1263,7 @@
         "feedback_data_handling",
         "feedback_designview_preset_url",
         "feedback_detail_page_mobile_padding",
+        "feedback_diagnostic_canary_choice",
         "feedback_enumerate_states",
         "feedback_evals",
         "feedback_exhaust_diagnostics",
@@ -1169,6 +1279,7 @@
         "feedback_reviewer_fallibility",
         "feedback_scanner_threshold_density",
         "feedback_schema_pressure_test",
+        "feedback_secret_output_discipline",
         "feedback_setup_hygiene",
         "feedback_ui_always_visible_controls",
         "feedback_ui_first_pass",
@@ -1232,15 +1343,21 @@
   "system": {
     "skills": 18,
     "rules": 16,
-    "hooks": 10,
+    "hooks": 12,
     "mcpServers": 2
   },
   "timeline": [
     {
+      "date": "Apr 21, 2026",
+      "title": "Agent Os V2 Sprint6 Sprint7 Roster Trim",
+      "desc": "Validated parallel agent execution thesis via Sprint 6 (3 parallel scripts: agent-utilization, agent-efficacy-report, b7-agent-efficacy), Absorbed chief-of-staff agent into main-thread role via new rule file, Archived 5 Mirror-locked agents + 4 evals; rewrote legal + marketer for 38twelve",
+      "active": true
+    },
+    {
       "date": "Apr 20, 2026",
       "title": "4 sessions",
       "desc": "Changed admin password to southside, Closed git drift on headless URL importer, Fixed mobile admin board layout (5 rounds)",
-      "active": true
+      "active": false
     },
     {
       "date": "Apr 19, 2026",
@@ -1353,6 +1470,24 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-04-22",
+      "text": "4 hook_catch events this session all on same-file-symbol false positives (computeMacroPcts, actualPct, actualPct, directedCount). PreToolUse Edit hook does not reliably inspect prior edits within same session — gap between claimed exception (b) SAME-FILE SYMBOL EXCEPTION and actual behavior",
+      "context": "BiancaTracker.jsx multi-edit sequence",
+      "high": true
+    },
+    {
+      "date": "2026-04-22",
+      "text": "Commit gate fired on polish commit 49ad2e1, but reviewer WAS invoked earlier this session (on 4d648b5) and this commit applies its non-blocker feedback directly. Re-spawning reviewer on a 6-line fix-forward of its own feedback is circular. Gate does not distinguish first commit from follow-up polish.",
+      "context": "bianca-tracker v2 metrics work",
+      "high": false
+    },
+    {
+      "date": "2026-04-22",
+      "text": "Commit gate fired on 64a1539 day-scrubber commit. Reviewer WAS spawned on the exact diff moments before this commit (returned PASS). Gate does not detect Agent tool invocations within session transcript — this is the 2nd false negative today on the same gate.",
+      "context": "bianca-tracker day-scrubber",
+      "high": false
+    },
+    {
       "date": "2026-04-21",
       "text": "Sprint 7 legal+marketer rewrites were written and verified-by-grep but not reviewed by reviewer agent. Voice consistency and CFR/USC citation accuracy would have benefited from fresh eyes.",
       "context": "parallel developer spawns for agent rewrites — main-thread did grep verification only",
@@ -1362,6 +1497,12 @@
       "date": "2026-04-21",
       "text": "Stop-hook meta-commentary pattern recurred 7/7 times across 3 parallel rounds without inline correction. Known pattern after round 1, should have updated prompt template before round 2 — did not. Inline loop discipline failure.",
       "context": "agent briefing prompt template",
+      "high": false
+    },
+    {
+      "date": "2026-04-21",
+      "text": "3 inline loop failures (agent deployment summary missed, surprises not logged inline, agent prompt pattern recurred 3x without inline correction); 1 valid hook_catch on SessionStart citation → 2 lessons saved",
+      "context": "agent-os-v2-sprint6-sprint7-roster-trim",
       "high": false
     },
     {
@@ -2597,9 +2738,11 @@
   ],
   "nightShift": {
     "status": "GREEN",
-    "lastRun": "2026-04-21",
+    "lastRun": "2026-04-22",
     "findings": [
-      "System healthy — no issues detected"
+      "CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate",
+      "CONCERN: pre-response-claim-audit has 84% FP rate (13 fires in 30d) — Sprint 4 refinement candidate",
+      "STALE: chief-of-staff last fired 2026-04-05 — retirement candidate"
     ],
     "evalCanaries": [
       {
@@ -2753,37 +2896,49 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 0,
+    "proposalCount": 5,
     "proposals": [
       {
-        "id": "P-2026-04-19-001",
-        "category": "regression",
-        "problem": "** chief-of-staff TC1 scored **4.6/5.0 (delta -0.40, baseline 5.0)**. The two docked criteria are:",
-        "solution": ""
+        "id": "P-2026-04-22-001",
+        "category": "agent_methodology",
+        "problem": "The `code-accuracy` hook has a **100% false-positive rate** — 5 fires in 30 days, all FP, last fired 2026-04-19 [FROM DATA: `efficacy-metrics.jsonl`, `efficacy_findings` = 3]. The rule itself already contains a buried HTML comment stating hook_catches must not be tagged `rule:\"code-accuracy\"`, because the Stop hook Haiku cannot make the semantic judgments code correctness requires. Despite that comment, fires continued through 2026-04-19 — meaning the constraint is documented in the wrong place. Agents logging `hook_catch` events look at `performance-logging.md` for logging instructions, not at the rule being excluded. The comment in `code-accuracy.md` is invisible at decision-time.",
+        "solution": "Add an explicit **excluded slugs table** to `~/.claude/rules/performance-logging.md`, inside the `hook_catch` section, immediately after the `rule` field definition:"
       },
       {
-        "id": "P-2026-04-19-002",
-        "category": "self_improvement",
-        "problem": "** Tonight marks **4 consecutive GREEN runs** with every friction metric at zero: fix_attempts=0, escalations=0, re_expl",
-        "solution": ""
+        "id": "P-2026-04-22-002",
+        "category": "agent_methodology",
+        "problem": "The `pre-response-claim-audit` Stop hook has an **84% false-positive rate** — 11 FPs out of 13 fires in 30 days [FROM DATA: `efficacy-metrics.jsonl`]. The Stop hook runs on `claude-haiku-4-5-20251001` [FROM DATA: `~/.claude/settings.json`] and applies a 7-check prompt with compounding exception logic — particularly check #7 (UNVERIFIED COMPLETION CLAIM), which carries 5 named exception clauses plus the source-tag exception. Haiku regularly misapplies these exceptions: it flags `\"I'll deploy after you confirm\"` (future intent, exception (a)) or `\"Edited file X\"` with a visible tool_result (exception (d)) as violations. Every false block interrupts a valid response, adds friction to the session, and costs a `valid:false` hook_catch log entry. At 84% FP, the hook is generating more noise than signal.",
+        "solution": "In `~/.claude/settings.json`, change the `model` field for the Stop hook prompt from `claude-haiku-4-5-20251001` to `claude-sonnet-4-5-20251001`. Sonnet handles multi-clause exception logic reliably where Haiku fails. No other change to the prompt is needed — the criteria are correct, the model applying them is under-powered for the task."
       },
       {
-        "id": "P-2026-04-19-003",
+        "id": "P-2026-04-22-003",
         "category": "eval_evolution",
-        "problem": "** The chief-of-staff eval suite (`/Users/reggie/.claude/agents/evals/chief-of-staff-evals.md`) has **five test prompts ",
+        "problem": "On 2026-04-21, the chief-of-staff was **promoted from a spawnable agent to an always-on main-thread rule** [FROM DATA: `~/.claude/rules/chief-of-staff.md` header reads \"This is a role, not a spawnable agent — there is no `chief-of-staff.md` agent to spawn\"]. The agent file was retired (`~/.claude/agents/chief-of-staff.md` → `.bak-2026-04-21`). However, `~/.claude/night-shift/config.json` still lists `chief-of-staff` and `chief-of-staff-tc4` in both `canary_evals` and the `nightly` tier [FROM DATA: `config.json`]. Tonight's TC1 eval (score: 4.6, delta: −0.40) ran against a non-existent agent definition — what was actually tested is ambiguous. Two genuine gaps were surfaced regardless: **C2** (the `⚠️ Blockers & Dependencies` header appeared but T&C as a hard prerequisite was not stated explicitly up front), and **C4** (opportunity cost was framed as per-option risk rather than symmetric delay-per-choice across all three options). The rule at `~/.claude/rules/chief-of-staff.md` already contains the `⚠️ Blockers & Dependencies` required format, but the C2/C4 language isn't strong enough to prevent the observed drift.",
+        "solution": ""
+      },
+      {
+        "id": "P-2026-04-22-004",
+        "category": "self_improvement",
+        "problem": "Bruce's own TC1 baseline is **aspirational, not measured**. The entry in `~/.claude/night-shift/baselines.json` reads: `\"score\": 5.0, \"date\": \"2026-04-09\", \"notes\": \"Initial target — no prior canary run\"` [FROM DATA: `baselines.json`]. The night-shift-evals.md score tracker shows `—` for all TC results [FROM DATA: `night-shift-evals.md`]. Night-shift appears in `canary_evals` but is absent from the `nightly` tier — it runs only on biweekly days [FROM DATA: `config.json`], and even those results aren't propagating back to the tracker. The practical consequence: if a future change to `~/.claude/agents/night-shift.md` caused Bruce to start fabricating metrics, proposing modifications instead of flagging them for Hero, or losing his read-only discipline, the current setup would detect it slowly (biweekly at best) and compare it against a made-up 5.0. Bruce holds every other agent to an evidence-based baseline. He doesn't hold himself to one.",
+        "solution": "Add `\"night-shift\"` to the `nightly` tier array in `~/.claude/night-shift/config.json`:"
+      },
+      {
+        "id": "P-2026-04-22-003",
+        "category": "unknown",
+        "problem": "",
         "solution": ""
       }
     ],
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-04-21\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- cloudflare-workers: 6 sessions\n- agents: 5 sessions\n- bash: 5 sessions\n- hooks: 5 sessions\n- react: 5 sessions\n\n## Agent Usage (7-day)\n- reviewer: 5 sessions\n- developer: 3 sessions\n- Explore: 2 sessions\n- chief-of-staff: 1 sessions\n- claude-code-guide: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n78 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 0\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n36 total, 26 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 72% | 26/36 accepted |\n| Eval Signal | OK | 6 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "briefingContent": "# Night Shift — 2026-04-22\n\n## Status: GREEN\n\n## Key Findings\n- CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate\n- CONCERN: pre-response-claim-audit has 84% FP rate (13 fires in 30d) — Sprint 4 refinement candidate\n- STALE: chief-of-staff last fired 2026-04-05 — retirement candidate\n\n## What Hero Worked On (7-day)\n- agents: 6 sessions\n- bash: 6 sessions\n- hooks: 6 sessions\n- cloudflare-workers: 5 sessions\n- rules: 5 sessions\n\n## Agent Usage (7-day)\n- reviewer: 5 sessions\n- developer: 4 sessions\n- Explore: 2 sessions\n- chief-of-staff: 1 sessions\n- claude-code-guide: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| chief-of-staff | 4.6 | 5.0 | -0.40 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n80 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 0\n\n\n## Proposals\nNow I have everything I need. Time to write the proposals.\n\n---\n\n# Proposals — 2026-04-22\n\n---\n\n## P-2026-04-22-001\n\n**Category:** `agent_methodology`\n\n**Problem:** The `code-accuracy` hook has a **100% false-positive rate** — 5 fires in 30 days, all FP, last fired 2026-04-19 [FROM DATA: `efficacy-metrics.jsonl`, `efficacy_findings` = 3]. The rule itself already contains a buried HTML comment stating hook_catches must not be tagged `rule:\"code-accuracy\"`, because the Stop hook Haiku cannot make the semantic judgments code correctness requires. Despite that comment, fires continued through 2026-04-19 — meaning the constraint is documented in the wrong place. Agents logging `hook_catch` events look at `performance-logging.md` for logging instructions, not at the rule being excluded. The comment in `code-accuracy.md` is invisible at decision-time.\n\n**Solution:** Add an explicit **excluded slugs table** to `~/.claude/rules/performance-logging.md`, inside the `hook_catch` section, immediately after the `rule` field definition:\n\n```markdown\n**Excluded slugs — do not use as `rule` values for hook_catch events:**\n| Slug | Reason |\n|------|--------|\n| `code-accuracy` | `enforce_mode: prompt_only` — the rule requires semantic code judgment the Stop-hook model cannot reliably produce. All fires in 30d were FP (B4 scan, 2026-04-20). Attribute to `unknown` if the catch appears code-accuracy-shaped. |\n```\n\n**Impact:** Future `hook_catch` events stop polluting the code-accuracy FP rate. The B4 efficacy scan stops flagging it as a concern. The exclusion is enforced at the logging instruction layer where agents actually look, not buried in the excluded rule's own file.\n\n**Risk:** Low. `code-accuracy` is `prompt_only` — removing it from hook attribution doesn't reduce enforcement coverage. The rule still fires as a session-start behavioral guardrail.\n\n---\n\n## P-2026-04-22-002\n\n**Category:** `agent_methodology`\n\n**Problem:** The `pre-response-claim-audit` Stop hook has an **84% false-positive rate** — 11 FPs out of 13 fires in 30 days [FROM DATA: `efficacy-metrics.jsonl`]. The Stop hook runs on `claude-haiku-4-5-20251001` [FROM DATA: `~/.claude/settings.json`] and applies a 7-check prompt with compounding exception logic — particularly check #7 (UNVERIFIED COMPLETION CLAIM), which carries 5 named exception clauses plus the source-tag exception. Haiku regularly misapplies these exceptions: it flags `\"I'll deploy after you confirm\"` (future intent, exception (a)) or `\"Edited file X\"` with a visible tool_result (exception (d)) as violations. Every false block interrupts a valid response, adds friction to the session, and costs a `valid:false` hook_catch log entry. At 84% FP, the hook is generating more noise than signal.\n\n**Solution:** In `~/.claude/settings.json`, change the `model` field for the Stop hook prompt from `claude-haiku-4-5-20251001` to `claude-sonnet-4-5-20251001`. Sonnet handles multi-clause exception logic reliably where Haiku fails. No other change to the prompt is needed — the criteria are correct, the model applying them is under-powered for the task.\n\n```json\n// In the Stop hook prompt entry:\n\"model\": \"claude-sonnet-4-5-20251001\"  // was: claude-haiku-4-5-20251001\n```\n\n**Impact:** FP rate should drop substantially — Sonnet's exception comprehension resolves the systematic misapplication of exception (a) (future intent) and exception (d) (tool_result evidence). Genuine violations (checks 1–6 plus real check-7 failures) are still caught. Hook catches become meaningful signal again; the `hook_catches_valid` metric recovers meaning.\n\n**Risk:** Higher per-check cost (~5–10× Haiku → Sonnet per token). Mitigated by the hook's bounded firing frequency — Stop hooks run once per turn end, not per tool call. The current false-positive cost (interrupting valid sessions, polluting metrics) already exceeds the model cost differential at 84% FP.\n\n---\n\n## P-2026-04-22-003\n\n**Category:** `eval_evolution`\n\n**Problem:** On 2026-04-21, the chief-of-staff was **promoted from a spawnable agent to an always-on main-thread rule** [FROM DATA: `~/.claude/rules/chief-of-staff.md` header reads \"This is a role, not a spawnable agent — there is no `chief-of-staff.md` agent to spawn\"]. The agent file was retired (`~/.claude/agents/chief-of-staff.md` → `.bak-2026-04-21`). However, `~/.claude/night-shift/config.json` still lists `chief-of-staff` and `chief-of-staff-tc4` in both `canary_evals` and the `nightly` tier [FROM DATA: `config.json`]. Tonight's TC1 eval (score: 4.6, delta: −0.40) ran against a non-existent agent definition — what was actually tested is ambiguous. Two genuine gaps were surfaced regardless: **C2** (the `⚠️ Blockers & Dependencies` header appeared but T&C as a hard prerequisite was not stated explicitly up front), and **C4** (opportunity cost was framed as per-option risk rather than symmetric delay-per-choice across all three options). The rule at `~/.claude/rules/chief-of-staff.md` already contains the `⚠️ Blockers & Dependencies` required format, but the C2/C4 language isn't strong enough to prevent the observed drift.\n\n**Solution — two steps:**\n\n1. **Fix the C2/C4 gaps** in `~/.claude/rules/chief-of-staff.md` → Multi-Option Recommendations section:\n\n   - **C2 fix:** Strengthen the `Inter-option dependencies` instruction to: *\"If ANY option is a legal or technical prerequisite for another, or forecloses another entirely, name it in the `⚠️ Blockers & Dependencies` header as the FIRST thing written — before any option heading or option content. Do not bury it inside an option's description.\"*\n   - **C4 fix:** Reframe the opportunity cost instruction from \"what you give up by choosing it\" to: *\"Frame as what choosing this option delays or forecloses relative to the others — symmetrical across ALL options. Example: 'Choosing A delays B by N weeks.' A list of risks-per-option is not opportunity cost.\"*\n\n2. **Remove the retired canary entries** from `~/.claude/night-shift/config.json`: delete `chief-of-staff` and `chief-of-staff-tc4` from `canary_evals` and from the `nightly` tier array. The CoS discipline is now always-on via the rule; organic session coverage replaces the canary. Add a comment: `// CoS promoted to main-thread rule 2026-04-21; canary retired`.\n\n**Impact:** C2/C4 gaps are fixed where CoS discipline now lives (the rule). Eval budget stops being spent on a retired agent (~$0.50+/night). The eval-results record reflects reality.\n\n**Risk:** Losing a structured nightly signal on CoS performance. Mitigated: the rule fires on every main-thread response, so degradation will surface as organic friction events (re-explanations, escalations) faster than a once-nightly canary would catch it.\n\n---\n\n## P-2026-04-22-004\n\n**Category:** `self_improvement`\n\n**Problem:** Bruce's own TC1 baseline is **aspirational, not measured**. The entry in `~/.claude/night-shift/baselines.json` reads: `\"score\": 5.0, \"date\": \"2026-04-09\", \"notes\": \"Initial target — no prior canary run\"` [FROM DATA: `baselines.json`]. The night-shift-evals.md score tracker shows `—` for all TC results [FROM DATA: `night-shift-evals.md`]. Night-shift appears in `canary_evals` but is absent from the `nightly` tier — it runs only on biweekly days [FROM DATA: `config.json`], and even those results aren't propagating back to the tracker. The practical consequence: if a future change to `~/.claude/agents/night-shift.md` caused Bruce to start fabricating metrics, proposing modifications instead of flagging them for Hero, or losing his read-only discipline, the current setup would detect it slowly (biweekly at best) and compare it against a made-up 5.0. Bruce holds every other agent to an evidence-based baseline. He doesn't hold himself to one.\n\n**Solution:** Add `\"night-shift\"` to the `nightly` tier array in `~/.claude/night-shift/config.json`:\n\n```json\n\"nightly\": [\"developer\", \"night-shift\", \"reviewer\"]\n```\n*(after chief-of-staff is removed per P-2026-04-22-003)*\n\nAfter the first real nightly run produces a score, update `baselines.json`:\n```json\n\"night-shift\": {\n  \"TC1\": {\n    \"score\": <actual_score>,\n    \"date\": \"<first_run_date>\",\n    \"notes\": \"First measured baseline — replaced aspirational 5.0 target.\"\n  }\n}\n```\n\nAlso update the `night-shift-evals.md` score tracker with each nightly result (same pattern as developer and reviewer).\n\n**Impact:** Bruce's degradation becomes detectable on a nightly cadence. The system that holds all agents to evidence-based standards holds itself to the same standard. The `consecutive_all_pass` streak (currently 7) will reflect real parity across the eval suite, including the agent running it.\n\n**Risk:** The real baseline is likely below 5.0 — developer TC6 measured 3.6 vs. its aspirational 5.0 when first run. A sub-5.0 first score on night-shift TC1 would immediately set the canary to WATCH (YELLOW). This is the correct outcome: it's better to know. Communicate the expectation in the next briefing so Hero isn't alarmed by the first YELLOW.\n\n## Proposal Track Record\n40 total, 26 accepted, 8 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 72% | 26/36 accepted |\n| Eval Signal | OK | 7 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 36,
+      "total": 40,
       "accepted": 26,
-      "pending": 3,
+      "pending": 7,
       "rejected": 5
     },
     "benchmarks": [
@@ -2800,7 +2955,7 @@
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "6 consecutive all-pass runs"
+        "detail": "7 consecutive all-pass runs"
       }
     ]
   },
@@ -2888,5 +3043,5 @@
     ],
     "generated": "2026-04-20 18:11"
   },
-  "lastUpdated": "2026-04-21T21:25:06.489Z"
+  "lastUpdated": "2026-04-22T22:12:37.591Z"
 }

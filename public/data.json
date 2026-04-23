@@ -1251,6 +1251,23 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "agent-os-finish-everything",
+        "date": "2026-04-23",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "developer",
+            "detail": "Stream A timed out after 20 min / 25 tool calls — task scope (6 cleanup items + 7-layer viz + timeline decision + sync + deploy) exceeded si"
+          }
+        ]
       }
     ],
     "hasData": true
@@ -1413,6 +1430,12 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-04-23",
+      "text": "Stream A timed out after 20 min / 25 tool calls — task scope (6 cleanup items + 7-layer viz + timeline decision + sync + deploy) exceeded single-agent budget",
+      "context": "main-thread completed remaining work in ~10 min — better decomposition would have been 2 agents per task class (cleanup + additions) with shared file lock",
+      "high": false
+    },
+    {
       "date": "2026-04-22",
       "text": "4 hook_catch events this session all on same-file-symbol false positives (computeMacroPcts, actualPct, actualPct, directedCount). PreToolUse Edit hook does not reliably inspect prior edits within same session — gap between claimed exception (b) SAME-FILE SYMBOL EXCEPTION and actual behavior",
       "context": "BiancaTracker.jsx multi-edit sequence",
@@ -1494,12 +1517,6 @@
       "date": "2026-04-20",
       "text": "Easy build (single stack, no API) consumed a full day due to 5-round iteration and no agent delegation.",
       "context": "scout-v1 mobile polish",
-      "high": false
-    },
-    {
-      "date": "2026-04-20",
-      "text": "Template outputs schema/ dir but wrangler.toml references migrations_dir='migrations' — mismatch breaks npm run db:migrate. Fix in template: rename schema/0001_initial.sql.tpl to migrations/0001_initial.sql.tpl",
-      "context": "Sprint 2 deploy test discovered first real template bug",
       "high": false
     }
   ],
@@ -1779,5 +1796,5 @@
     ],
     "generated": "2026-04-20 18:11"
   },
-  "lastUpdated": "2026-04-23T03:08:11.298Z"
+  "lastUpdated": "2026-04-23T03:56:50.127Z"
 }

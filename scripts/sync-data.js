@@ -96,22 +96,7 @@ async function getAgents() {
   return agents;
 }
 
-// ─── Escalation Paths (stable, derived from agent analysis) ──────────────────
-
-const ESCALATION_PATHS = [
-  { from: 'developer', to: 'debug', label: 'After 3 failed fixes', freq: 'high' },
-  { from: 'debug', to: 'developer', label: 'Diagnosis → fix handback', freq: 'high' },
-  { from: 'debug', to: 'chief-of-staff', label: 'Unresolved issues', freq: 'medium' },
-  { from: 'product', to: 'data', label: 'Needs quantitative validation', freq: 'medium' },
-  { from: 'product', to: 'customer-success', label: 'Needs user feedback', freq: 'medium' },
-  { from: 'product', to: 'research', label: 'Needs market data', freq: 'low' },
-  { from: 'customer-success', to: 'chief-of-staff', label: 'Churn threats', freq: 'medium' },
-  { from: 'reviewer', to: 'chief-of-staff', label: 'After 3 fail cycles', freq: 'low' },
-  { from: 'finance', to: 'legal', label: 'Compliance implications', freq: 'low' },
-  { from: 'legal', to: 'developer', label: 'Implementation needs', freq: 'low' },
-  { from: 'marketer', to: 'research', label: 'Market intelligence', freq: 'medium' },
-  { from: 'data', to: 'product', label: 'Pattern implications', freq: 'medium' },
-];
+// escalationPaths removed — Agent Map tab was retired; no renderer references this data
 
 // ─── Memory ──────────────────────────────────────────────────────────────────
 
@@ -119,7 +104,7 @@ async function getMemory() {
   const files = await safeReaddir(MEMORY_DIR);
   const mdFiles = files.filter(f => f.endsWith('.md') && f !== 'MEMORY.md');
   const byType = { feedback: 0, project: 0, user: 0, reference: 0, other: 0 };
-  const labels = { feedback: [], project: [], user: [], reference: [] };
+  // memory.labels removed — Memory Brain graph was retired; no renderer references this data
 
   for (const f of mdFiles) {
     const content = await safeReadFile(join(MEMORY_DIR, f));
@@ -127,13 +112,12 @@ async function getMemory() {
     const type = fm.type || 'other';
     if (byType[type] !== undefined) {
       byType[type]++;
-      if (labels[type]) labels[type].push(f.replace('.md', ''));
     } else {
       byType.other++;
     }
   }
 
-  return { total: mdFiles.length + 1, byType, labels };
+  return { total: mdFiles.length + 1, byType };
 }
 
 // ─── Performance Metrics ─────────────────────────────────────────────────────
@@ -238,7 +222,8 @@ async function getSelfImprovement() {
     }
   }
 
-  return entries.sort((a, b) => b.date.localeCompare(a.date));
+  // Slice to 15 most recent — log is 216+ entries, noise beyond this
+  return entries.sort((a, b) => b.date.localeCompare(a.date)).slice(0, 15);
 }
 
 // ─── System Counts ───────────────────────────────────────────────────────────
@@ -476,9 +461,18 @@ async function getNightShift() {
 }
 
 // ─── Timeline ────────────────────────────────────────────────────────────────
+// Auto-populated from two sources:
+//   1. Sprint history parsed from ~/.claude/projects/-Users-reggie/memory/project_agent_os.md (### Sprint history section)
+//   2. Session digests from session-digests.jsonl (fills in any date gaps)
+// Static hardcoded milestones removed — timeline now self-updates on each sync.
+
+const SPRINT_HISTORY_FILE = join(MEMORY_DIR, 'project_agent_os.md');
 
 async function getTimeline() {
-  const milestones = [
+  const milestones = [];
+
+  // Static pre-sprint milestones (pre-Apr-19 work, not in sprint history)
+  const staticMilestones = [
     { date: 'Apr 4-5, 2026', title: 'Security Hardening', desc: 'Auth flow fixes, feedback system, Webflow security audit', sortDate: '2026-04-05' },
     { date: 'Mar 31 – Apr 3, 2026', title: 'Mirror Build 3.0', desc: 'Full app shipped in 4 parallel sessions — check-ins, budgets, insights, onboarding', sortDate: '2026-04-03' },
     { date: 'Mar 30, 2026', title: 'Mirror JS Migration', desc: 'Embeds moved to Cloudflare Pages, eliminated Webflow inline script limits', sortDate: '2026-03-30' },
@@ -488,8 +482,36 @@ async function getTimeline() {
     { date: 'Mar 21, 2026', title: 'Orchard Terminal', desc: 'Frosted glass Electron terminal — built and packaged as .app in one day', sortDate: '2026-03-21' },
     { date: 'Mar 20, 2026', title: 'Mirror Research Phase', desc: 'Deep behavioral research — 8 sources, 29-page strategy doc', sortDate: '2026-03-20' },
   ];
-  const digestContent = await safeReadFile(DIGEST_LOG);
+  milestones.push(...staticMilestones);
+
+  // Parse sprint history from project_agent_os.md (### Sprint history section)
+  const sprintContent = await safeReadFile(SPRINT_HISTORY_FILE);
+  if (sprintContent) {
+    const match = sprintContent.match(/### Sprint history\n([\s\S]*?)(?=\n###|\n##|$)/);
+    if (match) {
+      const lines = match[1].split('\n').filter(l => l.trim().startsWith('- **Sprint'));
+      for (const line of lines) {
+        // Format: - **Sprint N** (YYYY-MM-DD): Title. Description
+        const sprintMatch = line.match(/\*\*Sprint (\d+)\*\*\s*\(([^)]+)\):\s*([^.]+)\.\s*(.*)/);
+        if (!sprintMatch) continue;
+        const [, num, rawDate, title, desc] = sprintMatch;
+        // rawDate is like "2026-04-19" or "2026-04-20"
+        const d = new Date(rawDate + 'T12:00:00');
+        const formatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        milestones.push({
+          date: formatted,
+          title: 'Sprint ' + num + ' — ' + title.trim(),
+          desc: desc.trim().replace(/\s+/g, ' ').slice(0, 200),
+          sortDate: rawDate,
+        });
+      }
+    }
+  }
+
   const existingSortDates = new Set(milestones.map(m => m.sortDate));
+
+  // Fill remaining gaps from session digests
+  const digestContent = await safeReadFile(DIGEST_LOG);
   if (digestContent && digestContent.trim()) {
     const digests = digestContent.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
     const byDate = new Map();
@@ -509,6 +531,7 @@ async function getTimeline() {
       milestones.push({ date: formatted, title, desc, sortDate: date });
     }
   }
+
   milestones.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
   if (milestones.length > 0) { milestones.forEach(m => { m.active = false; }); milestones[0].active = true; }
   return milestones.map(({ sortDate, ...rest }) => rest);
@@ -558,6 +581,34 @@ async function getConsolidation() {
 
 // ─── Main ────────────────────────────────────────────────────────────────────
 
+// Parse b7 efficacy report from cached file — written nightly by Bruce, manually via `bash ~/.claude/night-shift/phases/b7-agent-efficacy.sh > ~/.claude/agent-efficacy-report.md` if stale
+async function getAgentEfficacy() {
+  const reportPath = join(CLAUDE_DIR, 'agent-efficacy-report.md');
+  const out = await safeReadFile(reportPath);
+  if (!out) return [];
+  const scores = [];
+  // Match lines like: "1. **agent-name** — score 1.00, 8 deployments, last used 2026-04-22"
+  const re = /\*\*[^*]+\*\*\s+—\s+score\s+([\d.]+)/g;
+  let m;
+  while ((m = re.exec(out)) !== null) {
+    scores.push(parseFloat(m[1]));
+  }
+  return scores;
+}
+
+// 7-Layer Spine — synthesized from project_agent_os.md "Layer status" table
+function getSevenLayerSpine() {
+  return [
+    { num: 1, name: 'Universal Telemetry', status: 'Shipped', purpose: 'Every tool call logs' },
+    { num: 2, name: 'Pattern Detection', status: 'Partial', purpose: 'Daemon watches telemetry for repeats' },
+    { num: 3, name: 'Auto-Install Preventions', status: 'Shipped', purpose: 'Low-risk patterns install same-session' },
+    { num: 4, name: 'Efficacy Tracking', status: 'Shipped', purpose: 'Hooks + agents measured; retire if unused' },
+    { num: 5, name: 'Consolidation Daemon', status: 'Shipped', purpose: 'Merges duplicates, flags stale preventions' },
+    { num: 6, name: 'Intent Preservation', status: 'Shipped', purpose: 'Session records what was meant' },
+    { num: 7, name: 'Template Extraction', status: 'Shipped', purpose: 'Recurring projects auto-extract' },
+  ];
+}
+
 async function main() {
   console.log('Syncing Agent OS data...');
 
@@ -574,10 +625,14 @@ async function main() {
     getConsolidation(),
   ]);
 
+  const agentEfficacy = await getAgentEfficacy();
+  const sevenLayerSpine = getSevenLayerSpine();
+
   const data = {
     agents,
     agentCount: agents.length,
-    escalationPaths: ESCALATION_PATHS,
+    agentEfficacy,
+    sevenLayerSpine,
     metrics,
     memory,
     system,
@@ -598,6 +653,7 @@ async function main() {
   console.log(`  Self-improvement entries: ${selfImprovement.length}`);
   console.log(`  Patterns: ${patterns.hasData ? patterns.findings.length + ' finding(s)' : 'no report yet'}`);
   console.log(`  Consolidation: ${consolidation.hasData ? consolidation.findings.length + ' candidate(s)' : 'no report yet'}`);
+  console.log(`  Agent efficacy: ${agentEfficacy.length} healthy agent(s) scored`);
 }
 
 main().catch(err => { console.error(err); process.exit(1); });

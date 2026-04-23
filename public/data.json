@@ -66,78 +66,55 @@
     }
   ],
   "agentCount": 8,
-  "escalationPaths": [
+  "agentEfficacy": [
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "sevenLayerSpine": [
     {
-      "from": "developer",
-      "to": "debug",
-      "label": "After 3 failed fixes",
-      "freq": "high"
+      "num": 1,
+      "name": "Universal Telemetry",
+      "status": "Shipped",
+      "purpose": "Every tool call logs"
     },
     {
-      "from": "debug",
-      "to": "developer",
-      "label": "Diagnosis → fix handback",
-      "freq": "high"
+      "num": 2,
+      "name": "Pattern Detection",
+      "status": "Partial",
+      "purpose": "Daemon watches telemetry for repeats"
     },
     {
-      "from": "debug",
-      "to": "chief-of-staff",
-      "label": "Unresolved issues",
-      "freq": "medium"
+      "num": 3,
+      "name": "Auto-Install Preventions",
+      "status": "Shipped",
+      "purpose": "Low-risk patterns install same-session"
     },
     {
-      "from": "product",
-      "to": "data",
-      "label": "Needs quantitative validation",
-      "freq": "medium"
+      "num": 4,
+      "name": "Efficacy Tracking",
+      "status": "Shipped",
+      "purpose": "Hooks + agents measured; retire if unused"
     },
     {
-      "from": "product",
-      "to": "customer-success",
-      "label": "Needs user feedback",
-      "freq": "medium"
+      "num": 5,
+      "name": "Consolidation Daemon",
+      "status": "Shipped",
+      "purpose": "Merges duplicates, flags stale preventions"
     },
     {
-      "from": "product",
-      "to": "research",
-      "label": "Needs market data",
-      "freq": "low"
+      "num": 6,
+      "name": "Intent Preservation",
+      "status": "Shipped",
+      "purpose": "Session records what was meant"
     },
     {
-      "from": "customer-success",
-      "to": "chief-of-staff",
-      "label": "Churn threats",
-      "freq": "medium"
-    },
-    {
-      "from": "reviewer",
-      "to": "chief-of-staff",
-      "label": "After 3 fail cycles",
-      "freq": "low"
-    },
-    {
-      "from": "finance",
-      "to": "legal",
-      "label": "Compliance implications",
-      "freq": "low"
-    },
-    {
-      "from": "legal",
-      "to": "developer",
-      "label": "Implementation needs",
-      "freq": "low"
-    },
-    {
-      "from": "marketer",
-      "to": "research",
-      "label": "Market intelligence",
-      "freq": "medium"
-    },
-    {
-      "from": "data",
-      "to": "product",
-      "label": "Pattern implications",
-      "freq": "medium"
+      "num": 7,
+      "name": "Template Extraction",
+      "status": "Shipped",
+      "purpose": "Recurring projects auto-extract"
     }
   ],
   "metrics": {
@@ -1236,6 +1213,44 @@
             "detail": "Commit gate fired on 64a1539 day-scrubber commit. Reviewer WAS spawned on the exact diff moments before this commit (returned PASS). Gate do"
           }
         ]
+      },
+      {
+        "name": "bruce-night-shift",
+        "date": "2026-04-22",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 3,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Hook flagged Dashboard deployed claim — read HTTP 401 as deploy failure, but script explicitly treats 401 as success (Vercel team SSO wall) "
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Valid: extrapolated $0.50-1/night for P-004 from P-003's figure without sourcing; invented 60-seconds-ago precision"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "FP: flagged 5-10x per-token cost and $0.50/night which were both cited from briefing.md Read in same turn but not re-quoted inline"
+          }
+        ]
+      },
+      {
+        "name": "b7-honest-usage-stream-b",
+        "date": "2026-04-23",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
@@ -1248,96 +1263,6 @@
       "user": 17,
       "reference": 16,
       "other": 0
-    },
-    "labels": {
-      "feedback": [
-        "feedback_agents_skills",
-        "feedback_api_external",
-        "feedback_apple_social",
-        "feedback_bruce_is_slash_command",
-        "feedback_bruce_proposal_staleness",
-        "feedback_build_deploy",
-        "feedback_canvas_mobile_labels",
-        "feedback_cloudflare_38twelve",
-        "feedback_config_sourced_rules",
-        "feedback_data_handling",
-        "feedback_designview_preset_url",
-        "feedback_detail_page_mobile_padding",
-        "feedback_diagnostic_canary_choice",
-        "feedback_enumerate_states",
-        "feedback_evals",
-        "feedback_exhaust_diagnostics",
-        "feedback_identify_deploy_source",
-        "feedback_iron_law_pattern",
-        "feedback_live_testing",
-        "feedback_macos_native",
-        "feedback_metric_honesty",
-        "feedback_mobile_device_default",
-        "feedback_no_pricing_talk",
-        "feedback_parallel_execution_bounds",
-        "feedback_research_planning",
-        "feedback_reviewer_fallibility",
-        "feedback_scanner_threshold_density",
-        "feedback_schema_pressure_test",
-        "feedback_secret_output_discipline",
-        "feedback_setup_hygiene",
-        "feedback_ui_always_visible_controls",
-        "feedback_ui_first_pass",
-        "feedback_verification"
-      ],
-      "project": [
-        "project_38twelve_daily",
-        "project_38twelve_next",
-        "project_agency",
-        "project_agent_os",
-        "project_debug_agent",
-        "project_design_view",
-        "project_edge",
-        "project_impeccable_install",
-        "project_night_shift",
-        "project_obsidian_vault",
-        "project_open_questions",
-        "project_orchard",
-        "project_orchard_next",
-        "project_os_scorecard"
-      ],
-      "user": [
-        "feedback_strategy_private",
-        "user_accuracy_law",
-        "user_apple_career",
-        "user_argue_both_sides",
-        "user_behavioral_scientist",
-        "user_competitive_drive",
-        "user_data_privacy",
-        "user_dogfood_qa",
-        "user_external_input",
-        "user_identity",
-        "user_learns_by_doing",
-        "user_marathon_builder",
-        "user_naming_style",
-        "user_revenue_first",
-        "user_single_machine",
-        "user_solve_immediately",
-        "user_visual_decider"
-      ],
-      "reference": [
-        "reference_agent_lifecycle",
-        "reference_beehiiv_embeds",
-        "reference_bruce_billing",
-        "reference_claude_cli",
-        "reference_design_library",
-        "reference_dream_consolidation",
-        "reference_edge_docs",
-        "reference_electron",
-        "reference_hooks",
-        "reference_instrument_hierarchy",
-        "reference_key_decisions",
-        "reference_lottery_ticket",
-        "reference_pdf_extraction",
-        "reference_workflow_tools",
-        "reference_x_api_2026",
-        "reference_xcode_setup"
-      ]
     }
   },
   "system": {
@@ -1355,14 +1280,32 @@
     },
     {
       "date": "Apr 20, 2026",
-      "title": "4 sessions",
-      "desc": "Changed admin password to southside, Closed git drift on headless URL importer, Fixed mobile admin board layout (5 rounds)",
+      "title": "Sprint 2 — Layer 7 template pilot",
+      "desc": "Extracted cf-worker-d1 from 38twelveDaily. `template-new.sh` 445-line bash 3.2-compatible. End-to-end verified: `/health` → 200 in 387ms. Committed `c694ba3`.",
+      "active": false
+    },
+    {
+      "date": "Apr 20, 2026",
+      "title": "Sprint 3 — Layers 4 + 3 pilot",
+      "desc": "`efficacy-report.sh`, `retire-artifact.sh`, Bruce `b4-efficacy-scan.sh`, memory-cite auto-installer. Survived BLOCK verdict recovery (reviewer's JSON-comment fix caught by PostToolUse hook — integrati",
+      "active": false
+    },
+    {
+      "date": "Apr 20, 2026",
+      "title": "Sprint 4 — Layer 2 cross-session pattern detection",
+      "desc": "`pattern-scan.sh` + 3 scanners (cross-session 2×/7d, trigram similarity 0.6, same-file churn) + `b5-pattern-scan.sh`. Commit-gate pattern detected on first scan (known-positive validation). Committed ",
+      "active": false
+    },
+    {
+      "date": "Apr 20, 2026",
+      "title": "Sprint 5 — Layer 5 consolidation daemon (5a mode)",
+      "desc": "`consolidation-scan.sh` + 3 consolidators (memory-duplicate 0.70, rule-overlap 0.30 + shared-count-2 floor, hook-stale 30d) + contradiction-detect stub + `b6-consolidation-scan.sh`. Read-only, flag-on",
       "active": false
     },
     {
       "date": "Apr 19, 2026",
-      "title": "2 sessions",
-      "desc": "Built design-principles.md rule v2 (244 lines) from 10-book corpus, Extracted 10 design books via 10 parallel agents with pdftotext + tesseract OCR pipeline, Built /design-audit skill + eval file (4-pass checklist with principle citations)",
+      "title": "Sprint 1 — Layers 6 + 1 foundation",
+      "desc": "`intent.yaml`, `context-pack.sh`, `universal-logger.sh`, `session-context-snapshot.sh`, `sprint1-metrics.sh`, zero-brief agent briefing convention. Committed `6bcc7d1`.",
       "active": false
     },
     {
@@ -1488,6 +1431,30 @@
       "high": false
     },
     {
+      "date": "2026-04-22",
+      "text": "** The `code-accuracy` hook has a **100% false-positive rate** — 5 fires in 30 days, all FP, last fired 2026-04-19 [FR",
+      "context": "Bruce proposal P-2026-04-22-001",
+      "high": true
+    },
+    {
+      "date": "2026-04-22",
+      "text": "** The `pre-response-claim-audit` Stop hook has an **84% false-positive rate** — 11 FPs out of 13 fires in 30 days [FR",
+      "context": "Bruce proposal P-2026-04-22-002",
+      "high": true
+    },
+    {
+      "date": "2026-04-22",
+      "text": "** On 2026-04-21, the chief-of-staff was **promoted from a spawnable agent to an always-on main-thread rule** [FROM DATA",
+      "context": "Bruce proposal P-2026-04-22-003",
+      "high": true
+    },
+    {
+      "date": "2026-04-22",
+      "text": "** Bruce's own TC1 baseline is **aspirational, not measured**. The entry in `~/.claude/night-shift/baselines.json` reads",
+      "context": "Bruce proposal P-2026-04-22-004",
+      "high": true
+    },
+    {
       "date": "2026-04-21",
       "text": "Sprint 7 legal+marketer rewrites were written and verified-by-grep but not reviewed by reviewer agent. Voice consistency and CFR/USC citation accuracy would have benefited from fresh eyes.",
       "context": "parallel developer spawns for agent rewrites — main-thread did grep verification only",
@@ -1534,1206 +1501,6 @@
       "text": "Template outputs schema/ dir but wrangler.toml references migrations_dir='migrations' — mismatch breaks npm run db:migrate. Fix in template: rename schema/0001_initial.sql.tpl to migrations/0001_initial.sql.tpl",
       "context": "Sprint 2 deploy test discovered first real template bug",
       "high": false
-    },
-    {
-      "date": "2026-04-20",
-      "text": "Commit c694ba3 skipped fresh reviewer spawn because all committed content was reviewer-audited yesterday (2× — template files + template-new.sh). Only today's additions were retroactive log backfill (additive events to jsonl) + single-line gitignore allow-templates — neither requires review. Gate checks today's agent_deployment only; doesn't understand cross-day review freshness.",
-      "context": "Sprint 2 commit, content pre-reviewed 2026-04-19",
-      "high": false
-    },
-    {
-      "date": "2026-04-20",
-      "text": "commit-gate needs a 'recent-review' concept — checking rolling 48h window for reviewer agent_deployment events on the specific files being committed. Current per-day check creates false positives for multi-day builds. Candidate fix in Sprint 3 as part of Layer 4 (efficacy tracking) — track per-artifact review freshness, not just daily presence.",
-      "context": "agent-delegation-triggers.md commit-gate rule refinement",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "Both reviewer and main-thread missed that JSON doesn't support // comments. Reviewer's specified fix would have shipped broken. Pattern: reviewers can be wrong; verify-before-presenting test catches the downstream error when reviewer's fix is applied. The integration test loop (hook + test) provided the real truth, not the spec",
-      "context": "Sprint 3 BLOCK → fix → test → caught second-order bug",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "Sprint 3 commit: content was reviewer-audited once (BLOCK verdict), then fixes applied in main thread (reviewer's fix + JSON-comment root cause fix). Re-review would be prudent but 5-line privacy-filter additions + already-verified MUST FIX make it redundant. Same cross-day recent-review issue as Sprint 2 commit-gate catch",
-      "context": "Sprint 3 commit",
-      "high": false
-    },
-    {
-      "date": "2026-04-20",
-      "text": "Commit includes 2 post-reviewer changes: rss.ts (1-char logic change, processEntities: true→false with comment block) + wrangler.toml (1-line account_id pin). Both verified via live production test — 4 Simon Willison articles ingested + 5 pending drafts (previously 0 from that feed in 48h). Re-reviewer would be prudent but mechanical for 6 lines of changes with live verification",
-      "context": "38twelve production fix commit",
-      "high": false
-    },
-    {
-      "date": "2026-04-20",
-      "text": "Hero flagged: /learn and /bruce are BATCH patterns (nightly review, end-of-session debrief) designed for Agent OS v1 (correctness-after-the-fact). Agent OS v2 is continuous-loop (Layer 3 auto-install, Layer 4 continuous efficacy, Layer 5 consolidation, Layer 6 intent preservation). Question to carry forward: once all 7 layers built, do these commands retain batch structure OR shrink to human-checkpoint role with automatic work migrated to continuous hooks? Candidate for Bruce proposal cycle after Sprint 4+.",
-      "context": "/learn Step 7b voice-of-customer",
-      "high": false
-    },
-    {
-      "date": "2026-04-20",
-      "text": "Vibe-coded external-API integrations can ship with correct-looking code that silently fails due to API quirks (Oura v2 same-day range). Debug via wide-window probe revealed it immediately. Systemic fix: when integrating any time-ranged API, first test [date,date] vs [date, date+1) to check for this pattern before assuming code is correct.",
-      "context": "Spent ~45 min diagnosing as if it were an account/subscription/scope issue before testing the date-range itself",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "Declared Oura sync unfixable and proposed deferring ('I've run out of non-destructive diagnostics'); Hero pushed back with 'wow that sucks i really want us to figure out why'; bug resolved in 5 min after running wide-window probe. Pattern: giving up on diagnosis before exhausting test categories (wider time window, alternate endpoints, richer metadata).",
-      "context": "Oura sync returning 200+empty — had hypothesized account mismatch, subscription gate, sandbox mode but hadn't tested query-shape itself",
-      "high": false
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=9",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=14",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "cross-session-repeat: agent:hook_catch x2",
-      "context": "Layer 2 scanner — 2 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "5-round mobile UI iteration, 2 stop-hook catches (tail-truncated deploy output, unverified aspect-ratio math), Mac Air multiple hard shutdowns from node process memory, zero agents spawned on a multi-deploy session. → 3 lessons saved",
-      "context": "scout-v1-mobile-polish",
-      "high": false
-    },
-    {
-      "date": "2026-04-20",
-      "text": "Two reviewer-specified fixes had semantic errors (bash 4 syntax on 3.2 macOS; // JSON comments). PostToolUse Bash hooks caught both. 4 stop-hook catches on recurring source-tag lapses (existing rule, enforcement failure). 3 pretooluse commit-gate advisories on cross-day review-freshness. Inline loop failure: surprises not logged until /learn → 2 lessons saved",
-      "context": "agent-os-v2-sprints-1-2-3-plus-38twelve-pipeline-fix",
-      "high": false
-    },
-    {
-      "date": "2026-04-20",
-      "text": "Wrangler config walk-up hijacked deploy from wrong cwd; wrangler account ID cached after logout/login; spent ~45min chasing wrong Oura hypotheses before testing query shape itself → 3 lessons saved",
-      "context": "bianca-tracker-ship",
-      "high": false
-    },
-    {
-      "date": "2026-04-20",
-      "text": "Reviewer agent returned mid-audit twice (Sprint 4, Sprint 5), required SendMessage to resume. Sprint 5 rule-overlap required 3 tuning iterations after reviewer SHOULD FIX broke acceptance test. → 3 lessons saved",
-      "context": "agent-os-v2-sprints-4-5-plus-consolidation",
-      "high": false
-    },
-    {
-      "date": "2026-04-20",
-      "text": "** `reviewer` is the **most-used agent this week** — 5 sessions out of 15 (33% of all agent activity) — yet there is",
-      "context": "Bruce proposal P-2026-04-20-003",
-      "high": true
-    },
-    {
-      "date": "2026-04-20",
-      "text": "** Two hooks are generating substantial noise per the B4 efficacy scan:",
-      "context": "Bruce proposal P-2026-04-20-004",
-      "high": true
-    },
-    {
-      "date": "2026-04-19",
-      "text": "Reviewer NOT spawned before commit. Reason: commit is pure markdown (rules/design-principles.md, rules/system-reminder-citation.md, skills/design-audit/, design-library/ corpus, memory files) with zero code logic — falls under the explicit config/docs/memory exception in agent-delegation-triggers.md",
-      "context": "session-learning commit",
-      "high": false
-    },
-    {
-      "date": "2026-04-19",
-      "text": "Reviewer NOT spawned before second commit (Post-/learn refresh). Reason: commit contains only Bruce-phase output refresh (briefing.md, events.jsonl) + JSONL log appends (session-digests, os-performance) — zero code logic, pure telemetry/reporting. Falls under config/docs/memory exception in agent-delegation-triggers.md",
-      "context": "post-/learn refresh commit",
-      "high": false
-    },
-    {
-      "date": "2026-04-19",
-      "text": "hook_catch x3",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-19",
-      "text": "pattern-detector.sh was counting all hook_catch events regardless of valid field — a valid:false false-positive could tip the threshold and force a systemic-fix pause on noise. Fixed by filtering select(.event != 'hook_catch' or .valid != false). Jq `//` alternative operator treats false as 'use default' so initial fix was buggy and required the .valid != false form.",
-      "context": "Gap Diagnosis Protocol triggered by pattern-detector firing on 3 hook_catches today (2 valid main-thread drift, 1 invalid SDK false-positive)",
-      "high": true
-    },
-    {
-      "date": "2026-04-19",
-      "text": "hook_catch x3",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-19",
-      "text": "3 valid hook_catches today across 3 different rules (source-before-stating, source-labeling-convention, verify-before-presenting) — all same root pattern: asserting specifics at response-composition time without per-claim grounding. Earlier in session I chose 'option 1 — defer until recurring'; recurrence crossed threshold. Systemic fix: added TL;DR Ritual section at top of pre-response-claim-audit.md condensing the three rules into a single per-claim check (quote/tag/soften/verify-first) that fires while writing, not after.",
-      "context": "pattern-detector re-fired after hook_catch count reached 3 valid following icon-verify catch",
-      "high": true
-    },
-    {
-      "date": "2026-04-19",
-      "text": "4 stop-hook false positives on system-reminder-sourced citations triggered pattern-detector; fixed inline with new rule. 1 PDF-extraction failure (32MB Read limit) recovered via pdftotext pipeline. → 5 lessons saved",
-      "context": "design-principles-v2",
-      "high": false
-    },
-    {
-      "date": "2026-04-19",
-      "text": "3 valid response-time discipline drifts across source-before-stating/source-labeling-convention/verify-before-presenting rules; icon PNGs initially 2x wrong size due to NSImage+lockFocus scale; jq // operator misbehavior on boolean fallback. All fixed inline. → 7 lessons saved",
-      "context": "design-view-build",
-      "high": false
-    },
-    {
-      "date": "2026-04-18",
-      "text": "Read tool cannot handle large PDFs with images — Norman PDF (2.4MB) blew past 32MB API request limit when rendered. Had to pre-convert via pdftotext and re-run extraction",
-      "context": "PDF extraction at scale",
-      "high": false
-    },
-    {
-      "date": "2026-04-18",
-      "text": "hook_catch x4",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-18",
-      "text": "Stop hook fires on system-reminder-sourced claims (skills list, CLAUDE.md contents) because system-reminders are not in the hook's evidence rubric. 4 hook_catch events this session, 2+ prior-session instances. Fix: rules/system-reminder-citation.md forces inline-quoting OR generic rephrasing instead of bare citations or invalid tags",
-      "context": "recurring hook false-positive pattern",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "Presented full metrics + strategy plan without asking the foundational scoping question: 'what does the existing toolset (X native analytics) already solve, and what's the minimum new work needed to close the gap?' Resulted in ~60% of Plan v1 being discarded after Hero pushed back",
-      "context": "38twelveDaily strategy enforcement — first plan included metrics pipeline + dashboard that got fully dropped",
-      "high": false
-    },
-    {
-      "date": "2026-04-16",
-      "text": "Hook demands verification of functions/files created earlier in the same session, costing turns on ceremony comments for things the agent demonstrably just wrote. 5+ turns this session spent writing 'verified at file:line' notes for self-authored code",
-      "context": "PreToolUse hook enforces verification but can't distinguish 'never seen' from 'just wrote'. Proposed fix: auto-pass when target file mtime is within session window, OR honor an inline marker like // pre-tool-verified",
-      "high": false
-    },
-    {
-      "date": "2026-04-16",
-      "text": "PreToolUse + stop hooks evaluate atomically without memory/prior-turn visibility — caused 5+ stop-hook flags and 2+ pretool hook retries in a single session. Hero rated the session progressed-but-spun-wheels specifically because of hook friction",
-      "context": "hook architecture",
-      "high": false
-    },
-    {
-      "date": "2026-04-16",
-      "text": "C0 phase emitted a ledger entry with summary=\"No summary extracted\" and category=\"unknown\" — parser silently failed on one of 4 proposals in the LLM output but still recorded a stub. Purged as P-2026-04-16-006 during review.",
-      "context": "c0-proposals.sh extract/parse is fragile when LLM output varies in formatting",
-      "high": false
-    },
-    {
-      "date": "2026-04-16",
-      "text": "Hero feedback: 'We need to self improve in the moment if things continue to pop up.' During this session, stop-hook false positives fired 3+ times. The self-improvement rule (rules/self-improvement.md) says pattern detection should trigger immediate systemic fix, but I kept one-off-correcting until Hero pushed for a solve. Built pre-response-claim-audit.md + /check-claims as the fix — but only at hit #4, after Hero's explicit intervention.",
-      "context": "In-session pattern-to-fix pivot is not enforced; current rules describe it but don't require it. Candidate fix: a mid-session hook or Stop-hook augmentation that counts same-type events and forces a systemic-fix pause when count >= 3.",
-      "high": false
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, pattern_detected x3",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, pattern_detected x4",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, pattern_detected x5",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, pattern_detected x6",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, pattern_detected x7",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, pattern_detected x8",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, pattern_detected x9",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, pattern_detected x10",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, pattern_detected x11",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, pattern_detected x12",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x3, pattern_detected x13",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x3, pattern_detected x14",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x3, pattern_detected x15",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x3, pattern_detected x16",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x3, pattern_detected x17",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x4, pattern_detected x18",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x4, pattern_detected x19",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x4, pattern_detected x20",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x4, pattern_detected x21",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x4, pattern_detected x22",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x4, pattern_detected x23",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x4, pattern_detected x24",
-      "context": "Stop hook fired mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x4",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "Stop-hook schema bug: hookSpecificOutput.additionalContext not valid for Stop hooks; commit-gate missing hookEventName for PreToolUse; pattern-detector self-amplifying loop",
-      "context": "Systemic fix: corrected both hooks to use correct schema, added stop_hook_active guard, excluded pattern_detected from self-count. Lesson added to reference_hooks.md.",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x4",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "Gap diagnosis complete: 4 hook_catches = 2 hook FPs + 2 my discipline gaps; 5 capability_gaps = 1 solved by today's Stop-hook fix + 2 hook-architecture friction + 2 one-off bugs",
-      "context": "Proposed options A/B/C for hook-judge context issue; awaiting Hero decision. Stop-hook schema fix already shipped (d50c236) addresses enforcement gap.",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x4",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x4",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "pattern-detector Stop hook was re-firing on every stop today regardless of state changes (threshold-once-crossed-stays-fired bug)",
-      "context": "Systemic fix: added marker-file de-spam guard. Hook only re-fires when ALERT string changes (new events cross threshold), not on every stop.",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "Built Option A: hook_catch events now carry valid (true/false) + rule fields; Phase A1 computes per-rule FP rate and flags rules with >=50% FP as candidates for prompt sharpening",
-      "context": "Systemic fix for hook false-positive friction. Initial data from today's 4 catches already flagged pre-response-claim-audit rule (2/3 FP) for review.",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x5, hook_catch x6",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "Prompt-audit hooks (PreToolUse Write|Edit + Stop) evaluate atomically and cannot see prior tool output as evidence. 4/6 hook_catches + 2/5 capability_gaps today trace to this cause. Proposed fix: sharpen both hook prompts to honor (1) relative-path imports as trusted, (2) in-transcript tool output as evidence. Awaiting Hero approval before editing settings.json.",
-      "context": "pattern-detector Stop-hook fired threshold",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "RESOLVED: Sharpened PreToolUse Write|Edit prompt (3 exceptions: relative-import, same-file-symbol, in-session-evidence) + Stop hook #7 exceptions (widened future-tense, any-position tool output, source-tagged prior turns). Expected effect: kills relative-import FPs and in-transcript evidence FPs without removing real hallucination catches.",
-      "context": "settings.json hooks sharpened",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "First-read of agent-dashboard was piecewise ls + Read instead of one Explore spawn. Rule agent-delegation-triggers.md §3 says first unfamiliar codebase of session = Explore.",
-      "context": "A3 swim-lane build",
-      "high": false
-    },
-    {
-      "date": "2026-04-16",
-      "text": "Committed 4 times this session (da76934, 324952f, 036d0de, aee134f) without reviewer agent invocation. commit-gate.sh fired advisory but I did not spawn. Per agent-delegation-triggers.md §2, reviewer should spawn before prod-deploy commits.",
-      "context": "A3 + gap-closing commits",
-      "high": false
-    },
-    {
-      "date": "2026-04-16",
-      "text": "capability_gap x7, hook_catch x6",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "hook_catch x6",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "RESOLVED: pattern-detector.sh now honors friction_resolved events (jq string-interpolation-in-has() bug fixed via explicit key binding). Logged 5 friction_resolved for already-fixed capability_gaps + 4 for FP hook_catches. Count drops from 7+6 to 2+2, below threshold.",
-      "context": "jq scoping bug caught during fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "Scope round-trip on metrics dashboard (planned then stripped), pretooluse hook over-fired on self-authored references → 5 lessons saved",
-      "context": "x-strategy-enforcement",
-      "high": false
-    },
-    {
-      "date": "2026-04-16",
-      "text": "Hook architecture friction: stop hook + pretool hook evaluate atomically without memory/prior-turn context visibility — caused 5+ false positives on memory-grounded citations and 2+ pretool retries on already-verified endpoints. Hero rated progressed-but-spun-wheels because of this. Bruce proposed source-labeling convention (P-2026-04-16-001, pending). → 3 lessons saved",
-      "context": "seo-phase-123",
-      "high": false
-    },
-    {
-      "date": "2026-04-16",
-      "text": "4 stop-hook false positives on cited facts (2 genuine fabrications + 2 missing inline evidence). Triggered the pre-response-claim-audit rule + pattern-detector enforcement as the solve. camelCase vs snake_case field-naming drift cost 1 round trip when Hero screenshotted 85 vs my claimed 98. → 9 lessons saved",
-      "context": "bruce-full-review-and-fix",
-      "high": false
-    },
-    {
-      "date": "2026-04-16",
-      "context": "Bruce proposal P-2026-04-16-001",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "** chief-of-staff TC1 scored **4.6 vs. baseline 5.0 (−0.4)**. Two criteria were docked:",
-      "context": "Bruce proposal P-2026-04-16-002",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "** Tonight's D0 briefing shows an **empty Eval Canaries table** despite B1 having produced a confirmed chief-of-staff TC",
-      "context": "Bruce proposal P-2026-04-16-003",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "** Tonight's A1 metrics report **`capability_gaps_7d: 8`** — 8 instances in the past 7 days where an agent explicitly ",
-      "context": "Bruce proposal P-2026-04-16-004",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "text": "** The chief-of-staff has **one canary eval: TC1 (Feature Prioritization)**. Tonight TC1 scored 4.6, with C2 (inter-opti",
-      "context": "Bruce proposal P-2026-04-16-005",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "context": "Bruce proposal P-2026-04-16-006",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "context": "Bruce proposal P-2026-04-16-007",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "context": "Bruce proposal P-2026-04-16-008",
-      "high": true
-    },
-    {
-      "date": "2026-04-16",
-      "context": "Bruce proposal P-2026-04-16-009",
-      "high": true
-    },
-    {
-      "date": "2026-04-14",
-      "text": "[object Object] RSS parser bug took 3 iterations in main thread — debug agent's root-cause discipline would have isolated faster",
-      "context": "manual decision to not delegate",
-      "high": false
-    },
-    {
-      "date": "2026-04-14",
-      "text": "Destination checkboxes shipped hidden inside collapsed edit panel — reviewer would have caught the UX miss pre-deploy",
-      "context": "no pre-deploy review performed",
-      "high": false
-    },
-    {
-      "date": "2026-04-14",
-      "text": "Piecewise discovery of pipeline structure (ls, grep, read, ls, grep...) — Explore would have mapped in one call",
-      "context": "main thread default",
-      "high": false
-    },
-    {
-      "date": "2026-04-14",
-      "text": "Hero feedback: 'less mistakes, spawning the rights agents, and the actual system we built working in full for once'. Root cause = discipline gap, not capability gap. System has debug/reviewer/Explore agents + triggers rule but no enforcement mechanism. Candidate for Bruce proposal: pre-commit hook or stop-hook check that fails if deploying code without a reviewer pass.",
-      "context": "session rated spun_wheels+went_backward by Hero",
-      "high": false
-    },
-    {
-      "date": "2026-04-14",
-      "text": "Many preventable bugs shipped and fixed mid-session: [object Object] in DB, subrequest cap blowout requiring chunking refactor, stale archive flood needing purge, invisible checkboxes requiring redeploy, non-clickable cards requiring redeploy. Zero subagents spawned in a 4hr build. → 6 lessons saved",
-      "context": "38twelve-dual-artifact",
-      "high": false
-    },
-    {
-      "date": "2026-04-12",
-      "text": "All 3 fix attempts were caused by not verifying external dependencies before coding. Updated code-accuracy.md rule.",
-      "context": "deployment pipeline",
-      "high": true
-    },
-    {
-      "date": "2026-04-12",
-      "text": "Hero had to manually catch 3 inline loop failures: agent deployment summary not presented, surprises not logged inline, fixes not applied inline. The rules existed but were not followed. This is the 2nd+ session where Hero catches what the system should catch automatically.",
-      "context": "system discipline",
-      "high": true
-    },
-    {
-      "date": "2026-04-12",
-      "text": "3 deploy failures from unverified external dependencies (model ID, RSS URLs, JSON parsing). Hero caught 3 inline loop failures (agent summary, surprise logging, inline fixes not triggered automatically). → 4 lessons saved",
-      "context": "38twelve-pipeline-build",
-      "high": false
-    },
-    {
-      "date": "2026-04-12",
-      "text": "Stop hook caught 4 unverified-completion claims; pretooluse hook blocked 8 edits until I verified functions/endpoints/URLs — discipline slowed momentum but prevented fabricated output → 3 lessons saved",
-      "context": "38twelve-website-beehiiv",
-      "high": false
-    },
-    {
-      "date": "2026-04-11",
-      "text": "3 accuracy violations caught by stop hook and Hero directly. Both subagent calls returned empty. Verify-before-ship repeated from prior session. → 5 lessons saved",
-      "context": "38twelve-daily-strategic-build",
-      "high": false
-    },
-    {
-      "date": "2026-04-10",
-      "text": "Vercel GitHub auto-deploy has silently broken 3-4 times across sessions — git push succeeds but Vercel webhook does not fire, leaving live dashboard stale while script claims success",
-      "context": "agent-dashboard sync-and-deploy.sh",
-      "high": true
-    },
-    {
-      "date": "2026-04-10",
-      "text": "Session-briefing hook does not inject durable corrections — facts Hero has had to repeat across multiple sessions. Two recurring examples: (1) Bruce is /bruce slash command not cron, (2) Vercel GitHub auto-deploy is broken, use CLI. Memory files for both exist but are not auto-loaded at session start, so each new session begins with a stale mental model until Hero corrects it. This is the core OS problem — recurring corrections should be prevented by injection, not re-learned by correction.",
-      "high": false
-    },
-    {
-      "date": "2026-04-10",
-      "text": "Claimed Bruce 3 AM cron would populate evals AND that Vercel auto-deploy would pick up git push — both wrong, corrected by Hero. Root cause: stale mental model at session start + no enforcement of verification-before-claim. Fixed systemically via Stop hook check 7 + session-briefing pinned corrections. → 6 lessons saved",
-      "context": "agent-os-score-64-to-97",
-      "high": false
-    },
-    {
-      "date": "2026-04-10",
-      "text": "B3 head -40 → head -160",
-      "context": "Bruce proposal P-2026-04-09-010",
-      "high": true
-    },
-    {
-      "date": "2026-04-10",
-      "text": "Create infra agent",
-      "context": "Bruce proposal P-2026-04-09-011",
-      "high": true
-    },
-    {
-      "date": "2026-04-09",
-      "text": "Library reorganization baseline — measure against this in 2 weeks",
-      "context": "Post-reorganization system metrics: CLAUDE.md=46 lines, rules=6 files, global_memory=92 files, mirror_memory=18 files, MEMORY_index=96 lines, hooks=5, skills=34, hook_catches_baseline=11, developer_eval=4.8, cos_eval=4.6",
-      "high": true
-    },
-    {
-      "date": "2026-04-09",
-      "text": "Stop hook caught unverified research claims twice; stale Mac Mini memory required manual correction → 2 lessons saved",
-      "context": "library-reorganization",
-      "high": false
-    },
-    {
-      "date": "2026-04-09",
-      "text": "Add Multi-Option Recommendations micro-rule to chief-of-staff.md",
-      "context": "Bruce proposal P-2026-04-09-009",
-      "high": true
-    },
-    {
-      "date": "2026-04-09",
-      "text": "Merge 4 project_agent_* files into project_agent_os.md",
-      "context": "Bruce proposal P-2026-04-09-012",
-      "high": true
-    },
-    {
-      "date": "2026-04-09",
-      "text": "Add post-eval audit to b1 — detect silent canary eval failures",
-      "context": "Bruce proposal P-2026-04-09-013",
-      "high": true
-    },
-    {
-      "date": "2026-04-09",
-      "text": "Add TC6 adversarial rule compliance eval to developer, replace TC2 canary",
-      "context": "Bruce proposal P-2026-04-09-014",
-      "high": true
-    },
-    {
-      "date": "2026-04-09",
-      "text": "Add evidence age filtering to B3 and C0 — prevent stale evidence proposals",
-      "context": "Bruce proposal P-2026-04-09-015",
-      "high": true
-    },
-    {
-      "date": "2026-04-08",
-      "text": "Stop hook infinite loop (fixed). PreToolUse blocked new file imports (workaround: Write instead of Edit). Bash 3.2 lacks associative arrays (rewrote with awk). Mac Mini username mismatch (sed fix). → 4 lessons saved",
-      "context": "night-shift-learning",
-      "high": false
-    },
-    {
-      "date": "2026-04-08",
-      "text": "Multiple git rebase conflicts from two machines pushing to same repo → 4 lessons saved",
-      "context": "night-shift-setup",
-      "high": false
-    },
-    {
-      "date": "2026-04-08",
-      "text": "SSH setup failed after 20+ minutes. Dashboard staleness not auto-detected — Hero caught it manually. → 2 lessons saved",
-      "context": "dashboard-gaps-fix",
-      "high": false
-    },
-    {
-      "date": "2026-04-08",
-      "text": "Browser cache caused repeated stale dashboard views. SSH setup failed. Explore subagents returned empty summaries twice. → 6 lessons saved",
-      "context": "bruce-refactor",
-      "high": false
-    },
-    {
-      "date": "2026-04-08",
-      "text": "Eval scoring regex produces score=0 for all responses, causing false RED system status",
-      "context": "Bruce proposal P-2026-04-08-001",
-      "high": true
-    },
-    {
-      "date": "2026-04-08",
-      "text": "Phase B2 skill gap detection has never worked — multi-line JSON always fails to parse",
-      "context": "Bruce proposal P-2026-04-08-002",
-      "high": true
-    },
-    {
-      "date": "2026-04-08",
-      "text": "feedback_electron and feedback_xano clusters consolidated into reference docs",
-      "context": "Bruce proposal P-2026-04-08-003",
-      "high": true
-    },
-    {
-      "date": "2026-04-08",
-      "text": "Developer TC1 regression was eval setup issue — canary needs project context, switched to TC2",
-      "context": "Bruce proposal P-2026-04-08-004",
-      "high": true
-    },
-    {
-      "date": "2026-04-08",
-      "text": "Developer agent adds unsolicited type hints/docstrings on new code — rule only guarded existing code",
-      "context": "Bruce proposal P-2026-04-08-005",
-      "high": true
-    },
-    {
-      "date": "2026-04-08",
-      "text": "TC2 baseline missing from baselines.json — deltas compared against TC1 fallback",
-      "context": "Bruce proposal P-2026-04-08-006",
-      "high": true
-    },
-    {
-      "date": "2026-04-08",
-      "text": "Proposal IDs collide when Bruce runs twice in one day — renumber from max existing",
-      "context": "Bruce proposal P-2026-04-08-007",
-      "high": true
-    },
-    {
-      "date": "2026-04-08",
-      "text": "Skill gap detection cant see agent files — re-flags addressed gaps as open",
-      "context": "Bruce proposal P-2026-04-08-008",
-      "high": true
-    },
-    {
-      "date": "2026-04-07",
-      "text": "Stop hook infinite loop: evaluates full transcript history, re-flags corrected historical violation on every new response. Hook should scope evaluation to current response only.",
-      "context": "Anti-hallucination stop hook design",
-      "high": true
-    },
-    {
-      "date": "2026-04-07",
-      "text": "Stop hook evaluated full transcript instead of latest response — caused infinite rejection loop after a corrected violation. Self-corrected by scoping hook prompt to latest response only.",
-      "context": "Anti-hallucination stop hook design flaw",
-      "high": true
-    },
-    {
-      "date": "2026-04-07",
-      "text": "Stop hook entered infinite loop re-flagging corrected violations — scoped to latest response. PreToolUse hook blocked edits for newly created files. → 0 lessons saved",
-      "context": "night-shift-build",
-      "high": false
-    },
-    {
-      "date": "2026-04-05",
-      "text": "4 PreToolUse hook catches on developer (API verification), 5 Stop hook catches on chief-of-staff (false certainty) → 3 lessons saved",
-      "context": "dashboard-build-1",
-      "high": false
-    },
-    {
-      "date": "2026-04-05",
-      "text": "LinkedIn returns 999 on WebFetch — asked for screenshots instead → 3 lessons saved",
-      "context": "career-identity",
-      "high": false
     }
   ],
   "nightShift": {
@@ -2762,27 +1529,8 @@
         "delta": 0,
         "status": "ok",
         "lastRun": "2026-04-08",
-        "stale": false,
+        "stale": true,
         "source": "run"
-      },
-      {
-        "agent": "chief-of-staff",
-        "score": 5,
-        "baseline": 5,
-        "delta": 0,
-        "status": "baseline",
-        "lastRun": "2026-04-02",
-        "stale": true,
-        "source": "baseline"
-      },
-      {
-        "agent": "chief-of-staff-tc4",
-        "score": null,
-        "baseline": null,
-        "delta": 0,
-        "status": "unscored",
-        "stale": true,
-        "source": "none"
       },
       {
         "agent": "customer-success",
@@ -2899,33 +1647,21 @@
     "proposalCount": 5,
     "proposals": [
       {
-        "id": "P-2026-04-22-001",
-        "category": "agent_methodology",
-        "problem": "The `code-accuracy` hook has a **100% false-positive rate** — 5 fires in 30 days, all FP, last fired 2026-04-19 [FROM DATA: `efficacy-metrics.jsonl`, `efficacy_findings` = 3]. The rule itself already contains a buried HTML comment stating hook_catches must not be tagged `rule:\"code-accuracy\"`, because the Stop hook Haiku cannot make the semantic judgments code correctness requires. Despite that comment, fires continued through 2026-04-19 — meaning the constraint is documented in the wrong place. Agents logging `hook_catch` events look at `performance-logging.md` for logging instructions, not at the rule being excluded. The comment in `code-accuracy.md` is invisible at decision-time.",
-        "solution": "Add an explicit **excluded slugs table** to `~/.claude/rules/performance-logging.md`, inside the `hook_catch` section, immediately after the `rule` field definition:"
-      },
-      {
-        "id": "P-2026-04-22-002",
-        "category": "agent_methodology",
-        "problem": "The `pre-response-claim-audit` Stop hook has an **84% false-positive rate** — 11 FPs out of 13 fires in 30 days [FROM DATA: `efficacy-metrics.jsonl`]. The Stop hook runs on `claude-haiku-4-5-20251001` [FROM DATA: `~/.claude/settings.json`] and applies a 7-check prompt with compounding exception logic — particularly check #7 (UNVERIFIED COMPLETION CLAIM), which carries 5 named exception clauses plus the source-tag exception. Haiku regularly misapplies these exceptions: it flags `\"I'll deploy after you confirm\"` (future intent, exception (a)) or `\"Edited file X\"` with a visible tool_result (exception (d)) as violations. Every false block interrupts a valid response, adds friction to the session, and costs a `valid:false` hook_catch log entry. At 84% FP, the hook is generating more noise than signal.",
-        "solution": "In `~/.claude/settings.json`, change the `model` field for the Stop hook prompt from `claude-haiku-4-5-20251001` to `claude-sonnet-4-5-20251001`. Sonnet handles multi-clause exception logic reliably where Haiku fails. No other change to the prompt is needed — the criteria are correct, the model applying them is under-powered for the task."
-      },
-      {
-        "id": "P-2026-04-22-003",
-        "category": "eval_evolution",
-        "problem": "On 2026-04-21, the chief-of-staff was **promoted from a spawnable agent to an always-on main-thread rule** [FROM DATA: `~/.claude/rules/chief-of-staff.md` header reads \"This is a role, not a spawnable agent — there is no `chief-of-staff.md` agent to spawn\"]. The agent file was retired (`~/.claude/agents/chief-of-staff.md` → `.bak-2026-04-21`). However, `~/.claude/night-shift/config.json` still lists `chief-of-staff` and `chief-of-staff-tc4` in both `canary_evals` and the `nightly` tier [FROM DATA: `config.json`]. Tonight's TC1 eval (score: 4.6, delta: −0.40) ran against a non-existent agent definition — what was actually tested is ambiguous. Two genuine gaps were surfaced regardless: **C2** (the `⚠️ Blockers & Dependencies` header appeared but T&C as a hard prerequisite was not stated explicitly up front), and **C4** (opportunity cost was framed as per-option risk rather than symmetric delay-per-choice across all three options). The rule at `~/.claude/rules/chief-of-staff.md` already contains the `⚠️ Blockers & Dependencies` required format, but the C2/C4 language isn't strong enough to prevent the observed drift.",
+        "id": "P-2026-04-19-001",
+        "category": "regression",
+        "problem": "** chief-of-staff TC1 scored **4.6/5.0 (delta -0.40, baseline 5.0)**. The two docked criteria are:",
         "solution": ""
       },
       {
-        "id": "P-2026-04-22-004",
+        "id": "P-2026-04-19-002",
         "category": "self_improvement",
-        "problem": "Bruce's own TC1 baseline is **aspirational, not measured**. The entry in `~/.claude/night-shift/baselines.json` reads: `\"score\": 5.0, \"date\": \"2026-04-09\", \"notes\": \"Initial target — no prior canary run\"` [FROM DATA: `baselines.json`]. The night-shift-evals.md score tracker shows `—` for all TC results [FROM DATA: `night-shift-evals.md`]. Night-shift appears in `canary_evals` but is absent from the `nightly` tier — it runs only on biweekly days [FROM DATA: `config.json`], and even those results aren't propagating back to the tracker. The practical consequence: if a future change to `~/.claude/agents/night-shift.md` caused Bruce to start fabricating metrics, proposing modifications instead of flagging them for Hero, or losing his read-only discipline, the current setup would detect it slowly (biweekly at best) and compare it against a made-up 5.0. Bruce holds every other agent to an evidence-based baseline. He doesn't hold himself to one.",
-        "solution": "Add `\"night-shift\"` to the `nightly` tier array in `~/.claude/night-shift/config.json`:"
+        "problem": "** Tonight marks **4 consecutive GREEN runs** with every friction metric at zero: fix_attempts=0, escalations=0, re_expl",
+        "solution": ""
       },
       {
-        "id": "P-2026-04-22-003",
-        "category": "unknown",
-        "problem": "",
+        "id": "P-2026-04-19-003",
+        "category": "eval_evolution",
+        "problem": "** The chief-of-staff eval suite (`/Users/reggie/.claude/agents/evals/chief-of-staff-evals.md`) has **five test prompts ",
         "solution": ""
       }
     ],
@@ -2937,8 +1673,8 @@
     "memoryHealth": null,
     "proposalTrackRecord": {
       "total": 40,
-      "accepted": 26,
-      "pending": 7,
+      "accepted": 30,
+      "pending": 3,
       "rejected": 5
     },
     "benchmarks": [
@@ -3043,5 +1779,5 @@
     ],
     "generated": "2026-04-20 18:11"
   },
-  "lastUpdated": "2026-04-22T22:12:37.591Z"
+  "lastUpdated": "2026-04-23T03:08:11.298Z"
 }

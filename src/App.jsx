@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import Reveal from './components/Reveal'
 import ScoreRing from './components/ScoreRing'
 import AORCard from './components/AORCard'
-import Timeline from './components/Timeline'
 
-const NAV = ["Score", "Areas", "Activity", "Timeline"]
+// Timeline tab retired — static milestones cut off at Apr 4-5 with no auto-update; timeline now auto-populates from sprint history in sync-data.js but the tab added no unique signal vs Activity/Patterns/Consolidation
+const NAV = ["Score", "Areas", "Activity"]
 
 const EVENT_COLORS = {
   fix_attempt: '#f55',
@@ -90,18 +90,24 @@ function computeAORs(data) {
   const frictionPerSession = frictionEvents / totalSessions
   const frictionScore = Math.round(100 * Math.exp(-frictionPerSession * 0.7))
 
-  // --- AGENTS (25%) ---
-  // 70% coverage (are agents measured?) + 30% quality (how do measured agents score?)
-  // Coverage weighted heavier: unmeasured agents are unknown risk
+  // --- AGENTS (30%) ---
+  // 70% efficacy (are agents working well in the field?) + 30% quality (canary eval scores)
+  // Efficacy comes from b7-agent-efficacy.sh healthy-agent scores stored in data.agentEfficacy
   const agentCount = data.agentCount || 0
   const evalCanaries = ns.evalCanaries || []
-  const evaldAgents = evalCanaries.length > 0 ? evalCanaries.length : 2 // fallback to known 2
-  const evalCoverage = agentCount > 0 ? (evaldAgents / agentCount) * 100 : 0
   const avgEvalScore = evalCanaries.length > 0
     ? evalCanaries.reduce((sum, e) => sum + (parseFloat(e.score) || 0), 0) / evalCanaries.length
     : 4.7 // fallback to last known
   const evalQuality = (avgEvalScore / 5) * 100
-  const agentScore = Math.round(evalCoverage * 0.7 + evalQuality * 0.3)
+  // Avg per-agent efficacy from b7 healthy list (score 0–1), converted to 0–100
+  const efficacyScores = data.agentEfficacy || []
+  const avgEfficacy = efficacyScores.length > 0
+    ? efficacyScores.reduce((sum, s) => sum + s, 0) / efficacyScores.length
+    : null
+  const efficacyPct = avgEfficacy != null ? avgEfficacy * 100 : null
+  const agentScore = efficacyPct != null
+    ? Math.round(efficacyPct * 0.7 + evalQuality * 0.3)
+    : Math.round(evalQuality)
 
   // --- MEMORY (15%) ---
   // Under 60% = perfect. Quadratic penalty as you approach the 100-file ceiling.
@@ -119,20 +125,11 @@ function computeAORs(data) {
     ? Math.max(0, Math.round(proposalRate - pendingPenalty))
     : 50
 
-  // --- COVERAGE (10%) ---
-  // 4 instrument types, each pass/fail against minimum threshold.
-  // Score = % of types that are staffed. Answers: "are all categories covered?"
-  const coveragePassing = [
-    (sys.skills || 0) >= 15 ? 1 : 0,
-    (sys.rules || 0) >= 5 ? 1 : 0,
-    (sys.hooks || 0) >= 3 ? 1 : 0,
-    (sys.mcpServers || 0) >= 1 ? 1 : 0,
-  ].reduce((a, b) => a + b, 0)
-  const coverageScore = Math.round((coveragePassing / 4) * 100)
+  // Coverage AOR retired 2026-04-23 — Skills 18/Rules 16/Hooks 12/MCP 2 are 2-5x past benchmarks; question is no longer "do we have enough?" but "are these earning their keep?" Layers 4+5 answer that. Weight redistributed: +5% Friction, +5% Agents.
 
   const aors = [
     {
-      name: 'Friction', icon: '\u26A1', weight: 35, score: frictionScore,
+      name: 'Friction', icon: '\u26A1', weight: 40, score: frictionScore,
       metrics: [
         { name: 'Fix Attempts', value: totalFix, benchmark: '0', definition: 'Code fixes that failed to resolve the issue' },
         { name: 'Escalations', value: totalEsc, benchmark: '0', definition: 'Work handed from one agent to another due to failure' },
@@ -142,10 +139,10 @@ function computeAORs(data) {
       ],
     },
     {
-      name: 'Agents', icon: '\uD83E\uDD16', weight: 25, score: agentScore,
+      name: 'Agents', icon: '\uD83E\uDD16', weight: 30, score: agentScore,
       metrics: [
-        { name: 'Eval Coverage', value: Math.round(evalCoverage) + '%', benchmark: '100%', definition: evaldAgents + '/' + agentCount + ' agents have canary evals' },
-        { name: 'Avg Eval Score', value: avgEvalScore.toFixed(1), benchmark: '5.0', definition: 'Mean score across evaluated agents' },
+        { name: 'Avg Efficacy', value: efficacyPct != null ? Math.round(efficacyPct) + '%' : 'N/A', benchmark: '\u226580%', definition: 'Mean per-agent efficacy from b7 (real-world deployments)' },
+        { name: 'Avg Eval Score', value: avgEvalScore.toFixed(1), benchmark: '5.0', definition: 'Mean score across canary eval results' },
       ],
     },
     {
@@ -160,15 +157,6 @@ function computeAORs(data) {
       metrics: [
         { name: 'Hit Rate', value: proposalRate + '%', benchmark: '>80%', definition: 'Accepted \u00F7 (Accepted + Rejected)' },
         { name: 'Pending', value: proposals.pending, benchmark: '0', definition: 'Each pending proposal costs 10pts (max 30pt drag)' },
-      ],
-    },
-    {
-      name: 'Coverage', icon: '\uD83D\uDEE1\uFE0F', weight: 10, score: coverageScore,
-      metrics: [
-        { name: 'Skills', value: (sys.skills || 0) + '/15', benchmark: '\u226515', definition: 'Slash commands and skill files installed' },
-        { name: 'Rules', value: (sys.rules || 0) + '/5', benchmark: '\u22655', definition: 'Behavioral constraint files in rules/' },
-        { name: 'Hooks', value: (sys.hooks || 0) + '/3', benchmark: '\u22653', definition: 'Pre/Post/Stop hooks active' },
-        { name: 'MCP Servers', value: (sys.mcpServers || 0) + '/1', benchmark: '\u22651', definition: 'External tool integrations' },
       ],
     },
   ]
@@ -334,6 +322,44 @@ export default function App() {
                 )}
               </div>
             </Reveal>
+
+            {/* 7-Layer Spine */}
+            {data.sevenLayerSpine && data.sevenLayerSpine.length > 0 && (
+              <Reveal delay={300}>
+                <div style={{
+                  background: 'rgba(255,255,255,0.03)', borderRadius: 16,
+                  border: '1px solid rgba(255,255,255,0.06)', padding: '20px 24px',
+                  marginTop: 16,
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
+                    <div style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.2)' }}>
+                      7-Layer Spine
+                    </div>
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)' }}>
+                      {data.sevenLayerSpine.filter(l => l.status === 'Shipped').length}/7 shipped
+                    </div>
+                  </div>
+                  {data.sevenLayerSpine.map((layer, i) => {
+                    const dotColor = layer.status === 'Shipped' ? '#53e16f' : layer.status === 'Partial' ? '#F5B07B' : 'rgba(255,255,255,0.2)';
+                    return (
+                      <div key={layer.num} style={{
+                        display: 'flex', alignItems: 'center', gap: 12,
+                        padding: '10px 0',
+                        borderBottom: i < data.sevenLayerSpine.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
+                      }}>
+                        <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', fontWeight: 600, width: 16 }}>{layer.num}</div>
+                        <div style={{ width: 6, height: 6, borderRadius: '50%', background: dotColor, flexShrink: 0 }} />
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,0.85)' }}>{layer.name}</div>
+                          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', marginTop: 2 }}>{layer.purpose}</div>
+                        </div>
+                        <div style={{ fontSize: 10, color: dotColor, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{layer.status}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Reveal>
+            )}
           </>
         )}
 

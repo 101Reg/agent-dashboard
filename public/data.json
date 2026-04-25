@@ -1276,6 +1276,23 @@
         ]
       },
       {
+        "name": "kin-w1-foundation",
+        "date": "2026-04-23",
+        "fixAttempts": 1,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "fix_attempt",
+            "agent": "main-thread",
+            "detail": "npm create cloudflare@latest --framework=next failed 3 times with 'Unsupported framework: next' in C3 v2.67.2 despite next being in --help a"
+          }
+        ]
+      },
+      {
         "name": "b7-honest-usage-stream-b",
         "date": "2026-04-23",
         "fixAttempts": 0,
@@ -1337,26 +1354,15 @@
         ]
       },
       {
-        "name": "kin-w1-foundation",
-        "date": "2026-04-23",
-        "fixAttempts": 1,
+        "name": "agent-os-v2-c2-gates-parallel",
+        "date": "2026-04-24",
+        "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 1,
+        "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 0,
-        "events": [
-          {
-            "event": "fix_attempt",
-            "agent": "main-thread",
-            "detail": "npm create cloudflare@latest --framework=next failed 3 times with 'Unsupported framework: next' in C3 v2.67.2 despite next being in --help a"
-          },
-          {
-            "event": "capability_gap",
-            "agent": "main-thread",
-            "detail": "C3 v2.67.2 has a Next.js template regression; plan assumed create-cloudflare would bootstrap Next.js but it silently fell back to Hello Worl"
-          }
-        ]
+        "events": []
       }
     ],
     "hasData": true
@@ -1374,13 +1380,13 @@
   "system": {
     "skills": 18,
     "rules": 16,
-    "hooks": 11,
+    "hooks": 12,
     "mcpServers": 2
   },
   "timeline": [
     {
       "date": "Apr 23, 2026",
-      "title": "2 sessions",
+      "title": "3 sessions",
       "desc": "Bruce review of open queue, Dashboard audit + cleanup (Coverage AOR retired, 2 orphan fields stripped, selfImprovement sliced to 15, 7-Layer Spine added, Timeline tab retired), b7 telemetry blind spot fix (canary + slash invocations count as real usage)",
       "active": true
     },
@@ -1525,6 +1531,48 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-04-24",
+      "text": "cross-session-repeat: agent:capability_gap x4",
+      "context": "Layer 2 scanner — 3 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-24",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 3 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-24",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 3 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-24",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-24",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-24",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-24",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
       "date": "2026-04-23",
       "text": "Stream A timed out after 20 min / 25 tool calls — task scope (6 cleanup items + 7-layer viz + timeline decision + sync + deploy) exceeded single-agent budget",
       "context": "main-thread completed remaining work in ~10 min — better decomposition would have been 2 agents per task class (cleanup + additions) with shared file lock",
@@ -1570,48 +1618,6 @@
       "date": "2026-04-23",
       "text": "Hero feedback (/learn Step 7b): hooks fired mid-fix during a hook-hygiene session. commit-gate fired on its own documentation text; deploy-gate fired on pushes to config repo; Haiku PostToolUse flagged test JSON as real errors; pattern-detector fired with stale resolved-pairing signals. Hero direction: is Agent OS working in parallel or is things stepping on each other? The 7-layer architecture assumes independence; practice shows shared state (perf log, ledger) written by multiple hooks with no coordination layer, LLM-prompt hooks lossy on meta-vs-real state, and rule/hook scope misalignments.",
       "context": "session outcome: spun_wheels. Shipped 8 commits but with significant self-interference.",
-      "high": false
-    },
-    {
-      "date": "2026-04-23",
-      "text": "capability_gap x3",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-23",
-      "text": "cap_gap x3 mandate (P-2026-04-23-001) — all 3 were deferred/seeded/rule-compliance, not inline-actionable. Built friction_acknowledged event type + --ack flag to resolve-gap.sh + pattern-detector resolved-set union update.",
-      "context": "Gap Diagnosis complete. Systemic fix: distinguish resolved-by-fix from acknowledged-as-tracked-elsewhere.",
-      "high": true
-    },
-    {
-      "date": "2026-04-23",
-      "text": "H1 hook tightening applied: added COMMON FP GUARD preamble, E1 concrete examples, E10 system-reminder exception, F5 tighter gate. Measurement window: 7 days. Target: FP rate drops below 50%.",
-      "context": "pre-response-claim-audit Stop hook prompt v2",
-      "high": true
-    },
-    {
-      "date": "2026-04-23",
-      "text": "Advisory-only commit-gate.sh could not prevent reviewer-not-spawned recurrence across 3+ sessions (2026-04-14 scout-v1-mobile-polish, 2026-04-16 weekly-scan-a3, 2026-04-20 38twelve-dual-artifact). Hook emits additionalContext advisory but never blocks. Rule (agent-delegation-triggers.md trigger #2) is **/*-scope with no deterministic gate — the core symptom of Agent OS V2 §4 C2 finding (structurally broken self-improvement loop stage 2).",
-      "context": "pre-C2 state: 14 of 22 rules aspirational per rule-enforcement-map.md §8",
-      "high": false
-    },
-    {
-      "date": "2026-04-23",
-      "text": "Reviewer agent final response hijacked by Stop-hook narration instead of delivering prompted verification outputs (4 checks: missed consumers, fallback safety, physical split integrity, other issues). Same failure mode observed 2026-04-21 across 7/7 parallel agents and codified in agent-delegation-triggers.md §Final-Summary Discipline. The explicit ignore-Stop-hook clause was included in the prompt and still got hijacked — means the clause is insufficient or the Stop hook fires mid-generation.",
-      "context": "tool_call log split review; main-thread had to run verification directly",
-      "high": false
-    },
-    {
-      "date": "2026-04-23",
-      "text": "C3 v2.67.2 has a Next.js template regression; plan assumed create-cloudflare would bootstrap Next.js but it silently fell back to Hello World. Pivoted to create-next-app + manual Cloudflare adapter (@opennextjs/cloudflare) instead of @cloudflare/next-on-pages (which peer-caps at Next 15.5.2, not Next 16)",
-      "context": "kin scaffold + cloudflare wiring",
-      "high": false
-    },
-    {
-      "date": "2026-04-23",
-      "text": "Stream A agent timed out at 20 min / 25 tool calls mid-dashboard-cleanup; main-thread completed remainder. 4 failed Edits on App.jsx unicode escapes before pivoting to Python. First efficacy parser used execSync with 30s→60s timeouts before pivoting to cache-file pattern. → 5 lessons saved",
-      "context": "agent-os-finish-everything",
       "high": false
     }
   ],
@@ -1765,8 +1771,8 @@
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 41,
-      "accepted": 33,
+      "total": 42,
+      "accepted": 34,
       "pending": 0,
       "rejected": 5
     },
@@ -1793,6 +1799,12 @@
     "findings": [
       {
         "heading": "Cross-session: agent:capability_gap repeating across sessions",
+        "observed": "4x (2026-04-19, 2026-04-21, 2026-04-23)",
+        "signature": "reviewer",
+        "suggested": "[hook] — gap diagnosis: recurring agent:capability_gap pattern across sessions without resolution"
+      },
+      {
+        "heading": "Cross-session: agent:capability_gap repeating across sessions",
         "observed": "3x (2026-04-20)",
         "signature": "commit-gate",
         "suggested": "[hook] — gap diagnosis: recurring agent:capability_gap pattern across sessions without resolution"
@@ -1811,6 +1823,12 @@
       },
       {
         "heading": "Similarity cluster: pattern_detected (6 events, trigram)",
+        "observed": "6x (2026-04-16, 2026-04-23)",
+        "signature": "",
+        "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
+      },
+      {
+        "heading": "Similarity cluster: pattern_detected (6 events, trigram)",
         "observed": "6x (2026-04-16)",
         "signature": "",
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
@@ -1818,12 +1836,6 @@
       {
         "heading": "Similarity cluster: pattern_detected (4 events, trigram)",
         "observed": "4x (2026-04-16, 2026-04-18, 2026-04-19)",
-        "signature": "",
-        "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
-      },
-      {
-        "heading": "Similarity cluster: pattern_detected (3 events, trigram)",
-        "observed": "3x (2026-04-16)",
         "signature": "",
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
       },
@@ -1840,7 +1852,7 @@
         "suggested": ""
       }
     ],
-    "generated": "2026-04-20 14:54"
+    "generated": "2026-04-24 22:26"
   },
   "consolidation": {
     "hasData": true,
@@ -1872,5 +1884,73 @@
     ],
     "generated": "2026-04-20 18:11"
   },
-  "lastUpdated": "2026-04-24T04:20:27.586Z"
+  "projects": [
+    {
+      "id": "agent-os",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0
+    },
+    {
+      "id": "blank-id-test",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0
+    },
+    {
+      "id": "custom-test",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0
+    },
+    {
+      "id": "final-check",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0
+    },
+    {
+      "id": "happy-path",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0
+    },
+    {
+      "id": "inject-test",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0
+    },
+    {
+      "id": "injection-test",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0
+    },
+    {
+      "id": "log-test",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0
+    },
+    {
+      "id": "sprint2-canary",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0
+    },
+    {
+      "id": "test-proj",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0
+    },
+    {
+      "id": "traversal-test",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0
+    }
+  ],
+  "lastUpdated": "2026-04-25T03:31:07.259Z"
 }

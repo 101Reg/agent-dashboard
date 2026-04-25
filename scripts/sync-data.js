@@ -579,6 +579,57 @@ async function getConsolidation() {
   return { hasData: true, findings: findings.slice(0, 10), generated };
 }
 
+// ─── Project Scorecards (Phase 4) ───────────────────────────────────────────
+
+async function getProjects() {
+  const today = new Date().toISOString().slice(0, 10);
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10);
+
+  const raw = await safeReadFile(PERF_LOG);
+  if (!raw || !raw.trim()) return [];
+
+  const lines = raw.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+
+  // Derive active project IDs from last 30 days
+  const projectIds = new Set();
+  for (const e of lines) {
+    const p = e.project;
+    if (p && typeof p === 'string' && e.date >= thirtyDaysAgo) projectIds.add(p);
+  }
+  if (projectIds.size === 0) return [];
+
+  // Build resolution key set: friction_resolved + friction_acknowledged
+  const resolvedKeys = new Set();
+  for (const e of lines) {
+    if (e.event === 'friction_resolved' || e.event === 'friction_acknowledged') {
+      if (e.target_session && e.target_event && e.target_detail != null) {
+        resolvedKeys.add(`${e.target_session}::${e.target_event}::${e.target_detail}`);
+      }
+    }
+  }
+
+  const FRICTION_EVENTS = new Set(['fix_attempt', 'capability_gap', 'escalation']);
+
+  return Array.from(projectIds).sort().map(id => {
+    let friction_today = 0;
+    const capGaps = [];
+    const templates = new Set();
+
+    for (const e of lines) {
+      if (e.project !== id) continue;
+      if (FRICTION_EVENTS.has(e.event) && e.date === today) friction_today++;
+      if (e.event === 'capability_gap') capGaps.push({ session: e.session || '', detail: e.detail || '' });
+      if (e.event === 'code_shape' && e.template) templates.add(e.template);
+    }
+
+    const unresolved_gaps = capGaps.filter(
+      g => !resolvedKeys.has(`${g.session}::capability_gap::${g.detail}`)
+    ).length;
+
+    return { id, friction_today, unresolved_gaps, templates_used: templates.size };
+  });
+}
+
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 // Parse b7 efficacy report from cached file — written nightly by Bruce, manually via `bash ~/.claude/night-shift/phases/b7-agent-efficacy.sh > ~/.claude/agent-efficacy-report.md` if stale
@@ -613,7 +664,7 @@ async function main() {
   console.log('Syncing Agent OS data...');
 
   // getTimeline defined at line 394 of this file
-  const [agents, memory, metrics, selfImprovement, system, nightShift, timeline, patterns, consolidation] = await Promise.all([
+  const [agents, memory, metrics, selfImprovement, system, nightShift, timeline, patterns, consolidation, projects] = await Promise.all([
     getAgents(),
     getMemory(),
     getMetrics(),
@@ -623,6 +674,7 @@ async function main() {
     getTimeline(),
     getPatterns(),
     getConsolidation(),
+    getProjects(),
   ]);
 
   const agentEfficacy = await getAgentEfficacy();
@@ -641,6 +693,7 @@ async function main() {
     nightShift,
     patterns,
     consolidation,
+    projects,
     lastUpdated: new Date().toISOString(),
   };
 
@@ -654,6 +707,7 @@ async function main() {
   console.log(`  Patterns: ${patterns.hasData ? patterns.findings.length + ' finding(s)' : 'no report yet'}`);
   console.log(`  Consolidation: ${consolidation.hasData ? consolidation.findings.length + ' candidate(s)' : 'no report yet'}`);
   console.log(`  Agent efficacy: ${agentEfficacy.length} healthy agent(s) scored`);
+  console.log(`  Projects: ${projects.length} active project(s) with scorecards`);;
 }
 
 main().catch(err => { console.error(err); process.exit(1); });

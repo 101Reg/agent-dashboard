@@ -1363,6 +1363,23 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "agent-os-v3-p3-p4-headless",
+        "date": "2026-04-24",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "template-extract",
+            "detail": "template-extract.sh v1 missed substituting source-project name in (1) arbitrary string contexts (manifest values, code titles, cookie names,"
+          }
+        ]
       }
     ],
     "hasData": true
@@ -1573,52 +1590,52 @@
       "high": true
     },
     {
-      "date": "2026-04-23",
-      "text": "Stream A timed out after 20 min / 25 tool calls — task scope (6 cleanup items + 7-layer viz + timeline decision + sync + deploy) exceeded single-agent budget",
-      "context": "main-thread completed remaining work in ~10 min — better decomposition would have been 2 agents per task class (cleanup + additions) with shared file lock",
+      "date": "2026-04-24",
+      "text": "template-extract.sh v1 missed substituting source-project name in (1) arbitrary string contexts (manifest values, code titles, cookie names, email body text), (2) doc-style files (plan.md, spec/*, scripts/seed*.sql) — produced 'next-cloudflare-d1' with ~10 hardcoded 'Kin' literals requiring manual surgical patching post-extraction",
+      "context": "V3 Phase 3 dogfood — kin → next-cloudflare-d1 extraction. Ship-blocking on Kin literals in .dev.vars MAGIC_LINK_FROM_EMAIL value + comment. Patched manually 2026-04-24. Template documented in known_issues field.",
       "high": false
     },
     {
-      "date": "2026-04-23",
-      "text": "Dashboard does not reflect real-time state. Sync runs only on /learn or manual `npm run sync` — Hero's friction events / new cap_gaps / efficacy changes are invisible until next sync. Hero direction: 'dashboard needs to reflect in real time what's going on.'",
-      "context": "step 7b feedback",
-      "high": false
-    },
-    {
-      "date": "2026-04-23",
-      "text": "4 failed Edit calls on App.jsx (unicode escape mismatch) before pivoting to Python. Hero direction: 'failed edits is unacceptable.' No rule currently codifies tool-pivot threshold for repeat Edit failures.",
-      "context": "step 7b feedback",
-      "high": false
-    },
-    {
-      "date": "2026-04-23",
-      "text": "capability_gap x3",
-      "context": "Stop hook blocked — mandate to build systemic fix",
+      "date": "2026-04-24",
+      "text": "cross-session-repeat: agent:capability_gap x4",
+      "context": "Layer 2 scanner — 3 cross-session finding(s)",
       "high": true
     },
     {
-      "date": "2026-04-23",
-      "text": "cap_gap x3 mandate — 2/3 already resolved inline earlier today but friction_resolved events missing. 1 remaining (dashboard real-time) is deferred as thread #1 in open queue.",
-      "context": "Gap Diagnosis Protocol complete. Systemic fix: self-improvement.md discipline rule + resolve-gap.sh helper",
+      "date": "2026-04-24",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 3 cross-session finding(s)",
       "high": true
     },
     {
-      "date": "2026-04-23",
-      "text": "Committed 8f223ae (Path A hygiene) without spawning reviewer. Reason: commit contained settings.json (config), self-improvement.md (docs), resolve-gap.sh (60-line helper tested inline with no-match case), perf log entries (data). Not a prod deploy. Rule scope is pre-deploy reviewer; commit-gate hook scope is all git commits — 1-level mismatch.",
-      "context": "commit-gate fired during Path A hook hygiene work",
-      "high": false
+      "date": "2026-04-24",
+      "text": "cross-session-repeat: agent:hook_catch x2",
+      "context": "Layer 2 scanner — 3 cross-session finding(s)",
+      "high": true
     },
     {
-      "date": "2026-04-23",
-      "text": "Pushed session learning to 101Reg/claude-config main without reviewer. Reason: this repo is not a prod-auto-deploy branch (config repo only). Rule scope per agent-delegation-triggers.md is `git push origin main on a prod-auto-deploy branch` — hook watches all pushes to main without branch-deploy-target awareness.",
-      "context": "deploy-gate 2nd-level scope mismatch (hook watches all pushes, rule watches auto-deploy pushes)",
-      "high": false
+      "date": "2026-04-24",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
     },
     {
-      "date": "2026-04-23",
-      "text": "Hero feedback (/learn Step 7b): hooks fired mid-fix during a hook-hygiene session. commit-gate fired on its own documentation text; deploy-gate fired on pushes to config repo; Haiku PostToolUse flagged test JSON as real errors; pattern-detector fired with stale resolved-pairing signals. Hero direction: is Agent OS working in parallel or is things stepping on each other? The 7-layer architecture assumes independence; practice shows shared state (perf log, ledger) written by multiple hooks with no coordination layer, LLM-prompt hooks lossy on meta-vs-real state, and rule/hook scope misalignments.",
-      "context": "session outcome: spun_wheels. Shipped 8 commits but with significant self-interference.",
-      "high": false
+      "date": "2026-04-24",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-24",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-24",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
     }
   ],
   "nightShift": {
@@ -1852,7 +1869,7 @@
         "suggested": ""
       }
     ],
-    "generated": "2026-04-24 22:26"
+    "generated": "2026-04-24 23:33"
   },
   "consolidation": {
     "hasData": true,
@@ -1882,75 +1899,37 @@
         "action": ""
       }
     ],
-    "generated": "2026-04-20 18:11"
+    "generated": "2026-04-24 23:33"
   },
   "projects": [
+    {
+      "id": "agent-dashboard",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 104
+    },
     {
       "id": "agent-os",
       "friction_today": 0,
       "unresolved_gaps": 0,
-      "templates_used": 0
+      "templates_used": 1,
+      "tool_calls_30d": 0
     },
     {
-      "id": "blank-id-test",
+      "id": "claude-config",
       "friction_today": 0,
       "unresolved_gaps": 0,
-      "templates_used": 0
+      "templates_used": 0,
+      "tool_calls_30d": 374
     },
     {
-      "id": "custom-test",
+      "id": "kin",
       "friction_today": 0,
       "unresolved_gaps": 0,
-      "templates_used": 0
-    },
-    {
-      "id": "final-check",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0
-    },
-    {
-      "id": "happy-path",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0
-    },
-    {
-      "id": "inject-test",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0
-    },
-    {
-      "id": "injection-test",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0
-    },
-    {
-      "id": "log-test",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0
-    },
-    {
-      "id": "sprint2-canary",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0
-    },
-    {
-      "id": "test-proj",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0
-    },
-    {
-      "id": "traversal-test",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0
+      "templates_used": 0,
+      "tool_calls_30d": 156
     }
   ],
-  "lastUpdated": "2026-04-25T03:31:07.259Z"
+  "lastUpdated": "2026-04-25T04:33:54.783Z"
 }

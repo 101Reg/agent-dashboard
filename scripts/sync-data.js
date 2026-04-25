@@ -10,6 +10,7 @@ const AGENTS_DIR = join(CLAUDE_DIR, 'agents');
 const SKILLS_DIR = join(CLAUDE_DIR, 'skills');
 const RULES_DIR = join(CLAUDE_DIR, 'rules');
 const PERF_LOG = join(MEMORY_DIR, 'logs/os-performance.jsonl');
+const TOOL_CALL_LOG = join(MEMORY_DIR, 'logs/os-performance-tool-calls.jsonl');
 const DIGEST_LOG = join(MEMORY_DIR, 'logs/session-digests.jsonl');
 const SETTINGS = join(CLAUDE_DIR, 'settings.json');
 const LEDGER = join(CLAUDE_DIR, 'night-shift/proposal-ledger.jsonl');
@@ -585,22 +586,41 @@ async function getProjects() {
   const today = new Date().toISOString().slice(0, 10);
   const thirtyDaysAgo = new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10);
 
-  const raw = await safeReadFile(PERF_LOG);
-  if (!raw || !raw.trim()) return [];
+  // Signal log: capability_gap / fix_attempt / friction_resolved / code_shape / template_used
+  // Tool-call log: every PostToolUse event (where universal-logger tags project most reliably)
+  const [signalRaw, toolCallRaw] = await Promise.all([
+    safeReadFile(PERF_LOG),
+    safeReadFile(TOOL_CALL_LOG),
+  ]);
 
-  const lines = raw.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+  const parseLines = raw => raw && raw.trim()
+    ? raw.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean)
+    : [];
 
-  // Derive active project IDs from last 30 days
+  const signalEvents = parseLines(signalRaw);
+  const toolCallEvents = parseLines(toolCallRaw);
+
+  // Project ID set: union of both logs, last 30 days, excluding "none"/"unknown"
+  // and obvious test fixtures (any id ending in -test, starting with test-, or matching common throwaway names).
+  const TEST_FIXTURE_PATTERNS = [/-test$/, /^test-/, /^injection-/, /^inject-/, /-canary$/, /^final-check$/, /^happy-path$/, /^review-test$/, /^log-test$/, /^kin-replay$/];
+  const isRealProject = id => {
+    if (!id || typeof id !== 'string') return false;
+    if (id === 'none' || id === 'unknown' || id === '') return false;
+    return !TEST_FIXTURE_PATTERNS.some(re => re.test(id));
+  };
+
   const projectIds = new Set();
-  for (const e of lines) {
-    const p = e.project;
-    if (p && typeof p === 'string' && e.date >= thirtyDaysAgo) projectIds.add(p);
+  for (const e of signalEvents) {
+    if (isRealProject(e.project) && e.date >= thirtyDaysAgo) projectIds.add(e.project);
+  }
+  for (const e of toolCallEvents) {
+    if (isRealProject(e.project) && e.date >= thirtyDaysAgo) projectIds.add(e.project);
   }
   if (projectIds.size === 0) return [];
 
-  // Build resolution key set: friction_resolved + friction_acknowledged
+  // Resolution key set from signal log (friction_resolved + friction_acknowledged)
   const resolvedKeys = new Set();
-  for (const e of lines) {
+  for (const e of signalEvents) {
     if (e.event === 'friction_resolved' || e.event === 'friction_acknowledged') {
       if (e.target_session && e.target_event && e.target_detail != null) {
         resolvedKeys.add(`${e.target_session}::${e.target_event}::${e.target_detail}`);
@@ -612,21 +632,27 @@ async function getProjects() {
 
   return Array.from(projectIds).sort().map(id => {
     let friction_today = 0;
+    let tool_calls_30d = 0;
     const capGaps = [];
     const templates = new Set();
 
-    for (const e of lines) {
+    for (const e of signalEvents) {
       if (e.project !== id) continue;
       if (FRICTION_EVENTS.has(e.event) && e.date === today) friction_today++;
       if (e.event === 'capability_gap') capGaps.push({ session: e.session || '', detail: e.detail || '' });
-      if (e.event === 'code_shape' && e.template) templates.add(e.template);
+      if ((e.event === 'code_shape' || e.event === 'template_used') && e.template) templates.add(e.template);
+    }
+
+    for (const e of toolCallEvents) {
+      if (e.project !== id) continue;
+      if (e.date >= thirtyDaysAgo) tool_calls_30d++;
     }
 
     const unresolved_gaps = capGaps.filter(
       g => !resolvedKeys.has(`${g.session}::capability_gap::${g.detail}`)
     ).length;
 
-    return { id, friction_today, unresolved_gaps, templates_used: templates.size };
+    return { id, friction_today, unresolved_gaps, templates_used: templates.size, tool_calls_30d };
   });
 }
 

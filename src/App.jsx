@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react'
 import Reveal from './components/Reveal'
 import ScoreRing from './components/ScoreRing'
 import AORCard from './components/AORCard'
+import LoopHealth from './components/LoopHealth'
+import FailureToPrevention from './components/FailureToPrevention'
+import PatternToTemplate from './components/PatternToTemplate'
+import PreventionEfficacy from './components/PreventionEfficacy'
 
-// Timeline tab retired — static milestones cut off at Apr 4-5 with no auto-update; timeline now auto-populates from sprint history in sync-data.js but the tab added no unique signal vs Activity/Patterns/Consolidation
-const NAV = ["Score", "Areas", "Activity"]
+const NAV = ["Loop", "Detail"]
 
 const EVENT_COLORS = {
   fix_attempt: '#f55',
@@ -81,25 +84,16 @@ function computeAORs(data) {
   const proposals = ns.proposalTrackRecord || { total: 0, accepted: 0, pending: 0, rejected: 0 }
   const proposalRate = proposals.total > 0 ? Math.round((proposals.accepted / proposals.total) * 100) : 0
   const mem = data.memory || { total: 0, byType: {} }
-  const sys = data.system || {}
 
-  // --- FRICTION (35%) ---
-  // Exponential decay: 0 friction = 100, half-life at 1 event/session
-  // Smooth gradient — every fraction of friction matters
   const frictionEvents = totalFix + totalEsc + totalReex + totalGaps + totalToil
   const frictionPerSession = frictionEvents / totalSessions
   const frictionScore = Math.round(100 * Math.exp(-frictionPerSession * 0.7))
 
-  // --- AGENTS (30%) ---
-  // 70% efficacy (are agents working well in the field?) + 30% quality (canary eval scores)
-  // Efficacy comes from b7-agent-efficacy.sh healthy-agent scores stored in data.agentEfficacy
-  const agentCount = data.agentCount || 0
   const evalCanaries = ns.evalCanaries || []
   const avgEvalScore = evalCanaries.length > 0
     ? evalCanaries.reduce((sum, e) => sum + (parseFloat(e.score) || 0), 0) / evalCanaries.length
-    : 4.7 // fallback to last known
+    : 4.7
   const evalQuality = (avgEvalScore / 5) * 100
-  // Avg per-agent efficacy from b7 healthy list (score 0–1), converted to 0–100
   const efficacyScores = data.agentEfficacy || []
   const avgEfficacy = efficacyScores.length > 0
     ? efficacyScores.reduce((sum, s) => sum + s, 0) / efficacyScores.length
@@ -109,27 +103,19 @@ function computeAORs(data) {
     ? Math.round(efficacyPct * 0.7 + evalQuality * 0.3)
     : Math.round(evalQuality)
 
-  // --- MEMORY (15%) ---
-  // Under 60% = perfect. Quadratic penalty as you approach the 100-file ceiling.
-  // Answers: "how much headroom do we have before consolidation is urgent?"
   const memTotal = mem.total || 0
   const memUtilization = Math.min(memTotal / 100, 1)
   const memScore = memUtilization <= 0.6 ? 100
     : Math.round(100 * Math.max(0, 1 - Math.pow((memUtilization - 0.6) / 0.4, 2)))
 
-  // --- SELF-IMPROVEMENT (15%) ---
-  // Acceptance rate * responsiveness. Pending proposals = backlog = drag on score.
-  // Need 5+ proposals for meaningful rate, otherwise cap at 50.
-  const pendingPenalty = Math.min(proposals.pending * 10, 30) // max 30pt penalty
+  const pendingPenalty = Math.min(proposals.pending * 10, 30)
   const proposalScore = proposals.total >= 5
     ? Math.max(0, Math.round(proposalRate - pendingPenalty))
     : 50
 
-  // Coverage AOR retired 2026-04-23 — Skills 18/Rules 16/Hooks 12/MCP 2 are 2-5x past benchmarks; question is no longer "do we have enough?" but "are these earning their keep?" Layers 4+5 answer that. Weight redistributed: +5% Friction, +5% Agents.
-
   const aors = [
     {
-      name: 'Friction', icon: '\u26A1', weight: 40, score: frictionScore,
+      name: 'Friction', icon: '⚡', weight: 40, score: frictionScore,
       metrics: [
         { name: 'Fix Attempts', value: totalFix, benchmark: '0', definition: 'Code fixes that failed to resolve the issue' },
         { name: 'Escalations', value: totalEsc, benchmark: '0', definition: 'Work handed from one agent to another due to failure' },
@@ -139,23 +125,23 @@ function computeAORs(data) {
       ],
     },
     {
-      name: 'Agents', icon: '\uD83E\uDD16', weight: 30, score: agentScore,
+      name: 'Agents', icon: '🤖', weight: 30, score: agentScore,
       metrics: [
-        { name: 'Avg Efficacy', value: efficacyPct != null ? Math.round(efficacyPct) + '%' : 'N/A', benchmark: '\u226580%', definition: 'Mean per-agent efficacy from b7 (real-world deployments)' },
+        { name: 'Avg Efficacy', value: efficacyPct != null ? Math.round(efficacyPct) + '%' : 'N/A', benchmark: '≥80%', definition: 'Mean per-agent efficacy from b7 (real-world deployments)' },
         { name: 'Avg Eval Score', value: avgEvalScore.toFixed(1), benchmark: '5.0', definition: 'Mean score across canary eval results' },
       ],
     },
     {
-      name: 'Memory', icon: '\uD83E\uDDE0', weight: 15, score: memScore,
+      name: 'Memory', icon: '🧠', weight: 15, score: memScore,
       metrics: [
-        { name: 'Total Files', value: memTotal, benchmark: '<100', definition: memTotal + '/100 ceiling \u2014 ' + Math.round((1 - memUtilization) * 100) + '% headroom' },
+        { name: 'Total Files', value: memTotal, benchmark: '<100', definition: memTotal + '/100 ceiling — ' + Math.round((1 - memUtilization) * 100) + '% headroom' },
         { name: 'Index Usage', value: '98/200', benchmark: '<200', definition: 'MEMORY.md line count vs truncation limit' },
       ],
     },
     {
-      name: 'Self-Improvement', icon: '\uD83D\uDD04', weight: 15, score: proposalScore,
+      name: 'Self-Improvement', icon: '🔄', weight: 15, score: proposalScore,
       metrics: [
-        { name: 'Hit Rate', value: proposalRate + '%', benchmark: '>80%', definition: 'Accepted \u00F7 (Accepted + Rejected)' },
+        { name: 'Hit Rate', value: proposalRate + '%', benchmark: '>80%', definition: 'Accepted ÷ (Accepted + Rejected)' },
         { name: 'Pending', value: proposals.pending, benchmark: '0', definition: 'Each pending proposal costs 10pts (max 30pt drag)' },
       ],
     },
@@ -168,7 +154,7 @@ function computeAORs(data) {
 export default function App() {
   const [data, setData] = useState(null)
   const [loaded, setLoaded] = useState(false)
-  const [tab, setTab] = useState('Score')
+  const [tab, setTab] = useState('Loop')
 
   useEffect(() => {
     fetch('/data.json?t=' + Date.now())
@@ -251,46 +237,35 @@ export default function App() {
           )}
         </div>
 
-        {/* Tab: Score */}
-        {tab === 'Score' && (
+        {/* Tab: Loop */}
+        {tab === 'Loop' && (
           <>
-            <Reveal>
-              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 48 }}>
-                <ScoreRing score={overall} status={status} label={sessions.length + ' sessions measured'} />
-              </div>
+            <Reveal delay={0}>
+              <LoopHealth
+                failureToPrevention={data.failureToPrevention}
+                patternToTemplate={data.patternToTemplate}
+                preventionEfficacy={data.preventionEfficacy}
+              />
             </Reveal>
 
-            {/* AOR Summary Strip */}
             <Reveal delay={100}>
-              <div style={{
-                display: 'grid', gridTemplateColumns: 'repeat(' + aors.length + ', 1fr)', gap: 8,
-                marginBottom: 32,
-              }}>
-                {aors.map(a => {
-                  const c = a.score >= 80 ? '#53e16f' : a.score >= 60 ? '#F5B07B' : '#f55'
-                  return (
-                    <div key={a.name} onClick={() => setTab('Areas')} style={{
-                      background: 'rgba(255,255,255,0.03)', borderRadius: 12,
-                      border: '1px solid rgba(255,255,255,0.06)',
-                      padding: '14px 8px', textAlign: 'center', cursor: 'pointer',
-                      transition: 'all 0.2s',
-                    }}>
-                      <div style={{ fontSize: 16, marginBottom: 6 }}>{a.icon}</div>
-                      <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: '-0.03em', color: c }}>{a.score}</div>
-                      <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.25)', fontWeight: 500, marginTop: 4, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                        {a.name}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
+              <FailureToPrevention data={data.failureToPrevention} />
+            </Reveal>
+
+            <Reveal delay={200}>
+              <PatternToTemplate data={data.patternToTemplate} />
+            </Reveal>
+
+            <Reveal delay={300}>
+              <PreventionEfficacy data={data.preventionEfficacy} />
             </Reveal>
 
             {/* Proposals Card */}
-            <Reveal delay={200}>
+            <Reveal delay={400}>
               <div style={{
                 background: 'rgba(255,255,255,0.03)', borderRadius: 16,
                 border: '1px solid rgba(255,255,255,0.06)', padding: '20px 24px',
+                marginTop: 16,
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
                   <div style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.2)' }}>
@@ -317,85 +292,78 @@ export default function App() {
                   </div>
                 )) : (
                   <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.2)', padding: '12px 0', textAlign: 'center' }}>
-                    No pending proposals \u00B7 Run /bruce to generate
+                    No pending proposals · Run /bruce to generate
                   </div>
                 )}
               </div>
             </Reveal>
-
-            {/* 7-Layer Spine */}
-            {data.sevenLayerSpine && data.sevenLayerSpine.length > 0 && (
-              <Reveal delay={300}>
-                <div style={{
-                  background: 'rgba(255,255,255,0.03)', borderRadius: 16,
-                  border: '1px solid rgba(255,255,255,0.06)', padding: '20px 24px',
-                  marginTop: 16,
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
-                    <div style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.2)' }}>
-                      7-Layer Spine
-                    </div>
-                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)' }}>
-                      {data.sevenLayerSpine.filter(l => l.status === 'Shipped').length}/7 shipped
-                    </div>
-                  </div>
-                  {data.sevenLayerSpine.map((layer, i) => {
-                    const dotColor = layer.status === 'Shipped' ? '#53e16f' : layer.status === 'Partial' ? '#F5B07B' : 'rgba(255,255,255,0.2)';
-                    return (
-                      <div key={layer.num} style={{
-                        display: 'flex', alignItems: 'center', gap: 12,
-                        padding: '10px 0',
-                        borderBottom: i < data.sevenLayerSpine.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
-                      }}>
-                        <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', fontWeight: 600, width: 16 }}>{layer.num}</div>
-                        <div style={{ width: 6, height: 6, borderRadius: '50%', background: dotColor, flexShrink: 0 }} />
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,0.85)' }}>{layer.name}</div>
-                          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', marginTop: 2 }}>{layer.purpose}</div>
-                        </div>
-                        <div style={{ fontSize: 10, color: dotColor, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{layer.status}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </Reveal>
-            )}
           </>
         )}
 
-        {/* Tab: Areas */}
-        {tab === 'Areas' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <Reveal>
-              <div style={{ marginBottom: 8 }}>
-                <h2 style={{ fontSize: 20, fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>Areas of Responsibility</h2>
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', marginTop: 4 }}>Tap any area to see metrics, definitions, and goals</p>
-              </div>
-            </Reveal>
-            {aors.map((a, i) => (
-              <Reveal key={a.name} delay={i * 60}>
-                <AORCard {...a} />
-              </Reveal>
-            ))}
-            <Reveal delay={aors.length * 60 + 100}>
-              <div style={{
-                background: 'rgba(255,255,255,0.02)', borderRadius: 12,
-                padding: '16px 20px', marginTop: 8,
-                border: '1px dashed rgba(255,255,255,0.06)',
-              }}>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', lineHeight: 1.6 }}>
-                  <strong style={{ color: 'rgba(255,255,255,0.4)' }}>How scoring works:</strong> Each area is scored 0-100 based on its metrics.
-                  Weighted by impact: Friction (35%) and Agents (25%) carry the most weight.
-                  Overall = weighted average of all areas.
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        )}
-
-        {/* Tab: Activity */}
-        {tab === 'Activity' && (
+        {/* Tab: Detail */}
+        {tab === 'Detail' && (
           <>
+            {/* Section: Overall Score */}
+            <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.25)', marginBottom: 12, marginTop: 24 }}>Overall Score</div>
+
+            <Reveal>
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 48 }}>
+                <ScoreRing score={overall} status={status} label={sessions.length + ' sessions measured'} />
+              </div>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <div style={{
+                display: 'grid', gridTemplateColumns: 'repeat(' + aors.length + ', 1fr)', gap: 8,
+                marginBottom: 32,
+              }}>
+                {aors.map(a => {
+                  const c = a.score >= 80 ? '#53e16f' : a.score >= 60 ? '#F5B07B' : '#f55'
+                  return (
+                    <div key={a.name} style={{
+                      background: 'rgba(255,255,255,0.03)', borderRadius: 12,
+                      border: '1px solid rgba(255,255,255,0.06)',
+                      padding: '14px 8px', textAlign: 'center',
+                      transition: 'all 0.2s',
+                    }}>
+                      <div style={{ fontSize: 16, marginBottom: 6 }}>{a.icon}</div>
+                      <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: '-0.03em', color: c }}>{a.score}</div>
+                      <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.25)', fontWeight: 500, marginTop: 4, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        {a.name}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </Reveal>
+
+            {/* Section: Areas Drill-Down */}
+            <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.25)', marginBottom: 12, marginTop: 24 }}>Areas Drill-Down</div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16 }}>
+              {aors.map((a, i) => (
+                <Reveal key={a.name} delay={i * 60}>
+                  <AORCard {...a} />
+                </Reveal>
+              ))}
+              <Reveal delay={aors.length * 60 + 100}>
+                <div style={{
+                  background: 'rgba(255,255,255,0.02)', borderRadius: 12,
+                  padding: '16px 20px', marginTop: 8,
+                  border: '1px dashed rgba(255,255,255,0.06)',
+                }}>
+                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', lineHeight: 1.6 }}>
+                    <strong style={{ color: 'rgba(255,255,255,0.4)' }}>How scoring works:</strong> Each area is scored 0-100 based on its metrics.
+                    Weighted by impact: Friction (35%) and Agents (25%) carry the most weight.
+                    Overall = weighted average of all areas.
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Section: Recent Activity */}
+            <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.25)', marginBottom: 12, marginTop: 24 }}>Recent Activity</div>
+
             <Reveal>
               <div style={{ marginBottom: 24 }}>
                 <h2 style={{ fontSize: 20, fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>Recent Sessions</h2>
@@ -436,7 +404,6 @@ export default function App() {
               })}
             </div>
 
-            {/* Swim Lanes — per-session event timeline */}
             <Reveal delay={150}>
               <div style={{ marginBottom: 32 }}>
                 <div style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.2)', marginBottom: 12 }}>
@@ -446,7 +413,6 @@ export default function App() {
               </div>
             </Reveal>
 
-            {/* Self-Improvement highlights — only non-proposal entries */}
             <Reveal delay={200}>
               <div>
                 <div style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.2)', marginBottom: 12 }}>
@@ -466,7 +432,6 @@ export default function App() {
               </div>
             </Reveal>
 
-            {/* Layer 2 — Patterns (cross-session detections) */}
             {data.patterns?.hasData && data.patterns.findings.length > 0 && (
               <Reveal delay={300}>
                 <div style={{ marginTop: 32 }}>
@@ -490,7 +455,6 @@ export default function App() {
               </Reveal>
             )}
 
-            {/* Layer 5 — Consolidation candidates (duplicates, overlaps, stale) */}
             {data.consolidation?.hasData && data.consolidation.findings.length > 0 && (
               <Reveal delay={400}>
                 <div style={{ marginTop: 32 }}>
@@ -516,12 +480,47 @@ export default function App() {
                 </div>
               </Reveal>
             )}
-          </>
-        )}
 
-        {/* Tab: Timeline */}
-        {tab === 'Timeline' && (
-          <Timeline milestones={data.timeline || []} />
+            {/* Section: Infrastructure */}
+            {data.sevenLayerSpine && data.sevenLayerSpine.length > 0 && (
+              <>
+                <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.25)', marginBottom: 12, marginTop: 24 }}>Infrastructure</div>
+                <Reveal delay={500}>
+                  <div style={{
+                    background: 'rgba(255,255,255,0.03)', borderRadius: 16,
+                    border: '1px solid rgba(255,255,255,0.06)', padding: '20px 24px',
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
+                      <div style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.2)' }}>
+                        7-Layer Spine
+                      </div>
+                      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)' }}>
+                        {data.sevenLayerSpine.filter(l => l.status === 'Shipped').length}/7 shipped
+                      </div>
+                    </div>
+                    {data.sevenLayerSpine.map((layer, i) => {
+                      const dotColor = layer.status === 'Shipped' ? '#53e16f' : layer.status === 'Partial' ? '#F5B07B' : 'rgba(255,255,255,0.2)';
+                      return (
+                        <div key={layer.num} style={{
+                          display: 'flex', alignItems: 'center', gap: 12,
+                          padding: '10px 0',
+                          borderBottom: i < data.sevenLayerSpine.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
+                        }}>
+                          <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', fontWeight: 600, width: 16 }}>{layer.num}</div>
+                          <div style={{ width: 6, height: 6, borderRadius: '50%', background: dotColor, flexShrink: 0 }} />
+                          <div style={{ flex: 1, minWidth: 0 }}>
+                            <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,0.85)' }}>{layer.name}</div>
+                            <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', marginTop: 2 }}>{layer.purpose}</div>
+                          </div>
+                          <div style={{ fontSize: 10, color: dotColor, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{layer.status}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </Reveal>
+              </>
+            )}
+          </>
         )}
       </main>
     </div>

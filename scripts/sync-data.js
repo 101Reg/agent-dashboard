@@ -656,6 +656,262 @@ async function getProjects() {
   });
 }
 
+// ─── Rolling Window Helper ───────────────────────────────────────────────────
+
+function rollingWindow(days, anchorDate = new Date()) {
+  const ms = days * 24 * 60 * 60 * 1000;
+  // Shift thisEnd forward by 1 day so date-string strict-less-than (`e.date < thisEnd`)
+  // properly INCLUDES events dated on anchorDate's calendar day. Without this shift,
+  // today's events fall through both windows when comparing yyyy-mm-dd strings.
+  const thisEnd = new Date(anchorDate.getTime() + 86400000);
+  const thisStart = new Date(thisEnd.getTime() - ms);
+  const prevStart = new Date(thisStart.getTime() - ms);
+  return { thisStart, thisEnd, prevStart, prevEnd: thisStart };
+}
+
+// ─── Verb 1: Failure → Prevention ───────────────────────────────────────────
+
+async function getFailureToPrevention() {
+  const raw = await safeReadFile(PERF_LOG);
+  const events = raw && raw.trim()
+    ? raw.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean)
+    : [];
+
+  const now = new Date();
+  const win7 = rollingWindow(7, now);
+  const win14 = rollingWindow(14, now);
+
+  const isFailure = e =>
+    ['capability_gap', 'fix_attempt', 'escalation'].includes(e.event) ||
+    (e.event === 'hook_catch' && e.valid === true);
+
+  const isPrevention = e => e.event === 'auto_install';
+
+  const inWindow = (e, start, end) => e.date >= start.toISOString().slice(0, 10) && e.date < end.toISOString().slice(0, 10);
+
+  // This week and last week counts
+  const thisWeekEvents = events.filter(e => inWindow(e, win7.thisStart, win7.thisEnd));
+  const lastWeekEvents = events.filter(e => inWindow(e, win7.prevStart, win7.prevEnd));
+
+  const countWeek = (evs) => {
+    const failures = evs.filter(isFailure).length;
+    const preventions = evs.filter(isPrevention).length;
+    const autoInstalls = evs.filter(e => e.event === 'auto_install').length;
+    const conversionPct = failures === 0 ? 0 : Math.round(100 * preventions / failures);
+    return { failures, preventions, autoInstalls, conversionPct };
+  };
+
+  // Daily breakdown for last 14 days
+  const daily = [];
+  for (let i = 13; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+    const dayEvents = events.filter(e => e.date === d);
+    daily.push({
+      date: d,
+      failures: dayEvents.filter(isFailure).length,
+      preventions: dayEvents.filter(isPrevention).length,
+    });
+  }
+
+  // Stuck failures: capability_gap events with no matching friction_resolved or auto_install
+  // within 7 days of the gap event. Top 5 by age desc.
+  const resolvedDetails = new Set(
+    events
+      .filter(e => e.event === 'friction_resolved' && e.target_detail)
+      .map(e => e.target_detail)
+  );
+  const autoInstallDetails = new Set(
+    events
+      .filter(e => e.event === 'auto_install' && e.detail)
+      .map(e => e.detail)
+  );
+
+  const capGaps = events.filter(e => e.event === 'capability_gap');
+  const today = now.toISOString().slice(0, 10);
+
+  const stuckFailures = capGaps
+    .filter(e => {
+      // Check if any friction_resolved target_detail is a substring match
+      const detail = e.detail || '';
+      const isResolved = [...resolvedDetails].some(rd => rd.includes(detail) || detail.includes(rd));
+      const isAutoInstalled = [...autoInstallDetails].some(ad => ad.includes(detail) || detail.includes(ad));
+      return !isResolved && !isAutoInstalled;
+    })
+    .map(e => {
+      const age_days = Math.floor((new Date(today) - new Date(e.date)) / 86400000);
+      return { session: e.session || 'unknown', detail: (e.detail || '').slice(0, 140), age_days };
+    })
+    .sort((a, b) => b.age_days - a.age_days)
+    .slice(0, 5);
+
+  return {
+    thisWeek: countWeek(thisWeekEvents),
+    lastWeek: countWeek(lastWeekEvents),
+    daily,
+    stuckFailures,
+  };
+}
+
+// ─── Verb 2: Pattern → Template ─────────────────────────────────────────────
+
+async function getPatternToTemplate(parsedPatterns) {
+  const raw = await safeReadFile(PERF_LOG);
+  const events = raw && raw.trim()
+    ? raw.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean)
+    : [];
+
+  const now = new Date();
+  const win7 = rollingWindow(7, now);
+  const fourteenDaysAgo = new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
+
+  const inWindow = (e, start, end) => e.date >= start.toISOString().slice(0, 10) && e.date < end.toISOString().slice(0, 10);
+
+  const countWindow = (start, end) => {
+    const evs = events.filter(e => inWindow(e, start, end));
+    const patternsDetected = evs.filter(e => e.event === 'pattern_detected').length;
+    const templatesExtracted = evs.filter(e => e.event === 'template_extracted').length;
+    const templatesInstantiated = evs.filter(e => e.event === 'template_used').length;
+    const extractionRate = patternsDetected === 0 ? 0 : Math.round(100 * templatesExtracted / patternsDetected);
+    return { patternsDetected, templatesExtracted, templatesInstantiated, extractionRate };
+  };
+
+  // Active templates: group template_used events by template field
+  const templateMap = new Map();
+  for (const e of events) {
+    if (e.event !== 'template_used' || !e.template) continue;
+    if (!templateMap.has(e.template)) {
+      templateMap.set(e.template, { name: e.template, instantiations: 0, lastUsed: e.date, projects: new Set() });
+    }
+    const entry = templateMap.get(e.template);
+    entry.instantiations++;
+    if (e.date > entry.lastUsed) entry.lastUsed = e.date;
+    if (e.project) entry.projects.add(e.project);
+  }
+
+  const activeTemplates = Array.from(templateMap.values())
+    .sort((a, b) => b.instantiations - a.instantiations)
+    .slice(0, 3)
+    .map(t => ({ name: t.name, instantiations: t.instantiations, lastUsed: t.lastUsed, projects: [...t.projects] }));
+
+  // Stuck patterns: pattern signatures from pattern-report.md that have no matching
+  // template_extracted event within 14 days. Text-based join on signature field —
+  // NOTE: this is a fuzzy substring match with no pattern_id link on events;
+  // false negatives are possible when the template name differs from the pattern signature.
+  const recentTemplateNames = new Set(
+    events
+      .filter(e => e.event === 'template_extracted' && e.date >= fourteenDaysAgo && e.template)
+      .map(e => e.template)
+  );
+
+  const stuckPatterns = (parsedPatterns || [])
+    .filter(p => {
+      const sig = (p.signature || p.heading || '').toLowerCase();
+      // Check if any recently extracted template name partially matches the pattern signature
+      return ![...recentTemplateNames].some(tn => sig.includes(tn.toLowerCase()) || tn.toLowerCase().includes(sig));
+    })
+    .map(p => {
+      // Age is unknown without a date on pattern entries — use a sentinel
+      return { heading: p.heading, age_days: null };
+    })
+    .slice(0, 5);
+
+  return {
+    thisWeek: countWindow(win7.thisStart, win7.thisEnd),
+    lastWeek: countWindow(win7.prevStart, win7.prevEnd),
+    activeTemplates,
+    stuckPatterns,
+  };
+}
+
+// ─── Verb 3: Prevention Efficacy ─────────────────────────────────────────────
+
+async function getPreventionEfficacy() {
+  const raw = await safeReadFile(PERF_LOG);
+  const events = raw && raw.trim()
+    ? raw.trim().split('\n').map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean)
+    : [];
+
+  const now = new Date();
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10);
+  const sevenDaysAgo = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10);
+  const today = now.toISOString().slice(0, 10);
+
+  // Excluded rule slugs per performance-logging.md
+  const EXCLUDED_SLUGS = new Set(['code-accuracy', 'pre-tool-use-same-file-symbol']);
+
+  // Group hook_catch events over 30 days by rule, skipping undefined valid and excluded slugs
+  const ruleMap = new Map();
+  for (const e of events) {
+    if (e.event !== 'hook_catch') continue;
+    if (e.date < thirtyDaysAgo) continue;
+    if (e.valid === undefined || e.valid === null) continue; // skip legacy entries without valid field
+    const rule = e.rule || 'unknown';
+    if (EXCLUDED_SLUGS.has(rule)) continue;
+    if (!ruleMap.has(rule)) {
+      ruleMap.set(rule, { rule, valid: 0, invalid: 0, dailyMap: new Map() });
+    }
+    const entry = ruleMap.get(rule);
+    if (e.valid === true) entry.valid++;
+    else entry.invalid++;
+    // Track daily for sparkline
+    if (!entry.dailyMap.has(e.date)) entry.dailyMap.set(e.date, { valid: 0, invalid: 0 });
+    const day = entry.dailyMap.get(e.date);
+    if (e.valid === true) day.valid++;
+    else day.invalid++;
+  }
+
+  // Build sparkline: 30-element array, today-29 to today
+  const sparklineDates = [];
+  for (let i = 29; i >= 0; i--) {
+    sparklineDates.push(new Date(Date.now() - i * 86400000).toISOString().slice(0, 10));
+  }
+
+  const perRule = Array.from(ruleMap.values()).map(entry => {
+    const fires30d = entry.valid + entry.invalid;
+    const efficacy = fires30d === 0 ? 0 : entry.valid / fires30d;
+    const sparkline = sparklineDates.map(d => {
+      const day = entry.dailyMap.get(d);
+      if (!day) return null;
+      const total = day.valid + day.invalid;
+      return total === 0 ? null : day.valid / total;
+    });
+    // Find last fire date
+    const firedDates = [...entry.dailyMap.keys()].sort();
+    const last_fire_date = firedDates.length > 0 ? firedDates[firedDates.length - 1] : null;
+    return { rule: entry.rule, efficacy, fires30d, valid: entry.valid, invalid: entry.invalid, sparkline, last_fire_date };
+  });
+
+  // Retirement candidates: efficacy === 0 && fires30d >= 3
+  const retirementCandidates = perRule
+    .filter(r => r.efficacy === 0 && r.fires30d >= 3)
+    .map(({ rule, efficacy, fires30d, last_fire_date }) => ({ rule, efficacy, fires30d, last_fire_date }));
+
+  // Active preventions = distinct rules NOT in retirement candidates
+  const retirementSet = new Set(retirementCandidates.map(r => r.rule));
+  const activePreventions = perRule.filter(r => !retirementSet.has(r.rule)).length;
+
+  // Weighted average efficacy
+  const totalFires = perRule.reduce((s, r) => s + r.fires30d, 0);
+  const avgEfficacy = totalFires === 0
+    ? 0
+    : perRule.reduce((s, r) => s + r.efficacy * r.fires30d, 0) / totalFires;
+
+  // Retirements this week and net active
+  const retirementsThisWeek = events.filter(e => e.event === 'retirement' && e.date >= sevenDaysAgo).length;
+  const autoInstalls30d = events.filter(e => e.event === 'auto_install' && e.date >= thirtyDaysAgo).length;
+  const retirements30d = events.filter(e => e.event === 'retirement' && e.date >= thirtyDaysAgo).length;
+  const netActive30d = autoInstalls30d - retirements30d;
+
+  return {
+    activePreventions,
+    avgEfficacy,
+    retirementCandidates,
+    retirementsThisWeek,
+    netActive30d,
+    perRule,
+  };
+}
+
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 // Parse b7 efficacy report from cached file — written nightly by Bruce, manually via `bash ~/.claude/night-shift/phases/b7-agent-efficacy.sh > ~/.claude/agent-efficacy-report.md` if stale
@@ -689,7 +945,6 @@ function getSevenLayerSpine() {
 async function main() {
   console.log('Syncing Agent OS data...');
 
-  // getTimeline defined at line 394 of this file
   const [agents, memory, metrics, selfImprovement, system, nightShift, timeline, patterns, consolidation, projects] = await Promise.all([
     getAgents(),
     getMemory(),
@@ -706,6 +961,14 @@ async function main() {
   const agentEfficacy = await getAgentEfficacy();
   const sevenLayerSpine = getSevenLayerSpine();
 
+  // New 3-verb loop aggregations — Chunk 1 of dashboard redesign
+  // getPatternToTemplate receives already-parsed patterns to avoid re-reading pattern-report.md
+  const [failureToPrevention, patternToTemplate, preventionEfficacy] = await Promise.all([
+    getFailureToPrevention(),
+    getPatternToTemplate(patterns.findings),
+    getPreventionEfficacy(),
+  ]);
+
   const data = {
     agents,
     agentCount: agents.length,
@@ -720,6 +983,9 @@ async function main() {
     patterns,
     consolidation,
     projects,
+    failureToPrevention,
+    patternToTemplate,
+    preventionEfficacy,
     lastUpdated: new Date().toISOString(),
   };
 

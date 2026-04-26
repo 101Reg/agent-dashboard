@@ -1,4 +1,6 @@
 import VerbPanel from './VerbPanel'
+import InfoCarousel from './InfoCarousel'
+import { translatePatternHeading } from '../lib/translate'
 
 const BLUE = '#7b9ff5'
 const GREEN = '#53e16f'
@@ -78,6 +80,51 @@ export default function PatternToTemplate({ data }) {
 
   const topTemplates = (activeTemplates || []).slice(0, 3)
 
+  const stuckCarousel = (stuckPatterns || []).length > 0 ? (
+    <div style={{ marginTop: 16 }}>
+      <div style={{
+        fontSize: 10, fontWeight: 600, textTransform: 'uppercase',
+        letterSpacing: '0.08em', color: 'rgba(255,255,255,0.25)', marginBottom: 8,
+      }}>
+        Patterns waiting for template · what to tell me
+      </div>
+      <InfoCarousel
+        panels={stuckPatterns.map((sp, i) => {
+          const t = translatePatternHeading(sp.heading)
+          return {
+            label: `${i + 1}/${stuckPatterns.length}`,
+            content: (
+              <div>
+                <div style={{
+                  fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.85)',
+                  lineHeight: 1.4, marginBottom: 10,
+                }}>
+                  {t.summary}
+                </div>
+                <div style={{
+                  fontSize: 11, color: 'rgba(255,255,255,0.35)', marginBottom: 12,
+                  fontFamily: 'ui-monospace, SFMono-Regular, monospace',
+                }}>
+                  {sp.heading}
+                </div>
+                {t.suggestion && (
+                  <div style={{
+                    fontSize: 11, color: 'rgba(167,139,250,0.85)', fontStyle: 'italic',
+                    lineHeight: 1.5, padding: '8px 12px',
+                    background: 'rgba(167,139,250,0.06)',
+                    borderLeft: '2px solid rgba(167,139,250,0.4)', borderRadius: 4,
+                  }}>
+                    {t.suggestion}
+                  </div>
+                )}
+              </div>
+            ),
+          }
+        })}
+      />
+    </div>
+  ) : null
+
   const body = (
     <div>
       {topTemplates.length === 0 ? (
@@ -87,6 +134,7 @@ export default function PatternToTemplate({ data }) {
       ) : (
         topTemplates.map(t => <TemplateRow key={t.name} template={t} />)
       )}
+      {stuckCarousel}
     </div>
   )
 

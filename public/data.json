@@ -1380,6 +1380,28 @@
             "detail": "template-extract.sh v1 missed substituting source-project name in (1) arbitrary string contexts (manifest values, code titles, cookie names,"
           }
         ]
+      },
+      {
+        "name": "project-tag-backfill",
+        "date": "2026-04-25",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "dashboard-3verb-redesign",
+        "date": "2026-04-25",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
@@ -1903,17 +1925,38 @@
   },
   "projects": [
     {
+      "id": "38twelve-daily",
+      "friction_today": 0,
+      "unresolved_gaps": 1,
+      "templates_used": 0,
+      "tool_calls_30d": 0
+    },
+    {
+      "id": "Claude-Projects",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 7
+    },
+    {
       "id": "agent-dashboard",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 104
+      "tool_calls_30d": 312
     },
     {
       "id": "agent-os",
       "friction_today": 0,
-      "unresolved_gaps": 0,
+      "unresolved_gaps": 11,
       "templates_used": 1,
+      "tool_calls_30d": 0
+    },
+    {
+      "id": "bianca-tracker",
+      "friction_today": 0,
+      "unresolved_gaps": 2,
+      "templates_used": 0,
       "tool_calls_30d": 0
     },
     {
@@ -1921,7 +1964,14 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 374
+      "tool_calls_30d": 449
+    },
+    {
+      "id": "design-view",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 0
     },
     {
       "id": "kin",
@@ -1929,7 +1979,541 @@
       "unresolved_gaps": 0,
       "templates_used": 0,
       "tool_calls_30d": 156
+    },
+    {
+      "id": "mirror-app",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 51
+    },
+    {
+      "id": "orchard",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 0
+    },
+    {
+      "id": "scout",
+      "friction_today": 0,
+      "unresolved_gaps": 4,
+      "templates_used": 0,
+      "tool_calls_30d": 0
+    },
+    {
+      "id": "tmp",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 16
     }
   ],
-  "lastUpdated": "2026-04-25T04:33:54.783Z"
+  "failureToPrevention": {
+    "thisWeek": {
+      "failures": 47,
+      "preventions": 0,
+      "autoInstalls": 0,
+      "conversionPct": 0
+    },
+    "lastWeek": {
+      "failures": 32,
+      "preventions": 0,
+      "autoInstalls": 0,
+      "conversionPct": 0
+    },
+    "daily": [
+      {
+        "date": "2026-04-13",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-14",
+        "failures": 4,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-15",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-16",
+        "failures": 9,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-17",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-18",
+        "failures": 1,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-19",
+        "failures": 18,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-20",
+        "failures": 26,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-21",
+        "failures": 5,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-22",
+        "failures": 4,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-23",
+        "failures": 11,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-24",
+        "failures": 1,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-25",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-26",
+        "failures": 0,
+        "preventions": 0
+      }
+    ],
+    "stuckFailures": [
+      {
+        "session": "weekly-scan-a3",
+        "detail": "First-read of agent-dashboard was piecewise ls + Read instead of one Explore spawn. Rule agent-delegation-triggers.md §3 says first unfamili",
+        "age_days": 10
+      },
+      {
+        "session": "weekly-scan-a3",
+        "detail": "Committed 4 times this session (da76934, 324952f, 036d0de, aee134f) without reviewer agent invocation. commit-gate.sh fired advisory but I d",
+        "age_days": 10
+      },
+      {
+        "session": "design-principles-setup",
+        "detail": "Read tool cannot handle large PDFs with images — Norman PDF (2.4MB) blew past 32MB API request limit when rendered. Had to pre-convert via p",
+        "age_days": 8
+      },
+      {
+        "session": "design-principles-v2",
+        "detail": "Reviewer NOT spawned before commit. Reason: commit is pure markdown (rules/design-principles.md, rules/system-reminder-citation.md, skills/d",
+        "age_days": 7
+      },
+      {
+        "session": "design-principles-v2",
+        "detail": "Reviewer NOT spawned before second commit (Post-/learn refresh). Reason: commit contains only Bruce-phase output refresh (briefing.md, event",
+        "age_days": 7
+      }
+    ]
+  },
+  "patternToTemplate": {
+    "thisWeek": {
+      "patternsDetected": 104,
+      "templatesExtracted": 6,
+      "templatesInstantiated": 16,
+      "extractionRate": 6
+    },
+    "lastWeek": {
+      "patternsDetected": 45,
+      "templatesExtracted": 0,
+      "templatesInstantiated": 0,
+      "extractionRate": 0
+    },
+    "activeTemplates": [
+      {
+        "name": "cf-worker-d1",
+        "instantiations": 12,
+        "lastUsed": "2026-04-20",
+        "projects": [
+          "test-proj",
+          "custom-test",
+          "injection-test",
+          "traversal-test",
+          "log-test",
+          "blank-id-test",
+          "final-check",
+          "inject-test",
+          "happy-path",
+          "sprint2-canary"
+        ]
+      },
+      {
+        "name": "next-cloudflare-d1",
+        "instantiations": 4,
+        "lastUsed": "2026-04-25",
+        "projects": [
+          "kin-replay",
+          "review-test"
+        ]
+      }
+    ],
+    "stuckPatterns": [
+      {
+        "heading": "Cross-session: agent:capability_gap repeating across sessions",
+        "age_days": null
+      },
+      {
+        "heading": "Cross-session: agent:capability_gap repeating across sessions",
+        "age_days": null
+      },
+      {
+        "heading": "Cross-session: agent:hook_catch repeating across sessions",
+        "age_days": null
+      },
+      {
+        "heading": "Similarity cluster: pattern_detected (22 events, trigram)",
+        "age_days": null
+      },
+      {
+        "heading": "Similarity cluster: pattern_detected (6 events, trigram)",
+        "age_days": null
+      }
+    ]
+  },
+  "preventionEfficacy": {
+    "activePreventions": 8,
+    "avgEfficacy": 0.6727272727272727,
+    "retirementCandidates": [],
+    "retirementsThisWeek": 2,
+    "netActive30d": -2,
+    "perRule": [
+      {
+        "rule": "pre-response-claim-audit",
+        "efficacy": 0.44,
+        "fires30d": 25,
+        "valid": 11,
+        "invalid": 14,
+        "sparkline": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0.2,
+          null,
+          0,
+          0,
+          0.8888888888888888,
+          null,
+          0.5,
+          null,
+          null,
+          null,
+          null
+        ],
+        "last_fire_date": "2026-04-22"
+      },
+      {
+        "rule": "source-labeling-convention",
+        "efficacy": 0.7857142857142857,
+        "fires30d": 14,
+        "valid": 11,
+        "invalid": 3,
+        "sparkline": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          0,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "last_fire_date": "2026-04-20"
+      },
+      {
+        "rule": "source-before-stating",
+        "efficacy": 1,
+        "fires30d": 5,
+        "valid": 5,
+        "invalid": 0,
+        "sparkline": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "last_fire_date": "2026-04-20"
+      },
+      {
+        "rule": "unknown",
+        "efficacy": 0,
+        "fires30d": 1,
+        "valid": 0,
+        "invalid": 1,
+        "sparkline": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "last_fire_date": "2026-04-19"
+      },
+      {
+        "rule": "verify-before-presenting",
+        "efficacy": 1,
+        "fires30d": 4,
+        "valid": 4,
+        "invalid": 0,
+        "sparkline": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "last_fire_date": "2026-04-20"
+      },
+      {
+        "rule": "system-reminder-citation",
+        "efficacy": 1,
+        "fires30d": 4,
+        "valid": 4,
+        "invalid": 0,
+        "sparkline": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "last_fire_date": "2026-04-21"
+      },
+      {
+        "rule": "api-capability-hallucination",
+        "efficacy": 1,
+        "fires30d": 1,
+        "valid": 1,
+        "invalid": 0,
+        "sparkline": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "last_fire_date": "2026-04-21"
+      },
+      {
+        "rule": "secret-paste-protection",
+        "efficacy": 1,
+        "fires30d": 1,
+        "valid": 1,
+        "invalid": 0,
+        "sparkline": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "last_fire_date": "2026-04-21"
+      }
+    ]
+  },
+  "lastUpdated": "2026-04-26T01:23:27.702Z"
 }

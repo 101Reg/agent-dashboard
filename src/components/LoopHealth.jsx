@@ -18,11 +18,15 @@ export default function LoopHealth({ failureToPrevention, patternToTemplate, pre
   const p2tThis = patternToTemplate?.thisWeek ?? {}
   const p2tLast = patternToTemplate?.lastWeek ?? {}
 
+  // Conversion stalled: failures detected but no preventions installed.
+  // This is the loud signal — the whole point of the Loop is broken.
+  const conversionStalled = (ftpThis.failures ?? 0) > 0 && (ftpThis.preventions ?? 0) === 0
+
   return (
     <div style={{
-      background: 'rgba(255,255,255,0.03)',
+      background: conversionStalled ? 'rgba(245,85,85,0.04)' : 'rgba(255,255,255,0.03)',
       borderRadius: 16,
-      border: '1px solid rgba(255,255,255,0.06)',
+      border: conversionStalled ? '1px solid rgba(245,85,85,0.25)' : '1px solid rgba(255,255,255,0.06)',
       padding: 24,
       textAlign: 'center',
     }}>
@@ -51,10 +55,26 @@ export default function LoopHealth({ failureToPrevention, patternToTemplate, pre
       <div style={{
         fontSize: 11,
         color: 'rgba(255,255,255,0.2)',
-        marginBottom: 20,
+        marginBottom: conversionStalled ? 12 : 20,
       }}>
         geometric mean of 3 conversion rates
       </div>
+
+      {conversionStalled && (
+        <div style={{
+          fontSize: 11,
+          fontWeight: 600,
+          color: '#f55',
+          background: 'rgba(245,85,85,0.08)',
+          border: '1px solid rgba(245,85,85,0.3)',
+          borderRadius: 8,
+          padding: '6px 12px',
+          marginBottom: 16,
+          display: 'inline-block',
+        }}>
+          🚨 Conversion stalled — failures detected, 0 preventions installed
+        </div>
+      )}
 
       <div style={{
         display: 'flex',

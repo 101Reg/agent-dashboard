@@ -912,6 +912,87 @@ async function getPreventionEfficacy() {
   };
 }
 
+// ─── What to Watch — derived weekly attention list ──────────────────────────
+
+function getWatchItems({ failureToPrevention, patternToTemplate, preventionEfficacy }) {
+  const items = [];
+
+  // 1. First auto_install fires this week
+  const autoInstalls = failureToPrevention?.thisWeek?.autoInstalls ?? 0;
+  items.push({
+    id: 'first-auto-install',
+    title: 'Auto-install fires this week',
+    current: `${autoInstalls}/week`,
+    target: '≥1 this week',
+    status: autoInstalls >= 1 ? 'green' : 'red',
+    why: 'Threshold lowered to 2 sessions. First fire flips Verb 1 from stalled to converting.',
+  });
+
+  // 2. Canary rule — worst-performing rule with ≥3 fires
+  const perRule = preventionEfficacy?.perRule ?? [];
+  const canaries = perRule
+    .filter(r => r.fires30d >= 3 && r.rule !== 'unknown')
+    .sort((a, b) => a.efficacy - b.efficacy);
+  const canary = canaries[0];
+  if (canary) {
+    const pct = Math.round(canary.efficacy * 100);
+    let status = 'green';
+    if (canary.efficacy < 0.3) status = 'red';
+    else if (canary.efficacy < 0.5) status = 'yellow';
+    items.push({
+      id: 'canary-rule',
+      title: `${canary.rule} efficacy`,
+      current: `${pct}% (${canary.fires30d} fires/30d)`,
+      target: 'stays ≥50%',
+      status,
+      why: 'Worst-performing rule with real fire volume. Drift below 30% = retirement candidate.',
+    });
+  }
+
+  // 3. Net active preventions
+  const netActive = preventionEfficacy?.netActive30d ?? 0;
+  items.push({
+    id: 'net-active',
+    title: 'Net active preventions (30d)',
+    current: `${netActive >= 0 ? '+' : ''}${netActive}`,
+    target: '≥0',
+    status: netActive < 0 ? 'red' : netActive === 0 ? 'yellow' : 'green',
+    why: 'Preventions installed minus retired. Sustained negative = system losing coverage.',
+  });
+
+  // 4. Stuck failures count
+  const stuckCount = (failureToPrevention?.stuckFailures ?? []).length;
+  let stuckStatus = 'green';
+  if (stuckCount >= 4) stuckStatus = 'red';
+  else if (stuckCount >= 1) stuckStatus = 'yellow';
+  items.push({
+    id: 'stuck-failures',
+    title: 'Stuck failures resolved',
+    current: `${stuckCount} stuck`,
+    target: 'reduce by ≥1 this week',
+    status: stuckStatus,
+    why: 'Failures aged ≥7 days without prevention or resolution. Check Verb 1 carousel.',
+  });
+
+  // 5. Pattern detection velocity
+  const thisPatterns = patternToTemplate?.thisWeek?.patternsDetected ?? 0;
+  const lastPatterns = patternToTemplate?.lastWeek?.patternsDetected ?? 0;
+  const velocityRatio = lastPatterns === 0 ? 1 : thisPatterns / lastPatterns;
+  let velStatus = 'green';
+  if (velocityRatio < 0.5) velStatus = 'red';
+  else if (velocityRatio < 0.9) velStatus = 'yellow';
+  items.push({
+    id: 'pattern-velocity',
+    title: 'Pattern detection velocity',
+    current: `${thisPatterns} this week (${lastPatterns} last)`,
+    target: 'stay near or above last week',
+    status: velStatus,
+    why: 'Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing.',
+  });
+
+  return items;
+}
+
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 // Parse b7 efficacy report from cached file — written nightly by Bruce, manually via `bash ~/.claude/night-shift/phases/b7-agent-efficacy.sh > ~/.claude/agent-efficacy-report.md` if stale
@@ -969,6 +1050,9 @@ async function main() {
     getPreventionEfficacy(),
   ]);
 
+  // Watch items derived from the 3 verbs above — the "what to watch this week" panel
+  const watchItems = getWatchItems({ failureToPrevention, patternToTemplate, preventionEfficacy });
+
   const data = {
     agents,
     agentCount: agents.length,
@@ -986,6 +1070,7 @@ async function main() {
     failureToPrevention,
     patternToTemplate,
     preventionEfficacy,
+    watchItems,
     lastUpdated: new Date().toISOString(),
   };
 

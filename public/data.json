@@ -1402,6 +1402,17 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "dashboard-3verb-iteration1",
+        "date": "2026-04-25",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
@@ -1943,7 +1954,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 312
+      "tool_calls_30d": 326
     },
     {
       "id": "agent-os",
@@ -1964,7 +1975,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 449
+      "tool_calls_30d": 450
     },
     {
       "id": "design-view",
@@ -2515,5 +2526,47 @@
       }
     ]
   },
-  "lastUpdated": "2026-04-26T01:23:27.702Z"
+  "watchItems": [
+    {
+      "id": "first-auto-install",
+      "title": "Auto-install fires this week",
+      "current": "0/week",
+      "target": "≥1 this week",
+      "status": "red",
+      "why": "Threshold lowered to 2 sessions. First fire flips Verb 1 from stalled to converting."
+    },
+    {
+      "id": "canary-rule",
+      "title": "pre-response-claim-audit efficacy",
+      "current": "44% (25 fires/30d)",
+      "target": "stays ≥50%",
+      "status": "yellow",
+      "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
+    },
+    {
+      "id": "net-active",
+      "title": "Net active preventions (30d)",
+      "current": "-2",
+      "target": "≥0",
+      "status": "red",
+      "why": "Preventions installed minus retired. Sustained negative = system losing coverage."
+    },
+    {
+      "id": "stuck-failures",
+      "title": "Stuck failures resolved",
+      "current": "5 stuck",
+      "target": "reduce by ≥1 this week",
+      "status": "red",
+      "why": "Failures aged ≥7 days without prevention or resolution. Check Verb 1 carousel."
+    },
+    {
+      "id": "pattern-velocity",
+      "title": "Pattern detection velocity",
+      "current": "104 this week (45 last)",
+      "target": "stay near or above last week",
+      "status": "green",
+      "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
+    }
+  ],
+  "lastUpdated": "2026-04-26T01:27:04.337Z"
 }

@@ -4,6 +4,7 @@ import LoopHealth from './components/LoopHealth'
 import FailureToPrevention from './components/FailureToPrevention'
 import PatternToTemplate from './components/PatternToTemplate'
 import PreventionEfficacy from './components/PreventionEfficacy'
+import WhatToWatch from './components/WhatToWatch'
 
 export default function App() {
   const [data, setData] = useState(null)
@@ -88,8 +89,12 @@ export default function App() {
           <PreventionEfficacy data={data.preventionEfficacy} />
         </Reveal>
 
-        {/* Proposals Card */}
         <Reveal delay={400}>
+          <WhatToWatch items={data.watchItems} />
+        </Reveal>
+
+        {/* Proposals Card */}
+        <Reveal delay={500}>
           <div style={{
             background: 'rgba(255,255,255,0.03)', borderRadius: 16,
             border: '1px solid rgba(255,255,255,0.06)', padding: '20px 24px',

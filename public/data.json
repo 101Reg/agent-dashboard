@@ -2223,7 +2223,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 374
+      "tool_calls_30d": 375
     },
     {
       "id": "agent-os",
@@ -2244,7 +2244,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 739
+      "tool_calls_30d": 755
     },
     {
       "id": "design-view",
@@ -2398,14 +2398,18 @@
     "thisWeek": {
       "patternsDetected": 38,
       "templatesExtracted": 6,
+      "distinctTemplatesExtracted": 1,
       "templatesInstantiated": 4,
-      "extractionRate": 16
+      "extractionRate": 50,
+      "extractablePatternCount": 2
     },
     "lastWeek": {
       "patternsDetected": 127,
       "templatesExtracted": 0,
+      "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 12,
-      "extractionRate": 0
+      "extractionRate": 0,
+      "extractablePatternCount": 2
     },
     "activeTemplates": [
       {
@@ -2829,5 +2833,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-04-28T05:06:52.456Z"
+  "lastUpdated": "2026-04-28T05:13:31.583Z"
 }

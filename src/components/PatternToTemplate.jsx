@@ -72,8 +72,8 @@ export default function PatternToTemplate({ data }) {
 
   const headline = (
     <SankeyHeadline
-      patterns={thisWeek.patternsDetected}
-      templates={thisWeek.templatesExtracted}
+      patterns={thisWeek.extractablePatternCount ?? thisWeek.patternsDetected}
+      templates={thisWeek.distinctTemplatesExtracted ?? thisWeek.templatesExtracted}
       instantiations={thisWeek.templatesInstantiated}
     />
   )
@@ -140,22 +140,21 @@ export default function PatternToTemplate({ data }) {
 
   const counters = [
     {
-      label: 'Patterns detected (7d)',
-      value: thisWeek.patternsDetected,
-      delta: thisWeek.patternsDetected - lastWeek.patternsDetected,
+      label: 'Extractable patterns',
+      value: thisWeek.extractablePatternCount ?? thisWeek.patternsDetected,
+      delta: (thisWeek.extractablePatternCount ?? thisWeek.patternsDetected) - (lastWeek.extractablePatternCount ?? lastWeek.patternsDetected),
+      deltaDirection: 'neutral',
+    },
+    {
+      label: 'Distinct templates extracted (7d)',
+      value: thisWeek.distinctTemplatesExtracted ?? thisWeek.templatesExtracted,
+      delta: (thisWeek.distinctTemplatesExtracted ?? thisWeek.templatesExtracted) - (lastWeek.distinctTemplatesExtracted ?? lastWeek.templatesExtracted),
       deltaDirection: 'more-is-good',
     },
     {
-      label: 'Templates extracted (7d)',
-      value: thisWeek.templatesExtracted,
-      delta: thisWeek.templatesExtracted - lastWeek.templatesExtracted,
-      deltaDirection: 'more-is-good',
-    },
-    {
-      // value is numeric so VerbPanel WoWDelta math works correctly
-      label: 'Extraction rate (%)',
-      value: thisWeek.extractionRate,
-      delta: thisWeek.extractionRate - lastWeek.extractionRate,
+      label: 'Template instantiations (7d)',
+      value: thisWeek.templatesInstantiated,
+      delta: thisWeek.templatesInstantiated - lastWeek.templatesInstantiated,
       deltaDirection: 'more-is-good',
     },
   ]

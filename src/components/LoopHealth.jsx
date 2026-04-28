@@ -112,14 +112,14 @@ export default function LoopHealth({ failureToPrevention, patternToTemplate, pre
 
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: 18, fontWeight: 700, color: 'rgba(255,255,255,0.85)' }}>
-            {p2tThis.templatesExtracted ?? 0}
+            {p2tThis.distinctTemplatesExtracted ?? p2tThis.templatesExtracted ?? 0}
           </div>
           <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', marginTop: 2, marginBottom: 4 }}>
-            Templates extracted
+            Distinct templates extracted
           </div>
           <WoWDelta
-            current={p2tThis.templatesExtracted ?? 0}
-            previous={p2tLast.templatesExtracted ?? 0}
+            current={p2tThis.distinctTemplatesExtracted ?? p2tThis.templatesExtracted ?? 0}
+            previous={p2tLast.distinctTemplatesExtracted ?? p2tLast.templatesExtracted ?? 0}
             direction="more-is-good"
           />
         </div>

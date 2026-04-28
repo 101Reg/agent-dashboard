@@ -774,13 +774,32 @@ async function getPatternToTemplate(parsedPatterns) {
 
   const inWindow = (e, start, end) => e.date >= start.toISOString().slice(0, 10) && e.date < end.toISOString().slice(0, 10);
 
+  // Denominator fix (2026-04-28): pattern_detected events are dominated by 3 noise classes
+  // (scanner-output similarity clusters, friction-volume hook fires, manual session narrative)
+  // — none convert to scaffolding templates. Restrict to "extractable" patterns:
+  // cross-session findings from pattern-report.md, similarity clusters excluded.
+  // pattern-report.md regenerates each Bruce run with last-14-day window, so no time-filter needed here.
+  const extractablePatterns = (parsedPatterns || []).filter(p => {
+    const heading = (p.heading || '').toLowerCase();
+    if (heading.startsWith('similarity cluster')) return false;  // scanner duplicate-detection noise
+    if (heading.startsWith('unused-agent')) return false;        // utilization signal, not extractable
+    return true;
+  });
+  const extractablePatternCount = extractablePatterns.length;
+
   const countWindow = (start, end) => {
     const evs = events.filter(e => inWindow(e, start, end));
-    const patternsDetected = evs.filter(e => e.event === 'pattern_detected').length;
-    const templatesExtracted = evs.filter(e => e.event === 'template_extracted').length;
+    const patternsDetected = evs.filter(e => e.event === 'pattern_detected').length;  // raw count, kept for back-compat
+    const templateExtractedEvents = evs.filter(e => e.event === 'template_extracted');
+    const templatesExtracted = templateExtractedEvents.length;  // raw count, kept for back-compat
+    // Numerator fix: dedupe by template name. 6 events for "next-cloudflare-d1" in one day = 1 distinct extraction.
+    const distinctTemplatesExtracted = new Set(templateExtractedEvents.map(e => e.template).filter(Boolean)).size;
     const templatesInstantiated = evs.filter(e => e.event === 'template_used').length;
-    const extractionRate = patternsDetected === 0 ? 0 : Math.round(100 * templatesExtracted / patternsDetected);
-    return { patternsDetected, templatesExtracted, templatesInstantiated, extractionRate };
+    // Honest extraction rate: distinct templates extracted ÷ extractable patterns from report.
+    // Note: extractablePatternCount is from current pattern-report.md (14-day window), not the 7-day window —
+    // safe approximation since template extraction is a slower cadence than the window comparison anyway.
+    const extractionRate = extractablePatternCount === 0 ? 0 : Math.round(100 * distinctTemplatesExtracted / extractablePatternCount);
+    return { patternsDetected, templatesExtracted, distinctTemplatesExtracted, templatesInstantiated, extractionRate, extractablePatternCount };
   };
 
   // Active templates: group template_used events by template field

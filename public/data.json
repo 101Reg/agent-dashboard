@@ -1489,6 +1489,17 @@
         "events": []
       },
       {
+        "name": "hook-error-fix",
+        "date": "2026-04-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "e27df24f-78f3-47d5-a8ad-6145579e5301",
         "date": "2026-04-27",
         "fixAttempts": 0,
@@ -1535,17 +1546,12 @@
         "reExplanations": 0,
         "capabilityGaps": 1,
         "toilEvents": 0,
-        "hookCatches": 1,
+        "hookCatches": 0,
         "events": [
           {
             "event": "fix_attempt",
             "agent": "main-thread",
             "detail": "scroll-inside-card on Bills/Subs/Debts shipped (commit b73ba82) — Hero reports not working in browser despite SSR HTML containing 3 wrappers"
-          },
-          {
-            "event": "hook_catch",
-            "agent": "main-thread",
-            "detail": "self-caught by Hero: claimed compile-clean as proof, told Hero to spin dev server. verify-before-presenting violation"
           },
           {
             "event": "capability_gap",
@@ -1588,7 +1594,7 @@
         "events": []
       },
       {
-        "name": "hook-error-fix",
+        "name": "kin-scroll-debug",
         "date": "2026-04-27",
         "fixAttempts": 0,
         "escalations": 0,
@@ -1619,10 +1625,16 @@
   },
   "timeline": [
     {
+      "date": "Apr 27, 2026",
+      "title": "Hook Error Fix",
+      "desc": "Diagnosed SessionStart hook JSON validation error, Added hookEventName field to session-briefing JSON output, Updated reference_hooks.md schema list to include SessionStart",
+      "active": true
+    },
+    {
       "date": "Apr 26, 2026",
       "title": "Kin Debt Frequency Uniform Rows",
       "desc": "Fixed debt owner display (missing column in SELECT), Unified Bills/Subs/Debts row layout with owner avatars + green/urgent treatment, Added next_payment_at + frequency columns to debts (migrations 0015, 0016) wired into form, API, page query, feed",
-      "active": true
+      "active": false
     },
     {
       "date": "Apr 25, 2026",
@@ -1825,6 +1837,24 @@
       "high": false
     },
     {
+      "date": "2026-04-27",
+      "text": "hook_catch x3",
+      "context": "Stop hook blocked — mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-04-27",
+      "text": "3 valid hook_catches today on pre-response-claim-audit, all same shape: gut estimate dressed up with specific number/measurement (60px row height, 30-45 min build, compile=working). Systemic fix: added Numbers reflex sub-clause to TL;DR.",
+      "context": "P-2026-04-27-001",
+      "high": true
+    },
+    {
+      "date": "2026-04-27",
+      "text": "None — direct investigation, 1-line fix, verified → 1 lessons saved",
+      "context": "hook-error-fix",
+      "high": false
+    },
+    {
       "date": "2026-04-26",
       "text": "cross-session-repeat: agent:capability_gap x3",
       "context": "Layer 2 scanner — 2 cross-session finding(s)",
@@ -1847,24 +1877,6 @@
       "text": "similarity-cluster size=6",
       "context": "Layer 2 scanner — similarity cluster",
       "high": true
-    },
-    {
-      "date": "2026-04-26",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-26",
-      "text": "similarity-cluster size=4",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-26",
-      "text": "Missing column in SELECT recurred 3x in one session (owner_user_id, next_payment_at, frequency). Pattern detector did not fire because failures were silently fixed without logging fix_attempt events. Inline loop failure: should have updated feedback_schema_pressure_test.md after the 2nd occurrence",
-      "context": "Kin debts table — page server components have separate SELECT queries from API routes; updating the API alone leaves the page rendering stale data",
-      "high": false
     }
   ],
   "nightShift": {
@@ -1873,6 +1885,9 @@
     "findings": [
       "High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)",
       "Elevated friction: 3 fix_attempts, 27 hook_catches in 7 days",
+      "WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)",
+      "High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)",
+      "Elevated friction: 3 fix_attempts, 29 hook_catches in 7 days",
       "WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)"
     ],
     "evalCanaries": [
@@ -2011,13 +2026,13 @@
     "proposalCount": 0,
     "proposals": [],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-04-27\n\n## Status: YELLOW\n\n## Key Findings\n- High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)\n- Elevated friction: 3 fix_attempts, 27 hook_catches in 7 days\n- WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)\n\n## What Hero Worked On (7-day)\n- bash: 8 sessions\n- hooks: 7 sessions\n- react: 7 sessions\n- agents: 6 sessions\n- dashboard: 5 sessions\n\n## Agent Usage (7-day)\n- developer: 6 sessions\n- Explore: 5 sessions\n- reviewer: 4 sessions\n- Plan: 3 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n88 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 27\n- re_explanations: 0\n- patterns_detected: 115\n\n## Review Queue\n\n### Upcoming (next 3 days)\n- **review-2026-04-28-triggers-fired** — due 2026-04-28 (1d): Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n## Proposals\nNone generated\n\n## Proposal Track Record\n46 total, 39 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 4 fix_attempts (14d) |\n| Proposal Hit Rate | 84% | 39/46 accepted |\n| Eval Signal | OK | 9 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-04-27\n\n## Status: YELLOW\n\n## Key Findings\n- High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)\n- Elevated friction: 3 fix_attempts, 27 hook_catches in 7 days\n- WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)\n- High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)\n- Elevated friction: 3 fix_attempts, 29 hook_catches in 7 days\n- WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)\n\n## What Hero Worked On (7-day)\n- bash: 8 sessions\n- hooks: 7 sessions\n- react: 7 sessions\n- agents: 6 sessions\n- dashboard: 5 sessions\n- bash: 9 sessions\n- hooks: 8 sessions\n- react: 7 sessions\n- agents: 6 sessions\n- dashboard: 5 sessions\n\n## Agent Usage (7-day)\n- developer: 6 sessions\n- Explore: 5 sessions\n- reviewer: 4 sessions\n- Plan: 3 sessions\n- chief-of-staff: 1 sessions\n- developer: 6 sessions\n- Explore: 5 sessions\n- reviewer: 4 sessions\n- Plan: 3 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n88 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 27\n- re_explanations: 0\n- patterns_detected: 115\n\n## Review Queue\n\n### Upcoming (next 3 days)\n- **review-2026-04-28-triggers-fired** — due 2026-04-28 (1d): Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n## Proposals\nNone generated\n\n## Proposal Track Record\n47 total, 39 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 4 fix_attempts (14d) |\n| Proposal Hit Rate | 84% | 39/46 accepted |\n| Eval Signal | OK | 9 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 46,
+      "total": 47,
       "accepted": 39,
       "pending": 0,
       "rejected": 5
@@ -2159,7 +2174,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 720
+      "tool_calls_30d": 726
     },
     {
       "id": "design-view",
@@ -2180,7 +2195,7 @@
       "friction_today": 0,
       "unresolved_gaps": 2,
       "templates_used": 0,
-      "tool_calls_30d": 2381
+      "tool_calls_30d": 2592
     },
     {
       "id": "mirror-app",
@@ -2213,7 +2228,7 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 25,
+      "failures": 27,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
@@ -2287,7 +2302,7 @@
       },
       {
         "date": "2026-04-27",
-        "failures": 5,
+        "failures": 7,
         "preventions": 0
       },
       {
@@ -2326,10 +2341,10 @@
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 33,
+      "patternsDetected": 35,
       "templatesExtracted": 6,
       "templatesInstantiated": 4,
-      "extractionRate": 18
+      "extractionRate": 17
     },
     "lastWeek": {
       "patternsDetected": 127,
@@ -2390,16 +2405,16 @@
   },
   "preventionEfficacy": {
     "activePreventions": 8,
-    "avgEfficacy": 0.6785714285714286,
+    "avgEfficacy": 0.6896551724137931,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": -2,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.46153846153846156,
-        "fires30d": 26,
-        "valid": 12,
+        "efficacy": 0.5,
+        "fires30d": 28,
+        "valid": 14,
         "invalid": 14,
         "sparkline": [
           null,
@@ -2729,9 +2744,9 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "46% (26 fires/30d)",
+      "current": "50% (28 fires/30d)",
       "target": "stays ≥50%",
-      "status": "yellow",
+      "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
     },
     {
@@ -2753,11 +2768,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "33 this week (127 last)",
+      "current": "35 this week (127 last)",
       "target": "stay near or above last week",
       "status": "red",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-04-28T03:21:55.941Z"
+  "lastUpdated": "2026-04-28T04:19:30.264Z"
 }

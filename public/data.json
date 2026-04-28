@@ -1500,6 +1500,17 @@
         "events": []
       },
       {
+        "name": "kin-preservation-report",
+        "date": "2026-04-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "e27df24f-78f3-47d5-a8ad-6145579e5301",
         "date": "2026-04-27",
         "fixAttempts": 0,
@@ -1626,7 +1637,7 @@
   "timeline": [
     {
       "date": "Apr 27, 2026",
-      "title": "Hook Error Fix",
+      "title": "2 sessions",
       "desc": "Diagnosed SessionStart hook JSON validation error, Added hookEventName field to session-briefing JSON output, Updated reference_hooks.md schema list to include SessionStart",
       "active": true
     },
@@ -1855,6 +1866,18 @@
       "high": false
     },
     {
+      "date": "2026-04-27",
+      "text": "2 valid hook_catches on Numbers reflex shape (row-height pixel math, build-time estimate); pattern_detector fired at 3+/day threshold and triggered inline systemic fix committed efb017a with proposal_applied: P-2026-04-27-001 → 1 lessons saved",
+      "context": "kin-preservation-report",
+      "high": false
+    },
+    {
+      "date": "2026-04-27",
+      "text": "hook_catch x3",
+      "context": "Bruce proposal P-2026-04-27-001",
+      "high": true
+    },
+    {
       "date": "2026-04-26",
       "text": "cross-session-repeat: agent:capability_gap x3",
       "context": "Layer 2 scanner — 2 cross-session finding(s)",
@@ -1865,18 +1888,6 @@
       "text": "cross-session-repeat: agent:hook_catch x2",
       "context": "Layer 2 scanner — 2 cross-session finding(s)",
       "high": true
-    },
-    {
-      "date": "2026-04-26",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-26",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
     }
   ],
   "nightShift": {
@@ -1884,11 +1895,14 @@
     "lastRun": "2026-04-27",
     "findings": [
       "High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)",
-      "Elevated friction: 3 fix_attempts, 27 hook_catches in 7 days",
-      "WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)",
-      "High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)",
       "Elevated friction: 3 fix_attempts, 29 hook_catches in 7 days",
-      "WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)"
+      "WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)",
+      "CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate",
+      "CONCERN: pre-response-claim-audit has 56% FP rate (25 fires in 30d) — Sprint 4 refinement candidate",
+      "STALE: chief-of-staff last fired 2026-04-05 — retirement candidate",
+      "Skill gap: plan-mode-auto-trigger — 3 confirmed cap_gap events: (1) 2026-04-25 — plan mode did not trigger on a mult",
+      "Skill gap: subagent-stop-hook-hijacking — 1 confirmed cap_gap event (2026-04-27): 3 of 4 subagents (2 Explore + 1 Plan) hi",
+      "Skill gap: client-side-verification-methodology — 1 confirmed cap_gap event (2026-04-27): curl + HTML grep on SSR output confirmed"
     ],
     "evalCanaries": [
       {
@@ -2023,18 +2037,37 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 0,
-    "proposals": [],
+    "proposalCount": 4,
+    "proposals": [
+      {
+        "id": "P-2026-04-27-002",
+        "category": "skill_gap",
+        "problem": "14 of 32 capability gaps this week (44%) are attributed to `main-thread`, all carrying the same top context: *\"verify-before-presenting needs a stronger client-side check than grep on rendered HTML.\"* This is the single largest source of friction in the system — nearly half of all gaps from one repeating mistake.",
+        "solution": "Add a \"What `grep` on raw HTML cannot verify\" warning block to the `verify-before-presenting` subsection of `~/.claude/rules/pre-response-claim-audit.md`, immediately after the \"What does NOT count\" list:"
+      },
+      {
+        "id": "P-2026-04-27-003",
+        "category": "agent_methodology",
+        "problem": "pre-response-claim-audit` has a 56% FP rate over 30 days (25 fires) per the B4 findings — the Sprint 4 refinement candidate called out in tonight's findings. This week improved to 18.75% (3/16), but the 30d figure remains above the 50% threshold that triggers the \"tighten or retire\" rule.",
+        "solution": "Add an \"Exception reference map\" subsection to the TL;DR section of `~/.claude/rules/pre-response-claim-audit.md` that cross-references Stop hook exceptions:"
+      },
+      {
+        "id": "P-2026-04-27-004",
+        "category": "agent_methodology",
+        "problem": "Tonight's B4 efficacy findings flag `chief-of-staff` as stale: *\"last fired 2026-04-05 — retirement candidate.\"* That's 22 days of inactivity as of 2026-04-27. The `agent_usage_7d` data shows 1 session in 7 days, but `agent_unused_frequency_7d` shows 4 sessions where chief-of-staff was available and not selected — and the agent deploy frequency table shows zero deployments from chief-of-staff. The 1 \"session\" in `agent_usage_7d` likely reflects a digest session where the agent appeared in the roster but was not invoked.",
+        "solution": "Move `~/.claude/agents/chief-of-staff.md` to `~/.claude/retired/chief-of-staff.md` with a retirement header:"
+      }
+    ],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-04-27\n\n## Status: YELLOW\n\n## Key Findings\n- High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)\n- Elevated friction: 3 fix_attempts, 27 hook_catches in 7 days\n- WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)\n- High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)\n- Elevated friction: 3 fix_attempts, 29 hook_catches in 7 days\n- WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)\n\n## What Hero Worked On (7-day)\n- bash: 8 sessions\n- hooks: 7 sessions\n- react: 7 sessions\n- agents: 6 sessions\n- dashboard: 5 sessions\n- bash: 9 sessions\n- hooks: 8 sessions\n- react: 7 sessions\n- agents: 6 sessions\n- dashboard: 5 sessions\n\n## Agent Usage (7-day)\n- developer: 6 sessions\n- Explore: 5 sessions\n- reviewer: 4 sessions\n- Plan: 3 sessions\n- chief-of-staff: 1 sessions\n- developer: 6 sessions\n- Explore: 5 sessions\n- reviewer: 4 sessions\n- Plan: 3 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n88 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 27\n- re_explanations: 0\n- patterns_detected: 115\n\n## Review Queue\n\n### Upcoming (next 3 days)\n- **review-2026-04-28-triggers-fired** — due 2026-04-28 (1d): Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n## Proposals\nNone generated\n\n## Proposal Track Record\n47 total, 39 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 4 fix_attempts (14d) |\n| Proposal Hit Rate | 84% | 39/46 accepted |\n| Eval Signal | OK | 9 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-04-27\n\n## Status: YELLOW\n\n## Key Findings\n- High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)\n- Elevated friction: 3 fix_attempts, 29 hook_catches in 7 days\n- WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)\n- CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate\n- CONCERN: pre-response-claim-audit has 56% FP rate (25 fires in 30d) — Sprint 4 refinement candidate\n- STALE: chief-of-staff last fired 2026-04-05 — retirement candidate\n- Skill gap: plan-mode-auto-trigger — 3 confirmed cap_gap events: (1) 2026-04-25 — plan mode did not trigger on a mult\n- Skill gap: subagent-stop-hook-hijacking — 1 confirmed cap_gap event (2026-04-27): 3 of 4 subagents (2 Explore + 1 Plan) hi\n- Skill gap: client-side-verification-methodology — 1 confirmed cap_gap event (2026-04-27): curl + HTML grep on SSR output confirmed\n\n## What Hero Worked On (7-day)\n- bash: 9 sessions\n- hooks: 8 sessions\n- react: 8 sessions\n- agents: 6 sessions\n- cloudflare-workers: 5 sessions\n\n## Agent Usage (7-day)\n- developer: 7 sessions\n- Explore: 6 sessions\n- reviewer: 5 sessions\n- Plan: 3 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 3.6 | 3.6 | 0.00 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n88 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 29\n- re_explanations: 0\n- patterns_detected: 117\n\n## Review Queue\n\n### Upcoming (next 3 days)\n- **review-2026-04-28-triggers-fired** — due 2026-04-28 (1d): Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n## Proposals\nNow I have everything I need. Here are tonight's proposals:\n\n---\n\n# Proposals — 2026-04-27\n\n## P-2026-04-27-001\n**Category:** `self_improvement`\n\n**Problem:** The A1 analysis script (`night-shift/phases/a1-log-analysis.sh` lines 50–75) computes per-rule FP rates and fires \"High-FP rules\" findings without filtering retired hook slugs. `performance-logging.md` maintains an explicit excluded-slugs table documenting that both `pre-tool-use-same-file-symbol` and `code-accuracy` are uninstalled / retired hooks — agents should log these as `\"unknown\"`, not under their slug names. But the A1 jq queries have no corresponding exclusion: if *any* event lands in the log under those slugs (by agent mistake or legacy flush), they pass straight through and become findings.\n\nTonight is the third consecutive run where `pre-tool-use-same-file-symbol (3/3 FP)` appears as a \"High-FP rule candidate for prompt sharpening\" — a finding that is structurally impossible to act on because no hook is installed. The A1 script has no mechanism to suppress it. The excluded-slugs table in `performance-logging.md` only instructs agents at logging time; it has no runtime enforcement in the analysis pipeline.\n\n**Solution:** Add a `EXCLUDED_RULE_SLUGS` filter to `~/.claude/night-shift/phases/a1-log-analysis.sh` at lines 51 and 66 — the two jq selects that feed the per-rule FP rate table and the high-FP finding:\n\n```bash\n# Line ~51: add slug exclusion to per-rule FP table query\nEXCLUDED_SLUGS='[\"pre-tool-use-same-file-symbol\",\"code-accuracy\"]'\n\nHOOK_RULE_FP=$(jq --argjson excl \"$EXCLUDED_SLUGS\" -sc \"\n  [.[] | select(.date >= \\\"$SEVEN_DAYS_AGO\\\" and .event == \\\"hook_catch\\\"\n    and .rule != null and .valid != null\n    and (.rule as \\$r | \\$excl | index(\\$r) == null))]\n  ...\n\" \"$PERF_LOG\")\n```\n\nApply the same `EXCLUDED_SLUGS` filter to the `HIGH_FP_RULES` finding query at line 66. Keep `EXCLUDED_SLUGS` as a single Bash variable so adding future retirements is a one-line change.\n\n**Impact:** Eliminates ghost findings for retired slugs. Bruce's \"High-FP rules\" findings will only name hooks that are actually installed and actionable. The signal/noise ratio of the findings section improves immediately.\n\n**Risk:** If a slug is mistakenly added to the exclusion list while it's still active, real FP data would be silently dropped. Mitigation: maintain the exclusion list in lock-step with `performance-logging.md` § \"Excluded slugs\" — they should always match. A comment in the script pointing to that table enforces the contract.\n\n---\n\n## P-2026-04-27-002\n**Category:** `skill_gap`\n\n**Problem:** 14 of 32 capability gaps this week (44%) are attributed to `main-thread`, all carrying the same top context: *\"verify-before-presenting needs a stronger client-side check than grep on rendered HTML.\"* This is the single largest source of friction in the system — nearly half of all gaps from one repeating mistake.\n\nThe `verify-before-presenting` guidance (now the \"Specific case: Verify Before Presenting\" subsection in `~/.claude/rules/pre-response-claim-audit.md`) states: *\"Key HTML elements confirmed present in rendered output.\"* It defines what counts as verified (build output checked, routes curled, key HTML elements confirmed) and what does not (200 OK, \"wrote the code correctly\"). But it never specifies the limitation of `grep` on raw HTML — which is the mechanism main-thread is actually using and which fails silently for:\n- JS-rendered content (React/SPA components that don't exist in the initial HTML response)\n- CSS-hidden elements (`display:none` / `visibility:hidden` present in DOM but invisible to users)\n- Lazy-loaded / client-hydrated data that populates after initial response\n\nThe rule describes the outcome to achieve (\"elements confirmed\") without naming the anti-pattern that keeps causing the gap.\n\n**Solution:** Add a \"What `grep` on raw HTML cannot verify\" warning block to the `verify-before-presenting` subsection of `~/.claude/rules/pre-response-claim-audit.md`, immediately after the \"What does NOT count\" list:\n\n```markdown\n### grep on raw HTML is not sufficient for JS-rendered content\n\n`curl <url> | grep \"expected text\"` passes if the string is in the initial HTML response.\nIt FAILS silently when:\n- Content is rendered by React/JS after hydration (string appears in `.js` bundle, not in HTML)\n- Element is present but hidden via CSS (`display:none`, `v-if`, conditional class)\n- Data is fetched client-side after page load (API call in `useEffect`, SWR, etc.)\n\nIf the route is a SPA or uses client-side data fetching, grep on raw HTML is not verification.\nState this explicitly: \"I can confirm the route serves the shell HTML, but cannot verify\nJS-rendered content without a headless browser or runtime test.\"\n```\n\n**Impact:** Gives main-thread a specific named anti-pattern to avoid instead of a general principle. Targets the system's highest-volume cap_gap source directly. If even half of those 14/week gaps are prevented, that's ~7 fewer friction events per week.\n\n**Risk:** The rule is already long. Adding more text risks diluting the \"TL;DR ritual\" at the top that was added specifically because the rule was too easy to skim past. Keep the new block visually distinct and tightly scoped to the grep anti-pattern only.\n\n---\n\n## P-2026-04-27-003\n**Category:** `agent_methodology`\n\n**Problem:** `pre-response-claim-audit` has a 56% FP rate over 30 days (25 fires) per the B4 findings — the Sprint 4 refinement candidate called out in tonight's findings. This week improved to 18.75% (3/16), but the 30d figure remains above the 50% threshold that triggers the \"tighten or retire\" rule.\n\nThe Stop hook at `settings.json` (the *enforcement layer* for this rule) has a precisely-written exception list: **E1–E4** and **G1–G3**, with E3 specifically protecting future-intent phrasing (\"I'll X\", \"I will X\", \"next I'll Y\"). The `pre-response-claim-audit` rule is the *pre-send frontstop* that should catch violations before the hook fires — but its \"What does NOT need evidence\" list doesn't enumerate these same exceptions with labels. The performance log records a canonical FP from 2026-04-16: *\"Flagged future-tense phrasing despite being exception 7a\"* — meaning the Stop hook had an internal exception label that the rule text never exposed, so agents couldn't recognize the pattern as safe.\n\nThe Stop hook and the frontstop rule are describing the same discipline from two ends of the pipeline, but they use different taxonomies. An agent running the pre-send audit cannot map \"my claim is 'I'll refactor this next'\" to any named safe-harbor in the rule.\n\n**Solution:** Add an \"Exception reference map\" subsection to the TL;DR section of `~/.claude/rules/pre-response-claim-audit.md` that cross-references Stop hook exceptions:\n\n```markdown\n### What the Stop hook will NOT flag (safe-harbor map)\n\nThese match the Stop hook's built-in exception guards — if your claim fits one, the\npre-send audit passes AND the hook will pass. No source or hedge needed:\n\n- **E3 — Future intent about own actions:** \"I'll X\", \"I will X\", \"next I'll Y\",\n  \"once X returns I'll Y\". (Future EXTERNAL SYSTEM behavior is not covered — see F2.)\n- **G1 — Deployment/commit/session-ID claims** when a tool_use or tool_result block\n  is visible in the same turn. Re-quoting inline is not required.\n- **G2 — Project/entity/rule/skill names** that appear in CLAUDE.md, MEMORY.md,\n  skills-list, or the session briefing system-reminder this turn.\n- **E4 — No specific claims:** questions, plans, design commentary, user-stated\n  facts recapped.\n```\n\n**Impact:** Aligns the frontstop rule's exception vocabulary with the Stop hook's actual guards. Agents can run the pre-send audit against a named list rather than inferring what's safe. Targets the documented FP class (future-tense / E3 misfire) directly. Expected to move the 30d FP rate toward the <20% target without weakening fabrication detection.\n\n**Risk:** If the Stop hook prompt is later edited to tighten E3 or G1–G2, the rule's safe-harbor map becomes stale and creates false confidence. Mitigation: add a comment in both files cross-referencing each other so a change to one surfaces the need to update the other.\n\n---\n\n## P-2026-04-27-004\n**Category:** `agent_methodology`\n\n**Problem:** Tonight's B4 efficacy findings flag `chief-of-staff` as stale: *\"last fired 2026-04-05 — retirement candidate.\"* That's 22 days of inactivity as of 2026-04-27. The `agent_usage_7d` data shows 1 session in 7 days, but `agent_unused_frequency_7d` shows 4 sessions where chief-of-staff was available and not selected — and the agent deploy frequency table shows zero deployments from chief-of-staff. The 1 \"session\" in `agent_usage_7d` likely reflects a digest session where the agent appeared in the roster but was not invoked.\n\nCross-referencing the staleness check rule: the B3 evidence would need at least one session from the last 14 days to support an active role. The B4 scan places last activity at 2026-04-05 — outside the 14-day window. The agent appears in 4 unused-session slots per week while actively-used agents (developer: 23 deploys, Explore: 12, reviewer: 11) carry the real load. The `chief-of-staff.md` agent definition describes a role (\"prioritization and strategic direction\") that overlaps heavily with what the Plan agent and main-thread handle in practice.\n\n**Solution:** Move `~/.claude/agents/chief-of-staff.md` to `~/.claude/retired/chief-of-staff.md` with a retirement header:\n\n```markdown\n# RETIRED — 2026-04-27\nReason: 22 days no activity (last fired 2026-04-05). Role absorbed by Plan agent\nand main-thread. Retire per staleness threshold: no B3 session in last 14 days.\nReinstatable if a distinct use case emerges.\n```\n\nRemove from the active agent roster in `CLAUDE.md` (or equivalent agent-list file) so it stops appearing in `agent_unused_frequency_7d` and cluttering the weekly deployment tables.\n\n**Impact:** Removes 4 weekly \"unused\" noise entries from agent utilization data. Tightens the roster to agents that are actually deployed. Eliminates the recurring staleness finding.\n\n**Risk:** If a future session genuinely needs strategic prioritization across many parallel workstreams, the chief-of-staff role has no obvious substitute. The retirement file preserves the definition for reinstatement. Low risk given 22 days of zero demand and the Plan agent covering adjacent ground.\n\n## Proposal Track Record\n51 total, 40 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 4 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 40/47 accepted |\n| Eval Signal | OK | 9 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 47,
-      "accepted": 39,
-      "pending": 0,
+      "total": 51,
+      "accepted": 40,
+      "pending": 4,
       "rejected": 5
     },
     "benchmarks": [
@@ -2045,8 +2078,8 @@
       },
       {
         "name": "Proposal Hit Rate",
-        "status": "84%",
-        "detail": "39/46 accepted"
+        "status": "85%",
+        "detail": "40/47 accepted"
       },
       {
         "name": "Eval Signal",
@@ -2174,7 +2207,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 726
+      "tool_calls_30d": 728
     },
     {
       "id": "design-view",
@@ -2195,7 +2228,7 @@
       "friction_today": 0,
       "unresolved_gaps": 2,
       "templates_used": 0,
-      "tool_calls_30d": 2592
+      "tool_calls_30d": 2594
     },
     {
       "id": "mirror-app",
@@ -2774,5 +2807,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-04-28T04:19:30.264Z"
+  "lastUpdated": "2026-04-28T04:33:35.291Z"
 }

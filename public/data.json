@@ -1648,6 +1648,28 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "a0-auto-install-backfill",
+        "date": "2026-04-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "1777348800-stuck-failures-pass",
+        "date": "2026-04-28",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
@@ -2201,7 +2223,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 348
+      "tool_calls_30d": 365
     },
     {
       "id": "agent-os",
@@ -2277,9 +2299,9 @@
   "failureToPrevention": {
     "thisWeek": {
       "failures": 28,
-      "preventions": 0,
-      "autoInstalls": 0,
-      "conversionPct": 0
+      "preventions": 4,
+      "autoInstalls": 4,
+      "conversionPct": 14
     },
     "lastWeek": {
       "failures": 59,
@@ -2351,7 +2373,7 @@
       {
         "date": "2026-04-27",
         "failures": 8,
-        "preventions": 0
+        "preventions": 4
       },
       {
         "date": "2026-04-28",
@@ -2361,21 +2383,6 @@
     ],
     "stuckFailures": [
       {
-        "session": "weekly-scan-a3",
-        "detail": "First-read of agent-dashboard was piecewise ls + Read instead of one Explore spawn. Rule agent-delegation-triggers.md §3 says first unfamili",
-        "age_days": 12
-      },
-      {
-        "session": "weekly-scan-a3",
-        "detail": "Committed 4 times this session (da76934, 324952f, 036d0de, aee134f) without reviewer agent invocation. commit-gate.sh fired advisory but I d",
-        "age_days": 12
-      },
-      {
-        "session": "design-principles-setup",
-        "detail": "Read tool cannot handle large PDFs with images — Norman PDF (2.4MB) blew past 32MB API request limit when rendered. Had to pre-convert via p",
-        "age_days": 10
-      },
-      {
         "session": "design-principles-v2",
         "detail": "Reviewer NOT spawned before commit. Reason: commit is pure markdown (rules/design-principles.md, rules/system-reminder-citation.md, skills/d",
         "age_days": 9
@@ -2384,6 +2391,21 @@
         "session": "design-principles-v2",
         "detail": "Reviewer NOT spawned before second commit (Post-/learn refresh). Reason: commit contains only Bruce-phase output refresh (briefing.md, event",
         "age_days": 9
+      },
+      {
+        "session": "scout-v1-mobile-polish",
+        "detail": "Mac Air required multiple hard shutdowns during session — node/bun/wrangler processes accumulated memory pressure. No build hygiene check ca",
+        "age_days": 8
+      },
+      {
+        "session": "scout-v1-mobile-polish",
+        "detail": "Hero flagged that scout-v1, Mirror, Edge, and 38twelve all use the same neutral gray/cream/black palette. Products are not visually distinct",
+        "age_days": 8
+      },
+      {
+        "session": "bruce-nightshift",
+        "detail": "Template outputs schema/ dir but wrangler.toml references migrations_dir='migrations' — mismatch breaks npm run db:migrate. Fix in template:",
+        "age_days": 8
       }
     ]
   },
@@ -2456,7 +2478,7 @@
     "avgEfficacy": 0.6896551724137931,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
-    "netActive30d": -2,
+    "netActive30d": 2,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
@@ -2784,9 +2806,9 @@
     {
       "id": "first-auto-install",
       "title": "Auto-install fires this week",
-      "current": "0/week",
+      "current": "4/week",
       "target": "≥1 this week",
-      "status": "red",
+      "status": "green",
       "why": "Threshold lowered to 2 sessions. First fire flips Verb 1 from stalled to converting."
     },
     {
@@ -2800,9 +2822,9 @@
     {
       "id": "net-active",
       "title": "Net active preventions (30d)",
-      "current": "-2",
+      "current": "+2",
       "target": "≥0",
-      "status": "red",
+      "status": "green",
       "why": "Preventions installed minus retired. Sustained negative = system losing coverage."
     },
     {
@@ -2822,5 +2844,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-04-28T04:55:13.643Z"
+  "lastUpdated": "2026-04-28T05:03:38.867Z"
 }

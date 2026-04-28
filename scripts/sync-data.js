@@ -713,11 +713,18 @@ async function getFailureToPrevention() {
     });
   }
 
-  // Stuck failures: capability_gap events with no matching friction_resolved or auto_install
-  // within 7 days of the gap event. Top 5 by age desc.
+  // Stuck failures: capability_gap events with no matching friction_resolved,
+  // friction_acknowledged, or auto_install. Top 5 by age desc.
+  // friction_acknowledged counts as not-stuck because it represents a known/deferred
+  // limitation that's been triaged — not actionable as a stuck failure.
   const resolvedDetails = new Set(
     events
       .filter(e => e.event === 'friction_resolved' && e.target_detail)
+      .map(e => e.target_detail)
+  );
+  const acknowledgedDetails = new Set(
+    events
+      .filter(e => e.event === 'friction_acknowledged' && e.target_detail)
       .map(e => e.target_detail)
   );
   const autoInstallDetails = new Set(
@@ -731,11 +738,12 @@ async function getFailureToPrevention() {
 
   const stuckFailures = capGaps
     .filter(e => {
-      // Check if any friction_resolved target_detail is a substring match
+      // Check if any friction event's target_detail is a substring match (either direction)
       const detail = e.detail || '';
       const isResolved = [...resolvedDetails].some(rd => rd.includes(detail) || detail.includes(rd));
+      const isAcknowledged = [...acknowledgedDetails].some(ad => ad.includes(detail) || detail.includes(ad));
       const isAutoInstalled = [...autoInstallDetails].some(ad => ad.includes(detail) || detail.includes(ad));
-      return !isResolved && !isAutoInstalled;
+      return !isResolved && !isAcknowledged && !isAutoInstalled;
     })
     .map(e => {
       const age_days = Math.floor((new Date(today) - new Date(e.date)) / 86400000);

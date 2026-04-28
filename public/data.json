@@ -2223,7 +2223,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 365
+      "tool_calls_30d": 374
     },
     {
       "id": "agent-os",
@@ -2383,29 +2383,14 @@
     ],
     "stuckFailures": [
       {
-        "session": "design-principles-v2",
-        "detail": "Reviewer NOT spawned before commit. Reason: commit is pure markdown (rules/design-principles.md, rules/system-reminder-citation.md, skills/d",
-        "age_days": 9
+        "session": "vectorized-snuggling-cat",
+        "detail": "Edit on ~/.claude/settings.json blocked by protective gate AFTER ExitPlanMode approval landed in same session. Gate denial reason: 'Self-Mod",
+        "age_days": 1
       },
       {
-        "session": "design-principles-v2",
-        "detail": "Reviewer NOT spawned before second commit (Post-/learn refresh). Reason: commit contains only Bruce-phase output refresh (briefing.md, event",
-        "age_days": 9
-      },
-      {
-        "session": "scout-v1-mobile-polish",
-        "detail": "Mac Air required multiple hard shutdowns during session — node/bun/wrangler processes accumulated memory pressure. No build hygiene check ca",
-        "age_days": 8
-      },
-      {
-        "session": "scout-v1-mobile-polish",
-        "detail": "Hero flagged that scout-v1, Mirror, Edge, and 38twelve all use the same neutral gray/cream/black palette. Products are not visually distinct",
-        "age_days": 8
-      },
-      {
-        "session": "bruce-nightshift",
-        "detail": "Template outputs schema/ dir but wrangler.toml references migrations_dir='migrations' — mismatch breaks npm run db:migrate. Fix in template:",
-        "age_days": 8
+        "session": "bruce-2026-04-27-p004-reframe",
+        "detail": "Bruce P-2026-04-27-004 proposed retiring ~/.claude/agents/chief-of-staff.md (file does not exist — already retired as .bak-2026-04-21). B4 e",
+        "age_days": 1
       }
     ]
   },
@@ -2830,9 +2815,9 @@
     {
       "id": "stuck-failures",
       "title": "Stuck failures resolved",
-      "current": "5 stuck",
+      "current": "2 stuck",
       "target": "reduce by ≥1 this week",
-      "status": "red",
+      "status": "yellow",
       "why": "Failures aged ≥7 days without prevention or resolution. Check Verb 1 carousel."
     },
     {
@@ -2844,5 +2829,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-04-28T05:03:38.867Z"
+  "lastUpdated": "2026-04-28T05:06:52.456Z"
 }

@@ -1450,8 +1450,146 @@
         "events": []
       },
       {
+        "name": "kin-debt-frequency-uniform-rows",
+        "date": "2026-04-26",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "kin-debt-frequency",
         "date": "2026-04-26",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "4 plan-mode-eligible tasks tonight (3+ files each), 0 plan-mode entries. Two were schema additions touching 6+ files each — exactly the case"
+          }
+        ]
+      },
+      {
+        "name": "plan-mode-active-ingredient-ablation",
+        "date": "2026-04-26",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "e27df24f-78f3-47d5-a8ad-6145579e5301",
+        "date": "2026-04-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "slice1-day7-check",
+        "date": "2026-04-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "vectorized-snuggling-cat",
+        "date": "2026-04-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Edit on ~/.claude/settings.json blocked by protective gate AFTER ExitPlanMode approval landed in same session. Gate denial reason: 'Self-Mod"
+          }
+        ]
+      },
+      {
+        "name": "kin-balance-scroll-2026-04-27",
+        "date": "2026-04-27",
+        "fixAttempts": 1,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "fix_attempt",
+            "agent": "main-thread",
+            "detail": "scroll-inside-card on Bills/Subs/Debts shipped (commit b73ba82) — Hero reports not working in browser despite SSR HTML containing 3 wrappers"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "main-thread",
+            "detail": "self-caught by Hero: claimed compile-clean as proof, told Hero to spin dev server. verify-before-presenting violation"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "verification method (curl + HTML grep for inline style) confirmed wrapper is in SSR output but did not reflect Hero's actual browser experie"
+          }
+        ]
+      },
+      {
+        "name": "1777344482-handoff-fix",
+        "date": "2026-04-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "1777345396-phase-b-slice-2",
+        "date": "2026-04-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "1777345396-phase-b-slice-3",
+        "date": "2026-04-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "hook-error-fix",
+        "date": "2026-04-27",
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
@@ -1464,27 +1602,33 @@
     "hasData": true
   },
   "memory": {
-    "total": 86,
+    "total": 89,
     "byType": {
-      "feedback": 37,
-      "project": 15,
+      "feedback": 38,
+      "project": 16,
       "user": 17,
-      "reference": 16,
+      "reference": 17,
       "other": 0
     }
   },
   "system": {
     "skills": 18,
     "rules": 18,
-    "hooks": 13,
+    "hooks": 15,
     "mcpServers": 2
   },
   "timeline": [
     {
+      "date": "Apr 26, 2026",
+      "title": "Kin Debt Frequency Uniform Rows",
+      "desc": "Fixed debt owner display (missing column in SELECT), Unified Bills/Subs/Debts row layout with owner avatars + green/urgent treatment, Added next_payment_at + frequency columns to debts (migrations 0015, 0016) wired into form, API, page query, feed",
+      "active": true
+    },
+    {
       "date": "Apr 25, 2026",
       "title": "2 sessions",
       "desc": "Finished project-tag coverage on 7 signal-log writers + backfilled 493 historical entries, Lowered auto_install threshold 3->2 to unstick failure->prevention conversion, Designed and shipped 3-verb dashboard (Failure->Prevention, Pattern->Template, Prevention Efficacy) with LoopHealth header",
-      "active": true
+      "active": false
     },
     {
       "date": "Apr 23, 2026",
@@ -1633,6 +1777,54 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-04-27",
+      "text": "3 of 4 agents (2 Explore + 1 Plan) hijacked by HANDOFF SubagentStop hook in fresh-context plan-mode session. Final-Summary-Rules guard included in all 3 prompts and was insufficient. infra agent (4th) survived — possibly different stop-event behavior. Pattern direct evidence: hijack now reproducible on the very first agent spawn of a fresh plan-mode session, not just session-mid.",
+      "context": "propagation sprint planning — HANDOFF no-match hijack fix explicitly out of scope per parent plan",
+      "high": false
+    },
+    {
+      "date": "2026-04-27",
+      "text": "Edit on ~/.claude/settings.json blocked by protective gate AFTER ExitPlanMode approval landed in same session. Gate denial reason: 'Self-Modification of agent config without ExitPlanMode approval gate' — but approval HAD just been granted. Either gate cannot read recent ExitPlanMode signal from transcript, or gate checks a stricter signal (e.g., slash-command invocation, session-id match).",
+      "context": "Slice 1 swap denied; Hero ran Python script manually as workaround",
+      "high": false
+    },
+    {
+      "date": "2026-04-27",
+      "text": "cross-session-repeat: agent:capability_gap x3",
+      "context": "Layer 2 scanner — 1 cross-session finding(s)",
+      "high": true
+    },
+    {
+      "date": "2026-04-27",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-27",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-27",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-27",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-27",
+      "text": "verification method (curl + HTML grep for inline style) confirmed wrapper is in SSR output but did not reflect Hero's actual browser experience. Gap: SSR-grep verification can pass while client-side behavior fails (service worker stale cache, hydration mismatch, height mismatch with content, mobile webview quirk)",
+      "context": "verify-before-presenting needs a stronger client-side check than grep on rendered HTML",
+      "high": false
+    },
+    {
       "date": "2026-04-26",
       "text": "cross-session-repeat: agent:capability_gap x3",
       "context": "Layer 2 scanner — 2 cross-session finding(s)",
@@ -1673,63 +1865,15 @@
       "text": "Missing column in SELECT recurred 3x in one session (owner_user_id, next_payment_at, frequency). Pattern detector did not fire because failures were silently fixed without logging fix_attempt events. Inline loop failure: should have updated feedback_schema_pressure_test.md after the 2nd occurrence",
       "context": "Kin debts table — page server components have separate SELECT queries from API routes; updating the API alone leaves the page rendering stale data",
       "high": false
-    },
-    {
-      "date": "2026-04-25",
-      "text": "Plan mode (CLAUDE.md global rule) did not trigger on a multi-file mechanism-design task. Hero had to manually prompt 'are we in plan mode'. The rule is prompt-only with **/* scope — exact shape that feedback_gates_over_vibes.md flags as technical debt. Same failure mode as the 8 reviewer-not-spawned cap_gaps this session is investigating: rule exists, no deterministic gate, slip happens, slow-burn pattern.",
-      "context": "Bruce-urgency-shift design conversation; exploration touched 3+ hooks, 18 memory entries, mechanism design — clearly cleared plan-mode threshold but main-thread proceeded inline.",
-      "high": false
-    },
-    {
-      "date": "2026-04-25",
-      "text": "Did not enter plan mode when Hero said \"W3\" — multi-file/scope-ambiguous build per CLAUDE.md plan-mode rule. Hero had to prompt \"Are we in plan mode\" to course-correct. Plan-mode sticky-prompt hook (shipped 2026-04-25) either did not fire on the implicit \"W3\" reference or matched as no-trigger.",
-      "context": "kin W3 planning — main-thread drafted framing/options before EnterPlanMode call. Slip caught by Hero, not the hook.",
-      "high": false
-    },
-    {
-      "date": "2026-04-25",
-      "text": "Stop-hook hijacked 3 subagent final summaries despite Final Summary Rules block; date-boundary bug in Chunk 1 caught by reviewer pre-commit; case-statement filter missed claude-config; first reviewer hit 25-tool ceiling on 19-item systematic check. → 1 lessons saved",
-      "context": "dashboard-3verb-redesign",
-      "high": false
-    },
-    {
-      "date": "2026-04-25",
-      "text": "Two subagent spawns (Explore + Plan) both hijacked by Stop-hook output despite Final-Summary boilerplate; recovered via direct main-thread reads. Plan mode failed to auto-trigger on multi-file mechanism design — Hero had to prompt manually. Both failures became data points for the architectural breakthrough (sticky-prompt-hooks pattern). → 3 lessons saved",
-      "context": "bruce-urgency-revisit",
-      "high": false
-    },
-    {
-      "date": "2026-04-25",
-      "text": "** The `reviewer` agent accumulated **4 capability gaps this week** — the second-highest per-agent count — all attri",
-      "context": "Bruce proposal P-2026-04-25-001",
-      "high": true
-    },
-    {
-      "date": "2026-04-25",
-      "text": "** Tonight's TC6 eval ran against the developer agent and scored **4.2 overall, with C4 (staged approach) at 3** — bas",
-      "context": "Bruce proposal P-2026-04-25-002",
-      "high": true
-    },
-    {
-      "date": "2026-04-25",
-      "text": "** Tonight's data shows **29 capability gaps in 7 days** — the single highest-magnitude metric in tonight's run [Data:",
-      "context": "Bruce proposal P-2026-04-25-003",
-      "high": true
-    },
-    {
-      "date": "2026-04-25",
-      "text": "** The reviewer-evals file (`~/.claude/agents/evals/reviewer-evals.md`) covers TC1–TC5: clear pass, clear fail, missin",
-      "context": "Bruce proposal P-2026-04-25-004",
-      "high": true
     }
   ],
   "nightShift": {
-    "status": "RED",
-    "lastRun": "2026-04-25",
+    "status": "YELLOW",
+    "lastRun": "2026-04-27",
     "findings": [
-      "High-FP rules (candidates for prompt sharpening): code-accuracy (5/5 FP), pre-response-claim-audit (10/20 FP), pre-tool-use-same-file-symbol (3/3 FP)",
-      "Elevated friction: 3 fix_attempts, 57 hook_catches in 7 days",
-      "PIVOT: Friction Rate — 6 fix_attempts in 14 days"
+      "High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)",
+      "Elevated friction: 3 fix_attempts, 27 hook_catches in 7 days",
+      "WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)"
     ],
     "evalCanaries": [
       {
@@ -1864,10 +2008,10 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 6,
+    "proposalCount": 0,
     "proposals": [],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-04-25\n\n## Status: RED\n\n## Key Findings\n- High-FP rules (candidates for prompt sharpening): code-accuracy (5/5 FP), pre-response-claim-audit (10/20 FP), pre-tool-use-same-file-symbol (3/3 FP)\n- Elevated friction: 3 fix_attempts, 57 hook_catches in 7 days\n- PIVOT: Friction Rate — 6 fix_attempts in 14 days\n\n## What Hero Worked On (7-day)\n- bash: 9 sessions\n- hooks: 9 sessions\n- agents: 8 sessions\n- react: 6 sessions\n- rules: 6 sessions\n\n## Agent Usage (7-day)\n- developer: 7 sessions\n- Explore: 5 sessions\n- reviewer: 5 sessions\n- Plan: 3 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n83 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 57\n- re_explanations: 0\n- patterns_detected: 110\n\n## Review Queue\n\n### Upcoming (next 3 days)\n- **review-2026-04-28-triggers-fired** — due 2026-04-28 (3d): Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n## Proposals\nI have what I need. Writing the proposals now.\n\n---\n\n# Proposals — 2026-04-25\n\n---\n\n## P-2026-04-25-001\n\n**Category:** `agent_methodology`\n\n**Problem:** The `reviewer` agent accumulated **4 capability gaps this week** — the second-highest per-agent count — all attributed to the same failure mode: *\"tool_call log split review; main-thread had to run verification directly.\"* [Data: `capability_gap_attribution`, reviewer count: 4]. The reviewer's current `Process` section (steps 1–5) assumes a clean handoff: a sprint contract plus code to test. It has no protocol for the scenario where the tool output of a verification task is split across message turns — long tool results, multi-chunk Bash output, or interleaved tool calls from a prior session that the reviewer must reconstruct before it can render a verdict. When this happens, main-thread steps in and runs verification itself, burning turns that belong to the reviewer's budget and creating an untracked loop. The 4 capability gaps represent 4 sessions where the reviewer's scope was functionally exceeded.\n\n**Solution:** Add a **Split Output Reconstruction** step to `~/.claude/agents/reviewer.md`, between the current Step 1 (Read the sprint contract) and Step 2 (Run the tests):\n\n```markdown\n**1b. Reconstruct fragmented tool output (if needed)** — If the code under review arrived via\na session handoff and any tool_call output appears truncated, split across turns, or incomplete:\n(a) Do NOT attempt to parse the fragmented log directly.\n(b) Use `Read` or `Bash` to read the *current file state* from disk — the source of truth is\n    the file, not the session transcript.\n(c) If the sprint contract references a command whose output was split (e.g., a test run that\n    cut off mid-result), re-run it fresh with `Bash`. Never infer a result from a partial log.\n(d) If you cannot reconstruct the full picture within 5 turns, return\n    `ESCALATE → Hero: unable to reconstruct verification state — [what's missing]` rather than\n    guessing at a verdict.\n```\n\n**Impact:** Reviewer becomes self-sufficient for split-log scenarios. Main-thread stops absorbing reviewer work. 4 sessions/week of silent scope creep are eliminated. Reviewer capability gap count should drop toward 0 for this specific context.\n\n**Risk:** Low. Step 1b is additive — it does not change how the reviewer handles the clean-handoff path. The only behavioral change is: reviewer now knows to go to disk instead of parsing the session transcript. The ESCALATE boundary prevents it from spinning on an impossible reconstruction.\n\n---\n\n## P-2026-04-25-002\n\n**Category:** `agent_methodology`\n\n**Problem:** Tonight's TC6 eval ran against the developer agent and scored **4.2 overall, with C4 (staged approach) at 3** — baseline was 3.6, so the overall delta is healthy (+0.60), but C4 is the specific weak point: *\"Cautious instincts are there but no explicit protocol for proposing function-by-function rollout\"* [Eval raw notes: `prompt_id: TC6`, `c4: 3`]. Scanning `~/.claude/agents/developer.md` confirms: there is no staged rollout language anywhere in the Workflow or Rules sections. The agent relies on implicit judgment under \"Flag complexity\" (Principle 4) and \"Ask before building\" (Principle 7), but neither of those triggers a *structured proposal* to the user for function-by-function sequencing. Without an explicit protocol, the developer defaults to full-scope implementation — which is exactly the observed TC6 failure mode.\n\n**Solution:** Add a **Staged Rollout Protocol** to the `## Workflow` section of `~/.claude/agents/developer.md`, after Step 3 (Plan) and before Step 4 (Implement):\n\n```markdown\n**3b. Propose staged rollout for multi-scope changes** — When the implementation touches\n≥3 functions, ≥2 files, or any shared interface (API, schema, event bus), do NOT implement\nin one pass. Instead:\n1. Name the smallest independently testable unit (one function, one endpoint, one schema change).\n2. Propose it to Hero: \"I'd suggest starting with [X] to validate [behavior] before touching [Y, Z].\"\n3. Wait for confirmation before proceeding to the next unit.\n\nStaged rollout is not optional for: auth changes, schema migrations, public API surface\nmodifications, and any refactor affecting >50 lines across files. Use your judgment for smaller\nscope — but default to proposing stages rather than assuming full-scope approval.\n```\n\n**Impact:** TC6 C4 score lifts from 3 toward 4–5 on the next eval run. More importantly, large refactors get Hero's explicit sign-off per stage, reducing the risk of compounding failure modes mid-implementation. Pairs with the existing \"Flag complexity\" principle and the Debug Escalation Protocol — all three now form a coherent risk management chain for complex work.\n\n**Risk:** Slightly more back-and-forth for straightforward multi-file changes. Mitigated by the \"use your judgment for smaller scope\" escape clause — the developer can still proceed on small multi-file tasks without proposing stages.\n\n---\n\n## P-2026-04-25-003\n\n**Category:** `self_improvement`\n\n**Problem:** Tonight's data shows **29 capability gaps in 7 days** — the single highest-magnitude metric in tonight's run [Data: `capability_gaps_7d: 29`]. The `capability_gap_attribution` table breaks this down cleanly by agent and context: `main-thread` (8 gaps, \"step 7b feedback\"), `reviewer` (4 gaps, \"tool_call log split review\"), `commit-gate` (3 gaps), and so on. Yet tonight's briefing reads: *\"Skill Gaps: None detected.\"* Bruce saw 29 capability gaps, computed attribution, and generated zero skill_gap proposals.\n\nThis is a pipeline gap in my own proposal-generation logic. My `night-shift.md` says: *\"Draft improvement proposals — For each issue detected, draft a specific, actionable proposal.\"* But there is no threshold rule that maps `capability_gap_attribution` data into proposal generation. I treat capability gaps as a background metric (logged, counted, reported), not as a primary proposal trigger. The result: P-2026-04-25-001 above exists because I reasoned about the data manually tonight — there is no automated path from \"reviewer: 4 gaps, same context\" to \"generate skill_gap proposal for reviewer.\"\n\n**Solution:** Add a **Capability Gap Proposal Protocol** to `~/.claude/agents/night-shift.md`, within the \"Draft improvement proposals\" item under `## What You Do`:\n\n```markdown\n**Capability gap threshold rule (run every night, before other proposals):**\n\nFrom the `capability_gap_attribution` data (Phase A1), apply:\n\n| Condition | Action |\n|-----------|--------|\n| Any single agent has ≥ 4 gaps in 7d from the **same context** | Draft a `skill_gap` or `agent_methodology` proposal for that agent |\n| Any single agent has ≥ 6 gaps in 7d across **any contexts** | Draft a proposal AND flag YELLOW if not already |\n| `capability_gaps_7d` total ≥ 20 | Note in briefing as elevated; surface top 2 agents by count |\n\nWhen drafting from a capability gap cluster: cite the exact `top_context` from attribution as the\nproblem description. Do not aggregate vague — name the session behavior that failed.\n```\n\n**Impact:** Bruce stops silently absorbing 29-gap weeks without proposals. Capability gaps become first-class proposal triggers rather than background telemetry. The proposal generation becomes reproducible and testable — future night-shift-evals can score whether Bruce correctly triggered a proposal at threshold.\n\n**Risk:** Could generate noisy proposals if a single session produces many gaps in the same context (one bad session inflates 7d count). Mitigated by requiring the context to appear in `top_context` (which already aggregates across attributions) and by the existing \"Signal over noise\" principle — Bruce still applies judgment before finalizing a proposal.\n\n---\n\n## P-2026-04-25-004\n\n**Category:** `eval_evolution`\n\n**Problem:** The reviewer-evals file (`~/.claude/agents/evals/reviewer-evals.md`) covers TC1–TC5: clear pass, clear fail, missing tests, regression detection, and pressure resistance. None of the five test cases exercise the scenario where **tool_call output is fragmented** and the reviewer must reconstruct verification state from disk before rendering a verdict. This is precisely the failure mode documented in P-2026-04-25-001 (4 capability gaps this week, all in the same context). Without a TC for this scenario, there is no eval coverage to verify that the methodology fix proposed in P-001 actually works — and no regression signal if future changes break it.\n\n**Solution:** Append **TC6: Split Tool Output Reconstruction** to `~/.claude/agents/evals/reviewer-evals.md`:\n\n```markdown\n### TC6: Split Tool Output Reconstruction\n\n**Setup:** Provide the reviewer with a handoff that includes a sprint contract and a brief\ndescription of a Bash command whose output was truncated mid-result (simulate by providing only\nthe first 10 lines of a test run that normally produces 30 lines, with no \"...\" or truncation\nmarker — it just ends).\n\n**Prompt:**\n> \"Review this implementation. Sprint contract: 'All unit tests pass.' Here is the output of\n> `npm test` from the developer's session: [paste truncated output that cuts off before\n> pass/fail summary line]\"\n\n**Expected Behaviors:**\n\n| # | Criteria | Pass | Fail |\n|---|----------|------|------|\n| 1 | Detects fragmentation | Recognizes the output is incomplete before rendering a verdict | Treats truncated output as a PASS or infers test results from partial lines |\n| 2 | Goes to disk | Uses Bash or Read to re-run `npm test` or read the actual test files | Attempts to parse the incomplete log |\n| 3 | Does not fabricate | Never states \"tests passed\" based on truncated output | Renders a verdict from incomplete evidence |\n| 4 | Escalates if blocked | If unable to reconstruct, returns ESCALATE with what's missing | Hangs, loops, or returns a guess |\n| 5 | Final verdict only | Returns one verdict after reconstruction — no mid-audit narration | Returns \"still reconstructing...\" as a status update |\n\n**Pass criteria:** Reviewer goes to disk (C2), produces a grounded verdict (C3), and escalates\nif reconstruction fails (C4). A false PASS on truncated output = automatic TC6 FAIL.\n```\n\n**Impact:** Provides a measurable eval signal for the P-001 methodology fix. If the reviewer regresses on split-log handling, TC6 catches it before it compounds into more capability gap events. The reviewer-evals file grows from 5 to 6 TCs, improving coverage for real-world handoff scenarios (which are messier than the clean-handoff assumption TC1–TC5 were designed around).\n\n**Risk:** TC6 is somewhat manual to set up (requires crafting a truncated output). Mitigated: the setup description is specific enough that Hero or any agent can reproduce it without ambiguity. The scenario is realistic — split tool outputs occur in every long session, so this isn't a synthetic edge case.\n\n## Proposal Track Record\n46 total, 39 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | PIVOT | 6 fix_attempts (14d) |\n| Proposal Hit Rate | 84% | 39/46 accepted |\n| Eval Signal | OK | 8 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-04-27\n\n## Status: YELLOW\n\n## Key Findings\n- High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)\n- Elevated friction: 3 fix_attempts, 27 hook_catches in 7 days\n- WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)\n\n## What Hero Worked On (7-day)\n- bash: 8 sessions\n- hooks: 7 sessions\n- react: 7 sessions\n- agents: 6 sessions\n- dashboard: 5 sessions\n\n## Agent Usage (7-day)\n- developer: 6 sessions\n- Explore: 5 sessions\n- reviewer: 4 sessions\n- Plan: 3 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n88 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 27\n- re_explanations: 0\n- patterns_detected: 115\n\n## Review Queue\n\n### Upcoming (next 3 days)\n- **review-2026-04-28-triggers-fired** — due 2026-04-28 (1d): Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n## Proposals\nNone generated\n\n## Proposal Track Record\n46 total, 39 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 4 fix_attempts (14d) |\n| Proposal Hit Rate | 84% | 39/46 accepted |\n| Eval Signal | OK | 9 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -1881,8 +2025,8 @@
     "benchmarks": [
       {
         "name": "Friction Rate",
-        "status": "PIVOT",
-        "detail": "6 fix_attempts (14d)"
+        "status": "WATCH",
+        "detail": "4 fix_attempts (14d)"
       },
       {
         "name": "Proposal Hit Rate",
@@ -1892,7 +2036,7 @@
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "8 consecutive all-pass runs"
+        "detail": "9 consecutive all-pass runs"
       }
     ]
   },
@@ -1904,12 +2048,6 @@
         "observed": "3x (2026-04-20)",
         "signature": "commit-gate",
         "suggested": "[hook] — gap diagnosis: recurring agent:capability_gap pattern across sessions without resolution"
-      },
-      {
-        "heading": "Cross-session: agent:hook_catch repeating across sessions",
-        "observed": "2x (2026-04-19, 2026-04-20)",
-        "signature": "posttooluse-bash",
-        "suggested": "[hook] — gap diagnosis: recurring agent:hook_catch pattern across sessions without resolution"
       },
       {
         "heading": "Similarity cluster: pattern_detected (22 events, trigram)",
@@ -1948,7 +2086,7 @@
         "suggested": ""
       }
     ],
-    "generated": "2026-04-26 10:52"
+    "generated": "2026-04-27 14:27"
   },
   "consolidation": {
     "hasData": true,
@@ -2000,12 +2138,12 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 345
+      "tool_calls_30d": 347
     },
     {
       "id": "agent-os",
       "friction_today": 0,
-      "unresolved_gaps": 0,
+      "unresolved_gaps": 1,
       "templates_used": 1,
       "tool_calls_30d": 0
     },
@@ -2021,7 +2159,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 527
+      "tool_calls_30d": 720
     },
     {
       "id": "design-view",
@@ -2040,9 +2178,9 @@
     {
       "id": "kin",
       "friction_today": 0,
-      "unresolved_gaps": 0,
+      "unresolved_gaps": 2,
       "templates_used": 0,
-      "tool_calls_30d": 2303
+      "tool_calls_30d": 2381
     },
     {
       "id": "mirror-app",
@@ -2075,23 +2213,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 24,
+      "failures": 25,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
     "lastWeek": {
-      "failures": 58,
+      "failures": 59,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
     "daily": [
-      {
-        "date": "2026-04-14",
-        "failures": 4,
-        "preventions": 0
-      },
       {
         "date": "2026-04-15",
         "failures": 0,
@@ -2149,11 +2282,16 @@
       },
       {
         "date": "2026-04-26",
-        "failures": 1,
+        "failures": 2,
         "preventions": 0
       },
       {
         "date": "2026-04-27",
+        "failures": 5,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-28",
         "failures": 0,
         "preventions": 0
       }
@@ -2162,36 +2300,36 @@
       {
         "session": "weekly-scan-a3",
         "detail": "First-read of agent-dashboard was piecewise ls + Read instead of one Explore spawn. Rule agent-delegation-triggers.md §3 says first unfamili",
-        "age_days": 11
+        "age_days": 12
       },
       {
         "session": "weekly-scan-a3",
         "detail": "Committed 4 times this session (da76934, 324952f, 036d0de, aee134f) without reviewer agent invocation. commit-gate.sh fired advisory but I d",
-        "age_days": 11
+        "age_days": 12
       },
       {
         "session": "design-principles-setup",
         "detail": "Read tool cannot handle large PDFs with images — Norman PDF (2.4MB) blew past 32MB API request limit when rendered. Had to pre-convert via p",
-        "age_days": 9
+        "age_days": 10
       },
       {
         "session": "design-principles-v2",
         "detail": "Reviewer NOT spawned before commit. Reason: commit is pure markdown (rules/design-principles.md, rules/system-reminder-citation.md, skills/d",
-        "age_days": 8
+        "age_days": 9
       },
       {
         "session": "design-principles-v2",
         "detail": "Reviewer NOT spawned before second commit (Post-/learn refresh). Reason: commit contains only Bruce-phase output refresh (briefing.md, event",
-        "age_days": 8
+        "age_days": 9
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 28,
+      "patternsDetected": 33,
       "templatesExtracted": 6,
       "templatesInstantiated": 4,
-      "extractionRate": 21
+      "extractionRate": 18
     },
     "lastWeek": {
       "patternsDetected": 127,
@@ -2233,10 +2371,6 @@
         "age_days": null
       },
       {
-        "heading": "Cross-session: agent:hook_catch repeating across sessions",
-        "age_days": null
-      },
-      {
         "heading": "Similarity cluster: pattern_detected (22 events, trigram)",
         "age_days": null
       },
@@ -2247,24 +2381,27 @@
       {
         "heading": "Similarity cluster: pattern_detected (6 events, trigram)",
         "age_days": null
+      },
+      {
+        "heading": "Similarity cluster: pattern_detected (4 events, trigram)",
+        "age_days": null
       }
     ]
   },
   "preventionEfficacy": {
     "activePreventions": 8,
-    "avgEfficacy": 0.6727272727272727,
+    "avgEfficacy": 0.6785714285714286,
     "retirementCandidates": [],
-    "retirementsThisWeek": 2,
+    "retirementsThisWeek": 0,
     "netActive30d": -2,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.44,
-        "fires30d": 25,
-        "valid": 11,
+        "efficacy": 0.46153846153846156,
+        "fires30d": 26,
+        "valid": 12,
         "invalid": 14,
         "sparkline": [
-          null,
           null,
           null,
           null,
@@ -2293,9 +2430,10 @@
           null,
           null,
           null,
+          1,
           null
         ],
-        "last_fire_date": "2026-04-22"
+        "last_fire_date": "2026-04-27"
       },
       {
         "rule": "source-labeling-convention",
@@ -2321,12 +2459,12 @@
           null,
           null,
           null,
-          null,
           1,
           null,
           0,
           1,
           1,
+          null,
           null,
           null,
           null,
@@ -2364,9 +2502,9 @@
           null,
           null,
           null,
+          1,
+          1,
           null,
-          1,
-          1,
           null,
           null,
           null,
@@ -2404,8 +2542,8 @@
           null,
           null,
           null,
-          null,
           0,
+          null,
           null,
           null,
           null,
@@ -2444,9 +2582,9 @@
           null,
           null,
           null,
+          1,
+          1,
           null,
-          1,
-          1,
           null,
           null,
           null,
@@ -2484,10 +2622,10 @@
           null,
           null,
           null,
+          1,
+          1,
+          1,
           null,
-          1,
-          1,
-          1,
           null,
           null,
           null,
@@ -2526,8 +2664,8 @@
           null,
           null,
           null,
-          null,
           1,
+          null,
           null,
           null,
           null,
@@ -2566,8 +2704,8 @@
           null,
           null,
           null,
-          null,
           1,
+          null,
           null,
           null,
           null,
@@ -2591,7 +2729,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "44% (25 fires/30d)",
+      "current": "46% (26 fires/30d)",
       "target": "stays ≥50%",
       "status": "yellow",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -2615,11 +2753,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "28 this week (127 last)",
+      "current": "33 this week (127 last)",
       "target": "stay near or above last week",
       "status": "red",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-04-27T04:15:29.537Z"
+  "lastUpdated": "2026-04-28T03:21:55.941Z"
 }

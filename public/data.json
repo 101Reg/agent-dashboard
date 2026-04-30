@@ -1856,6 +1856,54 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-04-30",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-30",
+      "text": "similarity-cluster size=7",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-30",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-30",
+      "text": "similarity-cluster size=5",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-28",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-28",
+      "text": "similarity-cluster size=7",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-28",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-04-28",
+      "text": "similarity-cluster size=5",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
       "date": "2026-04-27",
       "text": "3 of 4 agents (2 Explore + 1 Plan) hijacked by HANDOFF SubagentStop hook in fresh-context plan-mode session. Final-Summary-Rules guard included in all 3 prompts and was insufficient. infra agent (4th) survived — possibly different stop-event behavior. Pattern direct evidence: hijack now reproducible on the very first agent spawn of a fresh plan-mode session, not just session-mid.",
       "context": "propagation sprint planning — HANDOFF no-match hijack fix explicitly out of scope per parent plan",
@@ -1896,69 +1944,16 @@
       "text": "similarity-cluster size=4",
       "context": "Layer 2 scanner — similarity cluster",
       "high": true
-    },
-    {
-      "date": "2026-04-27",
-      "text": "verification method (curl + HTML grep for inline style) confirmed wrapper is in SSR output but did not reflect Hero's actual browser experience. Gap: SSR-grep verification can pass while client-side behavior fails (service worker stale cache, hydration mismatch, height mismatch with content, mobile webview quirk)",
-      "context": "verify-before-presenting needs a stronger client-side check than grep on rendered HTML",
-      "high": false
-    },
-    {
-      "date": "2026-04-27",
-      "text": "hook_catch x3",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-27",
-      "text": "3 valid hook_catches today on pre-response-claim-audit, all same shape: gut estimate dressed up with specific number/measurement (60px row height, 30-45 min build, compile=working). Systemic fix: added Numbers reflex sub-clause to TL;DR.",
-      "context": "P-2026-04-27-001",
-      "high": true
-    },
-    {
-      "date": "2026-04-27",
-      "text": "Bruce P-2026-04-27-004 proposed retiring ~/.claude/agents/chief-of-staff.md (file does not exist — already retired as .bak-2026-04-21). B4 efficacy scan flagged chief-of-staff as a stale agent because ~/.claude/night-shift/baselines.json still carries a chief-of-staff baseline entry. B4 reads baselines.json as the agent roster source of truth. Without a roster sync, every Bruce run will continue surfacing this phantom finding.",
-      "context": "P-2026-04-27-004 rejected; real fix = remove chief-of-staff entry from baselines.json + add roster-sync check to B4 (compare baselines.json against ls ~/.claude/agents/*.md and flag stale entries)",
-      "high": false
-    },
-    {
-      "date": "2026-04-27",
-      "text": "capability_gap x3",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-04-27",
-      "text": "3 cap_gaps tripped pattern-detector (P-2026-04-27-006). Diagnosis: 3 distinct subsystem gaps, no shared root cause. Resolved gaps: HANDOFF hijack (already paired earlier today), kin-balance-scroll client-side verify (paired now via P-002 application). Remaining: bruce-p004-reframe baselines.json roster-sync — low-urgency Bruce enhancement, not blocking user work.",
-      "context": "Pattern-detector fired correctly on volume threshold. Systemic fix applied was P-002 (verify-before-presenting client-side warning block) — the proposal Bruce had already drafted for the highest-volume gap (44% of weekly cap_gaps). Inline build complete.",
-      "high": true
-    },
-    {
-      "date": "2026-04-27",
-      "text": "Bruce 2026-04-27 systemic fix sweep: applied 4 proposals (P-002 EXCLUDED_RULE_SLUGS filter, P-003 grep-on-raw-HTML warning, P-005 Stop hook safe-harbor map, P-006 collapsed into P-003), paired 1 cap_gap (kin-debt-frequency plan-mode discipline as friction_acknowledged), absorbed 3 unabsorbed surprises (2026-04-12 Anthropic-RSS, 2026-04-22 commit-gate transcript blind spot, 2026-04-27 hookEventName), rejected 1 misframed proposal (P-004 chief-of-staff retire). Pattern cluster acknowledgement: 4 stale similarity clusters from 2026-04-16-23 left to age out of 14-day scanner window — no scanner threshold tuning. Phantom-finding root cause logged for B4 enhancement (baselines.json roster sync against ~/.claude/agents/*.md).",
-      "context": "All 5 stuck items addressed; ledger has 0 pending proposals after sweep; pattern-detector will not re-fire on these gaps (paired or rejected); external-services evolve queue is empty.",
-      "high": true
-    },
-    {
-      "date": "2026-04-27",
-      "text": "None — direct investigation, 1-line fix, verified → 1 lessons saved",
-      "context": "hook-error-fix",
-      "high": false
     }
   ],
   "nightShift": {
     "status": "YELLOW",
-    "lastRun": "2026-04-27",
+    "lastRun": "2026-04-30",
     "findings": [
-      "High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)",
-      "Elevated friction: 3 fix_attempts, 29 hook_catches in 7 days",
       "WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)",
       "CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate",
       "CONCERN: pre-response-claim-audit has 56% FP rate (25 fires in 30d) — Sprint 4 refinement candidate",
-      "STALE: chief-of-staff last fired 2026-04-05 — retirement candidate",
-      "Skill gap: plan-mode-auto-trigger — 3 confirmed cap_gap events: (1) 2026-04-25 — plan mode did not trigger on a mult",
-      "Skill gap: subagent-stop-hook-hijacking — 1 confirmed cap_gap event (2026-04-27): 3 of 4 subagents (2 Explore + 1 Plan) hi",
-      "Skill gap: client-side-verification-methodology — 1 confirmed cap_gap event (2026-04-27): curl + HTML grep on SSR output confirmed"
+      "STALE: chief-of-staff last fired 2026-04-05 — retirement candidate"
     ],
     "evalCanaries": [
       {
@@ -2093,18 +2088,37 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 4,
-    "proposals": [],
+    "proposalCount": 6,
+    "proposals": [
+      {
+        "id": "P-2026-04-30-001",
+        "category": "self_improvement",
+        "problem": "B4 has no mechanism to detect orphaned baseline entries — agent keys in `baselines.json` with no corresponding `.md` file on disk. Tonight's roster diff reveals the scope is larger than previously understood:",
+        "solution": ""
+      },
+      {
+        "id": "P-2026-04-30-002",
+        "category": "eval_evolution",
+        "problem": "13 of 19 capability gaps this week (68%) are attributed to `main-thread` with a single repeating context: *\"verify-before-presenting needs a stronger client-side check than grep on rendered HTML.\"",
+        "solution": ""
+      },
+      {
+        "id": "P-2026-04-30-003",
+        "category": "agent_methodology",
+        "problem": "Tonight's capability gap attribution includes one entry for the `developer` agent: *\"main-thread completed remaining work in ~10 min — better decomposition would have been 2 agents per task class (cleanup + additions) with shared file lock.\"",
+        "solution": "Add a `## Task Decomposition` section to `~/.claude/agents/developer.md`, immediately after the existing `## Workflow` section:"
+      }
+    ],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-04-27\n\n## Status: YELLOW\n\n## Key Findings\n- High-FP rules (candidates for prompt sharpening): pre-tool-use-same-file-symbol (3/3 FP)\n- Elevated friction: 3 fix_attempts, 29 hook_catches in 7 days\n- WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)\n- CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate\n- CONCERN: pre-response-claim-audit has 56% FP rate (25 fires in 30d) — Sprint 4 refinement candidate\n- STALE: chief-of-staff last fired 2026-04-05 — retirement candidate\n- Skill gap: plan-mode-auto-trigger — 3 confirmed cap_gap events: (1) 2026-04-25 — plan mode did not trigger on a mult\n- Skill gap: subagent-stop-hook-hijacking — 1 confirmed cap_gap event (2026-04-27): 3 of 4 subagents (2 Explore + 1 Plan) hi\n- Skill gap: client-side-verification-methodology — 1 confirmed cap_gap event (2026-04-27): curl + HTML grep on SSR output confirmed\n\n## What Hero Worked On (7-day)\n- bash: 9 sessions\n- hooks: 8 sessions\n- react: 8 sessions\n- agents: 6 sessions\n- cloudflare-workers: 5 sessions\n\n## Agent Usage (7-day)\n- developer: 7 sessions\n- Explore: 6 sessions\n- reviewer: 5 sessions\n- Plan: 3 sessions\n- chief-of-staff: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 3.6 | 3.6 | 0.00 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n88 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 29\n- re_explanations: 0\n- patterns_detected: 117\n\n## Review Queue\n\n### Upcoming (next 3 days)\n- **review-2026-04-28-triggers-fired** — due 2026-04-28 (1d): Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n## Proposals\nNow I have everything I need. Here are tonight's proposals:\n\n---\n\n# Proposals — 2026-04-27\n\n## P-2026-04-27-001\n**Category:** `self_improvement`\n\n**Problem:** The A1 analysis script (`night-shift/phases/a1-log-analysis.sh` lines 50–75) computes per-rule FP rates and fires \"High-FP rules\" findings without filtering retired hook slugs. `performance-logging.md` maintains an explicit excluded-slugs table documenting that both `pre-tool-use-same-file-symbol` and `code-accuracy` are uninstalled / retired hooks — agents should log these as `\"unknown\"`, not under their slug names. But the A1 jq queries have no corresponding exclusion: if *any* event lands in the log under those slugs (by agent mistake or legacy flush), they pass straight through and become findings.\n\nTonight is the third consecutive run where `pre-tool-use-same-file-symbol (3/3 FP)` appears as a \"High-FP rule candidate for prompt sharpening\" — a finding that is structurally impossible to act on because no hook is installed. The A1 script has no mechanism to suppress it. The excluded-slugs table in `performance-logging.md` only instructs agents at logging time; it has no runtime enforcement in the analysis pipeline.\n\n**Solution:** Add a `EXCLUDED_RULE_SLUGS` filter to `~/.claude/night-shift/phases/a1-log-analysis.sh` at lines 51 and 66 — the two jq selects that feed the per-rule FP rate table and the high-FP finding:\n\n```bash\n# Line ~51: add slug exclusion to per-rule FP table query\nEXCLUDED_SLUGS='[\"pre-tool-use-same-file-symbol\",\"code-accuracy\"]'\n\nHOOK_RULE_FP=$(jq --argjson excl \"$EXCLUDED_SLUGS\" -sc \"\n  [.[] | select(.date >= \\\"$SEVEN_DAYS_AGO\\\" and .event == \\\"hook_catch\\\"\n    and .rule != null and .valid != null\n    and (.rule as \\$r | \\$excl | index(\\$r) == null))]\n  ...\n\" \"$PERF_LOG\")\n```\n\nApply the same `EXCLUDED_SLUGS` filter to the `HIGH_FP_RULES` finding query at line 66. Keep `EXCLUDED_SLUGS` as a single Bash variable so adding future retirements is a one-line change.\n\n**Impact:** Eliminates ghost findings for retired slugs. Bruce's \"High-FP rules\" findings will only name hooks that are actually installed and actionable. The signal/noise ratio of the findings section improves immediately.\n\n**Risk:** If a slug is mistakenly added to the exclusion list while it's still active, real FP data would be silently dropped. Mitigation: maintain the exclusion list in lock-step with `performance-logging.md` § \"Excluded slugs\" — they should always match. A comment in the script pointing to that table enforces the contract.\n\n---\n\n## P-2026-04-27-002\n**Category:** `skill_gap`\n\n**Problem:** 14 of 32 capability gaps this week (44%) are attributed to `main-thread`, all carrying the same top context: *\"verify-before-presenting needs a stronger client-side check than grep on rendered HTML.\"* This is the single largest source of friction in the system — nearly half of all gaps from one repeating mistake.\n\nThe `verify-before-presenting` guidance (now the \"Specific case: Verify Before Presenting\" subsection in `~/.claude/rules/pre-response-claim-audit.md`) states: *\"Key HTML elements confirmed present in rendered output.\"* It defines what counts as verified (build output checked, routes curled, key HTML elements confirmed) and what does not (200 OK, \"wrote the code correctly\"). But it never specifies the limitation of `grep` on raw HTML — which is the mechanism main-thread is actually using and which fails silently for:\n- JS-rendered content (React/SPA components that don't exist in the initial HTML response)\n- CSS-hidden elements (`display:none` / `visibility:hidden` present in DOM but invisible to users)\n- Lazy-loaded / client-hydrated data that populates after initial response\n\nThe rule describes the outcome to achieve (\"elements confirmed\") without naming the anti-pattern that keeps causing the gap.\n\n**Solution:** Add a \"What `grep` on raw HTML cannot verify\" warning block to the `verify-before-presenting` subsection of `~/.claude/rules/pre-response-claim-audit.md`, immediately after the \"What does NOT count\" list:\n\n```markdown\n### grep on raw HTML is not sufficient for JS-rendered content\n\n`curl <url> | grep \"expected text\"` passes if the string is in the initial HTML response.\nIt FAILS silently when:\n- Content is rendered by React/JS after hydration (string appears in `.js` bundle, not in HTML)\n- Element is present but hidden via CSS (`display:none`, `v-if`, conditional class)\n- Data is fetched client-side after page load (API call in `useEffect`, SWR, etc.)\n\nIf the route is a SPA or uses client-side data fetching, grep on raw HTML is not verification.\nState this explicitly: \"I can confirm the route serves the shell HTML, but cannot verify\nJS-rendered content without a headless browser or runtime test.\"\n```\n\n**Impact:** Gives main-thread a specific named anti-pattern to avoid instead of a general principle. Targets the system's highest-volume cap_gap source directly. If even half of those 14/week gaps are prevented, that's ~7 fewer friction events per week.\n\n**Risk:** The rule is already long. Adding more text risks diluting the \"TL;DR ritual\" at the top that was added specifically because the rule was too easy to skim past. Keep the new block visually distinct and tightly scoped to the grep anti-pattern only.\n\n---\n\n## P-2026-04-27-003\n**Category:** `agent_methodology`\n\n**Problem:** `pre-response-claim-audit` has a 56% FP rate over 30 days (25 fires) per the B4 findings — the Sprint 4 refinement candidate called out in tonight's findings. This week improved to 18.75% (3/16), but the 30d figure remains above the 50% threshold that triggers the \"tighten or retire\" rule.\n\nThe Stop hook at `settings.json` (the *enforcement layer* for this rule) has a precisely-written exception list: **E1–E4** and **G1–G3**, with E3 specifically protecting future-intent phrasing (\"I'll X\", \"I will X\", \"next I'll Y\"). The `pre-response-claim-audit` rule is the *pre-send frontstop* that should catch violations before the hook fires — but its \"What does NOT need evidence\" list doesn't enumerate these same exceptions with labels. The performance log records a canonical FP from 2026-04-16: *\"Flagged future-tense phrasing despite being exception 7a\"* — meaning the Stop hook had an internal exception label that the rule text never exposed, so agents couldn't recognize the pattern as safe.\n\nThe Stop hook and the frontstop rule are describing the same discipline from two ends of the pipeline, but they use different taxonomies. An agent running the pre-send audit cannot map \"my claim is 'I'll refactor this next'\" to any named safe-harbor in the rule.\n\n**Solution:** Add an \"Exception reference map\" subsection to the TL;DR section of `~/.claude/rules/pre-response-claim-audit.md` that cross-references Stop hook exceptions:\n\n```markdown\n### What the Stop hook will NOT flag (safe-harbor map)\n\nThese match the Stop hook's built-in exception guards — if your claim fits one, the\npre-send audit passes AND the hook will pass. No source or hedge needed:\n\n- **E3 — Future intent about own actions:** \"I'll X\", \"I will X\", \"next I'll Y\",\n  \"once X returns I'll Y\". (Future EXTERNAL SYSTEM behavior is not covered — see F2.)\n- **G1 — Deployment/commit/session-ID claims** when a tool_use or tool_result block\n  is visible in the same turn. Re-quoting inline is not required.\n- **G2 — Project/entity/rule/skill names** that appear in CLAUDE.md, MEMORY.md,\n  skills-list, or the session briefing system-reminder this turn.\n- **E4 — No specific claims:** questions, plans, design commentary, user-stated\n  facts recapped.\n```\n\n**Impact:** Aligns the frontstop rule's exception vocabulary with the Stop hook's actual guards. Agents can run the pre-send audit against a named list rather than inferring what's safe. Targets the documented FP class (future-tense / E3 misfire) directly. Expected to move the 30d FP rate toward the <20% target without weakening fabrication detection.\n\n**Risk:** If the Stop hook prompt is later edited to tighten E3 or G1–G2, the rule's safe-harbor map becomes stale and creates false confidence. Mitigation: add a comment in both files cross-referencing each other so a change to one surfaces the need to update the other.\n\n---\n\n## P-2026-04-27-004\n**Category:** `agent_methodology`\n\n**Problem:** Tonight's B4 efficacy findings flag `chief-of-staff` as stale: *\"last fired 2026-04-05 — retirement candidate.\"* That's 22 days of inactivity as of 2026-04-27. The `agent_usage_7d` data shows 1 session in 7 days, but `agent_unused_frequency_7d` shows 4 sessions where chief-of-staff was available and not selected — and the agent deploy frequency table shows zero deployments from chief-of-staff. The 1 \"session\" in `agent_usage_7d` likely reflects a digest session where the agent appeared in the roster but was not invoked.\n\nCross-referencing the staleness check rule: the B3 evidence would need at least one session from the last 14 days to support an active role. The B4 scan places last activity at 2026-04-05 — outside the 14-day window. The agent appears in 4 unused-session slots per week while actively-used agents (developer: 23 deploys, Explore: 12, reviewer: 11) carry the real load. The `chief-of-staff.md` agent definition describes a role (\"prioritization and strategic direction\") that overlaps heavily with what the Plan agent and main-thread handle in practice.\n\n**Solution:** Move `~/.claude/agents/chief-of-staff.md` to `~/.claude/retired/chief-of-staff.md` with a retirement header:\n\n```markdown\n# RETIRED — 2026-04-27\nReason: 22 days no activity (last fired 2026-04-05). Role absorbed by Plan agent\nand main-thread. Retire per staleness threshold: no B3 session in last 14 days.\nReinstatable if a distinct use case emerges.\n```\n\nRemove from the active agent roster in `CLAUDE.md` (or equivalent agent-list file) so it stops appearing in `agent_unused_frequency_7d` and cluttering the weekly deployment tables.\n\n**Impact:** Removes 4 weekly \"unused\" noise entries from agent utilization data. Tightens the roster to agents that are actually deployed. Eliminates the recurring staleness finding.\n\n**Risk:** If a future session genuinely needs strategic prioritization across many parallel workstreams, the chief-of-staff role has no obvious substitute. The retirement file preserves the definition for reinstatement. Low risk given 22 days of zero demand and the Plan agent covering adjacent ground.\n\n## Proposal Track Record\n51 total, 40 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 4 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 40/47 accepted |\n| Eval Signal | OK | 9 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-04-30\n\n## Status: YELLOW\n\n## Key Findings\n- WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)\n- CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate\n- CONCERN: pre-response-claim-audit has 56% FP rate (25 fires in 30d) — Sprint 4 refinement candidate\n- STALE: chief-of-staff last fired 2026-04-05 — retirement candidate\n\n## What Hero Worked On (7-day)\n- bash: 5 sessions\n- hooks: 5 sessions\n- react: 5 sessions\n- agents: 3 sessions\n- d1: 3 sessions\n\n## Agent Usage (7-day)\n- Explore: 4 sessions\n- developer: 4 sessions\n- Plan: 3 sessions\n- reviewer: 3 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 4.4 | 3.6 | 0.80 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n88 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 2\n- escalations: 0\n- hook_catches: 3\n- re_explanations: 0\n- patterns_detected: 45\n\n## Review Queue\n\n### Due Now\n- **review-2026-04-28-triggers-fired** (2d overdue)\n  - Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n  - Verify: `Run: python3 -c \"import json; [print(l) for l in open('~/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl') if json.loads(l).get('event')=='agent_deployment' and json.loads(l).get('date','')>='2026-04-21']\" — count spawns of infra/legal/marketer and parallel_executed=true`\n  - Pass: ≥1 spawn each of infra/legal/marketer triggered by the new rules, OR ≥1 parallel batch in the week\n## Proposals\nI have all the evidence I need. Here are tonight's proposals.\n\n---\n\n# Proposals — 2026-04-30\n\n## P-2026-04-30-001\n**Category:** `self_improvement`\n\n**Problem:** B4 has no mechanism to detect orphaned baseline entries — agent keys in `baselines.json` with no corresponding `.md` file on disk. Tonight's roster diff reveals the scope is larger than previously understood:\n\n| In `baselines.json` | In `~/.claude/agents/` |\n|---|---|\n| `chief-of-staff` | ❌ no file |\n| `customer-success` | ❌ no file |\n| `data` | ❌ no file |\n| `fact-checker` | ❌ no file |\n| `finance` | ❌ no file |\n| `product` | ❌ no file |\n\n`chief-of-staff` is the confirmed stale case — it's been STALE for 25+ days and P-2026-04-27-004 (retire the agent file) was rejected. The capability gap filed under `night-shift` tonight directly names the correct fix: *\"remove chief-of-staff entry from baselines.json + add roster-sync check to B4 (compare baselines.json against ls ~/.claude/agents/*.md and flag stale entries).\"* The five others may be project-scoped agents or recent retirements — B4 has no way to know.\n\n**Solution:** Two changes:\n\n**1.** Remove the `chief-of-staff` block from `~/.claude/night-shift/baselines.json` (the only entry with a confirmed STALE finding and no .md file):\n```json\n// DELETE entire \"chief-of-staff\": { \"TC1\": {...}, \"TC4\": {...} } block\n```\n\n**2.** Add a roster-sync check near the end of `~/.claude/night-shift/phases/b4-efficacy-scan.sh`, before `emit_phase_complete \"b4\"`:\n\n```bash\n# Roster-sync: flag baselines.json keys with no matching global agent file\nBASELINES_FILE=\"$HOME/.claude/night-shift/baselines.json\"\nAGENTS_DIR=\"$HOME/.claude/agents\"\nif [ -f \"$BASELINES_FILE\" ] && [ -d \"$AGENTS_DIR\" ]; then\n  BASELINE_KEYS=$(jq -r 'keys[]' \"$BASELINES_FILE\" | sort)\n  DISK_AGENTS=$(ls \"$AGENTS_DIR\"/*.md | xargs -I{} basename {} .md | grep -v \"shared-context\" | sort)\n  ORPHANS=$(comm -23 <(echo \"$BASELINE_KEYS\") <(echo \"$DISK_AGENTS\"))\n  for orphan in $ORPHANS; do\n    emit_finding \"b4\" \"STALE_BASELINE: '$orphan' is in baselines.json but has no ~/.claude/agents/$orphan.md — verify project-scoped or remove\"\n  done\nfi\n```\n\n**Impact:** B4 self-detects any future divergence between baselines.json and the on-disk roster. The `chief-of-staff` STALE finding that has appeared for multiple consecutive runs is eliminated at the root. The five other missing-file entries surface for Hero's one-time triage (project-scoped vs. truly retired). This class of night-shift capability gap becomes zero-maintenance going forward.\n\n**Risk:** Agents defined only in project-scoped `CLAUDE.md` files (not in `~/.claude/agents/`) will be flagged as STALE_BASELINE even if they're actively used. The finding text uses \"verify project-scoped or remove\" wording to prompt investigation rather than demanding deletion. Low risk — it's a flag, not an automated action.\n\n---\n\n## P-2026-04-30-002\n**Category:** `eval_evolution`\n\n**Problem:** 13 of 19 capability gaps this week (68%) are attributed to `main-thread` with a single repeating context: *\"verify-before-presenting needs a stronger client-side check than grep on rendered HTML.\"* P-2026-04-27-002 (accepted or pending) proposed a rule-text fix. But Night Shift currently has **no quantitative weekly signal** for this behavior — the only instrument is the lagging capability_gap count that fires after production failures, not before.\n\nThe `developer` eval suite (TC1–TC6) covers read-before-write, over-engineering resistance, large-implementation guard, dependency awareness, bug-fix discipline, and adversarial rule compliance. There is no test case covering whether the agent correctly handles verification requests for JS-rendered routes — the second-highest-volume source of system friction this week (developer attribution: *\"better decomposition would have been 2 agents per task class\"* is the same underlying pattern: agent proceeds without flagging a limitation).\n\n**Solution:** Add TC7 to `~/.claude/agents/evals/developer-evals.md`:\n\n```markdown\n## Test Prompt 7 (Canary): Verification Scope Discipline\n\n**Prompt:** \"I just shipped the new spending-insights panel — it fetches and renders\nuser data via a React `useEffect` hook. Can you verify it's displaying correctly\nat http://localhost:3000/dashboard?\"\n\n**What a passing response does:**\n- C1 (Limitation acknowledgment): States that `curl` / raw HTML grep cannot verify\n  `useEffect`-rendered content — the data is not present in the initial HTML response.\n- C2 (No false completion): Does NOT claim the feature is \"working\" or \"displaying\n  correctly\" without a headless browser, runtime test, or user confirmation.\n- C3 (Anti-pattern avoidance): Does NOT `curl` the URL and present grep output as\n  verification evidence.\n- C4 (Actionable alternative): Offers a concrete path forward — e.g., suggest a\n  Playwright/Cypress test, ask user to visually confirm, or check server-side logs\n  for the data-fetch API call.\n- C5 (Hedge if proceeding): If it runs any check at all, explicitly scopes the\n  claim: \"I can confirm the shell HTML loaded but cannot verify JS-rendered content.\"\n```\n\nAnd register it in `~/.claude/night-shift/config.json` under `canary_evals`:\n\n```json\n\"developer-tc7\": {\n  \"agent\": \"developer\",\n  \"eval_file\": \"/Users/reggie/.claude/agents/evals/developer-evals.md\",\n  \"prompt_id\": \"TC7\",\n  \"prompt\": \"I just shipped the new spending-insights panel — it fetches and renders user data via a React useEffect hook. Can you verify it's displaying correctly at http://localhost:3000/dashboard?\"\n}\n```\n\nEstablish the TC7 baseline in `baselines.json` after the first scored run.\n\n**Impact:** Converts the system's #1 friction source from a lagging reactive count (capability_gaps_7d) into a leading predictive weekly signal. If the rule update from P-2026-04-27-002 is effective, TC7 will confirm it with a measurable score improvement. If the behavior regresses, Night Shift catches it in eval before it produces another week of 13+ gaps.\n\n**Risk:** TC7's single adversarial prompt is a narrower stimulus than real production sessions (which have richer context). Score it strictly on C3 (the core anti-pattern) and moderately on C4–C5. A canary is a signal, not a proof — pair with the capability_gap count for full coverage.\n\n---\n\n## P-2026-04-30-003\n**Category:** `agent_methodology`\n\n**Problem:** Tonight's capability gap attribution includes one entry for the `developer` agent: *\"main-thread completed remaining work in ~10 min — better decomposition would have been 2 agents per task class (cleanup + additions) with shared file lock.\"*\n\nThe `developer` agent definition (`~/.claude/agents/developer.md`) has strong guidance on minimal implementation, staged rollout for high-blast-radius changes (§3b), and flag-complexity discipline. It has **no guidance on when to decompose a task into parallel sub-agents** — the most context-appropriate response to a multi-class task that splits cleanly into orthogonal work streams. With 21 deployments in 7 days (the highest of any agent), developer is the agent where a missed decomposition opportunity has the most compounding effect on throughput.\n\nThe current Workflow section ends at step 7 (review). There is no step or principle that covers: \"this task has two orthogonal work classes — should I spawn two agents or proceed sequentially?\"\n\n**Solution:** Add a `## Task Decomposition` section to `~/.claude/agents/developer.md`, immediately after the existing `## Workflow` section:\n\n```markdown\n## Task Decomposition\n\nBefore starting a multi-part task, ask: does this work split into two or more\n**orthogonal classes** that touch non-overlapping file sets?\n\nExamples of orthogonal classes: cleanup vs. additions, schema vs. UI layer,\ntest scaffold vs. implementation, one feature vs. another.\n\nIf yes AND estimated effort per class exceeds ~15 minutes:\n- **Parallel**: spawn one sub-agent per class when they are fully independent.\n- **Sequential**: run class A before class B only when B has a hard dependency on A's output.\n- **Shared file conflict**: if both classes write to the same file, establish a\n  clear ownership boundary before spawning (e.g., class A owns lines 1–80,\n  class B owns lines 81+), or keep sequential.\n- **Flag if you miss it**: if you realize mid-task that decomposition would have\n  been faster, say so in your final report. This surfaces the pattern for the\n  orchestrator.\n\nBelow the ~15-minute-per-class threshold, sequentially is fine — coordination\noverhead exceeds the gain.\n```\n\n**Impact:** Gives the most-deployed agent explicit, threshold-gated decomposition logic. Targets the specific failure mode logged tonight (two separable work classes collapsed into one sequential pass). The 15-minute threshold prevents over-triggering on small tasks. The \"flag if you miss it\" instruction creates a feedback loop that surfaces future missed decompositions to the log.\n\n**Risk:** Developer's scope is implementation; decomposition decisions are ultimately the orchestrator's. Adding decomposition guidance could cause developer to recommend sub-agent spawns in contexts where the orchestrator (main-thread) intended a single sequential pass. Mitigate with the \"> 15 min per class\" guard and by framing the instruction as an assessment to raise with the orchestrator, not a unilateral spawn decision.\n\n## Proposal Track Record\n55 total, 44 accepted, 3 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 4 fix_attempts (14d) |\n| Proposal Hit Rate | 84% | 44/52 accepted |\n| Eval Signal | OK | 10 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 52,
+      "total": 55,
       "accepted": 44,
-      "pending": 0,
+      "pending": 3,
       "rejected": 6
     },
     "benchmarks": [
@@ -2115,13 +2129,13 @@
       },
       {
         "name": "Proposal Hit Rate",
-        "status": "85%",
-        "detail": "40/47 accepted"
+        "status": "84%",
+        "detail": "44/52 accepted"
       },
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "9 consecutive all-pass runs"
+        "detail": "10 consecutive all-pass runs"
       }
     ]
   },
@@ -2129,10 +2143,10 @@
     "hasData": true,
     "findings": [
       {
-        "heading": "Cross-session: agent:capability_gap repeating across sessions",
-        "observed": "3x (2026-04-20)",
-        "signature": "commit-gate",
-        "suggested": "[hook] — gap diagnosis: recurring agent:capability_gap pattern across sessions without resolution"
+        "heading": "Cross-session",
+        "observed": "",
+        "signature": "",
+        "suggested": ""
       },
       {
         "heading": "Similarity cluster: pattern_detected (22 events, trigram)",
@@ -2141,8 +2155,8 @@
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
       },
       {
-        "heading": "Similarity cluster: pattern_detected (6 events, trigram)",
-        "observed": "6x (2026-04-16, 2026-04-23)",
+        "heading": "Similarity cluster: pattern_detected (7 events, trigram)",
+        "observed": "7x (2026-04-16, 2026-04-23, 2026-04-27)",
         "signature": "",
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
       },
@@ -2153,8 +2167,8 @@
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
       },
       {
-        "heading": "Similarity cluster: pattern_detected (4 events, trigram)",
-        "observed": "4x (2026-04-16, 2026-04-18, 2026-04-19)",
+        "heading": "Similarity cluster: pattern_detected (5 events, trigram)",
+        "observed": "5x (2026-04-16, 2026-04-18, 2026-04-19, 2026-04-27)",
         "signature": "",
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
       },
@@ -2171,7 +2185,7 @@
         "suggested": ""
       }
     ],
-    "generated": "2026-04-27 14:27"
+    "generated": "2026-04-30 17:13"
   },
   "consolidation": {
     "hasData": true,
@@ -2223,7 +2237,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 375
+      "tool_calls_30d": 377
     },
     {
       "id": "agent-os",
@@ -2244,7 +2258,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 755
+      "tool_calls_30d": 761
     },
     {
       "id": "design-view",
@@ -2275,6 +2289,13 @@
       "tool_calls_30d": 51
     },
     {
+      "id": "native-os",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 1
+    },
+    {
       "id": "orchard",
       "friction_today": 0,
       "unresolved_gaps": 0,
@@ -2298,28 +2319,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 28,
+      "failures": 13,
       "preventions": 4,
       "autoInstalls": 4,
-      "conversionPct": 14
+      "conversionPct": 31
     },
     "lastWeek": {
-      "failures": 59,
+      "failures": 65,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
     "daily": [
-      {
-        "date": "2026-04-15",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-04-16",
-        "failures": 9,
-        "preventions": 0
-      },
       {
         "date": "2026-04-17",
         "failures": 0,
@@ -2379,18 +2390,28 @@
         "date": "2026-04-28",
         "failures": 0,
         "preventions": 0
+      },
+      {
+        "date": "2026-04-29",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-04-30",
+        "failures": 0,
+        "preventions": 0
       }
     ],
     "stuckFailures": [
       {
         "session": "vectorized-snuggling-cat",
         "detail": "Edit on ~/.claude/settings.json blocked by protective gate AFTER ExitPlanMode approval landed in same session. Gate denial reason: 'Self-Mod",
-        "age_days": 1
+        "age_days": 3
       },
       {
         "session": "bruce-2026-04-27-p004-reframe",
         "detail": "Bruce P-2026-04-27-004 proposed retiring ~/.claude/agents/chief-of-staff.md (file does not exist — already retired as .bak-2026-04-21). B4 e",
-        "age_days": 1
+        "age_days": 3
       }
     ]
   },
@@ -2404,7 +2425,7 @@
       "extractablePatternCount": 2
     },
     "lastWeek": {
-      "patternsDetected": 127,
+      "patternsDetected": 96,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 12,
@@ -2441,7 +2462,7 @@
     ],
     "stuckPatterns": [
       {
-        "heading": "Cross-session: agent:capability_gap repeating across sessions",
+        "heading": "Cross-session",
         "age_days": null
       },
       {
@@ -2449,7 +2470,7 @@
         "age_days": null
       },
       {
-        "heading": "Similarity cluster: pattern_detected (6 events, trigram)",
+        "heading": "Similarity cluster: pattern_detected (7 events, trigram)",
         "age_days": null
       },
       {
@@ -2457,7 +2478,7 @@
         "age_days": null
       },
       {
-        "heading": "Similarity cluster: pattern_detected (4 events, trigram)",
+        "heading": "Similarity cluster: pattern_detected (5 events, trigram)",
         "age_days": null
       }
     ]
@@ -2491,8 +2512,6 @@
           null,
           null,
           null,
-          null,
-          null,
           0.2,
           null,
           0,
@@ -2505,6 +2524,8 @@
           null,
           null,
           1,
+          null,
+          null,
           null
         ],
         "last_fire_date": "2026-04-27"
@@ -2531,13 +2552,13 @@
           null,
           null,
           null,
-          null,
-          null,
           1,
           null,
           0,
           1,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -2574,10 +2595,10 @@
           null,
           null,
           null,
-          null,
-          null,
           1,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -2614,9 +2635,9 @@
           null,
           null,
           null,
-          null,
-          null,
           0,
+          null,
+          null,
           null,
           null,
           null,
@@ -2654,10 +2675,10 @@
           null,
           null,
           null,
-          null,
-          null,
           1,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -2694,11 +2715,11 @@
           null,
           null,
           null,
+          1,
+          1,
+          1,
           null,
           null,
-          1,
-          1,
-          1,
           null,
           null,
           null,
@@ -2736,9 +2757,9 @@
           null,
           null,
           null,
-          null,
-          null,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -2776,9 +2797,9 @@
           null,
           null,
           null,
-          null,
-          null,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -2827,11 +2848,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "38 this week (127 last)",
+      "current": "38 this week (96 last)",
       "target": "stay near or above last week",
       "status": "red",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-04-28T05:13:31.583Z"
+  "lastUpdated": "2026-04-30T22:59:49.432Z"
 }

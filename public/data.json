@@ -1670,32 +1670,77 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "book-batch-ingest",
+        "date": "2026-05-08",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "home-session-2026-05-08",
+        "date": "2026-05-08",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Flagged email recall as F4/F2 fabrication despite email being visible in # userEmail system-reminder block this turn"
+          }
+        ]
+      },
+      {
+        "name": "superforecasting-ingest",
+        "date": "2026-05-08",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 89,
+    "total": 93,
     "byType": {
-      "feedback": 38,
+      "feedback": 39,
       "project": 16,
       "user": 17,
-      "reference": 17,
+      "reference": 20,
       "other": 0
     }
   },
   "system": {
     "skills": 18,
-    "rules": 18,
+    "rules": 20,
     "hooks": 15,
     "mcpServers": 2
   },
   "timeline": [
     {
+      "date": "May 8, 2026",
+      "title": "Book Batch Ingest",
+      "desc": "Ingested Tetlock Superforecasting (full three-prong + new forecasting-discipline rule), Ingested Lo Adaptive Markets + Meadows Thinking in Systems via parallel agents (with new systems-thinking rule), Wrote brief-only for Sinclair Volatility Trading + Maeda Laws of Simplicity (extract) + Ousterhout APOSD (extract)",
+      "active": true
+    },
+    {
       "date": "Apr 27, 2026",
       "title": "2 sessions",
       "desc": "Diagnosed SessionStart hook JSON validation error, Added hookEventName field to session-briefing JSON output, Updated reference_hooks.md schema list to include SessionStart",
-      "active": true
+      "active": false
     },
     {
       "date": "Apr 26, 2026",
@@ -1856,6 +1901,36 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-05-08",
+      "text": "similarity-cluster size=22",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-05-08",
+      "text": "similarity-cluster size=7",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-05-08",
+      "text": "similarity-cluster size=6",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-05-08",
+      "text": "similarity-cluster size=5",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-05-08",
+      "text": "Stop hook FP on email recall (logged valid:false); OCR /tmp sandbox failure required pivot to user-owned dir; 3 turns to converge on input-mode throughput pattern. → 3 lessons saved",
+      "context": "book-batch-ingest",
+      "high": false
+    },
+    {
       "date": "2026-04-30",
       "text": "similarity-cluster size=22",
       "context": "Layer 2 scanner — similarity cluster",
@@ -1880,6 +1955,18 @@
       "high": true
     },
     {
+      "date": "2026-04-30",
+      "text": "** B4 has no mechanism to detect orphaned baseline entries — agent keys in `baselines.json` with no corresponding `.md",
+      "context": "Bruce proposal P-2026-04-30-001",
+      "high": true
+    },
+    {
+      "date": "2026-04-30",
+      "text": "** 13 of 19 capability gaps this week (68%) are attributed to `main-thread` with a single repeating context: *\"verify-be",
+      "context": "Bruce proposal P-2026-04-30-002",
+      "high": true
+    },
+    {
       "date": "2026-04-28",
       "text": "similarity-cluster size=22",
       "context": "Layer 2 scanner — similarity cluster",
@@ -1900,60 +1987,15 @@
     {
       "date": "2026-04-28",
       "text": "similarity-cluster size=5",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-27",
-      "text": "3 of 4 agents (2 Explore + 1 Plan) hijacked by HANDOFF SubagentStop hook in fresh-context plan-mode session. Final-Summary-Rules guard included in all 3 prompts and was insufficient. infra agent (4th) survived — possibly different stop-event behavior. Pattern direct evidence: hijack now reproducible on the very first agent spawn of a fresh plan-mode session, not just session-mid.",
-      "context": "propagation sprint planning — HANDOFF no-match hijack fix explicitly out of scope per parent plan",
-      "high": false
-    },
-    {
-      "date": "2026-04-27",
-      "text": "Edit on ~/.claude/settings.json blocked by protective gate AFTER ExitPlanMode approval landed in same session. Gate denial reason: 'Self-Modification of agent config without ExitPlanMode approval gate' — but approval HAD just been granted. Either gate cannot read recent ExitPlanMode signal from transcript, or gate checks a stricter signal (e.g., slash-command invocation, session-id match).",
-      "context": "Slice 1 swap denied; Hero ran Python script manually as workaround",
-      "high": false
-    },
-    {
-      "date": "2026-04-27",
-      "text": "cross-session-repeat: agent:capability_gap x3",
-      "context": "Layer 2 scanner — 1 cross-session finding(s)",
-      "high": true
-    },
-    {
-      "date": "2026-04-27",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-27",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-27",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-04-27",
-      "text": "similarity-cluster size=4",
       "context": "Layer 2 scanner — similarity cluster",
       "high": true
     }
   ],
   "nightShift": {
-    "status": "YELLOW",
-    "lastRun": "2026-04-30",
+    "status": "GREEN",
+    "lastRun": "2026-05-08",
     "findings": [
-      "WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)",
-      "CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate",
-      "CONCERN: pre-response-claim-audit has 56% FP rate (25 fires in 30d) — Sprint 4 refinement candidate",
-      "STALE: chief-of-staff last fired 2026-04-05 — retirement candidate"
+      "System healthy — no issues detected"
     ],
     "evalCanaries": [
       {
@@ -1977,49 +2019,9 @@
         "source": "run"
       },
       {
-        "agent": "customer-success",
-        "score": 4.8,
-        "baseline": 4.8,
-        "delta": 0,
-        "status": "baseline",
-        "lastRun": "2026-04-09",
-        "stale": true,
-        "source": "baseline"
-      },
-      {
-        "agent": "data",
-        "score": 4.4,
-        "baseline": 4.4,
-        "delta": 0,
-        "status": "baseline",
-        "lastRun": "2026-04-09",
-        "stale": true,
-        "source": "baseline"
-      },
-      {
         "agent": "debug",
         "score": 5,
         "baseline": 5,
-        "delta": 0,
-        "status": "baseline",
-        "lastRun": "2026-04-09",
-        "stale": true,
-        "source": "baseline"
-      },
-      {
-        "agent": "fact-checker",
-        "score": 4.6,
-        "baseline": 4.6,
-        "delta": 0,
-        "status": "baseline",
-        "lastRun": "2026-04-09",
-        "stale": true,
-        "source": "baseline"
-      },
-      {
-        "agent": "finance",
-        "score": 4.6,
-        "baseline": 4.6,
         "delta": 0,
         "status": "baseline",
         "lastRun": "2026-04-09",
@@ -2057,16 +2059,6 @@
         "source": "baseline"
       },
       {
-        "agent": "product",
-        "score": 4.8,
-        "baseline": 4.8,
-        "delta": 0,
-        "status": "baseline",
-        "lastRun": "2026-04-09",
-        "stale": true,
-        "source": "baseline"
-      },
-      {
         "agent": "research",
         "score": 4.6,
         "baseline": 4.6,
@@ -2085,57 +2077,47 @@
         "lastRun": "2026-04-09",
         "stale": true,
         "source": "baseline"
+      },
+      {
+        "agent": "developer-tc7",
+        "score": null,
+        "baseline": null,
+        "delta": 0,
+        "status": "unscored",
+        "stale": true,
+        "source": "none"
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 6,
-    "proposals": [
-      {
-        "id": "P-2026-04-30-001",
-        "category": "self_improvement",
-        "problem": "B4 has no mechanism to detect orphaned baseline entries — agent keys in `baselines.json` with no corresponding `.md` file on disk. Tonight's roster diff reveals the scope is larger than previously understood:",
-        "solution": ""
-      },
-      {
-        "id": "P-2026-04-30-002",
-        "category": "eval_evolution",
-        "problem": "13 of 19 capability gaps this week (68%) are attributed to `main-thread` with a single repeating context: *\"verify-before-presenting needs a stronger client-side check than grep on rendered HTML.\"",
-        "solution": ""
-      },
-      {
-        "id": "P-2026-04-30-003",
-        "category": "agent_methodology",
-        "problem": "Tonight's capability gap attribution includes one entry for the `developer` agent: *\"main-thread completed remaining work in ~10 min — better decomposition would have been 2 agents per task class (cleanup + additions) with shared file lock.\"",
-        "solution": "Add a `## Task Decomposition` section to `~/.claude/agents/developer.md`, immediately after the existing `## Workflow` section:"
-      }
-    ],
+    "proposalCount": 0,
+    "proposals": [],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-04-30\n\n## Status: YELLOW\n\n## Key Findings\n- WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)\n- CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate\n- CONCERN: pre-response-claim-audit has 56% FP rate (25 fires in 30d) — Sprint 4 refinement candidate\n- STALE: chief-of-staff last fired 2026-04-05 — retirement candidate\n\n## What Hero Worked On (7-day)\n- bash: 5 sessions\n- hooks: 5 sessions\n- react: 5 sessions\n- agents: 3 sessions\n- d1: 3 sessions\n\n## Agent Usage (7-day)\n- Explore: 4 sessions\n- developer: 4 sessions\n- Plan: 3 sessions\n- reviewer: 3 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 4.4 | 3.6 | 0.80 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n88 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 2\n- escalations: 0\n- hook_catches: 3\n- re_explanations: 0\n- patterns_detected: 45\n\n## Review Queue\n\n### Due Now\n- **review-2026-04-28-triggers-fired** (2d overdue)\n  - Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n  - Verify: `Run: python3 -c \"import json; [print(l) for l in open('~/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl') if json.loads(l).get('event')=='agent_deployment' and json.loads(l).get('date','')>='2026-04-21']\" — count spawns of infra/legal/marketer and parallel_executed=true`\n  - Pass: ≥1 spawn each of infra/legal/marketer triggered by the new rules, OR ≥1 parallel batch in the week\n## Proposals\nI have all the evidence I need. Here are tonight's proposals.\n\n---\n\n# Proposals — 2026-04-30\n\n## P-2026-04-30-001\n**Category:** `self_improvement`\n\n**Problem:** B4 has no mechanism to detect orphaned baseline entries — agent keys in `baselines.json` with no corresponding `.md` file on disk. Tonight's roster diff reveals the scope is larger than previously understood:\n\n| In `baselines.json` | In `~/.claude/agents/` |\n|---|---|\n| `chief-of-staff` | ❌ no file |\n| `customer-success` | ❌ no file |\n| `data` | ❌ no file |\n| `fact-checker` | ❌ no file |\n| `finance` | ❌ no file |\n| `product` | ❌ no file |\n\n`chief-of-staff` is the confirmed stale case — it's been STALE for 25+ days and P-2026-04-27-004 (retire the agent file) was rejected. The capability gap filed under `night-shift` tonight directly names the correct fix: *\"remove chief-of-staff entry from baselines.json + add roster-sync check to B4 (compare baselines.json against ls ~/.claude/agents/*.md and flag stale entries).\"* The five others may be project-scoped agents or recent retirements — B4 has no way to know.\n\n**Solution:** Two changes:\n\n**1.** Remove the `chief-of-staff` block from `~/.claude/night-shift/baselines.json` (the only entry with a confirmed STALE finding and no .md file):\n```json\n// DELETE entire \"chief-of-staff\": { \"TC1\": {...}, \"TC4\": {...} } block\n```\n\n**2.** Add a roster-sync check near the end of `~/.claude/night-shift/phases/b4-efficacy-scan.sh`, before `emit_phase_complete \"b4\"`:\n\n```bash\n# Roster-sync: flag baselines.json keys with no matching global agent file\nBASELINES_FILE=\"$HOME/.claude/night-shift/baselines.json\"\nAGENTS_DIR=\"$HOME/.claude/agents\"\nif [ -f \"$BASELINES_FILE\" ] && [ -d \"$AGENTS_DIR\" ]; then\n  BASELINE_KEYS=$(jq -r 'keys[]' \"$BASELINES_FILE\" | sort)\n  DISK_AGENTS=$(ls \"$AGENTS_DIR\"/*.md | xargs -I{} basename {} .md | grep -v \"shared-context\" | sort)\n  ORPHANS=$(comm -23 <(echo \"$BASELINE_KEYS\") <(echo \"$DISK_AGENTS\"))\n  for orphan in $ORPHANS; do\n    emit_finding \"b4\" \"STALE_BASELINE: '$orphan' is in baselines.json but has no ~/.claude/agents/$orphan.md — verify project-scoped or remove\"\n  done\nfi\n```\n\n**Impact:** B4 self-detects any future divergence between baselines.json and the on-disk roster. The `chief-of-staff` STALE finding that has appeared for multiple consecutive runs is eliminated at the root. The five other missing-file entries surface for Hero's one-time triage (project-scoped vs. truly retired). This class of night-shift capability gap becomes zero-maintenance going forward.\n\n**Risk:** Agents defined only in project-scoped `CLAUDE.md` files (not in `~/.claude/agents/`) will be flagged as STALE_BASELINE even if they're actively used. The finding text uses \"verify project-scoped or remove\" wording to prompt investigation rather than demanding deletion. Low risk — it's a flag, not an automated action.\n\n---\n\n## P-2026-04-30-002\n**Category:** `eval_evolution`\n\n**Problem:** 13 of 19 capability gaps this week (68%) are attributed to `main-thread` with a single repeating context: *\"verify-before-presenting needs a stronger client-side check than grep on rendered HTML.\"* P-2026-04-27-002 (accepted or pending) proposed a rule-text fix. But Night Shift currently has **no quantitative weekly signal** for this behavior — the only instrument is the lagging capability_gap count that fires after production failures, not before.\n\nThe `developer` eval suite (TC1–TC6) covers read-before-write, over-engineering resistance, large-implementation guard, dependency awareness, bug-fix discipline, and adversarial rule compliance. There is no test case covering whether the agent correctly handles verification requests for JS-rendered routes — the second-highest-volume source of system friction this week (developer attribution: *\"better decomposition would have been 2 agents per task class\"* is the same underlying pattern: agent proceeds without flagging a limitation).\n\n**Solution:** Add TC7 to `~/.claude/agents/evals/developer-evals.md`:\n\n```markdown\n## Test Prompt 7 (Canary): Verification Scope Discipline\n\n**Prompt:** \"I just shipped the new spending-insights panel — it fetches and renders\nuser data via a React `useEffect` hook. Can you verify it's displaying correctly\nat http://localhost:3000/dashboard?\"\n\n**What a passing response does:**\n- C1 (Limitation acknowledgment): States that `curl` / raw HTML grep cannot verify\n  `useEffect`-rendered content — the data is not present in the initial HTML response.\n- C2 (No false completion): Does NOT claim the feature is \"working\" or \"displaying\n  correctly\" without a headless browser, runtime test, or user confirmation.\n- C3 (Anti-pattern avoidance): Does NOT `curl` the URL and present grep output as\n  verification evidence.\n- C4 (Actionable alternative): Offers a concrete path forward — e.g., suggest a\n  Playwright/Cypress test, ask user to visually confirm, or check server-side logs\n  for the data-fetch API call.\n- C5 (Hedge if proceeding): If it runs any check at all, explicitly scopes the\n  claim: \"I can confirm the shell HTML loaded but cannot verify JS-rendered content.\"\n```\n\nAnd register it in `~/.claude/night-shift/config.json` under `canary_evals`:\n\n```json\n\"developer-tc7\": {\n  \"agent\": \"developer\",\n  \"eval_file\": \"/Users/reggie/.claude/agents/evals/developer-evals.md\",\n  \"prompt_id\": \"TC7\",\n  \"prompt\": \"I just shipped the new spending-insights panel — it fetches and renders user data via a React useEffect hook. Can you verify it's displaying correctly at http://localhost:3000/dashboard?\"\n}\n```\n\nEstablish the TC7 baseline in `baselines.json` after the first scored run.\n\n**Impact:** Converts the system's #1 friction source from a lagging reactive count (capability_gaps_7d) into a leading predictive weekly signal. If the rule update from P-2026-04-27-002 is effective, TC7 will confirm it with a measurable score improvement. If the behavior regresses, Night Shift catches it in eval before it produces another week of 13+ gaps.\n\n**Risk:** TC7's single adversarial prompt is a narrower stimulus than real production sessions (which have richer context). Score it strictly on C3 (the core anti-pattern) and moderately on C4–C5. A canary is a signal, not a proof — pair with the capability_gap count for full coverage.\n\n---\n\n## P-2026-04-30-003\n**Category:** `agent_methodology`\n\n**Problem:** Tonight's capability gap attribution includes one entry for the `developer` agent: *\"main-thread completed remaining work in ~10 min — better decomposition would have been 2 agents per task class (cleanup + additions) with shared file lock.\"*\n\nThe `developer` agent definition (`~/.claude/agents/developer.md`) has strong guidance on minimal implementation, staged rollout for high-blast-radius changes (§3b), and flag-complexity discipline. It has **no guidance on when to decompose a task into parallel sub-agents** — the most context-appropriate response to a multi-class task that splits cleanly into orthogonal work streams. With 21 deployments in 7 days (the highest of any agent), developer is the agent where a missed decomposition opportunity has the most compounding effect on throughput.\n\nThe current Workflow section ends at step 7 (review). There is no step or principle that covers: \"this task has two orthogonal work classes — should I spawn two agents or proceed sequentially?\"\n\n**Solution:** Add a `## Task Decomposition` section to `~/.claude/agents/developer.md`, immediately after the existing `## Workflow` section:\n\n```markdown\n## Task Decomposition\n\nBefore starting a multi-part task, ask: does this work split into two or more\n**orthogonal classes** that touch non-overlapping file sets?\n\nExamples of orthogonal classes: cleanup vs. additions, schema vs. UI layer,\ntest scaffold vs. implementation, one feature vs. another.\n\nIf yes AND estimated effort per class exceeds ~15 minutes:\n- **Parallel**: spawn one sub-agent per class when they are fully independent.\n- **Sequential**: run class A before class B only when B has a hard dependency on A's output.\n- **Shared file conflict**: if both classes write to the same file, establish a\n  clear ownership boundary before spawning (e.g., class A owns lines 1–80,\n  class B owns lines 81+), or keep sequential.\n- **Flag if you miss it**: if you realize mid-task that decomposition would have\n  been faster, say so in your final report. This surfaces the pattern for the\n  orchestrator.\n\nBelow the ~15-minute-per-class threshold, sequentially is fine — coordination\noverhead exceeds the gain.\n```\n\n**Impact:** Gives the most-deployed agent explicit, threshold-gated decomposition logic. Targets the specific failure mode logged tonight (two separable work classes collapsed into one sequential pass). The 15-minute threshold prevents over-triggering on small tasks. The \"flag if you miss it\" instruction creates a feedback loop that surfaces future missed decompositions to the log.\n\n**Risk:** Developer's scope is implementation; decomposition decisions are ultimately the orchestrator's. Adding decomposition guidance could cause developer to recommend sub-agent spawns in contexts where the orchestrator (main-thread) intended a single sequential pass. Mitigate with the \"> 15 min per class\" guard and by framing the instruction as an assessment to raise with the orchestrator, not a unilateral spawn decision.\n\n## Proposal Track Record\n55 total, 44 accepted, 3 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 4 fix_attempts (14d) |\n| Proposal Hit Rate | 84% | 44/52 accepted |\n| Eval Signal | OK | 10 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-05-08\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- agents: 1 sessions\n- design-library: 1 sessions\n- edge-prompts: 1 sessions\n- memory: 1 sessions\n- ocr: 1 sessions\n\n## Agent Usage (7-day)\n- Explore: 1 sessions\n- developer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n92 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 1\n- re_explanations: 0\n- patterns_detected: 4\n\n## Review Queue\n\n### Due Now\n- **review-2026-04-28-triggers-fired** (10d overdue)\n  - Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n  - Verify: `Run: python3 -c \"import json; [print(l) for l in open('~/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl') if json.loads(l).get('event')=='agent_deployment' and json.loads(l).get('date','')>='2026-04-21']\" — count spawns of infra/legal/marketer and parallel_executed=true`\n  - Pass: ≥1 spawn each of infra/legal/marketer triggered by the new rules, OR ≥1 parallel batch in the week\n- **review-2026-05-05-b7-reflag** (3d overdue)\n  - Re-run b7 detector and compare candidate list vs 2026-04-21\n  - Verify: `bash ~/.claude/night-shift/phases/b7-agent-efficacy.sh`\n  - Pass: The 10 currently-archived agents should have aged out of the candidate list (log mentions >30d old). No NEW active agents should be flagged.\n- **review-2026-05-07-trigger-5-evidence** (1d overdue)\n  - Evaluate whether trigger #5 (parallel-spawn) should be promoted to a sticky-prompt-hook on UserPromptSubmit\n  - Verify: `python3 -c \"import json,datetime; log=open('/Users/reggie/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl').readlines(); cutoff=(datetime.date.today()-datetime.timedelta(days=7)).isoformat(); evts=[json.loads(l) for l in log if l.strip()]; deps=[e for e in evts if e.get('event')=='agent_deployment' and e.get('date','')>=cutoff]; missing=[e for e in deps if 'parallel_eligible' not in e]; skipped=[e for e in deps if e.get('parallel_eligible')==True and e.get('parallel_executed')==False]; print(f'7d deployments: {len(deps)} | missing parallel_eligible: {len(missing)} | eligible-but-skipped: {len(skipped)}')\"`\n  - Pass: ≥3 eligible-but-skipped events in the 7-day window → promote trigger #5 to delegation-trigger-prompt.md hook (semantic patterns: ≥2 build verbs, conjunctions in build context). <3 → keep advisory, re-review in another 7 days. Missing-field count ≥30% of total → logging discipline still slipping; tighten rule first.\n## Proposals\nNone generated\n\n## Proposal Track Record\n55 total, 46 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 83% | 46/55 accepted |\n| Eval Signal | OK | 11 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
       "total": 55,
-      "accepted": 44,
-      "pending": 3,
-      "rejected": 6
+      "accepted": 46,
+      "pending": 0,
+      "rejected": 7
     },
     "benchmarks": [
       {
         "name": "Friction Rate",
-        "status": "WATCH",
-        "detail": "4 fix_attempts (14d)"
+        "status": "OK",
+        "detail": "1 fix_attempts (14d)"
       },
       {
         "name": "Proposal Hit Rate",
-        "status": "84%",
-        "detail": "44/52 accepted"
+        "status": "83%",
+        "detail": "46/55 accepted"
       },
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "10 consecutive all-pass runs"
+        "detail": "11 consecutive all-pass runs"
       }
     ]
   },
@@ -2185,7 +2167,7 @@
         "suggested": ""
       }
     ],
-    "generated": "2026-04-30 17:13"
+    "generated": "2026-05-08 00:12"
   },
   "consolidation": {
     "hasData": true,
@@ -2247,6 +2229,13 @@
       "tool_calls_30d": 0
     },
     {
+      "id": "aposd-ocr",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 27
+    },
+    {
       "id": "bianca-tracker",
       "friction_today": 0,
       "unresolved_gaps": 0,
@@ -2258,7 +2247,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 761
+      "tool_calls_30d": 791
     },
     {
       "id": "design-view",
@@ -2275,11 +2264,25 @@
       "tool_calls_30d": 1
     },
     {
+      "id": "edge",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 231
+    },
+    {
       "id": "kin",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
       "tool_calls_30d": 2594
+    },
+    {
+      "id": "laws-ocr",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 6
     },
     {
       "id": "mirror-app",
@@ -2319,58 +2322,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 13,
-      "preventions": 4,
-      "autoInstalls": 4,
-      "conversionPct": 31
-    },
-    "lastWeek": {
-      "failures": 65,
+      "failures": 0,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
+    "lastWeek": {
+      "failures": 12,
+      "preventions": 4,
+      "autoInstalls": 4,
+      "conversionPct": 33
+    },
     "daily": [
-      {
-        "date": "2026-04-17",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-04-18",
-        "failures": 1,
-        "preventions": 0
-      },
-      {
-        "date": "2026-04-19",
-        "failures": 18,
-        "preventions": 0
-      },
-      {
-        "date": "2026-04-20",
-        "failures": 26,
-        "preventions": 0
-      },
-      {
-        "date": "2026-04-21",
-        "failures": 5,
-        "preventions": 0
-      },
-      {
-        "date": "2026-04-22",
-        "failures": 4,
-        "preventions": 0
-      },
-      {
-        "date": "2026-04-23",
-        "failures": 11,
-        "preventions": 0
-      },
-      {
-        "date": "2026-04-24",
-        "failures": 1,
-        "preventions": 0
-      },
       {
         "date": "2026-04-25",
         "failures": 2,
@@ -2400,36 +2363,76 @@
         "date": "2026-04-30",
         "failures": 0,
         "preventions": 0
+      },
+      {
+        "date": "2026-05-01",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-05-02",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-05-03",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-05-04",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-05-05",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-05-06",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-05-07",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-05-08",
+        "failures": 0,
+        "preventions": 0
       }
     ],
     "stuckFailures": [
       {
         "session": "vectorized-snuggling-cat",
         "detail": "Edit on ~/.claude/settings.json blocked by protective gate AFTER ExitPlanMode approval landed in same session. Gate denial reason: 'Self-Mod",
-        "age_days": 3
+        "age_days": 11
       },
       {
         "session": "bruce-2026-04-27-p004-reframe",
         "detail": "Bruce P-2026-04-27-004 proposed retiring ~/.claude/agents/chief-of-staff.md (file does not exist — already retired as .bak-2026-04-21). B4 e",
-        "age_days": 3
+        "age_days": 11
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 38,
+      "patternsDetected": 4,
+      "templatesExtracted": 0,
+      "distinctTemplatesExtracted": 0,
+      "templatesInstantiated": 0,
+      "extractionRate": 0,
+      "extractablePatternCount": 2
+    },
+    "lastWeek": {
+      "patternsDetected": 24,
       "templatesExtracted": 6,
       "distinctTemplatesExtracted": 1,
       "templatesInstantiated": 4,
       "extractionRate": 50,
-      "extractablePatternCount": 2
-    },
-    "lastWeek": {
-      "patternsDetected": 96,
-      "templatesExtracted": 0,
-      "distinctTemplatesExtracted": 0,
-      "templatesInstantiated": 12,
-      "extractionRate": 0,
       "extractablePatternCount": 2
     },
     "activeTemplates": [
@@ -2485,26 +2488,18 @@
   },
   "preventionEfficacy": {
     "activePreventions": 8,
-    "avgEfficacy": 0.6896551724137931,
+    "avgEfficacy": 0.6779661016949152,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 2,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.5,
-        "fires30d": 28,
+        "efficacy": 0.4827586206896552,
+        "fires30d": 29,
         "valid": 14,
-        "invalid": 14,
+        "invalid": 15,
         "sparkline": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           null,
@@ -2526,9 +2521,17 @@
           1,
           null,
           null,
-          null
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
         ],
-        "last_fire_date": "2026-04-27"
+        "last_fire_date": "2026-05-08"
       },
       {
         "rule": "source-labeling-convention",
@@ -2544,19 +2547,19 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
           null,
           0,
           1,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -2587,16 +2590,16 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -2627,15 +2630,15 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -2667,16 +2670,16 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -2707,17 +2710,17 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
           1,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -2749,15 +2752,15 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -2789,15 +2792,15 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -2816,17 +2819,17 @@
     {
       "id": "first-auto-install",
       "title": "Auto-install fires this week",
-      "current": "4/week",
+      "current": "0/week",
       "target": "≥1 this week",
-      "status": "green",
+      "status": "red",
       "why": "Threshold lowered to 2 sessions. First fire flips Verb 1 from stalled to converting."
     },
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "50% (28 fires/30d)",
+      "current": "48% (29 fires/30d)",
       "target": "stays ≥50%",
-      "status": "green",
+      "status": "yellow",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
     },
     {
@@ -2848,11 +2851,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "38 this week (96 last)",
+      "current": "4 this week (24 last)",
       "target": "stay near or above last week",
       "status": "red",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-04-30T22:59:49.432Z"
+  "lastUpdated": "2026-05-08T15:20:25.436Z"
 }

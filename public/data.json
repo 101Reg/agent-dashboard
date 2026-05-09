@@ -1709,14 +1709,42 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "edge-tier1-tier2-deploy",
+        "date": "2026-05-08",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "main",
+            "detail": "Leaked TRADIER_API_KEY by running grep on .env.local — secret-leak-prevent-pre.sh did not catch it. Hook patterns only covered cat .envrc / "
+          }
+        ]
+      },
+      {
+        "name": "edge-regime-card-deploy",
+        "date": "2026-05-08",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 93,
+    "total": 94,
     "byType": {
-      "feedback": 39,
+      "feedback": 40,
       "project": 16,
       "user": 17,
       "reference": 20,
@@ -2247,7 +2275,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 791
+      "tool_calls_30d": 808
     },
     {
       "id": "design-view",
@@ -2268,7 +2296,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 231
+      "tool_calls_30d": 519
     },
     {
       "id": "kin",
@@ -2322,23 +2350,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 0,
+      "failures": 1,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
     "lastWeek": {
-      "failures": 12,
+      "failures": 10,
       "preventions": 4,
       "autoInstalls": 4,
-      "conversionPct": 33
+      "conversionPct": 40
     },
     "daily": [
-      {
-        "date": "2026-04-25",
-        "failures": 2,
-        "preventions": 0
-      },
       {
         "date": "2026-04-26",
         "failures": 2,
@@ -2401,6 +2424,11 @@
       },
       {
         "date": "2026-05-08",
+        "failures": 1,
+        "preventions": 0
+      },
+      {
+        "date": "2026-05-09",
         "failures": 0,
         "preventions": 0
       }
@@ -2409,12 +2437,12 @@
       {
         "session": "vectorized-snuggling-cat",
         "detail": "Edit on ~/.claude/settings.json blocked by protective gate AFTER ExitPlanMode approval landed in same session. Gate denial reason: 'Self-Mod",
-        "age_days": 11
+        "age_days": 12
       },
       {
         "session": "bruce-2026-04-27-p004-reframe",
         "detail": "Bruce P-2026-04-27-004 proposed retiring ~/.claude/agents/chief-of-staff.md (file does not exist — already retired as .bak-2026-04-21). B4 e",
-        "age_days": 11
+        "age_days": 12
       }
     ]
   },
@@ -2429,10 +2457,10 @@
     },
     "lastWeek": {
       "patternsDetected": 24,
-      "templatesExtracted": 6,
-      "distinctTemplatesExtracted": 1,
-      "templatesInstantiated": 4,
-      "extractionRate": 50,
+      "templatesExtracted": 0,
+      "distinctTemplatesExtracted": 0,
+      "templatesInstantiated": 0,
+      "extractionRate": 0,
       "extractablePatternCount": 2
     },
     "activeTemplates": [
@@ -2487,8 +2515,8 @@
     ]
   },
   "preventionEfficacy": {
-    "activePreventions": 8,
-    "avgEfficacy": 0.6779661016949152,
+    "activePreventions": 9,
+    "avgEfficacy": 0.6833333333333333,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 2,
@@ -2500,7 +2528,6 @@
         "valid": 14,
         "invalid": 15,
         "sparkline": [
-          null,
           null,
           null,
           null,
@@ -2529,7 +2556,8 @@
           null,
           null,
           null,
-          0
+          0,
+          null
         ],
         "last_fire_date": "2026-05-08"
       },
@@ -2546,12 +2574,12 @@
           null,
           null,
           null,
-          null,
           1,
           null,
           0,
           1,
           1,
+          null,
           null,
           null,
           null,
@@ -2589,9 +2617,9 @@
           null,
           null,
           null,
+          1,
+          1,
           null,
-          1,
-          1,
           null,
           null,
           null,
@@ -2629,8 +2657,8 @@
           null,
           null,
           null,
-          null,
           0,
+          null,
           null,
           null,
           null,
@@ -2669,9 +2697,9 @@
           null,
           null,
           null,
+          1,
+          1,
           null,
-          1,
-          1,
           null,
           null,
           null,
@@ -2709,10 +2737,10 @@
           null,
           null,
           null,
+          1,
+          1,
+          1,
           null,
-          1,
-          1,
-          1,
           null,
           null,
           null,
@@ -2751,8 +2779,8 @@
           null,
           null,
           null,
-          null,
           1,
+          null,
           null,
           null,
           null,
@@ -2791,8 +2819,8 @@
           null,
           null,
           null,
-          null,
           1,
+          null,
           null,
           null,
           null,
@@ -2812,6 +2840,46 @@
           null
         ],
         "last_fire_date": "2026-04-21"
+      },
+      {
+        "rule": "secret-leak-prevention",
+        "efficacy": 1,
+        "fires30d": 1,
+        "valid": 1,
+        "invalid": 0,
+        "sparkline": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null
+        ],
+        "last_fire_date": "2026-05-08"
       }
     ]
   },
@@ -2857,5 +2925,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-05-08T15:20:25.436Z"
+  "lastUpdated": "2026-05-09T04:34:39.760Z"
 }

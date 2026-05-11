@@ -1816,20 +1816,10 @@
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 3,
+        "capabilityGaps": 1,
         "toilEvents": 0,
         "hookCatches": 0,
         "events": [
-          {
-            "event": "capability_gap",
-            "agent": "main-thread",
-            "detail": "Deployed prod fixes via vercel --prod --yes --force without spawning reviewer agent first; agent-delegation-triggers.md Trigger #2 mandates "
-          },
-          {
-            "event": "capability_gap",
-            "agent": "main-thread",
-            "detail": "Explore gate blocked Read 6 times across session even after debug agent had already mapped the codebase; gate clear-condition only accepts E"
-          },
           {
             "event": "capability_gap",
             "agent": "main-thread",
@@ -1892,6 +1882,94 @@
             "detail": "Asserted scheduled routine future-fire (\"tomorrow at 13:30 UTC the scheduled Polygon probe lands\") without hedging or this-turn tool evidenc"
           }
         ]
+      },
+      {
+        "name": "edge-v2-bug-fixes-round2",
+        "date": "2026-05-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "edge-v2-bug-fixes-round3",
+        "date": "2026-05-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "edge-v2-submit-hang-fix",
+        "date": "2026-05-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "edge-v2-teaching-and-plan",
+        "date": "2026-05-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "edge-v2-fk-fix",
+        "date": "2026-05-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "edge-v2-done-button",
+        "date": "2026-05-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "edge-v2-autocalc",
+        "date": "2026-05-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "edge-v2-demo-placeholder-sweep",
+        "date": "2026-05-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
@@ -2151,6 +2229,18 @@
     },
     {
       "date": "2026-05-10",
+      "text": "capability_gap x3",
+      "context": "Stop hook blocked — mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-05-10",
+      "text": "3 cap_gaps clustered into 2 root causes: (1) reviewer-gate clear-condition accepted ANY same-day reviewer event (stale review from morning Phase 1a passed afternoon AVGO deploy after debug had fired); (2) explore-gate clear-condition rejected debug despite debug doing equivalent broad reading. Both gates EXIST and FIRE; their semantics were too lax/tight respectively. Fix: tightened reviewer-gate to require reviewer be the LATEST agent_deployment for current project today; added debug to explore-gate's clearing-agent list. Verified via 4 smoke tests against real perf log.",
+      "context": "Pattern-detector hook fired on 3+ cap_gaps; P-2026-05-10-002 pending_inline",
+      "high": true
+    },
+    {
+      "date": "2026-05-10",
       "text": "Explore gate blocked Read 6 times after debug had already mapped codebase; pivoted to Bash+Python heredoc; reviewer NOT spawned before prod deploy (Trigger #2 slip) → 1 lessons saved",
       "context": "edge-v2-bug-fixes",
       "high": false
@@ -2164,18 +2254,6 @@
     {
       "date": "2026-05-09",
       "text": "similarity-cluster size=7",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-05-09",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-05-09",
-      "text": "similarity-cluster size=5",
       "context": "Layer 2 scanner — similarity cluster",
       "high": true
     }
@@ -2287,7 +2365,7 @@
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 58,
+      "total": 59,
       "accepted": 46,
       "pending": 0,
       "rejected": 7
@@ -2412,7 +2490,7 @@
     },
     {
       "id": "agent-os",
-      "friction_today": 1,
+      "friction_today": 0,
       "unresolved_gaps": 3,
       "templates_used": 1,
       "tool_calls_30d": 0
@@ -2436,7 +2514,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 814
+      "tool_calls_30d": 875
     },
     {
       "id": "design-view",
@@ -2461,10 +2539,10 @@
     },
     {
       "id": "edge-v2",
-      "friction_today": 2,
-      "unresolved_gaps": 3,
+      "friction_today": 0,
+      "unresolved_gaps": 1,
       "templates_used": 0,
-      "tool_calls_30d": 1595
+      "tool_calls_30d": 1822
     },
     {
       "id": "kin",
@@ -2548,7 +2626,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 30
+      "tool_calls_30d": 45
     }
   ],
   "failureToPrevention": {
@@ -2559,17 +2637,12 @@
       "conversionPct": 0
     },
     "lastWeek": {
-      "failures": 8,
-      "preventions": 4,
-      "autoInstalls": 4,
-      "conversionPct": 50
+      "failures": 0,
+      "preventions": 0,
+      "autoInstalls": 0,
+      "conversionPct": 0
     },
     "daily": [
-      {
-        "date": "2026-04-27",
-        "failures": 8,
-        "preventions": 4
-      },
       {
         "date": "2026-04-28",
         "failures": 0,
@@ -2634,39 +2707,34 @@
         "date": "2026-05-10",
         "failures": 7,
         "preventions": 0
+      },
+      {
+        "date": "2026-05-11",
+        "failures": 0,
+        "preventions": 0
       }
     ],
     "stuckFailures": [
       {
         "session": "vectorized-snuggling-cat",
         "detail": "Edit on ~/.claude/settings.json blocked by protective gate AFTER ExitPlanMode approval landed in same session. Gate denial reason: 'Self-Mod",
-        "age_days": 13
+        "age_days": 14
       },
       {
         "session": "bruce-2026-04-27-p004-reframe",
         "detail": "Bruce P-2026-04-27-004 proposed retiring ~/.claude/agents/chief-of-staff.md (file does not exist — already retired as .bak-2026-04-21). B4 e",
-        "age_days": 13
+        "age_days": 14
       },
       {
         "session": "edge-v2-slice-2-plan",
         "detail": "Two parallel Explore subagents both wrote ~/Claude-Projects/edge-v2/CLAUDE.md (15KB, untracked) despite plan mode active + Explore tool spec",
-        "age_days": 1
-      },
-      {
-        "session": "edge-v2-bug-fixes",
-        "detail": "Deployed prod fixes via vercel --prod --yes --force without spawning reviewer agent first; agent-delegation-triggers.md Trigger #2 mandates ",
-        "age_days": 0
-      },
-      {
-        "session": "edge-v2-bug-fixes",
-        "detail": "Explore gate blocked Read 6 times across session even after debug agent had already mapped the codebase; gate clear-condition only accepts E",
-        "age_days": 0
+        "age_days": 2
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 19,
+      "patternsDetected": 21,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -2674,7 +2742,7 @@
       "extractablePatternCount": 2
     },
     "lastWeek": {
-      "patternsDetected": 18,
+      "patternsDetected": 8,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -2750,7 +2818,6 @@
           null,
           null,
           null,
-          null,
           0.2,
           null,
           0,
@@ -2775,7 +2842,8 @@
           null,
           0,
           1,
-          1
+          1,
+          null
         ],
         "last_fire_date": "2026-05-10"
       },
@@ -2790,12 +2858,12 @@
           null,
           null,
           null,
-          null,
           1,
           null,
           0,
           1,
           1,
+          null,
           null,
           null,
           null,
@@ -2833,9 +2901,9 @@
           null,
           null,
           null,
+          1,
+          1,
           null,
-          1,
-          1,
           null,
           null,
           null,
@@ -2873,8 +2941,8 @@
           null,
           null,
           null,
-          null,
           0,
+          null,
           null,
           null,
           null,
@@ -2913,9 +2981,9 @@
           null,
           null,
           null,
+          1,
+          1,
           null,
-          1,
-          1,
           null,
           null,
           null,
@@ -2953,10 +3021,10 @@
           null,
           null,
           null,
+          1,
+          1,
+          1,
           null,
-          1,
-          1,
-          1,
           null,
           null,
           null,
@@ -2995,8 +3063,8 @@
           null,
           null,
           null,
-          null,
           1,
+          null,
           null,
           null,
           null,
@@ -3035,8 +3103,8 @@
           null,
           null,
           null,
-          null,
           1,
+          null,
           null,
           null,
           null,
@@ -3092,8 +3160,8 @@
           null,
           null,
           null,
-          null,
           1,
+          null,
           null,
           null
         ],
@@ -3134,8 +3202,8 @@
           null,
           null,
           null,
-          null,
-          1
+          1,
+          null
         ],
         "last_fire_date": "2026-05-10"
       }
@@ -3169,19 +3237,19 @@
     {
       "id": "stuck-failures",
       "title": "Stuck failures resolved",
-      "current": "5 stuck",
+      "current": "3 stuck",
       "target": "reduce by ≥1 this week",
-      "status": "red",
+      "status": "yellow",
       "why": "Failures aged ≥7 days without prevention or resolution. Check Verb 1 carousel."
     },
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "19 this week (18 last)",
+      "current": "21 this week (8 last)",
       "target": "stay near or above last week",
       "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-05-10T17:44:02.827Z"
+  "lastUpdated": "2026-05-11T01:40:07.151Z"
 }

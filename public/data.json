@@ -1828,6 +1828,17 @@
         ]
       },
       {
+        "name": "edge-v2-demo-placeholder-sweep",
+        "date": "2026-05-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "edge-v2-slice-2-phase-1a",
         "date": "2026-05-10",
         "fixAttempts": 0,
@@ -1961,7 +1972,7 @@
         "events": []
       },
       {
-        "name": "edge-v2-demo-placeholder-sweep",
+        "name": "a0-auto-install",
         "date": "2026-05-10",
         "fixAttempts": 0,
         "escalations": 0,
@@ -1993,7 +2004,7 @@
   "timeline": [
     {
       "date": "May 10, 2026",
-      "title": "Edge V2 Bug Fixes",
+      "title": "2 sessions",
       "desc": "Diagnosed AVGO entry-flow Step 4 HTTP 404 + Step 5 stuck spinner, Spawned debug agent for forensic root-cause; found 3 bugs (URL mismatch, FK violation, latent shape mismatch), Patched all 4 fixes via atomic Python heredoc (5 file changes)",
       "active": true
     },
@@ -2246,23 +2257,26 @@
       "high": false
     },
     {
-      "date": "2026-05-09",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
+      "date": "2026-05-10",
+      "text": "Conversation summary hallucinated 3 Dashboard fixes as done — reviewer FAIL caught them before deploy; reviewer-gate denied first deploy attempt despite logged event (retry worked) → 2 lessons saved",
+      "context": "edge-v2-demo-placeholder-sweep",
+      "high": false
     },
     {
-      "date": "2026-05-09",
-      "text": "similarity-cluster size=7",
-      "context": "Layer 2 scanner — similarity cluster",
+      "date": "2026-05-10",
+      "text": "capability_gap x3",
+      "context": "Bruce proposal P-2026-05-10-002",
       "high": true
     }
   ],
   "nightShift": {
-    "status": "GREEN",
-    "lastRun": "2026-05-08",
+    "status": "YELLOW",
+    "lastRun": "2026-05-10",
     "findings": [
-      "System healthy — no issues detected"
+      "WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)",
+      "CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate",
+      "CONCERN: pre-response-claim-audit has 56% FP rate (25 fires in 30d) — Sprint 4 refinement candidate",
+      "STALE: chief-of-staff last fired 2026-04-05 — retirement candidate"
     ],
     "evalCanaries": [
       {
@@ -2356,35 +2370,48 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 0,
-    "proposals": [],
+    "proposalCount": 4,
+    "proposals": [
+      {
+        "id": "P-2026-05-10-003",
+        "category": "unknown",
+        "problem": "",
+        "solution": ""
+      },
+      {
+        "id": "P-2026-05-10-004",
+        "category": "unknown",
+        "problem": "",
+        "solution": ""
+      }
+    ],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-05-08\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- agents: 1 sessions\n- design-library: 1 sessions\n- edge-prompts: 1 sessions\n- memory: 1 sessions\n- ocr: 1 sessions\n\n## Agent Usage (7-day)\n- Explore: 1 sessions\n- developer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n92 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 1\n- re_explanations: 0\n- patterns_detected: 4\n\n## Review Queue\n\n### Due Now\n- **review-2026-04-28-triggers-fired** (10d overdue)\n  - Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n  - Verify: `Run: python3 -c \"import json; [print(l) for l in open('~/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl') if json.loads(l).get('event')=='agent_deployment' and json.loads(l).get('date','')>='2026-04-21']\" — count spawns of infra/legal/marketer and parallel_executed=true`\n  - Pass: ≥1 spawn each of infra/legal/marketer triggered by the new rules, OR ≥1 parallel batch in the week\n- **review-2026-05-05-b7-reflag** (3d overdue)\n  - Re-run b7 detector and compare candidate list vs 2026-04-21\n  - Verify: `bash ~/.claude/night-shift/phases/b7-agent-efficacy.sh`\n  - Pass: The 10 currently-archived agents should have aged out of the candidate list (log mentions >30d old). No NEW active agents should be flagged.\n- **review-2026-05-07-trigger-5-evidence** (1d overdue)\n  - Evaluate whether trigger #5 (parallel-spawn) should be promoted to a sticky-prompt-hook on UserPromptSubmit\n  - Verify: `python3 -c \"import json,datetime; log=open('/Users/reggie/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl').readlines(); cutoff=(datetime.date.today()-datetime.timedelta(days=7)).isoformat(); evts=[json.loads(l) for l in log if l.strip()]; deps=[e for e in evts if e.get('event')=='agent_deployment' and e.get('date','')>=cutoff]; missing=[e for e in deps if 'parallel_eligible' not in e]; skipped=[e for e in deps if e.get('parallel_eligible')==True and e.get('parallel_executed')==False]; print(f'7d deployments: {len(deps)} | missing parallel_eligible: {len(missing)} | eligible-but-skipped: {len(skipped)}')\"`\n  - Pass: ≥3 eligible-but-skipped events in the 7-day window → promote trigger #5 to delegation-trigger-prompt.md hook (semantic patterns: ≥2 build verbs, conjunctions in build context). <3 → keep advisory, re-review in another 7 days. Missing-field count ≥30% of total → logging discipline still slipping; tighten rule first.\n## Proposals\nNone generated\n\n## Proposal Track Record\n55 total, 46 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 83% | 46/55 accepted |\n| Eval Signal | OK | 11 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-05-10\n\n## Status: YELLOW\n\n## Key Findings\n- WATCH: Friction Rate — 4 fix_attempts in 14 days (red line at 6)\n- CONCERN: code-accuracy has 100% FP rate (5 fires in 30d) — Sprint 4 refinement candidate\n- CONCERN: pre-response-claim-audit has 56% FP rate (25 fires in 30d) — Sprint 4 refinement candidate\n- STALE: chief-of-staff last fired 2026-04-05 — retirement candidate\n\n## What Hero Worked On (7-day)\n- react: 3 sessions\n- typescript: 3 sessions\n- agents: 2 sessions\n- memory: 2 sessions\n- postgres: 2 sessions\n\n## Agent Usage (7-day)\n- reviewer: 2 sessions\n- Explore: 1 sessions\n- debug: 1 sessions\n- developer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 3.6 | 3.6 | 0.00 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n95 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 3\n- escalations: 0\n- hook_catches: 7\n- re_explanations: 0\n- patterns_detected: 21\n\n## Review Queue\n\n### Due Now\n- **review-2026-04-28-triggers-fired** (12d overdue)\n  - Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n  - Verify: `Run: python3 -c \"import json; [print(l) for l in open('~/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl') if json.loads(l).get('event')=='agent_deployment' and json.loads(l).get('date','')>='2026-04-21']\" — count spawns of infra/legal/marketer and parallel_executed=true`\n  - Pass: ≥1 spawn each of infra/legal/marketer triggered by the new rules, OR ≥1 parallel batch in the week\n- **review-2026-05-05-b7-reflag** (5d overdue)\n  - Re-run b7 detector and compare candidate list vs 2026-04-21\n  - Verify: `bash ~/.claude/night-shift/phases/b7-agent-efficacy.sh`\n  - Pass: The 10 currently-archived agents should have aged out of the candidate list (log mentions >30d old). No NEW active agents should be flagged.\n- **review-2026-05-07-trigger-5-evidence** (3d overdue)\n  - Evaluate whether trigger #5 (parallel-spawn) should be promoted to a sticky-prompt-hook on UserPromptSubmit\n  - Verify: `python3 -c \"import json,datetime; log=open('/Users/reggie/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl').readlines(); cutoff=(datetime.date.today()-datetime.timedelta(days=7)).isoformat(); evts=[json.loads(l) for l in log if l.strip()]; deps=[e for e in evts if e.get('event')=='agent_deployment' and e.get('date','')>=cutoff]; missing=[e for e in deps if 'parallel_eligible' not in e]; skipped=[e for e in deps if e.get('parallel_eligible')==True and e.get('parallel_executed')==False]; print(f'7d deployments: {len(deps)} | missing parallel_eligible: {len(missing)} | eligible-but-skipped: {len(skipped)}')\"`\n  - Pass: ≥3 eligible-but-skipped events in the 7-day window → promote trigger #5 to delegation-trigger-prompt.md hook (semantic patterns: ≥2 build verbs, conjunctions in build context). <3 → keep advisory, re-review in another 7 days. Missing-field count ≥30% of total → logging discipline still slipping; tighten rule first.\n## Proposals\n# Proposals — 2026-05-10\n\nNight Shift run @ 03:00. 0 errors tonight. Prior 7d: 1 GREEN, 0 RED. Friction watch active (4 fix_attempts/14d, red line 6). Generating 4 proposals — one targets Bruce himself.\n\n---\n\n## P-2026-05-10-001\n- **Category**: self_improvement\n- **Problem**: My `agent_unused_frequency_7d` data shows 9 agents marked \"unused\" across 4–6 sessions each (debug, developer, infra, legal, marketer, Explore, night-shift, research, reviewer). But \"unused\" is ambiguous — I can't distinguish *\"agent was forgotten when it should have been deployed\"* from *\"agent was correctly skipped because it didn't apply.\"* This makes the signal noisy and undermines my B3 staleness checks (e.g., chief-of-staff retirement candidate could be a false call). Of 4 capability_gaps_7d, 3 came from main-thread doing work an agent should have owned — exactly the signal I'm currently failing to separate.\n- **Solution**: In `~/.agent-os/night-shift/phases/a1-collect.ts` (or equivalent), extend `agent_unused_frequency` to a richer record: `{agent, unused_sessions, sessions_where_alternative_deployed, sessions_where_main_thread_did_the_work, sessions_clearly_out_of_scope}`. Classify each unused-session by cross-referencing `agent_deploy_frequency_7d` and `capability_gap_attribution`. Emit a new derived metric `agent_should_have_fired_7d` per agent.\n- **Impact**: B3 retirement decisions become evidence-backed; capability gap attribution stops being a separate sidecar and becomes the primary lens; future proposals like \"retire chief-of-staff\" carry a count, not a date.\n- **Risk**: Classification heuristic could miscategorize edge cases — mitigate by emitting raw counts alongside derived buckets so reviewers can audit.\n\n---\n\n## P-2026-05-10-002\n- **Category**: agent_methodology\n- **Problem**: Top capability gap tonight: main-thread read `entry-flow + entry-store + StepRisk` *after* debug forensic completed (count: 3, the dominant gap). Debug agents are completing investigations without handing off a structured \"files the caller will need to read next\" manifest, forcing main-thread to re-derive the read-set from prose. This is recurring (3 of 4 gaps trace to it) and aligns with the TC6 eval finding that developer agents under-emphasize file-read discipline.\n- **Solution**: Edit `~/.agent-os/agents/debug.md` — append a required output section: `## Next Reads` listing `{file, reason, what-to-look-for}` for every file the forensic implicates but didn't fully analyze. Mirror in `~/.agent-os/agents/Explore.md` so codebase maps always end with a prioritized read-list.\n- **Impact**: Eliminates the dominant capability_gap pattern; reduces main-thread context churn; sets up downstream agents (developer, reviewer) to receive structured handoffs.\n- **Risk**: Adds verbosity to debug output. Mitigate by capping `Next Reads` at 5 entries and marking it skippable when forensic is conclusive.\n\n---\n\n## P-2026-05-10-003\n- **Category**: regression\n- **Problem**: Developer TC6 eval flat at 3.6 (baseline 3.6, delta 0.00), with c2=3 and c5=3 the drags. Notes: *\"Agent should push back on skipping file read—blind async refactor risks breaking call sites.\"* This is the same theme as P-002 (file-read discipline) but on the *receiving* side. With 12 consecutive_all_pass runs, regressions are unlikely to fix themselves passively.\n- **Solution**: Edit `~/.agent-os/agents/developer.md` — add a \"Pre-Refactor Gate\" rule: before any refactor touching exported symbols or async boundaries, require reading (a) the target file, (b) at least one call site, (c) any sync sibling in the same module. User assurances of \"no need to read\" must be acknowledged but overridden with a one-line justification. Add a TC6-adjacent eval prompt (TC6b) where the user explicitly says \"skip the read\" — passing requires graceful pushback.\n- **Impact**: Lifts TC6 c2/c5 from 3→4; reduces correctness-class fix_attempts (currently 4/14d, on watch).\n- **Risk**: Could make developer agent feel \"argumentative\" — mitigate via tone guidance (\"acknowledge, then justify the read in ≤1 sentence\").\n\n---\n\n## P-2026-05-10-004\n- **Category**: agent_methodology\n- **Problem**: `pre-response-claim-audit` hook has 56% FP rate over 30d (25 fires) and 20% FP rate this week (1/5). It's flagged a Sprint 4 refinement candidate. With 7 hook_catches_7d total and this rule responsible for 5 of them, FP noise here is the largest drag on the hook system's signal-to-noise.\n- **Solution**: Edit `~/.agent-os/hooks/pre-response-claim-audit.{ts,md}` — tighten the trigger predicate: require BOTH (a) a verifiable claim pattern (file path, line number, function name, metric) AND (b) absence of a tool call in the prior 3 turns that would have produced that evidence. Today's rule likely fires on (a) alone. Add a `recent_tool_evidence` lookback to the matcher.\n- **Impact**: Cuts hook FP rate from 20%→<10% this week; improves trust in the audit signal so valid catches aren't dismissed.\n- **Risk**: Tightening could miss real claim-without-evidence cases. Mitigate by shadowing the new rule alongside the old one for 7 days and comparing catch sets before swapping.\n\n---\n\n**Summary**: 1 self-improvement (P-001), 2 agent_methodology (P-002, P-004), 1 regression (P-003). All cite tonight's data. Friction watch remains active; no escalations needed.\n\n## Proposal Track Record\n63 total, 47 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | WATCH | 4 fix_attempts (14d) |\n| Proposal Hit Rate | 79% | 47/59 accepted |\n| Eval Signal | OK | 12 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 59,
-      "accepted": 46,
-      "pending": 0,
+      "total": 63,
+      "accepted": 47,
+      "pending": 4,
       "rejected": 7
     },
     "benchmarks": [
       {
         "name": "Friction Rate",
-        "status": "OK",
-        "detail": "1 fix_attempts (14d)"
+        "status": "WATCH",
+        "detail": "4 fix_attempts (14d)"
       },
       {
         "name": "Proposal Hit Rate",
-        "status": "83%",
-        "detail": "46/55 accepted"
+        "status": "79%",
+        "detail": "47/59 accepted"
       },
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "11 consecutive all-pass runs"
+        "detail": "12 consecutive all-pass runs"
       }
     ]
   },
@@ -2514,7 +2541,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 875
+      "tool_calls_30d": 876
     },
     {
       "id": "design-view",
@@ -2542,7 +2569,7 @@
       "friction_today": 0,
       "unresolved_gaps": 1,
       "templates_used": 0,
-      "tool_calls_30d": 1822
+      "tool_calls_30d": 1826
     },
     {
       "id": "kin",
@@ -2632,9 +2659,9 @@
   "failureToPrevention": {
     "thisWeek": {
       "failures": 13,
-      "preventions": 0,
-      "autoInstalls": 0,
-      "conversionPct": 0
+      "preventions": 1,
+      "autoInstalls": 1,
+      "conversionPct": 8
     },
     "lastWeek": {
       "failures": 0,
@@ -2706,7 +2733,7 @@
       {
         "date": "2026-05-10",
         "failures": 7,
-        "preventions": 0
+        "preventions": 1
       },
       {
         "date": "2026-05-11",
@@ -2805,7 +2832,7 @@
     "avgEfficacy": 0.7076923076923077,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
-    "netActive30d": 2,
+    "netActive30d": 3,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
@@ -3213,9 +3240,9 @@
     {
       "id": "first-auto-install",
       "title": "Auto-install fires this week",
-      "current": "0/week",
+      "current": "1/week",
       "target": "≥1 this week",
-      "status": "red",
+      "status": "green",
       "why": "Threshold lowered to 2 sessions. First fire flips Verb 1 from stalled to converting."
     },
     {
@@ -3229,7 +3256,7 @@
     {
       "id": "net-active",
       "title": "Net active preventions (30d)",
-      "current": "+2",
+      "current": "+3",
       "target": "≥0",
       "status": "green",
       "why": "Preventions installed minus retired. Sustained negative = system losing coverage."
@@ -3251,5 +3278,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-05-11T01:40:07.151Z"
+  "lastUpdated": "2026-05-11T01:50:12.948Z"
 }

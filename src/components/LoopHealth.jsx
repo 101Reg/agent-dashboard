@@ -5,10 +5,16 @@ export default function LoopHealth({ failureToPrevention, patternToTemplate, pre
   const c1 = (failureToPrevention?.thisWeek?.conversionPct ?? 0) / 100
   const c2 = (patternToTemplate?.thisWeek?.extractionRate ?? 0) / 100
   const c3 = preventionEfficacy?.avgEfficacy ?? 0
+  const extractionStageStatus = patternToTemplate?.thisWeek?.stageStatus ?? null
 
-  const geomMean = Math.cbrt(
-    Math.max(c1, 0.01) * Math.max(c2, 0.01) * Math.max(c3, 0.01)
-  )
+  // 2026-05-10: when the extraction stage is dormant (no extractable patterns
+  // in the report at all), don't penalize Loop Health by capping c2 at 0.01.
+  // Fall back to a 2-stage geomMean of the active stages (conversion + efficacy).
+  // The dormancy is surfaced separately in the UI so the signal isn't hidden.
+  const extractionDormant = extractionStageStatus === 'dormant'
+  const geomMean = extractionDormant
+    ? Math.sqrt(Math.max(c1, 0.01) * Math.max(c3, 0.01))
+    : Math.cbrt(Math.max(c1, 0.01) * Math.max(c2, 0.01) * Math.max(c3, 0.01))
   const score = Math.round(geomMean * 100)
 
   const scoreColor = score >= 70 ? '#53e16f' : score >= 40 ? '#f5e17b' : '#f55'
@@ -57,7 +63,9 @@ export default function LoopHealth({ failureToPrevention, patternToTemplate, pre
         color: 'rgba(255,255,255,0.2)',
         marginBottom: conversionStalled ? 12 : 20,
       }}>
-        geometric mean of 3 conversion rates
+        {extractionDormant
+          ? 'geometric mean of 2 active stages (extraction dormant)'
+          : 'geometric mean of 3 conversion rates'}
       </div>
 
       {conversionStalled && (

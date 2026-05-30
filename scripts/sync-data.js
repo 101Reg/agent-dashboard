@@ -551,6 +551,19 @@ async function getPatterns() {
     const lines = sec.split('\n');
     const heading = lines[0].trim();
     const bullets = lines.filter(l => l.startsWith('- ')).map(l => l.slice(2));
+
+    // 2026-05-10: skip empty container headings — sections whose first body
+    // bullet is a "No findings" sentinel or DEFERRED marker. These were being
+    // counted as extractable patterns and producing a phantom denominator in
+    // patternToTemplate.extractionRate (cap to 0.01 in Loop Health math).
+    // Check first bullet only — split(/^### /m) absorbs subsequent ## sections
+    // (e.g. "Scanner Algorithms Used") into the trailing ### section's body,
+    // so length > 1 doesn't necessarily mean real content.
+    const sentinelRe = /^(no\s|deferred\b)/i;
+    const firstBullet = bullets[0] || '';
+    const isEmptyContainer = bullets.length === 0 || sentinelRe.test(firstBullet);
+    if (isEmptyContainer) continue;
+
     const observed = (bullets.find(b => b.startsWith('Observed:')) || '').replace('Observed:', '').trim();
     const signature = (bullets.find(b => b.startsWith('Signature:')) || '').replace('Signature:', '').trim();
     const suggested = (bullets.find(b => b.startsWith('Suggested fix:')) || '').replace('Suggested fix:', '').trim();
@@ -685,7 +698,7 @@ async function getFailureToPrevention() {
     ['capability_gap', 'fix_attempt', 'escalation'].includes(e.event) ||
     (e.event === 'hook_catch' && e.valid === true);
 
-  const isPrevention = e => e.event === 'auto_install';
+  const isPrevention = e => e.event === 'auto_install' || e.event === 'proposal_implemented';
 
   const inWindow = (e, start, end) => e.date >= start.toISOString().slice(0, 10) && e.date < end.toISOString().slice(0, 10);
 
@@ -799,7 +812,20 @@ async function getPatternToTemplate(parsedPatterns) {
     // Note: extractablePatternCount is from current pattern-report.md (14-day window), not the 7-day window —
     // safe approximation since template extraction is a slower cadence than the window comparison anyway.
     const extractionRate = extractablePatternCount === 0 ? 0 : Math.round(100 * distinctTemplatesExtracted / extractablePatternCount);
-    return { patternsDetected, templatesExtracted, distinctTemplatesExtracted, templatesInstantiated, extractionRate, extractablePatternCount };
+
+    // 2026-05-10: distinguish dormant from broken so Loop Health doesn't penalize
+    // an empty pipeline. dormant = no extractable inputs; broken = inputs exist
+    // but conversion is zero or low; active = healthy conversion.
+    let stageStatus;
+    if (extractablePatternCount === 0) {
+      stageStatus = 'dormant';
+    } else if (extractionRate < 30) {
+      stageStatus = 'broken';
+    } else {
+      stageStatus = 'active';
+    }
+
+    return { patternsDetected, templatesExtracted, distinctTemplatesExtracted, templatesInstantiated, extractionRate, extractablePatternCount, stageStatus };
   };
 
   // Active templates: group template_used events by template field

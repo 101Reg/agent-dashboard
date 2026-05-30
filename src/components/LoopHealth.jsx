@@ -2,9 +2,12 @@ import Num from './Num'
 import WoWDelta from './WoWDelta'
 
 export default function LoopHealth({ failureToPrevention, patternToTemplate, preventionEfficacy }) {
-  const c1 = (failureToPrevention?.thisWeek?.conversionPct ?? 0) / 100
-  const c2 = (patternToTemplate?.thisWeek?.extractionRate ?? 0) / 100
-  const c3 = preventionEfficacy?.avgEfficacy ?? 0
+  // P-2026-05-29-005: cap c1 at 1.0 so backlog cleanup (preventions > failures in week)
+  // does not inflate the geometric mean past steady-state. Backlog activity surfaces
+  // separately via stuckFailures count.
+  const c1 = Math.min((failureToPrevention?.thisWeek?.conversionPct ?? 0) / 100, 1.0)
+  const c2 = Math.min((patternToTemplate?.thisWeek?.extractionRate ?? 0) / 100, 1.0)
+  const c3 = Math.min(preventionEfficacy?.avgEfficacy ?? 0, 1.0)
   const extractionStageStatus = patternToTemplate?.thisWeek?.stageStatus ?? null
 
   // 2026-05-10: when the extraction stage is dormant (no extractable patterns

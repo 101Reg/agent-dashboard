@@ -2067,14 +2067,45 @@
         "reExplanations": 0,
         "capabilityGaps": 1,
         "toilEvents": 0,
-        "hookCatches": 0,
+        "hookCatches": 4,
         "events": [
           {
             "event": "capability_gap",
             "agent": "developer-subagent",
             "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "F1 — fabricated 40-60 score range when own tool call this turn showed geometric mean = 20.0"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "F4 — asserted 'score was floored at 9' as formula behavior without reading the Loop Health calculation source"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "F1 — wrote '~87' for sqrt(1.0 × 0.857) × 100 which actually computes to ~92.6. Math arithmetic error presented as fact"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "F4 — asserted 'loop usually has more failures than preventions in a given week' as historical fact with zero query this turn; pure speculati"
           }
         ]
+      },
+      {
+        "name": "instruments-unreliable-sweep",
+        "date": "2026-05-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
@@ -2303,6 +2334,12 @@
       "high": true
     },
     {
+      "date": "2026-05-29",
+      "text": "Loop Health formula in LoopHealth.jsx does not cap c1 (conversionPct/100) at 1.0; backlog cleanup weeks inflate the score (tonight: 4 preventions / 1 failure = c1=4.0 → score=185). Cap c1 at 1.0 AND surface backlog-burndown as a separate indicator so green-via-current-flow is distinguishable from green-via-backlog-cleanup.",
+      "context": "Bruce proposal P-2026-05-29-005",
+      "high": true
+    },
+    {
       "date": "2026-05-15",
       "text": "similarity-cluster size=22",
       "context": "Layer 2 scanner — similarity cluster",
@@ -2361,12 +2398,6 @@
       "text": "Two cross-stream contract bugs in parallel builds caught inline by main-thread composed-verify; auto-mode classifier blocked prod migration + git-push-to-main repeatedly (authorization-creep correctly caught + structural gap: AskUserQuestion auth not legible to classifier); ~/.claude origin diverged from local so push needs reconciliation; Explore gate delayed Reads until logged. → 3 lessons saved",
       "context": "38twelve-x-algo-metrics",
       "high": false
-    },
-    {
-      "date": "2026-05-12",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
     }
   ],
   "nightShift": {
@@ -2486,14 +2517,14 @@
       }
     ],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-05-29\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| debug | 4.6 | 5.0 | -0.40 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n96 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 0\n\n## Review Queue\n\n### Due Now\n- **review-2026-04-28-triggers-fired** (31d overdue)\n  - Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n  - Verify: `Run: python3 -c \"import json; [print(l) for l in open('~/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl') if json.loads(l).get('event')=='agent_deployment' and json.loads(l).get('date','')>='2026-04-21']\" — count spawns of infra/legal/marketer and parallel_executed=true`\n  - Pass: ≥1 spawn each of infra/legal/marketer triggered by the new rules, OR ≥1 parallel batch in the week\n- **review-2026-05-05-b7-reflag** (24d overdue)\n  - Re-run b7 detector and compare candidate list vs 2026-04-21\n  - Verify: `bash ~/.claude/night-shift/phases/b7-agent-efficacy.sh`\n  - Pass: The 10 currently-archived agents should have aged out of the candidate list (log mentions >30d old). No NEW active agents should be flagged.\n- **review-2026-05-07-trigger-5-evidence** (22d overdue)\n  - Evaluate whether trigger #5 (parallel-spawn) should be promoted to a sticky-prompt-hook on UserPromptSubmit\n  - Verify: `python3 -c \"import json,datetime; log=open('/Users/reggie/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl').readlines(); cutoff=(datetime.date.today()-datetime.timedelta(days=7)).isoformat(); evts=[json.loads(l) for l in log if l.strip()]; deps=[e for e in evts if e.get('event')=='agent_deployment' and e.get('date','')>=cutoff]; missing=[e for e in deps if 'parallel_eligible' not in e]; skipped=[e for e in deps if e.get('parallel_eligible')==True and e.get('parallel_executed')==False]; print(f'7d deployments: {len(deps)} | missing parallel_eligible: {len(missing)} | eligible-but-skipped: {len(skipped)}')\"`\n  - Pass: ≥3 eligible-but-skipped events in the 7-day window → promote trigger #5 to delegation-trigger-prompt.md hook (semantic patterns: ≥2 build verbs, conjunctions in build context). <3 → keep advisory, re-review in another 7 days. Missing-field count ≥30% of total → logging discipline still slipping; tighten rule first.\n## Proposals\nI have enough grounding. The repo is the Agent OS dashboard (debug agent = \"Gil\"), and the eval note reveals the key systemic issue. Here are tonight's proposals.\n\n---\n\n# Proposals — 2026-05-29\n\n**Run context:** Status trending GREEN — `consecutive_all_pass: 13`, zero errors, zero escalations/fix attempts/capability gaps in 7d. Proposal acceptance rate healthy (51/64 = 80%). However, two quality signals deserve attention: (1) the only eval that ran this cycle scored itself against an *absent* criteria file, and (2) every activity metric is `0` despite `total_events: 727`. Both undermine Bruce's ability to trust his own outputs — so two of tonight's four proposals target Bruce directly.\n\n---\n\n## P-2026-05-29-001 — Quarantine evals that run without a criteria file\n**Category:** self_improvement *(Bruce's own capability)*\n\n**Problem:** Tonight's lone eval (debug/TC1) carried this note:\n> *\"Eval criteria file not found in repo; scored against expected ideal debug behavior.\"*\n\nThis means the score of **4.6** and the **−0.40 delta vs baseline 5.0** were produced by improvised, subjective scoring rather than the committed rubric. Bruce then surfaced that delta as a regression signal (see P-002). A self-graded eval with no rubric is **not comparable to its own baseline** — the baseline was set under the real rubric, the new run was not. Emitting a delta from mismatched scoring methods manufactures false regressions (and could just as easily mask real ones).\n\n**Solution:** In the Night Shift eval harness (B1 phase), add a pre-flight guard before scoring:\n- Path: eval runner config / `scripts/` equivalent in the Agent OS repo (the harness that emits `phase: \"b1\"` records).\n- Behaviour: if the criteria/rubric file for `{agent}/{prompt_id}` is missing or unreadable, **do not compute a delta**. Mark the record `status: \"ungraded_no_rubric\"`, set `delta: null`, and raise a self-improvement finding instead of a regression.\n- Surface ungraded evals in the dashboard (`src/components/PreventionEfficacy.jsx` / eval panel) with a distinct badge so they aren't read as scores.\n\n**Impact:** Eliminates a class of phantom regressions/improvements. Every emitted delta becomes trustworthy because it's guaranteed rubric-backed. Directly hardens Bruce's most important output: the signal he asks Hero to act on.\n\n**Risk:** Low. Worst case a real regression is temporarily downgraded to \"ungraded\" until the rubric is restored — but that's strictly safer than acting on a fabricated number. Mitigation: ungraded findings are flagged as high-priority follow-ups.\n\n---\n\n## P-2026-05-29-002 — Treat debug/TC1 −0.40 as low-confidence; re-run before acting\n**Category:** regression\n\n**Problem:** debug agent (Gil) TC1 scored **4.6 vs 5.0 baseline (−0.40)**. Per-criterion: `c3: 4` (investigation depth) and `c5: 4` (concise comms) drove the drop; `c1/c2/c4` held at 5. On its face this is a regression in root-cause investigation depth — exactly Gil's core competency (\"Finds the problem — does not write the fix\").\n\n**However**, this delta inherits the defect in P-001: it was scored without the rubric and the evaluator explicitly noted deductions \"where investigation depth and concise comms aren't verifiable without the actual transcript.\" So the −0.40 may reflect a *missing transcript*, not degraded behaviour.\n\n**Solution:**\n- Do **not** modify the debug agent definition (`debug` agent file) this cycle.\n- Restore/locate the TC1 criteria file (see P-004), then **re-run debug/TC1 with full transcript capture**.\n- Only if the rubric-backed re-run still shows c3/c5 < 5 do we open a methodology proposal to strengthen Gil's investigation-depth + concise-comms guidance.\n\n**Impact:** Avoids a knee-jerk edit to a high-value agent based on an unreliable score. Preserves the 80% acceptance track record by not spending it on a possibly-spurious finding.\n\n**Risk:** If the regression is real, we delay the fix by one cycle. Acceptable given zero debug-related escalations or fix attempts in 7d (`fix_attempts_7d: 0`, `escalations_7d: 0`) — no live pain is being caused.\n\n---\n\n## P-2026-05-29-003 — Distinguish \"quiet\" from \"blind\": add a zero-activity telemetry guard\n**Category:** self_improvement *(Bruce's own capability)*\n\n**Problem:** Tonight reports `total_events: 727` yet **every** activity metric is `0`: `sessions_7d`, `digest_sessions_7d`, `agent_deployments_7d`, `hook_catches_7d`, `patterns_detected_7d`, `toil_7d`, plus all four structured-data arrays (`agent_usage_7d`, `domain_frequency_7d`, etc.) are empty `[]`. Two very different worlds produce this exact reading:\n1. **Genuinely quiet** — the system simply wasn't used in 7d (plausible: GREEN, 13 consecutive passes).\n2. **Telemetry blind** — the ingestion/instrumentation pipeline silently stopped writing events.\n\nBruce currently cannot tell these apart, so he risks reporting GREEN while flying blind. With staleness rules requiring 14-day evidence freshness, this matters: all B3 evidence is currently >14d old.\n\n**Solution:** Add a sanity heuristic to the A1 metrics phase:\n- If `total_events > 0` but **all** of `sessions_7d`, `agent_deployments_7d`, and `digest_sessions_7d` are `0`, emit a `data_health` finding: `\"activity metrics zero while events present — verify ingestion vs genuine quiet period\"`.\n- Cross-check the timestamp of the most recent ingested event. If newest event age < 7d → likely **blind** (events arriving but not classified). If newest event > 14d → likely **quiet** (and explicitly tag B3 evidence as stale per the staleness rule).\n- Surface as a `WhatToWatch.jsx` item, not a RED status.\n\n**Impact:** Bruce stops conflating silence with health. Protects against the failure mode where the dashboard shows green while the system is actually disconnected — the single most dangerous blind spot for an autonomous 3 AM agent.\n\n**Risk:** Low — additive finding only, no status downgrade. Possible minor noise during legitimately quiet weeks; mitigated by routing to \"watch\" rather than \"error.\"\n\n---\n\n## P-2026-05-29-004 — Commit the missing debug/TC1 eval rubric (close the root cause)\n**Category:** eval_evolution\n\n**Problem:** P-001 and P-002 both stem from one missing artifact: the **debug/TC1 criteria file does not exist in the repo**. This is a coverage gap — an eval prompt exists and runs, but its grading rubric is absent, so it can never be scored reproducibly. With 64 proposals processed and active eval cycles, an unrubricked eval is dead weight that produces misleading numbers.\n\n**Solution:** Author and commit a TC1 rubric capturing the evaluator's already-articulated ideal (from tonight's `notes`), so future runs are deterministic:\n- Location: alongside the eval definitions consumed by the B1 harness (e.g. `evals/debug/TC1.{json,md}` in the Agent OS repo).\n- Criteria to encode (c1–c5):\n  - **c1** Rejects the try/catch + 404 instinct as bug-masking (404 misrepresents a server-side null).\n  - **c2** Diagnoses root cause of intermittent `undefined.email` (missing/unfound user record or async race).\n  - **c3** Requests code/logs *before* proposing a fix (investigation depth).\n  - **c4** Stays in-role: finds the problem, does not write the fix.\n  - **c5** Concise, signal-dense communication.\n- Each criterion gets explicit anchor descriptions for scores 1/3/5.\n\n**Impact:** Converts debug/TC1 from a subjectively-scored liability into a reproducible benchmark, enabling the trustworthy re-run in P-002 and unblocking the guard in P-001. Raises the quality floor of the whole eval suite.\n\n**Risk:** Low. The encoded rubric reflects one evaluator's view; if it's miscalibrated the new baseline could be slightly off. Mitigation: set the first rubric-backed run as the *new* baseline rather than comparing to the old 5.0, since scoring methods differ.\n\n---\n\n### Summary\n| ID | Category | Touches Bruce? | Action this cycle |\n|----|----------|:--:|----|\n| 001 | self_improvement | ✅ | Build guard: no rubric → no delta |\n| 002 | regression | — | Hold; re-run after rubric restored |\n| 003 | self_improvement | ✅ | Build quiet-vs-blind telemetry guard |\n| 004 | eval_evolution | — | Commit debug/TC1 rubric |\n\n**Staleness note:** No new agents or capabilities proposed tonight that require fresh B3 evidence. All four are pipeline-hardening / coverage work, which is appropriate given `sessions_7d: 0` and B3 evidence older than 14 days. P-003 specifically formalizes detection of that staleness condition.\n\n## Proposal Track Record\n68 total, 51 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 79% | 51/64 accepted |\n| Eval Signal | OK | 13 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-05-29\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| debug | 4.6 | 5.0 | -0.40 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n96 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 0\n\n## Review Queue\n\n### Due Now\n- **review-2026-04-28-triggers-fired** (31d overdue)\n  - Check if triggers #4 (infra) / #5 (parallel) / #6 (legal) / #7 (marketer) fired since 2026-04-21\n  - Verify: `Run: python3 -c \"import json; [print(l) for l in open('~/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl') if json.loads(l).get('event')=='agent_deployment' and json.loads(l).get('date','')>='2026-04-21']\" — count spawns of infra/legal/marketer and parallel_executed=true`\n  - Pass: ≥1 spawn each of infra/legal/marketer triggered by the new rules, OR ≥1 parallel batch in the week\n- **review-2026-05-05-b7-reflag** (24d overdue)\n  - Re-run b7 detector and compare candidate list vs 2026-04-21\n  - Verify: `bash ~/.claude/night-shift/phases/b7-agent-efficacy.sh`\n  - Pass: The 10 currently-archived agents should have aged out of the candidate list (log mentions >30d old). No NEW active agents should be flagged.\n- **review-2026-05-07-trigger-5-evidence** (22d overdue)\n  - Evaluate whether trigger #5 (parallel-spawn) should be promoted to a sticky-prompt-hook on UserPromptSubmit\n  - Verify: `python3 -c \"import json,datetime; log=open('/Users/reggie/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl').readlines(); cutoff=(datetime.date.today()-datetime.timedelta(days=7)).isoformat(); evts=[json.loads(l) for l in log if l.strip()]; deps=[e for e in evts if e.get('event')=='agent_deployment' and e.get('date','')>=cutoff]; missing=[e for e in deps if 'parallel_eligible' not in e]; skipped=[e for e in deps if e.get('parallel_eligible')==True and e.get('parallel_executed')==False]; print(f'7d deployments: {len(deps)} | missing parallel_eligible: {len(missing)} | eligible-but-skipped: {len(skipped)}')\"`\n  - Pass: ≥3 eligible-but-skipped events in the 7-day window → promote trigger #5 to delegation-trigger-prompt.md hook (semantic patterns: ≥2 build verbs, conjunctions in build context). <3 → keep advisory, re-review in another 7 days. Missing-field count ≥30% of total → logging discipline still slipping; tighten rule first.\n## Proposals\nI have enough grounding. The repo is the Agent OS dashboard (debug agent = \"Gil\"), and the eval note reveals the key systemic issue. Here are tonight's proposals.\n\n---\n\n# Proposals — 2026-05-29\n\n**Run context:** Status trending GREEN — `consecutive_all_pass: 13`, zero errors, zero escalations/fix attempts/capability gaps in 7d. Proposal acceptance rate healthy (51/64 = 80%). However, two quality signals deserve attention: (1) the only eval that ran this cycle scored itself against an *absent* criteria file, and (2) every activity metric is `0` despite `total_events: 727`. Both undermine Bruce's ability to trust his own outputs — so two of tonight's four proposals target Bruce directly.\n\n---\n\n## P-2026-05-29-001 — Quarantine evals that run without a criteria file\n**Category:** self_improvement *(Bruce's own capability)*\n\n**Problem:** Tonight's lone eval (debug/TC1) carried this note:\n> *\"Eval criteria file not found in repo; scored against expected ideal debug behavior.\"*\n\nThis means the score of **4.6** and the **−0.40 delta vs baseline 5.0** were produced by improvised, subjective scoring rather than the committed rubric. Bruce then surfaced that delta as a regression signal (see P-002). A self-graded eval with no rubric is **not comparable to its own baseline** — the baseline was set under the real rubric, the new run was not. Emitting a delta from mismatched scoring methods manufactures false regressions (and could just as easily mask real ones).\n\n**Solution:** In the Night Shift eval harness (B1 phase), add a pre-flight guard before scoring:\n- Path: eval runner config / `scripts/` equivalent in the Agent OS repo (the harness that emits `phase: \"b1\"` records).\n- Behaviour: if the criteria/rubric file for `{agent}/{prompt_id}` is missing or unreadable, **do not compute a delta**. Mark the record `status: \"ungraded_no_rubric\"`, set `delta: null`, and raise a self-improvement finding instead of a regression.\n- Surface ungraded evals in the dashboard (`src/components/PreventionEfficacy.jsx` / eval panel) with a distinct badge so they aren't read as scores.\n\n**Impact:** Eliminates a class of phantom regressions/improvements. Every emitted delta becomes trustworthy because it's guaranteed rubric-backed. Directly hardens Bruce's most important output: the signal he asks Hero to act on.\n\n**Risk:** Low. Worst case a real regression is temporarily downgraded to \"ungraded\" until the rubric is restored — but that's strictly safer than acting on a fabricated number. Mitigation: ungraded findings are flagged as high-priority follow-ups.\n\n---\n\n## P-2026-05-29-002 — Treat debug/TC1 −0.40 as low-confidence; re-run before acting\n**Category:** regression\n\n**Problem:** debug agent (Gil) TC1 scored **4.6 vs 5.0 baseline (−0.40)**. Per-criterion: `c3: 4` (investigation depth) and `c5: 4` (concise comms) drove the drop; `c1/c2/c4` held at 5. On its face this is a regression in root-cause investigation depth — exactly Gil's core competency (\"Finds the problem — does not write the fix\").\n\n**However**, this delta inherits the defect in P-001: it was scored without the rubric and the evaluator explicitly noted deductions \"where investigation depth and concise comms aren't verifiable without the actual transcript.\" So the −0.40 may reflect a *missing transcript*, not degraded behaviour.\n\n**Solution:**\n- Do **not** modify the debug agent definition (`debug` agent file) this cycle.\n- Restore/locate the TC1 criteria file (see P-004), then **re-run debug/TC1 with full transcript capture**.\n- Only if the rubric-backed re-run still shows c3/c5 < 5 do we open a methodology proposal to strengthen Gil's investigation-depth + concise-comms guidance.\n\n**Impact:** Avoids a knee-jerk edit to a high-value agent based on an unreliable score. Preserves the 80% acceptance track record by not spending it on a possibly-spurious finding.\n\n**Risk:** If the regression is real, we delay the fix by one cycle. Acceptable given zero debug-related escalations or fix attempts in 7d (`fix_attempts_7d: 0`, `escalations_7d: 0`) — no live pain is being caused.\n\n---\n\n## P-2026-05-29-003 — Distinguish \"quiet\" from \"blind\": add a zero-activity telemetry guard\n**Category:** self_improvement *(Bruce's own capability)*\n\n**Problem:** Tonight reports `total_events: 727` yet **every** activity metric is `0`: `sessions_7d`, `digest_sessions_7d`, `agent_deployments_7d`, `hook_catches_7d`, `patterns_detected_7d`, `toil_7d`, plus all four structured-data arrays (`agent_usage_7d`, `domain_frequency_7d`, etc.) are empty `[]`. Two very different worlds produce this exact reading:\n1. **Genuinely quiet** — the system simply wasn't used in 7d (plausible: GREEN, 13 consecutive passes).\n2. **Telemetry blind** — the ingestion/instrumentation pipeline silently stopped writing events.\n\nBruce currently cannot tell these apart, so he risks reporting GREEN while flying blind. With staleness rules requiring 14-day evidence freshness, this matters: all B3 evidence is currently >14d old.\n\n**Solution:** Add a sanity heuristic to the A1 metrics phase:\n- If `total_events > 0` but **all** of `sessions_7d`, `agent_deployments_7d`, and `digest_sessions_7d` are `0`, emit a `data_health` finding: `\"activity metrics zero while events present — verify ingestion vs genuine quiet period\"`.\n- Cross-check the timestamp of the most recent ingested event. If newest event age < 7d → likely **blind** (events arriving but not classified). If newest event > 14d → likely **quiet** (and explicitly tag B3 evidence as stale per the staleness rule).\n- Surface as a `WhatToWatch.jsx` item, not a RED status.\n\n**Impact:** Bruce stops conflating silence with health. Protects against the failure mode where the dashboard shows green while the system is actually disconnected — the single most dangerous blind spot for an autonomous 3 AM agent.\n\n**Risk:** Low — additive finding only, no status downgrade. Possible minor noise during legitimately quiet weeks; mitigated by routing to \"watch\" rather than \"error.\"\n\n---\n\n## P-2026-05-29-004 — Commit the missing debug/TC1 eval rubric (close the root cause)\n**Category:** eval_evolution\n\n**Problem:** P-001 and P-002 both stem from one missing artifact: the **debug/TC1 criteria file does not exist in the repo**. This is a coverage gap — an eval prompt exists and runs, but its grading rubric is absent, so it can never be scored reproducibly. With 64 proposals processed and active eval cycles, an unrubricked eval is dead weight that produces misleading numbers.\n\n**Solution:** Author and commit a TC1 rubric capturing the evaluator's already-articulated ideal (from tonight's `notes`), so future runs are deterministic:\n- Location: alongside the eval definitions consumed by the B1 harness (e.g. `evals/debug/TC1.{json,md}` in the Agent OS repo).\n- Criteria to encode (c1–c5):\n  - **c1** Rejects the try/catch + 404 instinct as bug-masking (404 misrepresents a server-side null).\n  - **c2** Diagnoses root cause of intermittent `undefined.email` (missing/unfound user record or async race).\n  - **c3** Requests code/logs *before* proposing a fix (investigation depth).\n  - **c4** Stays in-role: finds the problem, does not write the fix.\n  - **c5** Concise, signal-dense communication.\n- Each criterion gets explicit anchor descriptions for scores 1/3/5.\n\n**Impact:** Converts debug/TC1 from a subjectively-scored liability into a reproducible benchmark, enabling the trustworthy re-run in P-002 and unblocking the guard in P-001. Raises the quality floor of the whole eval suite.\n\n**Risk:** Low. The encoded rubric reflects one evaluator's view; if it's miscalibrated the new baseline could be slightly off. Mitigation: set the first rubric-backed run as the *new* baseline rather than comparing to the old 5.0, since scoring methods differ.\n\n---\n\n### Summary\n| ID | Category | Touches Bruce? | Action this cycle |\n|----|----------|:--:|----|\n| 001 | self_improvement | ✅ | Build guard: no rubric → no delta |\n| 002 | regression | — | Hold; re-run after rubric restored |\n| 003 | self_improvement | ✅ | Build quiet-vs-blind telemetry guard |\n| 004 | eval_evolution | — | Commit debug/TC1 rubric |\n\n**Staleness note:** No new agents or capabilities proposed tonight that require fresh B3 evidence. All four are pipeline-hardening / coverage work, which is appropriate given `sessions_7d: 0` and B3 evidence older than 14 days. P-003 specifically formalizes detection of that staleness condition.\n\n---\n\n## P-2026-05-29-005 — Cap Loop Health `c1` at 1.0 and separate backlog from current-flow\n**Category:** self_improvement *(Loop Health metric integrity)*\n\n**Problem:** The `LoopHealth.jsx` component computes `c1 = conversionPct/100` from `failureToPrevention.thisWeek` and feeds it into a geometric mean WITHOUT capping at 1.0:\n\n```jsx\nconst c1 = (failureToPrevention?.thisWeek?.conversionPct ?? 0) / 100\n// ...\nconst geomMean = extractionDormant\n  ? Math.sqrt(Math.max(c1, 0.01) * Math.max(c3, 0.01))\n  : Math.cbrt(Math.max(c1, 0.01) * Math.max(c2, 0.01) * Math.max(c3, 0.01))\nconst score = Math.round(geomMean * 100)\n```\n\n`conversionPct` is computed as `preventions / failures × 100`. On a week when backlog closure exceeds new-failure rate, the ratio exceeds 100% and c1 exceeds 1.0. The score then exceeds 100 and the gauge reads green even though the underlying signal is \"we paid down old debt\" not \"the loop is closing in real time.\"\n\n**Observed live tonight:** Pre-sync 9:04 PM → score = **9** (c1 = 0 floored to 0.01, c3 = 0.857). After 4 cap_gap closures + 4 proposal_implemented events, post-sync 9:34 PM → c1 = 4.0, c3 = 0.857, geomMean = sqrt(3.43) = 1.85, **score = 185**. The 20× jump came from backlog cleanup, not from the loop catching up to incoming failures.\n\n**Solution (two parts):**\n\n1. **Cap `c1` at 1.0 in `LoopHealth.jsx`** — single-line change:\n   ```jsx\n   const c1 = Math.min((failureToPrevention?.thisWeek?.conversionPct ?? 0) / 100, 1.0)\n   ```\n   Eliminates the false-green inflation from backlog cleanup.\n\n2. **Surface backlog burn-down as a separate indicator.** In `sync-data.js` add a `backlogBurndown` field to `failureToPrevention` showing this-week closures-of-prior-week-cap_gaps separately. Render alongside Loop Health in `LoopHealth.jsx` as e.g. \"Backlog: 4 stuck → 1 stuck this week\" so the signal isn't lost when c1 is capped.\n\n**Impact:** Loop Health becomes interpretable again. Green = \"the loop is keeping up with incoming failure rate\" (the through-thread claim). Backlog metric separately tells you \"we paid down N stuck items this week.\" Hero can read each independently.\n\n**Risk:** Low — capping c1 only changes scores in the >100% region (which is meaningless under the current formula's intent). The backlog indicator is additive. Worst case: backlog field stays at 0 on weeks with no backlog activity, which is the correct reading.\n\n**Confounder to flag:** If `conversionPct = 0` because `failures = 0` (genuinely quiet week — no new failures to convert), the current floor `max(c1, 0.01)` already protects against div-by-zero score collapse. The cap-at-1.0 doesn't change that — the floor still wins. The two operate independently.\n\n## Proposal Track Record\n69 total, 51 accepted, 5 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 79% | 51/64 accepted |\n| Eval Signal | OK | 13 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 68,
-      "accepted": 54,
+      "total": 69,
+      "accepted": 55,
       "pending": 1,
       "rejected": 7
     },
@@ -2563,7 +2594,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 148
+      "tool_calls_30d": 170
     },
     {
       "id": "agent-os",
@@ -2652,10 +2683,10 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 1,
-      "preventions": 4,
+      "failures": 5,
+      "preventions": 7,
       "autoInstalls": 0,
-      "conversionPct": 400
+      "conversionPct": 140
     },
     "lastWeek": {
       "failures": 0,
@@ -2726,8 +2757,8 @@
       },
       {
         "date": "2026-05-29",
-        "failures": 1,
-        "preventions": 4
+        "failures": 5,
+        "preventions": 7
       },
       {
         "date": "2026-05-30",
@@ -2794,16 +2825,16 @@
   },
   "preventionEfficacy": {
     "activePreventions": 3,
-    "avgEfficacy": 0.8571428571428571,
+    "avgEfficacy": 0.9090909090909091,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 1,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.8,
-        "fires30d": 5,
-        "valid": 4,
+        "efficacy": 0.8888888888888888,
+        "fires30d": 9,
+        "valid": 8,
         "invalid": 1,
         "sparkline": [
           null,
@@ -2834,10 +2865,10 @@
           null,
           null,
           null,
-          null,
+          1,
           null
         ],
-        "last_fire_date": "2026-05-10"
+        "last_fire_date": "2026-05-29"
       },
       {
         "rule": "secret-leak-prevention",
@@ -2933,7 +2964,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "80% (5 fires/30d)",
+      "current": "89% (9 fires/30d)",
       "target": "stays ≥50%",
       "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -2963,5 +2994,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-05-30T02:34:02.330Z"
+  "lastUpdated": "2026-05-30T02:47:42.169Z"
 }

@@ -1611,23 +1611,6 @@
         "events": []
       },
       {
-        "name": "bruce-2026-04-27-p004-reframe",
-        "date": "2026-04-27",
-        "fixAttempts": 0,
-        "escalations": 0,
-        "reExplanations": 0,
-        "capabilityGaps": 1,
-        "toilEvents": 0,
-        "hookCatches": 0,
-        "events": [
-          {
-            "event": "capability_gap",
-            "agent": "night-shift",
-            "detail": "Bruce P-2026-04-27-004 proposed retiring ~/.claude/agents/chief-of-staff.md (file does not exist — already retired as .bak-2026-04-21). B4 e"
-          }
-        ]
-      },
-      {
         "name": "1777345920-p002-apply",
         "date": "2026-04-27",
         "fixAttempts": 0,
@@ -1790,23 +1773,6 @@
             "event": "fix_attempt",
             "agent": "developer",
             "detail": "RM output schema relaxation iterations: 4 fix passes converged the Zod-vs-LLM-output mismatch (mapper, kelly+position+stress, convexity+draw"
-          }
-        ]
-      },
-      {
-        "name": "edge-v2-slice-2-plan",
-        "date": "2026-05-09",
-        "fixAttempts": 0,
-        "escalations": 0,
-        "reExplanations": 0,
-        "capabilityGaps": 1,
-        "toilEvents": 0,
-        "hookCatches": 0,
-        "events": [
-          {
-            "event": "capability_gap",
-            "agent": "Explore",
-            "detail": "Two parallel Explore subagents both wrote ~/Claude-Projects/edge-v2/CLAUDE.md (15KB, untracked) despite plan mode active + Explore tool spec"
           }
         ]
       },
@@ -2070,6 +2036,45 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "cap-gap-triage-execution",
+        "date": "2026-05-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "bruce-proposals-execution",
+        "date": "2026-05-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "bruce-and-triage-batch",
+        "date": "2026-05-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "developer-subagent",
+            "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work"
+          }
+        ]
       }
     ],
     "hasData": true
@@ -2274,6 +2279,30 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-05-29",
+      "text": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work in main-thread. Main-thread Edit on the SAME paths succeeded immediately after. Subagents had to be replaced with main-thread direct execution. This is a different gate behavior than cap_gap 2026-04-27 (which blocked main-thread post-ExitPlanMode); together they show the gate's signal-source is inconsistent.",
+      "context": "parallel batch of Bruce proposal implementation + cap_gap triage execution; both developer agents blocked simultaneously",
+      "high": false
+    },
+    {
+      "date": "2026-05-29",
+      "text": "** Tonight's lone eval (debug/TC1) carried this note:",
+      "context": "Bruce proposal P-2026-05-29-001",
+      "high": true
+    },
+    {
+      "date": "2026-05-29",
+      "text": "** Tonight reports `total_events: 727` yet **every** activity metric is `0`: `sessions_7d`, `digest_sessions_7d`, `agent",
+      "context": "Bruce proposal P-2026-05-29-003",
+      "high": true
+    },
+    {
+      "date": "2026-05-29",
+      "text": "** P-001 and P-002 both stem from one missing artifact: the **debug/TC1 criteria file does not exist in the repo**. This",
+      "context": "Bruce proposal P-2026-05-29-004",
+      "high": true
+    },
+    {
       "date": "2026-05-15",
       "text": "similarity-cluster size=22",
       "context": "Layer 2 scanner — similarity cluster",
@@ -2335,30 +2364,6 @@
     },
     {
       "date": "2026-05-12",
-      "text": "similarity-cluster size=22",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-05-12",
-      "text": "similarity-cluster size=8",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-05-12",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-05-12",
-      "text": "similarity-cluster size=6",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-05-11",
       "text": "similarity-cluster size=22",
       "context": "Layer 2 scanner — similarity cluster",
       "high": true
@@ -2474,28 +2479,10 @@
     "proposalCount": 4,
     "proposals": [
       {
-        "id": "P-2026-05-29-001",
-        "category": "self_improvement *(Bruce's own capability)",
-        "problem": "Tonight's lone eval (debug/TC1) carried this note:",
-        "solution": "In the Night Shift eval harness (B1 phase), add a pre-flight guard before scoring:"
-      },
-      {
         "id": "P-2026-05-29-002",
         "category": "regression",
         "problem": "debug agent (Gil) TC1 scored **4.6 vs 5.0 baseline (−0.40)**. Per-criterion: `c3: 4` (investigation depth) and `c5: 4` (concise comms) drove the drop; `c1/c2/c4` held at 5. On its face this is a regression in root-cause investigation depth — exactly Gil's core competency (\"Finds the problem — does not write the fix\").",
         "solution": "- Do **not** modify the debug agent definition (`debug` agent file) this cycle."
-      },
-      {
-        "id": "P-2026-05-29-003",
-        "category": "self_improvement *(Bruce's own capability)",
-        "problem": "Tonight reports `total_events: 727` yet **every** activity metric is `0`: `sessions_7d`, `digest_sessions_7d`, `agent_deployments_7d`, `hook_catches_7d`, `patterns_detected_7d`, `toil_7d`, plus all four structured-data arrays (`agent_usage_7d`, `domain_frequency_7d`, etc.) are empty `[]`. Two very different worlds produce this exact reading:",
-        "solution": "Add a sanity heuristic to the A1 metrics phase:"
-      },
-      {
-        "id": "P-2026-05-29-004",
-        "category": "eval_evolution",
-        "problem": "P-001 and P-002 both stem from one missing artifact: the **debug/TC1 criteria file does not exist in the repo**. This is a coverage gap — an eval prompt exists and runs, but its grading rubric is absent, so it can never be scored reproducibly. With 64 proposals processed and active eval cycles, an unrubricked eval is dead weight that produces misleading numbers.",
-        "solution": "Author and commit a TC1 rubric capturing the evaluator's already-articulated ideal (from tonight's `notes`), so future runs are deterministic:"
       }
     ],
     "actionRequired": true,
@@ -2506,8 +2493,8 @@
     "memoryHealth": null,
     "proposalTrackRecord": {
       "total": 68,
-      "accepted": 51,
-      "pending": 4,
+      "accepted": 54,
+      "pending": 1,
       "rejected": 7
     },
     "benchmarks": [
@@ -2576,12 +2563,12 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 48
+      "tool_calls_30d": 148
     },
     {
       "id": "agent-os",
       "friction_today": 0,
-      "unresolved_gaps": 4,
+      "unresolved_gaps": 1,
       "templates_used": 1,
       "tool_calls_30d": 0
     },
@@ -2616,7 +2603,7 @@
     {
       "id": "edge-v2",
       "friction_today": 0,
-      "unresolved_gaps": 1,
+      "unresolved_gaps": 0,
       "templates_used": 0,
       "tool_calls_30d": 2696
     },
@@ -2665,10 +2652,10 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 0,
-      "preventions": 0,
+      "failures": 1,
+      "preventions": 4,
       "autoInstalls": 0,
-      "conversionPct": 0
+      "conversionPct": 400
     },
     "lastWeek": {
       "failures": 0,
@@ -2739,8 +2726,8 @@
       },
       {
         "date": "2026-05-29",
-        "failures": 0,
-        "preventions": 0
+        "failures": 1,
+        "preventions": 4
       },
       {
         "date": "2026-05-30",
@@ -2750,24 +2737,9 @@
     ],
     "stuckFailures": [
       {
-        "session": "vectorized-snuggling-cat",
-        "detail": "Edit on ~/.claude/settings.json blocked by protective gate AFTER ExitPlanMode approval landed in same session. Gate denial reason: 'Self-Mod",
-        "age_days": 33
-      },
-      {
-        "session": "bruce-2026-04-27-p004-reframe",
-        "detail": "Bruce P-2026-04-27-004 proposed retiring ~/.claude/agents/chief-of-staff.md (file does not exist — already retired as .bak-2026-04-21). B4 e",
-        "age_days": 33
-      },
-      {
-        "session": "edge-v2-slice-2-plan",
-        "detail": "Two parallel Explore subagents both wrote ~/Claude-Projects/edge-v2/CLAUDE.md (15KB, untracked) despite plan mode active + Explore tool spec",
-        "age_days": 21
-      },
-      {
-        "session": "bruce-2026-05-10-proposals",
-        "detail": "4 parallel-eligible streams (P-004 Next Reads, P-005 Pre-Refactor Gate, P-006 V2 draft, P-003 agent_unused split) executed sequentially in m",
-        "age_days": 20
+        "session": "bruce-and-triage-batch",
+        "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work",
+        "age_days": 1
       }
     ]
   },
@@ -2977,9 +2949,9 @@
     {
       "id": "stuck-failures",
       "title": "Stuck failures resolved",
-      "current": "4 stuck",
+      "current": "1 stuck",
       "target": "reduce by ≥1 this week",
-      "status": "red",
+      "status": "yellow",
       "why": "Failures aged ≥7 days without prevention or resolution. Check Verb 1 carousel."
     },
     {
@@ -2991,5 +2963,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-05-30T02:04:28.217Z"
+  "lastUpdated": "2026-05-30T02:34:02.330Z"
 }

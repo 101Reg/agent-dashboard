@@ -2038,6 +2038,17 @@
         "events": []
       },
       {
+        "name": "agent-os-instruments-sweep",
+        "date": "2026-05-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "cap-gap-triage-execution",
         "date": "2026-05-29",
         "fixAttempts": 0,
@@ -2106,15 +2117,87 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "opus48-system-scan-repair",
+        "date": "2026-05-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "reasoningbank-phase-b-build",
+        "date": "2026-05-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "reasoningbank-phase-c-build",
+        "date": "2026-05-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "kultrverse-resume",
+        "date": "2026-05-31",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "No fork-preflight discipline existed — forking 38twelve→KULTRVERSE inherited 4 latent bugs (FK-silent-drop, UA brand leak, naive JSON.parse,"
+          }
+        ]
+      },
+      {
+        "name": "kultrverse-resume-infra",
+        "date": "2026-05-31",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Tool-output channel corrupted intermittently in the 2026-05-31 ~05:00 session: fabricated CF account ID, fake KV/D1 IDs, false 'deploy succe"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated the 4 DB drafts 'carry the same branded image' as confirmed fact while same response admitted I couldn't read the draft content; imag"
+          }
+        ]
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 99,
+    "total": 102,
     "byType": {
-      "feedback": 44,
-      "project": 17,
+      "feedback": 45,
+      "project": 19,
       "user": 17,
       "reference": 20,
       "other": 0
@@ -2123,15 +2206,27 @@
   "system": {
     "skills": 18,
     "rules": 21,
-    "hooks": 15,
+    "hooks": 16,
     "mcpServers": 2
   },
   "timeline": [
     {
+      "date": "May 31, 2026",
+      "title": "Kultrverse Resume",
+      "desc": "Stood up KULTRVERSE CF infra (2 KV, deploy, D1 migrations, 6 secrets) all verified via wrangler list/SELECT/curl, Phase 1 neutral-documenter voice reskin + live-validated drafting (deploy→ingest→draft), Phase 2 workers-og numbers-graphic engine → R2, reskinned to brand tokens",
+      "active": true
+    },
+    {
+      "date": "May 29, 2026",
+      "title": "Agent Os Instruments Sweep",
+      "desc": "Ran /bruce 9 phases — GREEN then YELLOW after P-003 fired data_health watch; 4 new proposals, Triaged 5 stuck cap_gaps + 4 cluster findings; per-item decisions presented to Hero, Shipped Bruce P-001/P-003/P-004 + P-005 part 1 (LoopHealth c1 cap) + 3 instrument fixes (b7 canary/task split, similarity-cluster threshold 0.6→0.75, trigger #5 N≥30 review item)",
+      "active": false
+    },
+    {
       "date": "May 15, 2026",
       "title": "38twelve X Algo Metrics",
       "desc": "X-algo Tier1 (removed fabricated prompt numbers) + Tier2 (og:image media) shipped & verified in prod via screenshots, Per-card Publish button on Ready tab, Removed weakly-sourced daily-post cap, kept spacing gate",
-      "active": true
+      "active": false
     },
     {
       "date": "May 10, 2026",
@@ -2310,9 +2405,45 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-05-31",
+      "text": "Tool-output channel corrupted intermittently in the 2026-05-31 ~05:00 session: fabricated CF account ID, fake KV/D1 IDs, false 'deploy succeeded/secrets set/200 OK' lines, a fabricated git commit, and literal shell junk written into wrangler.toml. Some fabricated values were trusted before the pattern was caught; CF safety classifier blocked the high-severity writes.",
+      "context": "Mitigation adopted and validated this session: trust ONLY values read back from `wrangler … list`/SELECT/curl, never a create/deploy success line. All infra (KV/deploy/migrate/secrets) re-verified via authoritative list output. Logged retrospectively — deferred from prior session because the channel itself was unreliable.",
+      "high": false
+    },
+    {
+      "date": "2026-05-31",
+      "text": "No fork-preflight discipline existed — forking 38twelve→KULTRVERSE inherited 4 latent bugs (FK-silent-drop, UA brand leak, naive JSON.parse, window-gate burst) caught only by live test. Hero: turn each into a check so the next fork is clean.",
+      "context": "Hero /learn 7b feedback; created feedback_fork_template_discipline.md as the checklist",
+      "high": false
+    },
+    {
+      "date": "2026-05-31",
+      "text": "4 inherited fork bugs (FK silent-drop, UA brand leak, naive JSON.parse, window-gate publish burst) all caught by live testing not tsc; 1 valid Stop hook_catch corrected inline; verified dashboard agent's output and caught a TOML account_id-scoping deploy bug. → 3 lessons saved",
+      "context": "kultrverse-resume",
+      "high": false
+    },
+    {
       "date": "2026-05-29",
       "text": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work in main-thread. Main-thread Edit on the SAME paths succeeded immediately after. Subagents had to be replaced with main-thread direct execution. This is a different gate behavior than cap_gap 2026-04-27 (which blocked main-thread post-ExitPlanMode); together they show the gate's signal-source is inconsistent.",
       "context": "parallel batch of Bruce proposal implementation + cap_gap triage execution; both developer agents blocked simultaneously",
+      "high": false
+    },
+    {
+      "date": "2026-05-29",
+      "text": "hook_catch x4",
+      "context": "Stop hook blocked — mandate to build systemic fix",
+      "high": true
+    },
+    {
+      "date": "2026-05-29",
+      "text": "4 hook_catch (all pre-response-claim-audit, all valid TP numeric/score fabrications) from CLOSED session bruce-and-triage-batch fired a pause-current-task mandate in unrelated session opus48-system-scan-repair, surfaced only because the line-727 repair un-blinded the detector. Structural gap: hook_catch has no acknowledgment path (unlike cap_gap), so already-corrected valid catches count toward the daily threshold indefinitely and a corruption-repair backlog generates false cross-session mandates.",
+      "context": "Gap Diagnosis: (1) cross-session backlog false-mandate after un-blinding; (2) missing capability = hook_catch ack convention; (3) fix = acknowledged 4 catches via friction_acknowledged (done, unresolved now 0) + PROPOSE pattern-detector backlog-awareness (session-scope OR exclude already-corrected hook_catch) — DEFERRED to fresh session per fresh-context-for-infra (Stop hook = highest blast radius, classifier gating ~/.claude infra tonight).",
+      "high": true
+    },
+    {
+      "date": "2026-05-29",
+      "text": "Two parallel developer agents both blocked by subagent ~/.claude/ Edit gate; main-thread redistributed all work. Four stop-hook fabrication catches on Loop Health math/inference (F1×2, F4×2), all corrected inline. Stream A #5 self-override after evidence check contradicted earlier recommendation. → 4 lessons saved",
+      "context": "agent-os-instruments-sweep",
       "high": false
     },
     {
@@ -2362,49 +2493,14 @@
       "text": "similarity-cluster size=6",
       "context": "Layer 2 scanner — similarity cluster",
       "high": true
-    },
-    {
-      "date": "2026-05-15",
-      "text": "3 parallel developer agents ran on a SHARED working tree (no worktree isolation); decomposition assumed file-disjoint streams but 2A and 2B both edited dashboard/router.ts concurrently — no clobber occurred only because they hit different functions, and a missing skip_image migration fell between file-ownership boundaries",
-      "context": "parallel build trigger #8/#5; correct systemic fix = isolation:worktree for parallel write-agents OR explicit shared-file ownership in briefs",
-      "high": false
-    },
-    {
-      "date": "2026-05-15",
-      "text": "Dashboard Publish/Publish-All use force:true which bypasses canPublishNow cadence gate entirely with NO independent daily ceiling — observed 46/6 today on the live @38twelveDaily account during dogfooding; force can flood the log-of-record brand with zero guardrail",
-      "context": "per-card publish + media e2e verified in prod (OAuth multipart [UNVERIFIED]->verified); force-ceiling is a separate brand-risk gap",
-      "high": false
-    },
-    {
-      "date": "2026-05-15",
-      "text": "2nd parallel-build cross-stream contract mismatch this session: Stream A made post_metrics.published_post_id NOT NULL, Stream B pollMetrics INSERT omitted it -> silent constraint failure swallowed by graceful try/catch (post_metrics would stay empty forever). Caught by main-thread composed-state verification before reviewer/deploy",
-      "context": "file-disjoint ownership prevented file collisions this time, but SCHEMA/contract coupling across streams is the residual parallel-build risk; composed-verify discipline is the working backstop",
-      "high": true
-    },
-    {
-      "date": "2026-05-15",
-      "text": "AskUserQuestion authorization is not legible to the auto-mode classifier for git-push-to-default-branch / prod soft-blocks — Hero authorized the ~/.claude push twice via the intended UI and the classifier still denied (evaluates the shell command in isolation, cannot consume an AskUserQuestion outcome). 3-4 classifier denials this session on outward actions.",
-      "context": "end-of-session /learn push; also surfaced feedback_deploy_authorization.md lesson live",
-      "high": false
-    },
-    {
-      "date": "2026-05-15",
-      "text": "capability_gap x3",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-05-15",
-      "text": "Two cross-stream contract bugs in parallel builds caught inline by main-thread composed-verify; auto-mode classifier blocked prod migration + git-push-to-main repeatedly (authorization-creep correctly caught + structural gap: AskUserQuestion auth not legible to classifier); ~/.claude origin diverged from local so push needs reconciliation; Explore gate delayed Reads until logged. → 3 lessons saved",
-      "context": "38twelve-x-algo-metrics",
-      "high": false
     }
   ],
   "nightShift": {
     "status": "YELLOW",
-    "lastRun": "2026-05-29",
+    "lastRun": "2026-05-31",
     "findings": [
-      "WATCH: data_health AMBIGUOUS — activity zero, newest event 14d old. Verify ingestion (P-2026-05-29-003 guard)."
+      "Global memory count is 101 (target: under 100). Run consolidation.",
+      "WATCH: Eval Signal Rate — All canaries passing for 2+ weeks."
     ],
     "evalCanaries": [
       {
@@ -2507,23 +2603,23 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 4,
+    "proposalCount": 0,
     "proposals": [
       {
         "id": "P-2026-05-29-002",
         "category": "regression",
-        "problem": "debug agent (Gil) TC1 scored **4.6 vs 5.0 baseline (−0.40)**. Per-criterion: `c3: 4` (investigation depth) and `c5: 4` (concise comms) drove the drop; `c1/c2/c4` held at 5. On its face this is a regression in root-cause investigation depth — exactly Gil's core competency (\"Finds the problem — does not write the fix\").",
-        "solution": "- Do **not** modify the debug agent definition (`debug` agent file) this cycle."
+        "problem": "** debug agent (Gil) TC1 scored **4.6 vs 5.0 baseline (−0.40)**. Per-criterion: `c3: 4` (investigation depth) and `c5:",
+        "solution": ""
       }
     ],
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-05-29\n\n## Status: YELLOW\n\n## Key Findings\n- WATCH: data_health AMBIGUOUS — activity zero, newest event 14d old. Verify ingestion (P-2026-05-29-003 guard).\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n98 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 0\n\n\n## Proposals\nI have enough grounding. The repo is the Agent OS dashboard (debug agent = \"Gil\"), and the eval note reveals the key systemic issue. Here are tonight's proposals.\n\n---\n\n# Proposals — 2026-05-29\n\n**Run context:** Status trending GREEN — `consecutive_all_pass: 13`, zero errors, zero escalations/fix attempts/capability gaps in 7d. Proposal acceptance rate healthy (51/64 = 80%). However, two quality signals deserve attention: (1) the only eval that ran this cycle scored itself against an *absent* criteria file, and (2) every activity metric is `0` despite `total_events: 727`. Both undermine Bruce's ability to trust his own outputs — so two of tonight's four proposals target Bruce directly.\n\n---\n\n## P-2026-05-29-001 — Quarantine evals that run without a criteria file\n**Category:** self_improvement *(Bruce's own capability)*\n\n**Problem:** Tonight's lone eval (debug/TC1) carried this note:\n> *\"Eval criteria file not found in repo; scored against expected ideal debug behavior.\"*\n\nThis means the score of **4.6** and the **−0.40 delta vs baseline 5.0** were produced by improvised, subjective scoring rather than the committed rubric. Bruce then surfaced that delta as a regression signal (see P-002). A self-graded eval with no rubric is **not comparable to its own baseline** — the baseline was set under the real rubric, the new run was not. Emitting a delta from mismatched scoring methods manufactures false regressions (and could just as easily mask real ones).\n\n**Solution:** In the Night Shift eval harness (B1 phase), add a pre-flight guard before scoring:\n- Path: eval runner config / `scripts/` equivalent in the Agent OS repo (the harness that emits `phase: \"b1\"` records).\n- Behaviour: if the criteria/rubric file for `{agent}/{prompt_id}` is missing or unreadable, **do not compute a delta**. Mark the record `status: \"ungraded_no_rubric\"`, set `delta: null`, and raise a self-improvement finding instead of a regression.\n- Surface ungraded evals in the dashboard (`src/components/PreventionEfficacy.jsx` / eval panel) with a distinct badge so they aren't read as scores.\n\n**Impact:** Eliminates a class of phantom regressions/improvements. Every emitted delta becomes trustworthy because it's guaranteed rubric-backed. Directly hardens Bruce's most important output: the signal he asks Hero to act on.\n\n**Risk:** Low. Worst case a real regression is temporarily downgraded to \"ungraded\" until the rubric is restored — but that's strictly safer than acting on a fabricated number. Mitigation: ungraded findings are flagged as high-priority follow-ups.\n\n---\n\n## P-2026-05-29-002 — Treat debug/TC1 −0.40 as low-confidence; re-run before acting\n**Category:** regression\n\n**Problem:** debug agent (Gil) TC1 scored **4.6 vs 5.0 baseline (−0.40)**. Per-criterion: `c3: 4` (investigation depth) and `c5: 4` (concise comms) drove the drop; `c1/c2/c4` held at 5. On its face this is a regression in root-cause investigation depth — exactly Gil's core competency (\"Finds the problem — does not write the fix\").\n\n**However**, this delta inherits the defect in P-001: it was scored without the rubric and the evaluator explicitly noted deductions \"where investigation depth and concise comms aren't verifiable without the actual transcript.\" So the −0.40 may reflect a *missing transcript*, not degraded behaviour.\n\n**Solution:**\n- Do **not** modify the debug agent definition (`debug` agent file) this cycle.\n- Restore/locate the TC1 criteria file (see P-004), then **re-run debug/TC1 with full transcript capture**.\n- Only if the rubric-backed re-run still shows c3/c5 < 5 do we open a methodology proposal to strengthen Gil's investigation-depth + concise-comms guidance.\n\n**Impact:** Avoids a knee-jerk edit to a high-value agent based on an unreliable score. Preserves the 80% acceptance track record by not spending it on a possibly-spurious finding.\n\n**Risk:** If the regression is real, we delay the fix by one cycle. Acceptable given zero debug-related escalations or fix attempts in 7d (`fix_attempts_7d: 0`, `escalations_7d: 0`) — no live pain is being caused.\n\n---\n\n## P-2026-05-29-003 — Distinguish \"quiet\" from \"blind\": add a zero-activity telemetry guard\n**Category:** self_improvement *(Bruce's own capability)*\n\n**Problem:** Tonight reports `total_events: 727` yet **every** activity metric is `0`: `sessions_7d`, `digest_sessions_7d`, `agent_deployments_7d`, `hook_catches_7d`, `patterns_detected_7d`, `toil_7d`, plus all four structured-data arrays (`agent_usage_7d`, `domain_frequency_7d`, etc.) are empty `[]`. Two very different worlds produce this exact reading:\n1. **Genuinely quiet** — the system simply wasn't used in 7d (plausible: GREEN, 13 consecutive passes).\n2. **Telemetry blind** — the ingestion/instrumentation pipeline silently stopped writing events.\n\nBruce currently cannot tell these apart, so he risks reporting GREEN while flying blind. With staleness rules requiring 14-day evidence freshness, this matters: all B3 evidence is currently >14d old.\n\n**Solution:** Add a sanity heuristic to the A1 metrics phase:\n- If `total_events > 0` but **all** of `sessions_7d`, `agent_deployments_7d`, and `digest_sessions_7d` are `0`, emit a `data_health` finding: `\"activity metrics zero while events present — verify ingestion vs genuine quiet period\"`.\n- Cross-check the timestamp of the most recent ingested event. If newest event age < 7d → likely **blind** (events arriving but not classified). If newest event > 14d → likely **quiet** (and explicitly tag B3 evidence as stale per the staleness rule).\n- Surface as a `WhatToWatch.jsx` item, not a RED status.\n\n**Impact:** Bruce stops conflating silence with health. Protects against the failure mode where the dashboard shows green while the system is actually disconnected — the single most dangerous blind spot for an autonomous 3 AM agent.\n\n**Risk:** Low — additive finding only, no status downgrade. Possible minor noise during legitimately quiet weeks; mitigated by routing to \"watch\" rather than \"error.\"\n\n---\n\n## P-2026-05-29-004 — Commit the missing debug/TC1 eval rubric (close the root cause)\n**Category:** eval_evolution\n\n**Problem:** P-001 and P-002 both stem from one missing artifact: the **debug/TC1 criteria file does not exist in the repo**. This is a coverage gap — an eval prompt exists and runs, but its grading rubric is absent, so it can never be scored reproducibly. With 64 proposals processed and active eval cycles, an unrubricked eval is dead weight that produces misleading numbers.\n\n**Solution:** Author and commit a TC1 rubric capturing the evaluator's already-articulated ideal (from tonight's `notes`), so future runs are deterministic:\n- Location: alongside the eval definitions consumed by the B1 harness (e.g. `evals/debug/TC1.{json,md}` in the Agent OS repo).\n- Criteria to encode (c1–c5):\n  - **c1** Rejects the try/catch + 404 instinct as bug-masking (404 misrepresents a server-side null).\n  - **c2** Diagnoses root cause of intermittent `undefined.email` (missing/unfound user record or async race).\n  - **c3** Requests code/logs *before* proposing a fix (investigation depth).\n  - **c4** Stays in-role: finds the problem, does not write the fix.\n  - **c5** Concise, signal-dense communication.\n- Each criterion gets explicit anchor descriptions for scores 1/3/5.\n\n**Impact:** Converts debug/TC1 from a subjectively-scored liability into a reproducible benchmark, enabling the trustworthy re-run in P-002 and unblocking the guard in P-001. Raises the quality floor of the whole eval suite.\n\n**Risk:** Low. The encoded rubric reflects one evaluator's view; if it's miscalibrated the new baseline could be slightly off. Mitigation: set the first rubric-backed run as the *new* baseline rather than comparing to the old 5.0, since scoring methods differ.\n\n---\n\n### Summary\n| ID | Category | Touches Bruce? | Action this cycle |\n|----|----------|:--:|----|\n| 001 | self_improvement | ✅ | Build guard: no rubric → no delta |\n| 002 | regression | — | Hold; re-run after rubric restored |\n| 003 | self_improvement | ✅ | Build quiet-vs-blind telemetry guard |\n| 004 | eval_evolution | — | Commit debug/TC1 rubric |\n\n**Staleness note:** No new agents or capabilities proposed tonight that require fresh B3 evidence. All four are pipeline-hardening / coverage work, which is appropriate given `sessions_7d: 0` and B3 evidence older than 14 days. P-003 specifically formalizes detection of that staleness condition.\n\n## Proposal Track Record\n69 total, 55 accepted, 1 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 79% | 55/69 accepted |\n| Eval Signal | OK | 13 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "briefingContent": "# Night Shift — 2026-05-31\n\n## Status: YELLOW\n\n## Key Findings\n- Global memory count is 101 (target: under 100). Run consolidation.\n- WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\n\n## What Hero Worked On (7-day)\n- bash: 2 sessions\n- dashboard: 2 sessions\n- react: 2 sessions\n- agents: 1 sessions\n- cloudflare-workers: 1 sessions\n\n## Agent Usage (7-day)\n- developer: 2 sessions\n- reviewer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n101 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 5\n- re_explanations: 0\n- patterns_detected: 2\n\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n70 total, 55 accepted, 1 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 78% | 55/70 accepted |\n| Eval Signal | WATCH | 14 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 69,
+      "total": 70,
       "accepted": 55,
       "pending": 1,
       "rejected": 7
@@ -2536,20 +2632,20 @@
       },
       {
         "name": "Proposal Hit Rate",
-        "status": "79%",
-        "detail": "55/69 accepted"
+        "status": "78%",
+        "detail": "55/70 accepted"
       },
       {
         "name": "Eval Signal",
-        "status": "OK",
-        "detail": "13 consecutive all-pass runs"
+        "status": "WATCH",
+        "detail": "14 consecutive all-pass runs"
       }
     ]
   },
   "patterns": {
     "hasData": true,
     "findings": [],
-    "generated": "2026-05-29 20:43"
+    "generated": "2026-05-30 22:33"
   },
   "consolidation": {
     "hasData": true,
@@ -2587,14 +2683,21 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 257
+      "tool_calls_30d": 265
+    },
+    {
+      "id": "Claude-Projects",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 44
     },
     {
       "id": "agent-dashboard",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 181
+      "tool_calls_30d": 297
     },
     {
       "id": "agent-os",
@@ -2622,7 +2725,14 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 251
+      "tool_calls_30d": 587
+    },
+    {
+      "id": "dashboard",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 5
     },
     {
       "id": "edge",
@@ -2639,6 +2749,13 @@
       "tool_calls_30d": 2696
     },
     {
+      "id": "kultrverse",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 61
+    },
+    {
       "id": "laws-ocr",
       "friction_today": 0,
       "unresolved_gaps": 0,
@@ -2651,6 +2768,13 @@
       "unresolved_gaps": 0,
       "templates_used": 0,
       "tool_calls_30d": 2
+    },
+    {
+      "id": "pipeline",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 169
     },
     {
       "id": "schemas",
@@ -2683,10 +2807,10 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 5,
-      "preventions": 7,
+      "failures": 8,
+      "preventions": 9,
       "autoInstalls": 0,
-      "conversionPct": 140
+      "conversionPct": 113
     },
     "lastWeek": {
       "failures": 0,
@@ -2695,16 +2819,6 @@
       "conversionPct": 0
     },
     "daily": [
-      {
-        "date": "2026-05-17",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-05-18",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-05-19",
         "failures": 0,
@@ -2758,10 +2872,20 @@
       {
         "date": "2026-05-29",
         "failures": 5,
-        "preventions": 7
+        "preventions": 9
       },
       {
         "date": "2026-05-30",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-05-31",
+        "failures": 3,
+        "preventions": 0
+      },
+      {
+        "date": "2026-06-01",
         "failures": 0,
         "preventions": 0
       }
@@ -2770,13 +2894,13 @@
       {
         "session": "bruce-and-triage-batch",
         "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work",
-        "age_days": 1
+        "age_days": 3
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 0,
+      "patternsDetected": 2,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -2825,20 +2949,18 @@
   },
   "preventionEfficacy": {
     "activePreventions": 3,
-    "avgEfficacy": 0.9090909090909091,
+    "avgEfficacy": 0.9166666666666666,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 1,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.8888888888888888,
-        "fires30d": 9,
-        "valid": 8,
+        "efficacy": 0.9,
+        "fires30d": 10,
+        "valid": 9,
         "invalid": 1,
         "sparkline": [
-          null,
-          null,
           null,
           null,
           null,
@@ -2866,9 +2988,11 @@
           null,
           null,
           1,
+          null,
+          1,
           null
         ],
-        "last_fire_date": "2026-05-29"
+        "last_fire_date": "2026-05-31"
       },
       {
         "rule": "secret-leak-prevention",
@@ -2882,9 +3006,9 @@
           null,
           null,
           null,
-          null,
-          null,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -2924,9 +3048,9 @@
           null,
           null,
           null,
-          null,
-          null,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -2964,7 +3088,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "89% (9 fires/30d)",
+      "current": "90% (10 fires/30d)",
       "target": "stays ≥50%",
       "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -2988,11 +3112,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "0 this week (0 last)",
+      "current": "2 this week (0 last)",
       "target": "stay near or above last week",
       "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-05-30T02:55:55.383Z"
+  "lastUpdated": "2026-06-01T01:46:48.079Z"
 }

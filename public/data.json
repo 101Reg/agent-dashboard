@@ -2267,15 +2267,76 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "kultrverse-oversized-clip-fix",
+        "date": "2026-06-01",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "kultrverse-watchlist-sources",
+        "date": "2026-06-01",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "kultrverse-postdogfood",
+        "date": "2026-06-02",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Flagged 2.3K/20/2 view counts + 100x dropoff as fabricated stats; numbers were read directly from user-supplied [Image #4] screenshot this t"
+          }
+        ]
+      },
+      {
+        "name": "kultrverse-video-cap-fix",
+        "date": "2026-06-02",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "kultrverse-batch-approve",
+        "date": "2026-06-02",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 102,
+    "total": 103,
     "byType": {
       "feedback": 45,
-      "project": 19,
+      "project": 20,
       "user": 17,
       "reference": 20,
       "other": 0
@@ -2283,7 +2344,7 @@
   },
   "system": {
     "skills": 26,
-    "rules": 21,
+    "rules": 22,
     "hooks": 16,
     "mcpServers": 2
   },
@@ -2489,6 +2550,12 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-06-02",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
       "date": "2026-06-01",
       "text": "Bisection: fresh wrangler-put object deletes cleanly; S3-API-written (aws s3 cp) objects resist wrangler delete --remote. wrangler 4.95.0",
       "context": "may affect production archive cleanup / repair watcher in full Repost Console spec",
@@ -2570,19 +2637,13 @@
       "text": "** Tonight's lone eval (debug/TC1) carried this note:",
       "context": "Bruce proposal P-2026-05-29-001",
       "high": true
-    },
-    {
-      "date": "2026-05-29",
-      "text": "** Tonight reports `total_events: 727` yet **every** activity metric is `0`: `sessions_7d`, `digest_sessions_7d`, `agent",
-      "context": "Bruce proposal P-2026-05-29-003",
-      "high": true
     }
   ],
   "nightShift": {
     "status": "YELLOW",
-    "lastRun": "2026-06-01",
+    "lastRun": "2026-06-03",
     "findings": [
-      "Global memory count is 101 (target: under 100). Run consolidation.",
+      "Global memory count is 102 (target: under 100). Run consolidation.",
       "WATCH: Eval Signal Rate — All canaries passing for 2+ weeks."
     ],
     "evalCanaries": [
@@ -2695,8 +2756,8 @@
         "solution": ""
       }
     ],
-    "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-06-01\n\n## Status: YELLOW\n\n## Key Findings\n- Global memory count is 101 (target: under 100). Run consolidation.\n- WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\n\n## What Hero Worked On (7-day)\n- react: 3 sessions\n- agents: 2 sessions\n- bash: 2 sessions\n- d1: 2 sessions\n- dashboard: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 3 sessions\n- reviewer: 2 sessions\n- Explore: 1 sessions\n- debug: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n101 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 2\n- escalations: 0\n- hook_catches: 7\n- re_explanations: 0\n- patterns_detected: 5\n\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n71 total, 55 accepted, 1 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 2 fix_attempts (14d) |\n| Proposal Hit Rate | 77% | 55/71 accepted |\n| Eval Signal | WATCH | 15 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "actionRequired": true,
+    "briefingContent": "# Night Shift — 2026-06-03\n\n## Status: YELLOW\n\n## Key Findings\n- Global memory count is 102 (target: under 100). Run consolidation.\n- WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\n\n## What Hero Worked On (7-day)\n- react: 3 sessions\n- agents: 2 sessions\n- bash: 2 sessions\n- d1: 2 sessions\n- dashboard: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 3 sessions\n- reviewer: 2 sessions\n- Explore: 1 sessions\n- debug: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n102 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 2\n- escalations: 0\n- hook_catches: 8\n- re_explanations: 0\n- patterns_detected: 6\n\n## Review Queue\n\n### Upcoming (next 3 days)\n- **review-2026-06-05-protective-gate-signal-source** — due 2026-06-05 (2d): Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n## Proposals\nNone generated\n\n## Proposal Track Record\n71 total, 55 accepted, 1 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 2 fix_attempts (14d) |\n| Proposal Hit Rate | 77% | 55/71 accepted |\n| Eval Signal | WATCH | 16 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -2721,14 +2782,21 @@
       {
         "name": "Eval Signal",
         "status": "WATCH",
-        "detail": "15 consecutive all-pass runs"
+        "detail": "16 consecutive all-pass runs"
       }
     ]
   },
   "patterns": {
     "hasData": true,
-    "findings": [],
-    "generated": "2026-05-31 23:03"
+    "findings": [
+      {
+        "heading": "Similarity cluster: pattern_detected (3 events, trigram)",
+        "observed": "3x (2026-05-09, 2026-06-01)",
+        "signature": "",
+        "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
+      }
+    ],
+    "generated": "2026-06-02 21:05"
   },
   "consolidation": {
     "hasData": true,
@@ -2808,7 +2876,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 732
+      "tool_calls_30d": 755
     },
     {
       "id": "dashboard",
@@ -2833,10 +2901,10 @@
     },
     {
       "id": "kultrverse",
-      "friction_today": 2,
+      "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 602
+      "tool_calls_30d": 1288
     },
     {
       "id": "laws-ocr",
@@ -2903,16 +2971,6 @@
     },
     "daily": [
       {
-        "date": "2026-05-19",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-05-20",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
         "date": "2026-05-21",
         "failures": 0,
         "preventions": 0
@@ -2971,19 +3029,29 @@
         "date": "2026-06-01",
         "failures": 4,
         "preventions": 0
+      },
+      {
+        "date": "2026-06-02",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-06-03",
+        "failures": 0,
+        "preventions": 0
       }
     ],
     "stuckFailures": [
       {
         "session": "bruce-and-triage-batch",
         "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work",
-        "age_days": 3
+        "age_days": 5
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 5,
+      "patternsDetected": 6,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3028,24 +3096,27 @@
         ]
       }
     ],
-    "stuckPatterns": []
+    "stuckPatterns": [
+      {
+        "heading": "Similarity cluster: pattern_detected (3 events, trigram)",
+        "age_days": null
+      }
+    ]
   },
   "preventionEfficacy": {
     "activePreventions": 3,
-    "avgEfficacy": 0.9285714285714286,
+    "avgEfficacy": 0.8666666666666667,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 1,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.9166666666666666,
-        "fires30d": 12,
+        "efficacy": 0.8461538461538461,
+        "fires30d": 13,
         "valid": 11,
-        "invalid": 1,
+        "invalid": 2,
         "sparkline": [
-          null,
-          null,
           null,
           null,
           null,
@@ -3073,9 +3144,11 @@
           1,
           null,
           1,
-          1
+          1,
+          0,
+          null
         ],
-        "last_fire_date": "2026-06-01"
+        "last_fire_date": "2026-06-02"
       },
       {
         "rule": "secret-leak-prevention",
@@ -3087,9 +3160,9 @@
           null,
           null,
           null,
-          null,
-          null,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -3129,9 +3202,9 @@
           null,
           null,
           null,
-          null,
-          null,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -3171,7 +3244,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "92% (12 fires/30d)",
+      "current": "85% (13 fires/30d)",
       "target": "stays ≥50%",
       "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -3195,11 +3268,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "5 this week (0 last)",
+      "current": "6 this week (0 last)",
       "target": "stay near or above last week",
       "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-01T19:42:19.797Z"
+  "lastUpdated": "2026-06-03T05:05:39.196Z"
 }

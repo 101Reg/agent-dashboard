@@ -2328,15 +2328,75 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "kultrverse-video-cap-fix-and-batch-approve",
+        "date": "2026-06-03",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "kultrverse-ncii-override-fix",
+        "date": "2026-06-03",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "kultrverse-sentinel-ux-fix",
+        "date": "2026-06-03",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "ringkultr-engine-extraction",
+        "date": "2026-06-04",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 3,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Lumped The Athletic into a list of feeds that failed build-verification, but The Athletic was never tested — only Bleacher Report/Ringer/SI/"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "2nd consecutive catch, same shape: asserted NYT/WSJ/Bloomberg/The Athletic RSS behavior (200 + teaser) as fact without curling them this tur"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "3rd catch this session, same shape: asserted X developer-portal menu paths (User authentication settings, Keys and tokens) + the token-regen"
+          }
+        ]
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 103,
+    "total": 104,
     "byType": {
       "feedback": 45,
-      "project": 20,
+      "project": 21,
       "user": 17,
       "reference": 20,
       "other": 0
@@ -2350,10 +2410,16 @@
   },
   "timeline": [
     {
+      "date": "Jun 3, 2026",
+      "title": "Kultrverse Video Cap Fix And Batch Approve",
+      "desc": "Merged batch-compose-feedback branch to main, Diagnosed live publish failure: 88.2MB clip vs 40MB Worker memory cap (flagged, generic error hid risk_notes), Fixed: stream video from R2 range-reads into X chunked APPEND, cap 40MB->200MB; live-verified the 88MB clip posted",
+      "active": true
+    },
+    {
       "date": "Jun 1, 2026",
       "title": "Kultrverse Repost Console",
       "desc": "Activated + smoke-tested 1B GitHub-Actions video archive, Built 1C Mode A composer + clip voice + one-liner/thread auto-split, Built Mode B Part 1 self-building watchlist + Part 2 scrubber->suggestions",
-      "active": true
+      "active": false
     },
     {
       "date": "May 31, 2026",
@@ -2550,6 +2616,30 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-06-04",
+      "text": "3 hook_catch events this session all external-system-assertion-without-hedge/verify (The Athletic feed, NYT/WSJ RSS behavior, X portal steps). Systemic fix: when instructing on third-party UI/behavior, WebFetch docs or describe the goal + hedge labels — never assert menu paths/platform behavior as fact.",
+      "context": "pre-response-claim-audit F2 repeat",
+      "high": true
+    },
+    {
+      "date": "2026-06-04",
+      "text": "hook_catch x3",
+      "context": "advisory — hook_catch-only friction surfaced for Bruce review; stop NOT blocked (hook_catches are already self-corrected by the per-response Stop hook and often cross-session)",
+      "high": true
+    },
+    {
+      "date": "2026-06-03",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-06-03",
+      "text": "Guessed D1 column names (media_key/posted_at) before reading schema — 3 failed queries; first reviewer's final message arrived truncated, needed SendMessage to retrieve verdict → 1 lessons saved",
+      "context": "kultrverse-video-cap-fix-and-batch-approve",
+      "high": false
+    },
+    {
       "date": "2026-06-02",
       "text": "similarity-cluster size=3",
       "context": "Layer 2 scanner — similarity cluster",
@@ -2613,37 +2703,14 @@
       "text": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work in main-thread. Main-thread Edit on the SAME paths succeeded immediately after. Subagents had to be replaced with main-thread direct execution. This is a different gate behavior than cap_gap 2026-04-27 (which blocked main-thread post-ExitPlanMode); together they show the gate's signal-source is inconsistent.",
       "context": "parallel batch of Bruce proposal implementation + cap_gap triage execution; both developer agents blocked simultaneously",
       "high": false
-    },
-    {
-      "date": "2026-05-29",
-      "text": "hook_catch x4",
-      "context": "Stop hook blocked — mandate to build systemic fix",
-      "high": true
-    },
-    {
-      "date": "2026-05-29",
-      "text": "4 hook_catch (all pre-response-claim-audit, all valid TP numeric/score fabrications) from CLOSED session bruce-and-triage-batch fired a pause-current-task mandate in unrelated session opus48-system-scan-repair, surfaced only because the line-727 repair un-blinded the detector. Structural gap: hook_catch has no acknowledgment path (unlike cap_gap), so already-corrected valid catches count toward the daily threshold indefinitely and a corruption-repair backlog generates false cross-session mandates.",
-      "context": "Gap Diagnosis: (1) cross-session backlog false-mandate after un-blinding; (2) missing capability = hook_catch ack convention; (3) fix = acknowledged 4 catches via friction_acknowledged (done, unresolved now 0) + PROPOSE pattern-detector backlog-awareness (session-scope OR exclude already-corrected hook_catch) — DEFERRED to fresh session per fresh-context-for-infra (Stop hook = highest blast radius, classifier gating ~/.claude infra tonight).",
-      "high": true
-    },
-    {
-      "date": "2026-05-29",
-      "text": "Two parallel developer agents both blocked by subagent ~/.claude/ Edit gate; main-thread redistributed all work. Four stop-hook fabrication catches on Loop Health math/inference (F1×2, F4×2), all corrected inline. Stream A #5 self-override after evidence check contradicted earlier recommendation. → 4 lessons saved",
-      "context": "agent-os-instruments-sweep",
-      "high": false
-    },
-    {
-      "date": "2026-05-29",
-      "text": "** Tonight's lone eval (debug/TC1) carried this note:",
-      "context": "Bruce proposal P-2026-05-29-001",
-      "high": true
     }
   ],
   "nightShift": {
     "status": "YELLOW",
-    "lastRun": "2026-06-03",
+    "lastRun": "2026-06-04",
     "findings": [
-      "Global memory count is 102 (target: under 100). Run consolidation.",
+      "Elevated friction: 2 fix_attempts, 11 hook_catches in 7 days",
+      "Global memory count is 103 (target: under 100). Run consolidation.",
       "WATCH: Eval Signal Rate — All canaries passing for 2+ weeks."
     ],
     "evalCanaries": [
@@ -2757,7 +2824,7 @@
       }
     ],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-06-03\n\n## Status: YELLOW\n\n## Key Findings\n- Global memory count is 102 (target: under 100). Run consolidation.\n- WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\n\n## What Hero Worked On (7-day)\n- react: 3 sessions\n- agents: 2 sessions\n- bash: 2 sessions\n- d1: 2 sessions\n- dashboard: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 3 sessions\n- reviewer: 2 sessions\n- Explore: 1 sessions\n- debug: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n102 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 2\n- escalations: 0\n- hook_catches: 8\n- re_explanations: 0\n- patterns_detected: 6\n\n## Review Queue\n\n### Upcoming (next 3 days)\n- **review-2026-06-05-protective-gate-signal-source** — due 2026-06-05 (2d): Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n## Proposals\nNone generated\n\n## Proposal Track Record\n71 total, 55 accepted, 1 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 2 fix_attempts (14d) |\n| Proposal Hit Rate | 77% | 55/71 accepted |\n| Eval Signal | WATCH | 16 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-06-04\n\n## Status: YELLOW\n\n## Key Findings\n- Elevated friction: 2 fix_attempts, 11 hook_catches in 7 days\n- Global memory count is 103 (target: under 100). Run consolidation.\n- WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\n\n## What Hero Worked On (7-day)\n- react: 4 sessions\n- d1: 3 sessions\n- dashboard: 3 sessions\n- typescript: 3 sessions\n- agents: 2 sessions\n\n## Agent Usage (7-day)\n- developer: 3 sessions\n- reviewer: 3 sessions\n- Explore: 1 sessions\n- debug: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n103 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 2\n- escalations: 0\n- hook_catches: 11\n- re_explanations: 0\n- patterns_detected: 9\n\n## Review Queue\n\n### Upcoming (next 3 days)\n- **review-2026-06-05-protective-gate-signal-source** — due 2026-06-05 (1d): Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n## Proposals\nNone generated\n\n## Proposal Track Record\n71 total, 55 accepted, 1 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 2 fix_attempts (14d) |\n| Proposal Hit Rate | 77% | 55/71 accepted |\n| Eval Signal | WATCH | 17 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -2782,7 +2849,7 @@
       {
         "name": "Eval Signal",
         "status": "WATCH",
-        "detail": "16 consecutive all-pass runs"
+        "detail": "17 consecutive all-pass runs"
       }
     ]
   },
@@ -2796,7 +2863,7 @@
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
       }
     ],
-    "generated": "2026-06-02 21:05"
+    "generated": "2026-06-03 22:57"
   },
   "consolidation": {
     "hasData": true,
@@ -2876,14 +2943,14 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 755
+      "tool_calls_30d": 770
     },
     {
       "id": "dashboard",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 5
+      "tool_calls_30d": 13
     },
     {
       "id": "edge",
@@ -2900,11 +2967,18 @@
       "tool_calls_30d": 2696
     },
     {
+      "id": "engine",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 149
+    },
+    {
       "id": "kultrverse",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 1288
+      "tool_calls_30d": 1494
     },
     {
       "id": "laws-ocr",
@@ -2914,6 +2988,13 @@
       "tool_calls_30d": 6
     },
     {
+      "id": "media-engine",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 11
+    },
+    {
       "id": "migrations",
       "friction_today": 0,
       "unresolved_gaps": 0,
@@ -2921,11 +3002,25 @@
       "tool_calls_30d": 2
     },
     {
+      "id": "packages",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 63
+    },
+    {
       "id": "pipeline",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
       "tool_calls_30d": 278
+    },
+    {
+      "id": "ringkultr",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 225
     },
     {
       "id": "schemas",
@@ -2958,28 +3053,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 14,
-      "preventions": 9,
-      "autoInstalls": 0,
-      "conversionPct": 64
-    },
-    "lastWeek": {
-      "failures": 0,
+      "failures": 12,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
+    "lastWeek": {
+      "failures": 5,
+      "preventions": 9,
+      "autoInstalls": 0,
+      "conversionPct": 180
+    },
     "daily": [
-      {
-        "date": "2026-05-21",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-05-22",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-05-23",
         "failures": 0,
@@ -3039,19 +3124,29 @@
         "date": "2026-06-03",
         "failures": 0,
         "preventions": 0
+      },
+      {
+        "date": "2026-06-04",
+        "failures": 3,
+        "preventions": 0
+      },
+      {
+        "date": "2026-06-05",
+        "failures": 0,
+        "preventions": 0
       }
     ],
     "stuckFailures": [
       {
         "session": "bruce-and-triage-batch",
         "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work",
-        "age_days": 5
+        "age_days": 7
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 6,
+      "patternsDetected": 7,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3060,7 +3155,7 @@
       "stageStatus": "dormant"
     },
     "lastWeek": {
-      "patternsDetected": 0,
+      "patternsDetected": 2,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3105,21 +3200,19 @@
   },
   "preventionEfficacy": {
     "activePreventions": 3,
-    "avgEfficacy": 0.8666666666666667,
+    "avgEfficacy": 0.8888888888888888,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 1,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.8461538461538461,
-        "fires30d": 13,
-        "valid": 11,
+        "efficacy": 0.875,
+        "fires30d": 16,
+        "valid": 14,
         "invalid": 2,
         "sparkline": [
           null,
-          null,
-          null,
           0,
           1,
           1,
@@ -3146,9 +3239,11 @@
           1,
           1,
           0,
+          null,
+          1,
           null
         ],
-        "last_fire_date": "2026-06-02"
+        "last_fire_date": "2026-06-04"
       },
       {
         "rule": "secret-leak-prevention",
@@ -3158,9 +3253,9 @@
         "invalid": 0,
         "sparkline": [
           null,
-          null,
-          null,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -3200,9 +3295,9 @@
           null,
           null,
           null,
-          null,
-          null,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -3244,7 +3339,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "85% (13 fires/30d)",
+      "current": "88% (16 fires/30d)",
       "target": "stays ≥50%",
       "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -3268,11 +3363,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "6 this week (0 last)",
+      "current": "7 this week (2 last)",
       "target": "stay near or above last week",
       "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-03T05:05:39.196Z"
+  "lastUpdated": "2026-06-05T04:11:40.144Z"
 }

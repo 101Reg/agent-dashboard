@@ -2401,17 +2401,6 @@
         ]
       },
       {
-        "name": "media-engine-youtube-clipper",
-        "date": "2026-06-05",
-        "fixAttempts": 0,
-        "escalations": 0,
-        "reExplanations": 0,
-        "capabilityGaps": 0,
-        "toilEvents": 0,
-        "hookCatches": 0,
-        "events": []
-      },
-      {
         "name": "kultrverse-auth-health-reject-brand",
         "date": "2026-06-05",
         "fixAttempts": 0,
@@ -2427,6 +2416,45 @@
             "detail": "Tailwind-purge debug had 2+ failed fix attempts (absolute globs, vite config-root) + shell-cwd thrash before isolation-testing found root ca"
           }
         ]
+      },
+      {
+        "name": "media-engine-youtube-clipper",
+        "date": "2026-06-05",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "ringkultr-proxy",
+        "date": "2026-06-06",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Presented proxy bandwidth/cost estimates (video MB sizes, $/video) as specific facts without hedging or source tags"
+          }
+        ]
+      },
+      {
+        "name": "ringkultr-source-credit",
+        "date": "2026-06-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
@@ -2449,10 +2477,16 @@
   },
   "timeline": [
     {
+      "date": "Jun 5, 2026",
+      "title": "Kultrverse Auth Health Reject Brand",
+      "desc": "Diagnosed + fixed KULTRVERSE X 401 outage (revoked OAuth creds, re-minted all 4 keys), Built shared X auth-health detector + self-healing dashboard banner (media-engine), Added Ready-tab reject button to Ringkultr + KULTRVERSE",
+      "active": true
+    },
+    {
       "date": "Jun 4, 2026",
       "title": "Ringkultr Shared Engine Extraction",
       "desc": "Extracted config-driven shared media-engine (monorepo) from KULTRVERSE, Built Ringkultr vertical #3 live end-to-end — threads + clip→video publishing, Fixed dashboard Tailwind compile + watchlist drag→arrows + cross-category move + _headers cache + in-app refresh",
-      "active": true
+      "active": false
     },
     {
       "date": "Jun 3, 2026",
@@ -2661,6 +2695,18 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-06-06",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-06-06",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
       "date": "2026-06-05",
       "text": "Tailwind-purge debug had 2+ failed fix attempts (absolute globs, vite config-root) + shell-cwd thrash before isolation-testing found root cause; per debug-discipline 3-fix stop + delegation trigger #1 a debug agent should have spawned",
       "context": "main-thread solved it but against the rule",
@@ -2671,6 +2717,12 @@
       "text": "Tailwind-purge-shipped-without-CSS-verify recurred 2 days running (2026-06-04 + 2026-06-05); both times build-exit-0 + reviewer + tsc passed but CSS utilities purged — only on-device screenshot caught it; advisory surprise did not prevent recurrence",
       "context": "candidate for a deterministic pre-deploy built-CSS-utility check",
       "high": true
+    },
+    {
+      "date": "2026-06-05",
+      "text": "Node-25/Vite/Tailwind-purge rabbit hole RECURRED from 2026-06-04 and shipped live before an on-device screenshot caught it; debug agent not spawned despite 2+ failed fixes; 2 misreads on ambiguous 'what's off' feedback → 5 lessons saved",
+      "context": "kultrverse-auth-health-reject-brand",
+      "high": false
     },
     {
       "date": "2026-06-04",
@@ -2731,30 +2783,12 @@
       "text": "fix_attempt x2",
       "context": "Stop hook blocked — mandate to build systemic fix",
       "high": true
-    },
-    {
-      "date": "2026-06-01",
-      "text": "CORRECTION to earlier pattern_detected: S3-written objects do NOT resist wrangler delete. Real cause = wrangler r2 object get reads through 4h edge cache (Cache-Control:max-age=14400 on aws-s3-cp objects); delete succeeds at origin. Systemic fix = feedback_cloudflare_38twelve.md R2 cache section. proposal_applied P-2026-06-01-001",
-      "high": true
-    },
-    {
-      "date": "2026-06-01",
-      "text": "R2 undeletable rabbit hole resolved by debug (4h edge cache, not S3-vs-wrangler); 2 F2 hook catches on CF dashboard UI claims; publish false-failure from sync video upload — all fixed inline. → 2 lessons saved",
-      "context": "kultrverse-repost-console",
-      "high": false
-    },
-    {
-      "date": "2026-05-31",
-      "text": "Tool-output channel corrupted intermittently in the 2026-05-31 ~05:00 session: fabricated CF account ID, fake KV/D1 IDs, false 'deploy succeeded/secrets set/200 OK' lines, a fabricated git commit, and literal shell junk written into wrangler.toml. Some fabricated values were trusted before the pattern was caught; CF safety classifier blocked the high-severity writes.",
-      "context": "Mitigation adopted and validated this session: trust ONLY values read back from `wrangler … list`/SELECT/curl, never a create/deploy success line. All infra (KV/deploy/migrate/secrets) re-verified via authoritative list output. Logged retrospectively — deferred from prior session because the channel itself was unreliable.",
-      "high": false
     }
   ],
   "nightShift": {
     "status": "YELLOW",
-    "lastRun": "2026-06-05",
+    "lastRun": "2026-06-07",
     "findings": [
-      "Elevated friction: 2 fix_attempts, 11 hook_catches in 7 days",
       "Global memory count is 104 (target: under 100). Run consolidation.",
       "WATCH: Eval Signal Rate — All canaries passing for 2+ weeks."
     ],
@@ -2869,7 +2903,7 @@
       }
     ],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-06-05\n\n## Status: YELLOW\n\n## Key Findings\n- Elevated friction: 2 fix_attempts, 11 hook_catches in 7 days\n- Global memory count is 104 (target: under 100). Run consolidation.\n- WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\n\n## What Hero Worked On (7-day)\n- react: 5 sessions\n- d1: 4 sessions\n- dashboard: 4 sessions\n- typescript: 4 sessions\n- agents: 3 sessions\n\n## Agent Usage (7-day)\n- developer: 4 sessions\n- reviewer: 4 sessions\n- Explore: 2 sessions\n- Plan: 1 sessions\n- debug: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n104 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 2\n- escalations: 0\n- hook_catches: 11\n- re_explanations: 0\n- patterns_detected: 12\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (due today)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n71 total, 55 accepted, 1 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 2 fix_attempts (14d) |\n| Proposal Hit Rate | 77% | 55/71 accepted |\n| Eval Signal | WATCH | 18 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-06-07\n\n## Status: YELLOW\n\n## Key Findings\n- Global memory count is 104 (target: under 100). Run consolidation.\n- WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\n\n## What Hero Worked On (7-day)\n- react: 5 sessions\n- cloudflare-workers: 4 sessions\n- d1: 4 sessions\n- dashboard: 4 sessions\n- typescript: 4 sessions\n\n## Agent Usage (7-day)\n- reviewer: 5 sessions\n- Explore: 3 sessions\n- developer: 3 sessions\n- Plan: 1 sessions\n- debug: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n104 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 2\n- escalations: 0\n- hook_catches: 8\n- re_explanations: 0\n- patterns_detected: 12\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (2d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n71 total, 55 accepted, 1 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 2 fix_attempts (14d) |\n| Proposal Hit Rate | 77% | 55/71 accepted |\n| Eval Signal | WATCH | 19 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -2894,7 +2928,7 @@
       {
         "name": "Eval Signal",
         "status": "WATCH",
-        "detail": "18 consecutive all-pass runs"
+        "detail": "19 consecutive all-pass runs"
       }
     ]
   },
@@ -2914,7 +2948,7 @@
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
       }
     ],
-    "generated": "2026-06-04 23:17"
+    "generated": "2026-06-06 22:57"
   },
   "consolidation": {
     "hasData": true,
@@ -2994,7 +3028,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 784
+      "tool_calls_30d": 794
     },
     {
       "id": "dashboard",
@@ -3071,7 +3105,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 542
+      "tool_calls_30d": 847
     },
     {
       "id": "schemas",
@@ -3104,23 +3138,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 13,
+      "failures": 9,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
     "lastWeek": {
-      "failures": 5,
+      "failures": 10,
       "preventions": 9,
       "autoInstalls": 0,
-      "conversionPct": 180
+      "conversionPct": 90
     },
     "daily": [
-      {
-        "date": "2026-05-24",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-05-25",
         "failures": 0,
@@ -3183,6 +3212,11 @@
       },
       {
         "date": "2026-06-06",
+        "failures": 1,
+        "preventions": 0
+      },
+      {
+        "date": "2026-06-07",
         "failures": 0,
         "preventions": 0
       }
@@ -3191,13 +3225,13 @@
       {
         "session": "bruce-and-triage-batch",
         "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work",
-        "age_days": 8
+        "age_days": 9
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 10,
+      "patternsDetected": 12,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3255,19 +3289,18 @@
   },
   "preventionEfficacy": {
     "activePreventions": 3,
-    "avgEfficacy": 0.8888888888888888,
+    "avgEfficacy": 0.8947368421052632,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 1,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.875,
-        "fires30d": 16,
-        "valid": 14,
+        "efficacy": 0.8823529411764706,
+        "fires30d": 17,
+        "valid": 15,
         "invalid": 2,
         "sparkline": [
-          0,
           1,
           1,
           null,
@@ -3296,9 +3329,10 @@
           null,
           1,
           null,
+          1,
           null
         ],
-        "last_fire_date": "2026-06-04"
+        "last_fire_date": "2026-06-06"
       },
       {
         "rule": "secret-leak-prevention",
@@ -3307,7 +3341,7 @@
         "valid": 1,
         "invalid": 0,
         "sparkline": [
-          1,
+          null,
           null,
           null,
           null,
@@ -3348,8 +3382,8 @@
         "invalid": 0,
         "sparkline": [
           null,
-          null,
           1,
+          null,
           null,
           null,
           null,
@@ -3394,7 +3428,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "88% (16 fires/30d)",
+      "current": "88% (17 fires/30d)",
       "target": "stays ≥50%",
       "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -3418,11 +3452,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "10 this week (2 last)",
+      "current": "12 this week (2 last)",
       "target": "stay near or above last week",
       "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-06T01:37:45.482Z"
+  "lastUpdated": "2026-06-07T06:46:11.635Z"
 }

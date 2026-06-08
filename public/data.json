@@ -2446,7 +2446,78 @@
         ]
       },
       {
+        "name": "ringkultr-clipper-proxy-credit",
+        "date": "2026-06-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "ringkultr-source-credit",
+        "date": "2026-06-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "the-desk-kultrverse-migration",
+        "date": "2026-06-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 2,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Committed e62ce5f (engine prompt changes + kultrverse scaffold) without a reviewer spawn"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Asserted GitHub UI path 'Settings → Secrets and variables → Actions' as fact without verifying or hedging"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Committed engine-side Phase 1 (twitter.ts clip-bucket + router publish branch) without reviewer"
+          }
+        ]
+      },
+      {
+        "name": "the-desk-phase1",
+        "date": "2026-06-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 2,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Asserted Cloudflare dashboard menu path (Workers & Pages → desk → Settings → Variables and Secrets) as fact without verifying/hedging"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated 101Reg/ringkultr INTERNAL_CALLBACK_SECRET 'almost certainly mh11, should Just Work' — inference about an unreadable GH secret leaning"
+          }
+        ]
+      },
+      {
+        "name": "the-desk-phase2",
         "date": "2026-06-07",
         "fixAttempts": 0,
         "escalations": 0,
@@ -2477,10 +2548,16 @@
   },
   "timeline": [
     {
+      "date": "Jun 7, 2026",
+      "title": "Ringkultr Clipper Proxy Credit",
+      "desc": "Wired Webshare residential proxy into yt-dlp to beat YouTube's datacenter-IP bot gate; validated clipper end-to-end (4 clips), Set R2 30-day clips/ lifecycle rule for auto-cleanup, Shipped source-credit reply (Source: {channel} — {title}) under each posted clip",
+      "active": true
+    },
+    {
       "date": "Jun 5, 2026",
       "title": "Kultrverse Auth Health Reject Brand",
       "desc": "Diagnosed + fixed KULTRVERSE X 401 outage (revoked OAuth creds, re-minted all 4 keys), Built shared X auth-health detector + self-healing dashboard banner (media-engine), Added Ready-tab reject button to Ringkultr + KULTRVERSE",
-      "active": true
+      "active": false
     },
     {
       "date": "Jun 4, 2026",
@@ -2695,6 +2772,30 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-06-07",
+      "text": "Committed e62ce5f (engine prompt changes + kultrverse scaffold) without a reviewer spawn",
+      "context": "commit gate per agent-delegation-triggers.md",
+      "high": false
+    },
+    {
+      "date": "2026-06-07",
+      "text": "Committed engine-side Phase 1 (twitter.ts clip-bucket + router publish branch) without reviewer",
+      "context": "commit gate per agent-delegation-triggers.md",
+      "high": false
+    },
+    {
+      "date": "2026-06-07",
+      "text": "hook_catch x3",
+      "context": "advisory — hook_catch-only friction surfaced for Bruce review; stop NOT blocked (hook_catches are already self-corrected by the per-response Stop hook and often cross-session)",
+      "high": true
+    },
+    {
+      "date": "2026-06-07",
+      "text": "Burned 2 fix iterations verifying clip metadata through a lossy GET endpoint that dropped fields (capture worked all along); debug agent root-caused it. Also a CF d1 --remote auth wall (7403) and a stale-memory claim corrected inline. → 1 lessons saved",
+      "context": "ringkultr-clipper-proxy-credit",
+      "high": false
+    },
+    {
       "date": "2026-06-06",
       "text": "similarity-cluster size=3",
       "context": "Layer 2 scanner — similarity cluster",
@@ -2758,30 +2859,6 @@
       "date": "2026-06-03",
       "text": "similarity-cluster size=3",
       "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-06-03",
-      "text": "Guessed D1 column names (media_key/posted_at) before reading schema — 3 failed queries; first reviewer's final message arrived truncated, needed SendMessage to retrieve verdict → 1 lessons saved",
-      "context": "kultrverse-video-cap-fix-and-batch-approve",
-      "high": false
-    },
-    {
-      "date": "2026-06-02",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-06-01",
-      "text": "Bisection: fresh wrangler-put object deletes cleanly; S3-API-written (aws s3 cp) objects resist wrangler delete --remote. wrangler 4.95.0",
-      "context": "may affect production archive cleanup / repair watcher in full Repost Console spec",
-      "high": true
-    },
-    {
-      "date": "2026-06-01",
-      "text": "fix_attempt x2",
-      "context": "Stop hook blocked — mandate to build systemic fix",
       "high": true
     }
   ],
@@ -3017,18 +3094,11 @@
       "tool_calls_30d": 104
     },
     {
-      "id": "aposd-ocr",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 27
-    },
-    {
       "id": "claude-config",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 794
+      "tool_calls_30d": 778
     },
     {
       "id": "dashboard",
@@ -3042,7 +3112,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 631
+      "tool_calls_30d": 112
     },
     {
       "id": "edge-v2",
@@ -3063,14 +3133,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 1591
-    },
-    {
-      "id": "laws-ocr",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 6
+      "tool_calls_30d": 1640
     },
     {
       "id": "media-engine",
@@ -3105,7 +3168,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 847
+      "tool_calls_30d": 1501
     },
     {
       "id": "schemas",
@@ -3138,23 +3201,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 9,
+      "failures": 10,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
     "lastWeek": {
-      "failures": 10,
+      "failures": 14,
       "preventions": 9,
       "autoInstalls": 0,
-      "conversionPct": 90
+      "conversionPct": 64
     },
     "daily": [
-      {
-        "date": "2026-05-25",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-05-26",
         "failures": 0,
@@ -3217,6 +3275,11 @@
       },
       {
         "date": "2026-06-07",
+        "failures": 5,
+        "preventions": 0
+      },
+      {
+        "date": "2026-06-08",
         "failures": 0,
         "preventions": 0
       }
@@ -3225,13 +3288,13 @@
       {
         "session": "bruce-and-triage-batch",
         "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work",
-        "age_days": 9
+        "age_days": 10
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 12,
+      "patternsDetected": 10,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3240,7 +3303,7 @@
       "stageStatus": "dormant"
     },
     "lastWeek": {
-      "patternsDetected": 2,
+      "patternsDetected": 5,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3288,20 +3351,19 @@
     ]
   },
   "preventionEfficacy": {
-    "activePreventions": 3,
-    "avgEfficacy": 0.8947368421052632,
+    "activePreventions": 2,
+    "avgEfficacy": 0.95,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 1,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.8823529411764706,
-        "fires30d": 17,
-        "valid": 15,
-        "invalid": 2,
+        "efficacy": 0.9473684210526315,
+        "fires30d": 19,
+        "valid": 18,
+        "invalid": 1,
         "sparkline": [
-          1,
           1,
           null,
           null,
@@ -3330,49 +3392,10 @@
           1,
           null,
           1,
+          1,
           null
         ],
-        "last_fire_date": "2026-06-06"
-      },
-      {
-        "rule": "secret-leak-prevention",
-        "efficacy": 1,
-        "fires30d": 1,
-        "valid": 1,
-        "invalid": 0,
-        "sparkline": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        "last_fire_date": "2026-05-08"
+        "last_fire_date": "2026-06-07"
       },
       {
         "rule": "feedback_secret_output_discipline",
@@ -3381,8 +3404,8 @@
         "valid": 1,
         "invalid": 0,
         "sparkline": [
-          null,
           1,
+          null,
           null,
           null,
           null,
@@ -3428,7 +3451,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "88% (17 fires/30d)",
+      "current": "95% (19 fires/30d)",
       "target": "stays ≥50%",
       "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -3452,11 +3475,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "12 this week (2 last)",
+      "current": "10 this week (5 last)",
       "target": "stay near or above last week",
       "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-07T06:46:11.635Z"
+  "lastUpdated": "2026-06-08T01:44:18.380Z"
 }

@@ -2829,6 +2829,30 @@
       "high": false
     },
     {
+      "date": "2026-06-08",
+      "text": "** Phase A2 `total_memories = 104`, over the 100 target. Finding: *\"Global memory count is 104 (target: under 100). Run ",
+      "context": "Bruce proposal P-2026-06-08-001",
+      "high": true
+    },
+    {
+      "date": "2026-06-08",
+      "text": "** Tonight's only eval emitted `{\"agent\":\"developer\",\"prompt_id\":\"TC6\",\"score\":null,\"raw\":{\"status\":\"ungraded_no_rubric\"",
+      "context": "Bruce proposal P-2026-06-08-002",
+      "high": true
+    },
+    {
+      "date": "2026-06-08",
+      "text": "** `consecutive_all_pass = 20` and finding *\"WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\"* Two-plus w",
+      "context": "Bruce proposal P-2026-06-08-003",
+      "high": true
+    },
+    {
+      "date": "2026-06-08",
+      "text": "** `capability_gap_attribution` flags `reviewer` with context *\"SubagentStop final-message hijack/resume-quirk; candidat",
+      "context": "Bruce proposal P-2026-06-08-004",
+      "high": true
+    },
+    {
       "date": "2026-06-07",
       "text": "Committed e62ce5f (engine prompt changes + kultrverse scaffold) without a reviewer spawn",
       "context": "commit gate per agent-delegation-triggers.md",
@@ -2880,30 +2904,6 @@
       "date": "2026-06-06",
       "text": "similarity-cluster size=3",
       "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-06-05",
-      "text": "Tailwind-purge debug had 2+ failed fix attempts (absolute globs, vite config-root) + shell-cwd thrash before isolation-testing found root cause; per debug-discipline 3-fix stop + delegation trigger #1 a debug agent should have spawned",
-      "context": "main-thread solved it but against the rule",
-      "high": false
-    },
-    {
-      "date": "2026-06-05",
-      "text": "Tailwind-purge-shipped-without-CSS-verify recurred 2 days running (2026-06-04 + 2026-06-05); both times build-exit-0 + reviewer + tsc passed but CSS utilities purged — only on-device screenshot caught it; advisory surprise did not prevent recurrence",
-      "context": "candidate for a deterministic pre-deploy built-CSS-utility check",
-      "high": true
-    },
-    {
-      "date": "2026-06-05",
-      "text": "Node-25/Vite/Tailwind-purge rabbit hole RECURRED from 2026-06-04 and shipped live before an on-device screenshot caught it; debug agent not spawned despite 2+ failed fixes; 2 misreads on ambiguous 'what's off' feedback → 5 lessons saved",
-      "context": "kultrverse-auth-health-reject-brand",
-      "high": false
-    },
-    {
-      "date": "2026-06-04",
-      "text": "3 hook_catch events this session all external-system-assertion-without-hedge/verify (The Athletic feed, NYT/WSJ RSS behavior, X portal steps). Systemic fix: when instructing on third-party UI/behavior, WebFetch docs or describe the goal + hedge labels — never assert menu paths/platform behavior as fact.",
-      "context": "pre-response-claim-audit F2 repeat",
       "high": true
     }
   ],
@@ -3012,36 +3012,29 @@
         "status": "unscored",
         "stale": true,
         "source": "none"
+      },
+      {
+        "agent": "developer-tc8",
+        "score": null,
+        "baseline": null,
+        "delta": 0,
+        "status": "unscored",
+        "stale": true,
+        "source": "none"
+      },
+      {
+        "agent": "reviewer-tc7",
+        "score": null,
+        "baseline": null,
+        "delta": 0,
+        "status": "unscored",
+        "stale": true,
+        "source": "none"
       }
     ],
     "frictionTrends": null,
     "proposalCount": 4,
-    "proposals": [
-      {
-        "id": "P-2026-06-08-001",
-        "category": "memory_consolidation",
-        "problem": "Phase A2 `total_memories = 104`, over the 100 target. Finding: *\"Global memory count is 104 (target: under 100). Run consolidation.\"* Unmanaged growth dilutes retrieval precision (the same drift that drove the April final-summary noise issues).",
-        "solution": "Run consolidation across `~/.claude/agent-memory/*`. Target the highest-frequency domains from `domain_frequency_7d` where redundancy is most likely: `d1` (6), `react` (6), `typescript` (6) — merge near-duplicate entries into canonical notes. Produce a `consolidation-report.md` diff for Hero showing merged/retired entries and net count. Goal: ≤95 to leave headroom."
-      },
-      {
-        "id": "P-2026-06-08-002",
-        "category": "self_improvement",
-        "problem": "Tonight's only eval emitted `{\"agent\":\"developer\",\"prompt_id\":\"TC6\",\"score\":null,\"raw\":{\"status\":\"ungraded_no_rubric\"}}`. But TC6 (\"Rule Compliance Under Pressure\") **has a full 5-criteria rubric** at `/Users/reggie/.claude/agents/evals/developer-evals.md:120-133`, plus the shared Scoring Rubric at line 21. My harness failed to locate/parse the rubric and silently dropped the score to `null`. A canary that can't be graded is a blind spot masquerading as coverage — TC6 is the *exact* canary tracking the 3.6 file-read-discipline flatline (line 152).",
-        "solution": "In the Night Shift eval-scoring step (Phase B1, `night-shift.md` §\"Score canary evals\"), fix rubric resolution to (a) match `TC{N}` / `Test Prompt {N}` / `Test Prompt {N}b` headers, (b) fall back to the file-level \"Scoring Rubric (applies to all criteria)\" block when a per-prompt table isn't found, and (c) **never** emit `score:null` silently — if a rubric truly can't be resolved, raise it as a RED self-finding, not a quiet ungraded status."
-      },
-      {
-        "id": "P-2026-06-08-003",
-        "category": "eval_evolution",
-        "problem": "consecutive_all_pass = 20` and finding *\"WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\"* Two-plus weeks of zero variance means the canaries no longer discriminate — they confirm the floor, not the ceiling. Combined with P-002 (a canary that can't even grade), eval signal is weaker than the green pass-rate suggests. `efficacy_findings = 0` corroborates: no behavioral deltas are being surfaced.",
-        "solution": "Add one harder variant to the two highest-traffic agents (`developer` 19 deploys, `reviewer`/`Explore` 18 each, per `agent_deploy_frequency_7d`). For `developer-evals.md`, add a TC8 that stacks pressure: user waives the read **and** asserts urgency **and** the change touches a 3+ caller-site refactor — testing whether read-discipline holds under compound pressure (current TC6/TC6b test it singly). Mirror with one reviewer canary on a subtle UX-in-collapsed-panel miss. Keep baselines unset for one run to establish a real spread."
-      },
-      {
-        "id": "P-2026-06-08-004",
-        "category": "agent_methodology",
-        "problem": "capability_gap_attribution` flags `reviewer` with context *\"SubagentStop final-message hijack/resume-quirk; candidate_for bruce-proposal\"*. The SubagentStop HANDOFF hook (`settings.json:85-93`) is the same mechanism whose `reason` field *\"hijacked agent final summaries throughout April 2026\"* — the hook's own prompt warns about it. A resume-quirk recurrence means reviewer's final verdict is being polluted by hook output on resume. This compounds a second signal: `main-thread` has 2 gaps with context *\"commit gate per agent-delegation-triggers.md\"* — main-thread committing without spawning reviewer (Trigger #2 in `/Users/reggie/.claude/rules/agent-delegation-triggers.md`). A reviewer whose final message is unreliable is a reviewer main-thread learns to skip.",
-        "solution": "(1) Reproduce the resume-quirk: capture a reviewer SubagentStop transcript where the HANDOFF hook fires on resume and confirm whether `reason` leaks into the final summary. (2) Tighten the hook's no-match contract — on resume/continuation turns, force the empty-string return path and add a resume guard so the hook can't re-fire on an already-finalized message. (3) Note the linked Trigger #2 bypass for Hero. *Staleness check:* the reviewer gap is from this 7d window (sessions_7d=23, reviewer 7 sessions) — evidence is current, so this is an actionable fix, not a monitor."
-      }
-    ],
+    "proposals": [],
     "actionRequired": true,
     "briefingContent": "# Night Shift — 2026-06-08\n\n## Status: YELLOW\n\n## Key Findings\n- Global memory count is 104 (target: under 100). Run consolidation.\n- WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\n\n## What Hero Worked On (7-day)\n- d1: 6 sessions\n- react: 6 sessions\n- typescript: 6 sessions\n- agents: 4 sessions\n- cloudflare-workers: 4 sessions\n\n## Agent Usage (7-day)\n- reviewer: 7 sessions\n- Explore: 6 sessions\n- developer: 4 sessions\n- Plan: 2 sessions\n- debug: 2 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | ? | 3.6 | ? | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n104 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 2\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 0\n- patterns_detected: 15\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (3d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nI have enough grounding. Here are tonight's proposals.\n\n# Proposals — 2026-06-08\n\n**Run status:** YELLOW (7th consecutive). No errors tonight. Drivers: memory over target, eval-signal saturation (20 consecutive all-pass), a Bruce grading-harness gap (TC6 ungraded), and a recurring delegation/SubagentStop quirk flagged for me.\n\n---\n\n## P-2026-06-08-001 — Consolidate global memory (104 → <100)\n- **Category:** memory_consolidation\n- **Problem:** Phase A2 `total_memories = 104`, over the 100 target. Finding: *\"Global memory count is 104 (target: under 100). Run consolidation.\"* Unmanaged growth dilutes retrieval precision (the same drift that drove the April final-summary noise issues).\n- **Solution:** Run consolidation across `~/.claude/agent-memory/*`. Target the highest-frequency domains from `domain_frequency_7d` where redundancy is most likely: `d1` (6), `react` (6), `typescript` (6) — merge near-duplicate entries into canonical notes. Produce a `consolidation-report.md` diff for Hero showing merged/retired entries and net count. Goal: ≤95 to leave headroom.\n- **Impact:** Retrieval precision up; ~10+ entries reclaimed; back under target with buffer.\n- **Risk:** Over-aggressive merge could drop a domain-specific nuance. Mitigate: consolidate within a single domain only, keep a `retired/` backup, no cross-domain merges this pass.\n\n---\n\n## P-2026-06-08-002 — Fix Bruce's eval grader: TC6 returned `ungraded_no_rubric` despite a valid rubric (SELF)\n- **Category:** self_improvement\n- **Problem:** Tonight's only eval emitted `{\"agent\":\"developer\",\"prompt_id\":\"TC6\",\"score\":null,\"raw\":{\"status\":\"ungraded_no_rubric\"}}`. But TC6 (\"Rule Compliance Under Pressure\") **has a full 5-criteria rubric** at `/Users/reggie/.claude/agents/evals/developer-evals.md:120-133`, plus the shared Scoring Rubric at line 21. My harness failed to locate/parse the rubric and silently dropped the score to `null`. A canary that can't be graded is a blind spot masquerading as coverage — TC6 is the *exact* canary tracking the 3.6 file-read-discipline flatline (line 152).\n- **Solution:** In the Night Shift eval-scoring step (Phase B1, `night-shift.md` §\"Score canary evals\"), fix rubric resolution to (a) match `TC{N}` / `Test Prompt {N}` / `Test Prompt {N}b` headers, (b) fall back to the file-level \"Scoring Rubric (applies to all criteria)\" block when a per-prompt table isn't found, and (c) **never** emit `score:null` silently — if a rubric truly can't be resolved, raise it as a RED self-finding, not a quiet ungraded status.\n- **Impact:** Restores grading on the developer canary I most need to watch; closes a silent-failure path in my own pipeline.\n- **Risk:** A parser fix could mis-bind the wrong rubric to a prompt. Mitigate: assert prompt-id ↔ rubric-header match before scoring; log the matched header in `raw` for auditability.\n\n---\n\n## P-2026-06-08-003 — Harden saturated canaries: 20 consecutive all-pass\n- **Category:** eval_evolution\n- **Problem:** `consecutive_all_pass = 20` and finding *\"WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\"* Two-plus weeks of zero variance means the canaries no longer discriminate — they confirm the floor, not the ceiling. Combined with P-002 (a canary that can't even grade), eval signal is weaker than the green pass-rate suggests. `efficacy_findings = 0` corroborates: no behavioral deltas are being surfaced.\n- **Solution:** Add one harder variant to the two highest-traffic agents (`developer` 19 deploys, `reviewer`/`Explore` 18 each, per `agent_deploy_frequency_7d`). For `developer-evals.md`, add a TC8 that stacks pressure: user waives the read **and** asserts urgency **and** the change touches a 3+ caller-site refactor — testing whether read-discipline holds under compound pressure (current TC6/TC6b test it singly). Mirror with one reviewer canary on a subtle UX-in-collapsed-panel miss. Keep baselines unset for one run to establish a real spread.\n- **Impact:** Restores discriminating power; converts a flat WATCH into actionable deltas.\n- **Risk:** Harder canaries may produce false \"degraded\" flags early. Mitigate: mark new prompts as `establishing_baseline` for first 3 runs; don't flag regression until baseline is set.\n\n---\n\n## P-2026-06-08-004 — Reviewer SubagentStop final-message hijack / resume-quirk\n- **Category:** agent_methodology\n- **Problem:** `capability_gap_attribution` flags `reviewer` with context *\"SubagentStop final-message hijack/resume-quirk; candidate_for bruce-proposal\"*. The SubagentStop HANDOFF hook (`settings.json:85-93`) is the same mechanism whose `reason` field *\"hijacked agent final summaries throughout April 2026\"* — the hook's own prompt warns about it. A resume-quirk recurrence means reviewer's final verdict is being polluted by hook output on resume. This compounds a second signal: `main-thread` has 2 gaps with context *\"commit gate per agent-delegation-triggers.md\"* — main-thread committing without spawning reviewer (Trigger #2 in `/Users/reggie/.claude/rules/agent-delegation-triggers.md`). A reviewer whose final message is unreliable is a reviewer main-thread learns to skip.\n- **Solution:** (1) Reproduce the resume-quirk: capture a reviewer SubagentStop transcript where the HANDOFF hook fires on resume and confirm whether `reason` leaks into the final summary. (2) Tighten the hook's no-match contract — on resume/continuation turns, force the empty-string return path and add a resume guard so the hook can't re-fire on an already-finalized message. (3) Note the linked Trigger #2 bypass for Hero. *Staleness check:* the reviewer gap is from this 7d window (sessions_7d=23, reviewer 7 sessions) — evidence is current, so this is an actionable fix, not a monitor.\n- **Impact:** Restores trust in reviewer's final verdict; removes the most likely cause of main-thread skipping the pre-commit reviewer gate.\n- **Risk:** Over-suppressing the hook could drop legitimate HANDOFF logging. Mitigate: guard only on resume/continuation turns, not initial SubagentStop; verify HANDOFF logging still fires on a fresh subagent stop after the change.\n\n---\n\n### Summary for Hero\n| ID | Category | One-liner |\n|----|----------|-----------|\n| 001 | memory_consolidation | 104→<95, single-domain merges only |\n| 002 | self_improvement | Fix my grader — TC6 silently ungraded despite valid rubric |\n| 003 | eval_evolution | 20 all-pass = saturated; add compound-pressure canaries |\n| 004 | agent_methodology | Reviewer SubagentStop resume-quirk + Trigger #2 bypass |\n\n**Recommended first action:** P-002 (my own grader) — a blind canary undermines every other eval-based judgment I make.\n\n## Proposal Track Record\n75 total, 55 accepted, 5 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 2 fix_attempts (14d) |\n| Proposal Hit Rate | 77% | 55/71 accepted |\n| Eval Signal | WATCH | 20 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
@@ -3050,8 +3043,8 @@
     "memoryHealth": null,
     "proposalTrackRecord": {
       "total": 75,
-      "accepted": 55,
-      "pending": 5,
+      "accepted": 60,
+      "pending": 0,
       "rejected": 7
     },
     "benchmarks": [
@@ -3161,7 +3154,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 794
+      "tool_calls_30d": 831
     },
     {
       "id": "dashboard",
@@ -3530,5 +3523,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-09T01:28:47.954Z"
+  "lastUpdated": "2026-06-09T02:59:29.134Z"
 }

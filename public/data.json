@@ -3088,30 +3088,30 @@
     "findings": [
       {
         "heading": "Memory Duplicates",
-        "ratio": "",
-        "merge": "",
-        "action": ""
+        "ratio": "none above 0.7 trigram threshold",
+        "merge": "n/a",
+        "action": "none — /dream 2026-06-08 confirmed 104 files fully differentiated, no merge candidates"
       },
       {
         "heading": "Rule Overlaps",
-        "ratio": "",
-        "merge": "",
-        "action": ""
+        "ratio": "none above 0.3 directive overlap threshold",
+        "merge": "n/a",
+        "action": "none — 22 rules, no actionable overlap this pass"
       },
       {
         "heading": "Stale Hooks",
-        "ratio": "",
-        "merge": "",
-        "action": ""
+        "ratio": "n/a",
+        "merge": "n/a",
+        "action": "none — all hooks fired within 30 days or verdict unknown"
       },
       {
         "heading": "Contradiction Detection",
-        "ratio": "",
-        "merge": "",
-        "action": ""
+        "ratio": "n/a",
+        "merge": "n/a",
+        "action": "deferred (Sprint 6+ TODO)"
       }
     ],
-    "generated": "2026-04-24 23:33"
+    "generated": "2026-06-08 22:00"
   },
   "projects": [
     {
@@ -3133,7 +3133,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 297
+      "tool_calls_30d": 304
     },
     {
       "id": "agent-os",
@@ -3154,7 +3154,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 831
+      "tool_calls_30d": 832
     },
     {
       "id": "dashboard",
@@ -3523,5 +3523,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-09T02:59:29.134Z"
+  "lastUpdated": "2026-06-09T03:03:19.084Z"
 }

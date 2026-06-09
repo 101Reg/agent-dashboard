@@ -2576,6 +2576,17 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "a0-auto-derive",
+        "date": "2026-06-08",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
@@ -3165,7 +3176,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 320
+      "tool_calls_30d": 325
     },
     {
       "id": "agent-os",
@@ -3186,7 +3197,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 863
+      "tool_calls_30d": 870
     },
     {
       "id": "dashboard",
@@ -3276,9 +3287,9 @@
   "failureToPrevention": {
     "thisWeek": {
       "failures": 11,
-      "preventions": 6,
+      "preventions": 7,
       "autoInstalls": 0,
-      "conversionPct": 55
+      "conversionPct": 64
     },
     "lastWeek": {
       "failures": 14,
@@ -3350,7 +3361,7 @@
       {
         "date": "2026-06-08",
         "failures": 1,
-        "preventions": 6
+        "preventions": 7
       },
       {
         "date": "2026-06-09",
@@ -3555,5 +3566,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-09T03:38:17.822Z"
+  "lastUpdated": "2026-06-09T03:45:50.668Z"
 }

@@ -2565,6 +2565,17 @@
             "detail": "reviewer final-summary verdict not surfaced — twice the returned final message was only a continuation opener, not the PASS/FAIL verdict des"
           }
         ]
+      },
+      {
+        "name": "bruce-2026-06-08-review",
+        "date": "2026-06-08",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
@@ -3138,7 +3149,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 312
+      "tool_calls_30d": 318
     },
     {
       "id": "agent-os",
@@ -3159,7 +3170,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 853
+      "tool_calls_30d": 858
     },
     {
       "id": "dashboard",
@@ -3249,9 +3260,9 @@
   "failureToPrevention": {
     "thisWeek": {
       "failures": 11,
-      "preventions": 0,
+      "preventions": 6,
       "autoInstalls": 0,
-      "conversionPct": 0
+      "conversionPct": 55
     },
     "lastWeek": {
       "failures": 14,
@@ -3323,7 +3334,7 @@
       {
         "date": "2026-06-08",
         "failures": 1,
-        "preventions": 0
+        "preventions": 6
       },
       {
         "date": "2026-06-09",
@@ -3528,5 +3539,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-09T03:29:32.210Z"
+  "lastUpdated": "2026-06-09T03:34:30.885Z"
 }

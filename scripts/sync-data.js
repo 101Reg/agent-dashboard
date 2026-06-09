@@ -275,7 +275,10 @@ async function getNightShift() {
   try { canaryConfig = JSON.parse(configRaw || '{}').canary_evals || {}; } catch {}
   try { baselines = JSON.parse(baselinesRaw || '{}'); } catch {}
 
-  const mostRecentScores = {}; // agent -> { score, baseline, delta, date, stale }
+  // 2026-06-08: key by `${agent}::${prompt_id}` so multi-prompt agents (developer
+  // TC6/TC6b/TC7/TC8) don't collapse to a single score. The eval-canary loop below
+  // looks up by the config entry's agent+prompt_id, not the config key.
+  const mostRecentScores = {}; // `${agent}::${prompt_id}` -> { score, baseline, delta, date }
   for (const dir of dateDirs) {
     const evalFile = await safeReadFile(join(NIGHT_SHIFT_DIR, dir, 'eval-results.json'));
     if (!evalFile) continue;
@@ -283,8 +286,9 @@ async function getNightShift() {
       try {
         const entry = JSON.parse(line);
         if (entry.score == null || entry.score === 'null') continue;
-        if (mostRecentScores[entry.agent]) continue; // already have a newer entry
-        mostRecentScores[entry.agent] = {
+        const key = `${entry.agent}::${entry.prompt_id || 'TC1'}`;
+        if (mostRecentScores[key]) continue; // dirs walked newest-first → keep newest
+        mostRecentScores[key] = {
           score: parseFloat(entry.score),
           baseline: parseFloat(entry.baseline) || null,
           delta: parseFloat(entry.delta) || 0,
@@ -312,16 +316,20 @@ async function getNightShift() {
   const evalCanaries = [];
   const today = new Date();
   const configuredAgents = Object.keys(canaryConfig);
-  for (const agent of configuredAgents) {
-    const recent = mostRecentScores[agent];
-    const promptId = canaryConfig[agent].prompt_id || 'TC1';
-    const baselineEntry = baselines[agent] && baselines[agent][promptId];
+  for (const cfgKey of configuredAgents) {
+    // cfgKey is the config key (e.g. "developer-tc8"); resolve the real agent name
+    // + prompt_id it targets so scores/baselines (keyed by agent name) match.
+    const realAgent = canaryConfig[cfgKey].agent || cfgKey;
+    const promptId = canaryConfig[cfgKey].prompt_id || 'TC1';
+    const recent = mostRecentScores[`${realAgent}::${promptId}`];
+    const baselineEntry = baselines[realAgent] && baselines[realAgent][promptId];
     const baselineScore = baselineEntry ? baselineEntry.score : null;
 
     if (recent) {
       const ageDays = Math.floor((today - new Date(recent.date)) / 86400000);
       evalCanaries.push({
-        agent,
+        agent: cfgKey,
+        promptId,
         score: recent.score,
         baseline: recent.baseline != null ? recent.baseline : baselineScore,
         delta: recent.delta,
@@ -332,7 +340,8 @@ async function getNightShift() {
       });
     } else if (baselineScore != null) {
       evalCanaries.push({
-        agent,
+        agent: cfgKey,
+        promptId,
         score: baselineScore,
         baseline: baselineScore,
         delta: 0,
@@ -343,7 +352,7 @@ async function getNightShift() {
       });
     } else {
       evalCanaries.push({
-        agent, score: null, baseline: null, delta: 0,
+        agent: cfgKey, promptId, score: null, baseline: null, delta: 0,
         status: 'unscored', stale: true, source: 'none',
       });
     }

@@ -2933,6 +2933,7 @@
     "evalCanaries": [
       {
         "agent": "infra",
+        "promptId": "TC1",
         "score": 4.5,
         "baseline": 4.5,
         "delta": 0,
@@ -2943,6 +2944,7 @@
       },
       {
         "agent": "developer",
+        "promptId": "TC6",
         "score": 4.6,
         "baseline": 3.6,
         "delta": 1,
@@ -2953,6 +2955,7 @@
       },
       {
         "agent": "debug",
+        "promptId": "TC1",
         "score": 5,
         "baseline": 5,
         "delta": 0,
@@ -2963,6 +2966,7 @@
       },
       {
         "agent": "legal",
+        "promptId": "TC1",
         "score": 5,
         "baseline": 5,
         "delta": 0,
@@ -2973,6 +2977,7 @@
       },
       {
         "agent": "marketer",
+        "promptId": "TC1",
         "score": 4.6,
         "baseline": 4.6,
         "delta": 0,
@@ -2983,6 +2988,7 @@
       },
       {
         "agent": "night-shift",
+        "promptId": "TC1",
         "score": 4.8,
         "baseline": 5,
         "delta": -0.2,
@@ -2993,6 +2999,7 @@
       },
       {
         "agent": "research",
+        "promptId": "TC1",
         "score": 4.6,
         "baseline": 4.6,
         "delta": 0,
@@ -3003,6 +3010,7 @@
       },
       {
         "agent": "reviewer",
+        "promptId": "TC1",
         "score": 4.8,
         "baseline": 5,
         "delta": -0.2,
@@ -3013,39 +3021,47 @@
       },
       {
         "agent": "developer-tc7",
-        "score": null,
-        "baseline": null,
-        "delta": 0,
-        "status": "unscored",
-        "stale": true,
-        "source": "none"
+        "promptId": "TC7",
+        "score": 4.2,
+        "baseline": 5,
+        "delta": -0.8,
+        "status": "watch",
+        "lastRun": "2026-06-08",
+        "stale": false,
+        "source": "run"
       },
       {
         "agent": "developer-tc6b",
-        "score": null,
-        "baseline": null,
-        "delta": 0,
-        "status": "unscored",
-        "stale": true,
-        "source": "none"
+        "promptId": "TC6b",
+        "score": 4.8,
+        "baseline": 5,
+        "delta": -0.2,
+        "status": "ok",
+        "lastRun": "2026-06-08",
+        "stale": false,
+        "source": "run"
       },
       {
         "agent": "developer-tc8",
-        "score": null,
-        "baseline": null,
-        "delta": 0,
-        "status": "unscored",
-        "stale": true,
-        "source": "none"
+        "promptId": "TC8",
+        "score": 4.8,
+        "baseline": 5,
+        "delta": -0.2,
+        "status": "ok",
+        "lastRun": "2026-06-08",
+        "stale": false,
+        "source": "run"
       },
       {
         "agent": "reviewer-tc7",
-        "score": null,
-        "baseline": null,
-        "delta": 0,
-        "status": "unscored",
-        "stale": true,
-        "source": "none"
+        "promptId": "TC7",
+        "score": 4.2,
+        "baseline": 5,
+        "delta": -0.8,
+        "status": "watch",
+        "lastRun": "2026-06-08",
+        "stale": false,
+        "source": "run"
       }
     ],
     "frictionTrends": null,
@@ -3149,7 +3165,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 318
+      "tool_calls_30d": 320
     },
     {
       "id": "agent-os",
@@ -3170,7 +3186,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 858
+      "tool_calls_30d": 863
     },
     {
       "id": "dashboard",
@@ -3539,5 +3555,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-09T03:34:30.885Z"
+  "lastUpdated": "2026-06-09T03:38:17.822Z"
 }

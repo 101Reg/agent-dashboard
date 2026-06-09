@@ -2457,6 +2457,17 @@
         "events": []
       },
       {
+        "name": "the-desk",
+        "date": "2026-06-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "ringkultr-source-credit",
         "date": "2026-06-07",
         "fixAttempts": 0,
@@ -2526,6 +2537,23 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "38twelvedaily-vertical-migration",
+        "date": "2026-06-08",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "reviewer",
+            "detail": "reviewer final-summary verdict not surfaced — twice the returned final message was only a continuation opener, not the PASS/FAIL verdict des"
+          }
+        ]
       }
     ],
     "hasData": true
@@ -2549,7 +2577,7 @@
   "timeline": [
     {
       "date": "Jun 7, 2026",
-      "title": "Ringkultr Clipper Proxy Credit",
+      "title": "2 sessions",
       "desc": "Wired Webshare residential proxy into yt-dlp to beat YouTube's datacenter-IP bot gate; validated clipper end-to-end (4 clips), Set R2 30-day clips/ lifecycle rule for auto-cleanup, Shipped source-credit reply (Source: {channel} — {title}) under each posted clip",
       "active": true
     },
@@ -2772,6 +2800,12 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-06-08",
+      "text": "reviewer final-summary verdict not surfaced — twice the returned final message was only a continuation opener, not the PASS/FAIL verdict despite Final-Summary-Rules instruction; verdict had to be reconstructed via transcript parse + self-verify",
+      "context": "SubagentStop final-message hijack/resume-quirk; candidate_for bruce-proposal",
+      "high": false
+    },
+    {
       "date": "2026-06-07",
       "text": "Committed e62ce5f (engine prompt changes + kultrverse scaffold) without a reviewer spawn",
       "context": "commit gate per agent-delegation-triggers.md",
@@ -2791,8 +2825,26 @@
     },
     {
       "date": "2026-06-07",
+      "text": "similarity-cluster size=4",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-06-07",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-06-07",
       "text": "Burned 2 fix iterations verifying clip metadata through a lossy GET endpoint that dropped fields (capture worked all along); debug agent root-caused it. Also a CF d1 --remote auth wall (7403) and a stale-memory claim corrected inline. → 1 lessons saved",
       "context": "ringkultr-clipper-proxy-credit",
+      "high": false
+    },
+    {
+      "date": "2026-06-07",
+      "text": "3 runtime CF gotchas (1042 Worker-to-Worker, R2 token scope, NOT NULL) caught only at E2E; reviewer summary truncated 2x; false 'deploy verified' from an auth-gated 401 → 2 lessons saved",
+      "context": "the-desk",
       "high": false
     },
     {
@@ -2836,35 +2888,11 @@
       "text": "hook_catch x3",
       "context": "advisory — hook_catch-only friction surfaced for Bruce review; stop NOT blocked (hook_catches are already self-corrected by the per-response Stop hook and often cross-session)",
       "high": true
-    },
-    {
-      "date": "2026-06-04",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-06-04",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-06-04",
-      "text": "X 401 publish cost 5+ round-trips (my secret-name mismatch + wrong consumer keys, fixed via read-test isolation); dashboard shipped with Tailwind not compiling (lift dropped config) — caught by composed-verify + on-device screenshot; 3 hook_catches on third-party-platform assertions. → 3 lessons saved",
-      "context": "ringkultr-shared-engine-extraction",
-      "high": false
-    },
-    {
-      "date": "2026-06-03",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
     }
   ],
   "nightShift": {
     "status": "YELLOW",
-    "lastRun": "2026-06-07",
+    "lastRun": "2026-06-08",
     "findings": [
       "Global memory count is 104 (target: under 100). Run consolidation.",
       "WATCH: Eval Signal Rate — All canaries passing for 2+ weeks."
@@ -2980,7 +3008,7 @@
       }
     ],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-06-07\n\n## Status: YELLOW\n\n## Key Findings\n- Global memory count is 104 (target: under 100). Run consolidation.\n- WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\n\n## What Hero Worked On (7-day)\n- react: 5 sessions\n- cloudflare-workers: 4 sessions\n- d1: 4 sessions\n- dashboard: 4 sessions\n- typescript: 4 sessions\n\n## Agent Usage (7-day)\n- reviewer: 5 sessions\n- Explore: 3 sessions\n- developer: 3 sessions\n- Plan: 1 sessions\n- debug: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n104 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 2\n- escalations: 0\n- hook_catches: 8\n- re_explanations: 0\n- patterns_detected: 12\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (2d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n71 total, 55 accepted, 1 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 2 fix_attempts (14d) |\n| Proposal Hit Rate | 77% | 55/71 accepted |\n| Eval Signal | WATCH | 19 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-06-08\n\n## Status: YELLOW\n\n## Key Findings\n- Global memory count is 104 (target: under 100). Run consolidation.\n- WATCH: Eval Signal Rate — All canaries passing for 2+ weeks.\n\n## What Hero Worked On (7-day)\n- d1: 5 sessions\n- react: 5 sessions\n- typescript: 5 sessions\n- cloudflare-workers: 4 sessions\n- r2: 4 sessions\n\n## Agent Usage (7-day)\n- reviewer: 6 sessions\n- Explore: 5 sessions\n- developer: 3 sessions\n- debug: 2 sessions\n- Plan: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n104 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 2\n- escalations: 0\n- hook_catches: 10\n- re_explanations: 0\n- patterns_detected: 15\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (3d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n71 total, 55 accepted, 1 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 2 fix_attempts (14d) |\n| Proposal Hit Rate | 77% | 55/71 accepted |\n| Eval Signal | WATCH | 20 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -3005,7 +3033,7 @@
       {
         "name": "Eval Signal",
         "status": "WATCH",
-        "detail": "19 consecutive all-pass runs"
+        "detail": "20 consecutive all-pass runs"
       }
     ]
   },
@@ -3013,19 +3041,19 @@
     "hasData": true,
     "findings": [
       {
-        "heading": "Similarity cluster: pattern_detected (3 events, trigram)",
-        "observed": "3x (2026-05-09, 2026-06-01)",
+        "heading": "Similarity cluster: pattern_detected (4 events, trigram)",
+        "observed": "4x (2026-05-10, 2026-05-29, 2026-06-04, 2026-06-07)",
         "signature": "",
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
       },
       {
         "heading": "Similarity cluster: pattern_detected (3 events, trigram)",
-        "observed": "3x (2026-05-10, 2026-05-29, 2026-06-04)",
+        "observed": "3x (2026-05-09, 2026-06-01)",
         "signature": "",
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
       }
     ],
-    "generated": "2026-06-06 22:57"
+    "generated": "2026-06-07 23:27"
   },
   "consolidation": {
     "hasData": true,
@@ -3063,14 +3091,14 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 265
+      "tool_calls_30d": 275
     },
     {
       "id": "Claude-Projects",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 44
+      "tool_calls_30d": 45
     },
     {
       "id": "agent-dashboard",
@@ -3098,7 +3126,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 778
+      "tool_calls_30d": 792
     },
     {
       "id": "dashboard",
@@ -3108,18 +3136,11 @@
       "tool_calls_30d": 13
     },
     {
-      "id": "edge",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 112
-    },
-    {
       "id": "edge-v2",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 2696
+      "tool_calls_30d": 1672
     },
     {
       "id": "engine",
@@ -3143,13 +3164,6 @@
       "tool_calls_30d": 12
     },
     {
-      "id": "migrations",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 2
-    },
-    {
       "id": "packages",
       "friction_today": 0,
       "unresolved_gaps": 0,
@@ -3168,21 +3182,21 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 1501
+      "tool_calls_30d": 2010
     },
     {
       "id": "schemas",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 2
+      "tool_calls_30d": 1
     },
     {
       "id": "server",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 291
+      "tool_calls_30d": 248
     },
     {
       "id": "src",
@@ -3196,12 +3210,12 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 164
+      "tool_calls_30d": 151
     }
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 10,
+      "failures": 11,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
@@ -3213,11 +3227,6 @@
       "conversionPct": 64
     },
     "daily": [
-      {
-        "date": "2026-05-26",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-05-27",
         "failures": 0,
@@ -3280,6 +3289,11 @@
       },
       {
         "date": "2026-06-08",
+        "failures": 1,
+        "preventions": 0
+      },
+      {
+        "date": "2026-06-09",
         "failures": 0,
         "preventions": 0
       }
@@ -3288,13 +3302,13 @@
       {
         "session": "bruce-and-triage-batch",
         "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work",
-        "age_days": 10
+        "age_days": 11
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 10,
+      "patternsDetected": 11,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3303,7 +3317,7 @@
       "stageStatus": "dormant"
     },
     "lastWeek": {
-      "patternsDetected": 5,
+      "patternsDetected": 6,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3341,7 +3355,7 @@
     ],
     "stuckPatterns": [
       {
-        "heading": "Similarity cluster: pattern_detected (3 events, trigram)",
+        "heading": "Similarity cluster: pattern_detected (4 events, trigram)",
         "age_days": null
       },
       {
@@ -3352,19 +3366,18 @@
   },
   "preventionEfficacy": {
     "activePreventions": 2,
-    "avgEfficacy": 0.95,
+    "avgEfficacy": 0.9473684210526315,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 1,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.9473684210526315,
-        "fires30d": 19,
-        "valid": 18,
+        "efficacy": 0.9444444444444444,
+        "fires30d": 18,
+        "valid": 17,
         "invalid": 1,
         "sparkline": [
-          1,
           null,
           null,
           null,
@@ -3393,6 +3406,7 @@
           null,
           1,
           1,
+          null,
           null
         ],
         "last_fire_date": "2026-06-07"
@@ -3404,7 +3418,7 @@
         "valid": 1,
         "invalid": 0,
         "sparkline": [
-          1,
+          null,
           null,
           null,
           null,
@@ -3451,7 +3465,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "95% (19 fires/30d)",
+      "current": "94% (18 fires/30d)",
       "target": "stays ≥50%",
       "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -3475,11 +3489,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "10 this week (5 last)",
+      "current": "11 this week (6 last)",
       "target": "stay near or above last week",
       "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-08T01:44:18.380Z"
+  "lastUpdated": "2026-06-09T01:10:26.456Z"
 }

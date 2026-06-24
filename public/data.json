@@ -2770,14 +2770,42 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "desk-ig-reels-carousels",
+        "date": "2026-06-23",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-ig-reels-slice1",
+        "date": "2026-06-23",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated 'migrations applied, tables live' as fact from user's 'both are done' without independent remote-D1 verification"
+          }
+        ]
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 109,
+    "total": 111,
     "byType": {
-      "feedback": 46,
+      "feedback": 48,
       "project": 23,
       "user": 18,
       "reference": 20,
@@ -2792,10 +2820,16 @@
   },
   "timeline": [
     {
+      "date": "Jun 23, 2026",
+      "title": "Desk Ig Reels Carousels",
+      "desc": "Shipped IG Reels publishing (Slice 1) live on @kultrverse, Built + proved multi-video IG carousels (3-step container) live, Added X-video repost source + Incoming-clips surface + carousel-mode clip length",
+      "active": true
+    },
+    {
       "date": "Jun 21, 2026",
       "title": "Spoken Becoming Loop",
       "desc": "Shipped the Becoming Loop to Spoken prod: fixed silent data-loss on graduation 'add another', doubled 'someone who' identity text, and the 5-day graduation misfire, Built the user-pulled, ease-gated growth mechanism + per-identity journey record + constellation of closed-out identities, Added AI suggestions to the growth step (/api/grow) and the onboarding action step (/api/actions); tap-to-fill + editable",
-      "active": true
+      "active": false
     },
     {
       "date": "Jun 17, 2026",
@@ -3046,6 +3080,18 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-06-23",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-06-23",
+      "text": "3 IG integration bugs + 60s carousel-item cap + a runner-repo wrong-turn + a half-landed deploy — all diagnosed via source-of-truth/live-path tracing and fixed; nothing shipped broken → 3 lessons saved",
+      "context": "desk-ig-reels-carousels",
+      "high": false
+    },
+    {
       "date": "2026-06-21",
       "text": "similarity-cluster size=3",
       "context": "Layer 2 scanner — similarity cluster",
@@ -3122,25 +3168,13 @@
       "text": "Bruce dated-dir routing quirk caused empty reads mid-run (parked); stale status artifacts misled work 4x but were caught each time by ground-truth verification. → 5 lessons saved",
       "context": "agent-os-github-scan",
       "high": false
-    },
-    {
-      "date": "2026-06-14",
-      "text": "B3 flags cloudflare-deployment-verification as HIGH severity: 3 sessions in 7d hit CF runtime errors surfacing only at E",
-      "context": "Bruce proposal P-2026-06-14-001",
-      "high": true
-    },
-    {
-      "date": "2026-06-14",
-      "text": "B3 flags verification-through-untrusted-endpoints (MEDIUM): two distinct false-confidence detours in 7d — 'false deploy ",
-      "context": "Bruce proposal P-2026-06-14-002",
-      "high": true
     }
   ],
   "nightShift": {
     "status": "RED",
-    "lastRun": "2026-06-21",
+    "lastRun": "2026-06-23",
     "findings": [
-      "PIVOT: Eval Signal Rate — All canaries passing for 66 days across 21 runs. Evals too easy."
+      "PIVOT: Eval Signal Rate — All canaries passing for 65 days across 21 runs. Evals too easy."
     ],
     "evalCanaries": [
       {
@@ -3162,7 +3196,7 @@
         "delta": 1,
         "status": "ok",
         "lastRun": "2026-06-08",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3206,7 +3240,7 @@
         "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-06-08",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3228,7 +3262,7 @@
         "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-06-08",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3239,7 +3273,7 @@
         "delta": -0.8,
         "status": "watch",
         "lastRun": "2026-06-08",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3250,7 +3284,7 @@
         "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-06-08",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3261,7 +3295,7 @@
         "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-06-08",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3272,7 +3306,7 @@
         "delta": -0.8,
         "status": "watch",
         "lastRun": "2026-06-08",
-        "stale": false,
+        "stale": true,
         "source": "run"
       }
     ],
@@ -3280,7 +3314,7 @@
     "proposalCount": 0,
     "proposals": [],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-06-21\n\n## Status: RED\n\n## Key Findings\n- PIVOT: Eval Signal Rate — All canaries passing for 66 days across 21 runs. Evals too easy.\n\n## What Hero Worked On (7-day)\n- pwa: 3 sessions\n- svelte: 3 sessions\n- typescript: 3 sessions\n- cloudflare: 2 sessions\n- indexeddb: 2 sessions\n\n## Agent Usage (7-day)\n- Explore: 3 sessions\n- reviewer: 3 sessions\n- developer: 2 sessions\n- Plan: 1 sessions\n- debug: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n108 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 3\n- re_explanations: 0\n- patterns_detected: 5\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (16d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n79 total, 70 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 88% | 70/79 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-06-23\n\n## Status: RED\n\n## Key Findings\n- PIVOT: Eval Signal Rate — All canaries passing for 65 days across 21 runs. Evals too easy.\n\n## What Hero Worked On (7-day)\n- typescript: 4 sessions\n- pwa: 3 sessions\n- svelte: 3 sessions\n- agents: 2 sessions\n- cloudflare: 2 sessions\n\n## Agent Usage (7-day)\n- Explore: 4 sessions\n- reviewer: 4 sessions\n- developer: 3 sessions\n- Plan: 2 sessions\n- debug: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n110 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 3\n- re_explanations: 0\n- patterns_detected: 3\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (18d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n79 total, 70 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 88% | 70/79 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -3319,7 +3353,7 @@
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
       }
     ],
-    "generated": "2026-06-21 17:48"
+    "generated": "2026-06-23 11:22"
   },
   "consolidation": {
     "hasData": true,
@@ -3403,7 +3437,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 1083
+      "tool_calls_30d": 1095
     },
     {
       "id": "dashboard",
@@ -3459,7 +3493,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 2165
+      "tool_calls_30d": 2689
     },
     {
       "id": "spoken",
@@ -3478,28 +3512,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 6,
+      "failures": 2,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
     "lastWeek": {
-      "failures": 1,
-      "preventions": 15,
+      "failures": 6,
+      "preventions": 4,
       "autoInstalls": 0,
-      "conversionPct": 1500
+      "conversionPct": 67
     },
     "daily": [
-      {
-        "date": "2026-06-09",
-        "failures": 0,
-        "preventions": 11
-      },
-      {
-        "date": "2026-06-10",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-06-11",
         "failures": 0,
@@ -3559,13 +3583,23 @@
         "date": "2026-06-22",
         "failures": 0,
         "preventions": 0
+      },
+      {
+        "date": "2026-06-23",
+        "failures": 1,
+        "preventions": 0
+      },
+      {
+        "date": "2026-06-24",
+        "failures": 0,
+        "preventions": 0
       }
     ],
     "stuckFailures": [
       {
         "session": "bruce-and-triage-batch",
         "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work",
-        "age_days": 24
+        "age_days": 26
       }
     ]
   },
@@ -3580,7 +3614,7 @@
       "stageStatus": "dormant"
     },
     "lastWeek": {
-      "patternsDetected": 6,
+      "patternsDetected": 4,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3625,20 +3659,18 @@
   },
   "preventionEfficacy": {
     "activePreventions": 3,
-    "avgEfficacy": 0.8947368421052632,
+    "avgEfficacy": 0.9,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 0,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.9375,
-        "fires30d": 16,
-        "valid": 15,
+        "efficacy": 0.9411764705882353,
+        "fires30d": 17,
+        "valid": 16,
         "invalid": 1,
         "sparkline": [
-          null,
-          null,
           null,
           null,
           null,
@@ -3666,9 +3698,11 @@
           null,
           null,
           null,
+          null,
+          1,
           null
         ],
-        "last_fire_date": "2026-06-16"
+        "last_fire_date": "2026-06-23"
       },
       {
         "rule": "system-reminder-citation",
@@ -3691,9 +3725,9 @@
           null,
           null,
           null,
-          null,
-          null,
           0,
+          null,
+          null,
           null,
           null,
           null,
@@ -3737,10 +3771,10 @@
           null,
           null,
           null,
-          null,
-          null,
           1,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -3764,7 +3798,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "94% (16 fires/30d)",
+      "current": "94% (17 fires/30d)",
       "target": "stays ≥50%",
       "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -3788,11 +3822,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "2 this week (6 last)",
+      "current": "2 this week (4 last)",
       "target": "stay near or above last week",
-      "status": "red",
+      "status": "yellow",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-22T03:02:03.158Z"
+  "lastUpdated": "2026-06-24T03:40:36.311Z"
 }

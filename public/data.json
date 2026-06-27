@@ -2798,6 +2798,127 @@
             "detail": "Stated 'migrations applied, tables live' as fact from user's 'both are done' without independent remote-D1 verification"
           }
         ]
+      },
+      {
+        "name": "the-desk-ig-cover-carousel",
+        "date": "2026-06-26",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-revamp-p0-p1",
+        "date": "2026-06-26",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-revamp-p2",
+        "date": "2026-06-26",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-revamp-p3a",
+        "date": "2026-06-26",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-revamp-p3b",
+        "date": "2026-06-26",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-discover-d1",
+        "date": "2026-06-26",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "the-desk-d1-watchlist",
+        "date": "2026-06-26",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "the-desk-d1-d2-queue-d3",
+        "date": "2026-06-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "the-desk-d2-x-output",
+        "date": "2026-06-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "the-desk-queue-tab",
+        "date": "2026-06-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "the-desk-d3-rss-picker",
+        "date": "2026-06-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
@@ -2820,10 +2941,16 @@
   },
   "timeline": [
     {
+      "date": "Jun 27, 2026",
+      "title": "The Desk D1 D2 Queue D3",
+      "desc": "D1 watchlist manage view (add/remove/reorder/recategorize), D2 full X output composer (clips/news/photo→X + two-layer capability matrix), Queue tab — closed the HITL approve→publish loop in the cobalt shell",
+      "active": true
+    },
+    {
       "date": "Jun 23, 2026",
       "title": "Desk Ig Reels Carousels",
       "desc": "Shipped IG Reels publishing (Slice 1) live on @kultrverse, Built + proved multi-video IG carousels (3-step container) live, Added X-video repost source + Incoming-clips surface + carousel-mode clip length",
-      "active": true
+      "active": false
     },
     {
       "date": "Jun 21, 2026",
@@ -3080,6 +3207,30 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-06-27",
+      "text": "Explore gate blocked Reads mid-session (worked around via grep/sed/python); reviewer caught a thread-dup bug I introduced; 2 review agents idled without a verdict (pulled via SendMessage) → 3 lessons saved",
+      "context": "the-desk-d1-d2-queue-d3",
+      "high": false
+    },
+    {
+      "date": "2026-06-26",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-06-26",
+      "text": "adversarial reviewer caught a cross-file seam bug (R2 key prefix mismatch causing live-IG 404) that tsc+build could not — validates the adversarial-debug rule on new live-publish code",
+      "context": "P3b news-magazine",
+      "high": true
+    },
+    {
+      "date": "2026-06-25",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
       "date": "2026-06-23",
       "text": "similarity-cluster size=3",
       "context": "Layer 2 scanner — similarity cluster",
@@ -3144,37 +3295,13 @@
       "text": "ESM runtime crash + iOS PWA storage reset + non-extractable-key backup failure — all caught by live smoke tests, not code review; one developer agent stalled (600s watchdog) and the fix was finished main-thread → 3 lessons saved",
       "context": "spoken-build",
       "high": false
-    },
-    {
-      "date": "2026-06-15",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-06-14",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-06-14",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-06-14",
-      "text": "Bruce dated-dir routing quirk caused empty reads mid-run (parked); stale status artifacts misled work 4x but were caught each time by ground-truth verification. → 5 lessons saved",
-      "context": "agent-os-github-scan",
-      "high": false
     }
   ],
   "nightShift": {
     "status": "RED",
-    "lastRun": "2026-06-23",
+    "lastRun": "2026-06-27",
     "findings": [
-      "PIVOT: Eval Signal Rate — All canaries passing for 65 days across 21 runs. Evals too easy."
+      "PIVOT: Eval Signal Rate — All canaries passing for 68 days across 21 runs. Evals too easy."
     ],
     "evalCanaries": [
       {
@@ -3314,7 +3441,7 @@
     "proposalCount": 0,
     "proposals": [],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-06-23\n\n## Status: RED\n\n## Key Findings\n- PIVOT: Eval Signal Rate — All canaries passing for 65 days across 21 runs. Evals too easy.\n\n## What Hero Worked On (7-day)\n- typescript: 4 sessions\n- pwa: 3 sessions\n- svelte: 3 sessions\n- agents: 2 sessions\n- cloudflare: 2 sessions\n\n## Agent Usage (7-day)\n- Explore: 4 sessions\n- reviewer: 4 sessions\n- developer: 3 sessions\n- Plan: 2 sessions\n- debug: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n110 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 3\n- re_explanations: 0\n- patterns_detected: 3\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (18d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n79 total, 70 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 88% | 70/79 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-06-27\n\n## Status: RED\n\n## Key Findings\n- PIVOT: Eval Signal Rate — All canaries passing for 68 days across 21 runs. Evals too easy.\n\n## What Hero Worked On (7-day)\n- typescript: 3 sessions\n- agents: 2 sessions\n- cloudflare-workers: 2 sessions\n- d1: 2 sessions\n- react: 2 sessions\n\n## Agent Usage (7-day)\n- Explore: 3 sessions\n- reviewer: 3 sessions\n- developer: 2 sessions\n- Plan: 1 sessions\n- general-purpose: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n110 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 1\n- re_explanations: 0\n- patterns_detected: 5\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (22d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n79 total, 70 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 88% | 70/79 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -3353,7 +3480,7 @@
         "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
       }
     ],
-    "generated": "2026-06-23 11:22"
+    "generated": "2026-06-26 14:44"
   },
   "consolidation": {
     "hasData": true,
@@ -3437,7 +3564,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 1095
+      "tool_calls_30d": 1110
     },
     {
       "id": "dashboard",
@@ -3465,7 +3592,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 12
+      "tool_calls_30d": 34
     },
     {
       "id": "packages",
@@ -3493,7 +3620,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 2689
+      "tool_calls_30d": 3935
     },
     {
       "id": "spoken",
@@ -3503,11 +3630,25 @@
       "tool_calls_30d": 1402
     },
     {
+      "id": "the-desk",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 0
+    },
+    {
       "id": "tmp",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
       "tool_calls_30d": 7
+    },
+    {
+      "id": "youtube-clipper",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 0
     }
   ],
   "failureToPrevention": {
@@ -3524,21 +3665,6 @@
       "conversionPct": 67
     },
     "daily": [
-      {
-        "date": "2026-06-11",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-06-12",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-06-13",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-06-14",
         "failures": 0,
@@ -3593,19 +3719,34 @@
         "date": "2026-06-24",
         "failures": 0,
         "preventions": 0
+      },
+      {
+        "date": "2026-06-25",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-06-26",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-06-27",
+        "failures": 0,
+        "preventions": 0
       }
     ],
     "stuckFailures": [
       {
         "session": "bruce-and-triage-batch",
         "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work",
-        "age_days": 26
+        "age_days": 29
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 2,
+      "patternsDetected": 5,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3671,9 +3812,6 @@
         "valid": 16,
         "invalid": 1,
         "sparkline": [
-          null,
-          null,
-          null,
           1,
           null,
           1,
@@ -3700,6 +3838,9 @@
           null,
           null,
           1,
+          null,
+          null,
+          null,
           null
         ],
         "last_fire_date": "2026-06-23"
@@ -3722,10 +3863,10 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
           0,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -3768,11 +3909,11 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
           1,
           1,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -3822,11 +3963,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "2 this week (4 last)",
+      "current": "5 this week (4 last)",
       "target": "stay near or above last week",
-      "status": "yellow",
+      "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-24T03:40:36.311Z"
+  "lastUpdated": "2026-06-27T06:59:16.033Z"
 }

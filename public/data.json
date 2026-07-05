@@ -2076,15 +2076,10 @@
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 1,
+        "capabilityGaps": 0,
         "toilEvents": 0,
         "hookCatches": 4,
         "events": [
-          {
-            "event": "capability_gap",
-            "agent": "developer-subagent",
-            "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work"
-          },
           {
             "event": "hook_catch",
             "agent": "stop-hook",
@@ -3730,12 +3725,12 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 39
+      "tool_calls_30d": 44
     },
     {
       "id": "agent-os",
       "friction_today": 0,
-      "unresolved_gaps": 2,
+      "unresolved_gaps": 1,
       "templates_used": 1,
       "tool_calls_30d": 0
     },
@@ -3889,11 +3884,6 @@
       }
     ],
     "stuckFailures": [
-      {
-        "session": "bruce-and-triage-batch",
-        "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work",
-        "age_days": 37
-      },
       {
         "session": "desk-debrief-recovery",
         "detail": "/learn session-end debrief was skipped for 3 desk sessions on 2026-06-28 (desk-batch-queue, desk-sibling-ig, desk-ig-crosspost) — agent_depl",
@@ -4107,7 +4097,7 @@
     {
       "id": "stuck-failures",
       "title": "Stuck failures resolved",
-      "current": "2 stuck",
+      "current": "1 stuck",
       "target": "reduce by ≥1 this week",
       "status": "yellow",
       "why": "Failures aged ≥7 days without prevention or resolution. Check Verb 1 carousel."
@@ -4121,5 +4111,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-07-05T17:49:49.436Z"
+  "lastUpdated": "2026-07-05T21:03:22.532Z"
 }

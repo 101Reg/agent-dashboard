@@ -3038,23 +3038,6 @@
         ]
       },
       {
-        "name": "desk-debrief-recovery",
-        "date": "2026-06-28",
-        "fixAttempts": 0,
-        "escalations": 0,
-        "reExplanations": 0,
-        "capabilityGaps": 1,
-        "toilEvents": 0,
-        "hookCatches": 0,
-        "events": [
-          {
-            "event": "capability_gap",
-            "agent": "main-thread",
-            "detail": "/learn session-end debrief was skipped for 3 desk sessions on 2026-06-28 (desk-batch-queue, desk-sibling-ig, desk-ig-crosspost) — agent_depl"
-          }
-        ]
-      },
-      {
         "name": "desk-queue-backlog-fix",
         "date": "2026-06-28",
         "fixAttempts": 0,
@@ -3725,12 +3708,12 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 44
+      "tool_calls_30d": 46
     },
     {
       "id": "agent-os",
       "friction_today": 0,
-      "unresolved_gaps": 1,
+      "unresolved_gaps": 0,
       "templates_used": 1,
       "tool_calls_30d": 0
     },
@@ -3883,13 +3866,7 @@
         "preventions": 3
       }
     ],
-    "stuckFailures": [
-      {
-        "session": "desk-debrief-recovery",
-        "detail": "/learn session-end debrief was skipped for 3 desk sessions on 2026-06-28 (desk-batch-queue, desk-sibling-ig, desk-ig-crosspost) — agent_depl",
-        "age_days": 7
-      }
-    ]
+    "stuckFailures": []
   },
   "patternToTemplate": {
     "thisWeek": {
@@ -4097,9 +4074,9 @@
     {
       "id": "stuck-failures",
       "title": "Stuck failures resolved",
-      "current": "1 stuck",
+      "current": "0 stuck",
       "target": "reduce by ≥1 this week",
-      "status": "yellow",
+      "status": "green",
       "why": "Failures aged ≥7 days without prevention or resolution. Check Verb 1 carousel."
     },
     {
@@ -4111,5 +4088,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-07-05T21:03:22.532Z"
+  "lastUpdated": "2026-07-05T21:05:56.123Z"
 }

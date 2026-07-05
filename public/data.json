@@ -2919,6 +2919,173 @@
         "toilEvents": 0,
         "hookCatches": 0,
         "events": []
+      },
+      {
+        "name": "desk-dogfood-ux",
+        "date": "2026-06-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-discover-direct-post",
+        "date": "2026-06-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-clipper-rebuild",
+        "date": "2026-06-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-c-batch",
+        "date": "2026-06-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-p7-cutover",
+        "date": "2026-06-27",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-p5-sibling-parity",
+        "date": "2026-06-28",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-sibling-ig",
+        "date": "2026-06-28",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 2,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Asserted Meta dashboard menu paths + 'Instagram-vs-Facebook = #1 reason OAuth fails' + Show-button/password UI behavior on a third-party UI "
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "2nd same-session catch: described App settings>Basic page CONTENTS + Show-button/password behavior I hadn't seen (only the sidebar was visib"
+          }
+        ]
+      },
+      {
+        "name": "desk-batch-queue",
+        "date": "2026-06-28",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Flagged '6 debug agents' as un-evidenced stat. Count is accurate (6 debug agents were spawned in the P7 sweep earlier this session) but it's"
+          }
+        ]
+      },
+      {
+        "name": "desk-ig-crosspost",
+        "date": "2026-06-28",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated 'carousels crosspost differently' (Meta carousel vs reel crosspost behavior) as fact in a parenthetical, unhedged + unverified"
+          }
+        ]
+      },
+      {
+        "name": "desk-debrief-recovery",
+        "date": "2026-06-28",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "/learn session-end debrief was skipped for 3 desk sessions on 2026-06-28 (desk-batch-queue, desk-sibling-ig, desk-ig-crosspost) — agent_depl"
+          }
+        ]
+      },
+      {
+        "name": "desk-queue-backlog-fix",
+        "date": "2026-06-28",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-hardening-fable",
+        "date": "2026-07-01",
+        "fixAttempts": 1,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "fix_attempt",
+            "agent": "main-thread",
+            "detail": "38tD migration failed on guessed DB name 38twelvedaily-db — actual name 38twelve-daily-db (hyphenated); fixed by reading wrangler.toml"
+          }
+        ]
       }
     ],
     "hasData": true
@@ -3207,6 +3374,36 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-07-02",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-07-01",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
+      "date": "2026-06-28",
+      "text": "hook_catch x3",
+      "context": "advisory — hook_catch-only friction surfaced for Bruce review; stop NOT blocked (hook_catches are already self-corrected by the per-response Stop hook and often cross-session)",
+      "high": true
+    },
+    {
+      "date": "2026-06-28",
+      "text": "/learn session-end debrief was skipped for 3 desk sessions on 2026-06-28 (desk-batch-queue, desk-sibling-ig, desk-ig-crosspost) — agent_deployment backfilled from memory; surprises + attribution unrecoverable (not fabricated). Project memory + git were intact",
+      "context": "agent-deployment-tracking.md: debrief is NOT optional, BEFORE session close — inline-loop slip",
+      "high": false
+    },
+    {
+      "date": "2026-06-27",
+      "text": "similarity-cluster size=3",
+      "context": "Layer 2 scanner — similarity cluster",
+      "high": true
+    },
+    {
       "date": "2026-06-27",
       "text": "Explore gate blocked Reads mid-session (worked around via grep/sed/python); reviewer caught a thread-dup bug I introduced; 2 review agents idled without a verdict (pulled via SendMessage) → 3 lessons saved",
       "context": "the-desk-d1-d2-queue-d3",
@@ -3265,43 +3462,34 @@
       "text": "C2 reviewer-gate hook only recognizes reviewer agent_deployment as a standalone/top-level event, not when nested in an agents_used array; blocked vercel deploy repeatedly despite a logged reviewer PASS, cost multiple turns",
       "context": "deploy after pressure-test fixes",
       "high": false
-    },
-    {
-      "date": "2026-06-17",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-06-17",
-      "text": "Reviewer-gate hook didn't recognize reviewer events nested in an agents_used array, blocked vercel deploy repeatedly; a bare deploy command inherited the wrong cwd and shipped the relay folder to a junk project; 2 early stop-hook claim catches on iOS platform claims. → 4 lessons saved",
-      "context": "spoken-pressure-test-and-fixes",
-      "high": false
-    },
-    {
-      "date": "2026-06-16",
-      "text": "after 2 failed fixes on the Vercel FUNCTION_INVOCATION_FAILED crash, trigger #1 says spawn debug — diagnosed main-thread via vercel logs instead; worked but skipped the rule",
-      "context": "delegation-trigger slip",
-      "high": false
-    },
-    {
-      "date": "2026-06-16",
-      "text": "recurring this session: (1) subagent final-summary truncation lost verdicts (3-4x re-pulls); (2) reviewer-gate blind to subagent reviews because reviewers don't self-log agent_deployment; (3) CF Bot-Fight 1010 made python-urllib a false-negative smoke tool",
-      "context": "Step 7b feedback — systemic frictions costing turns",
-      "high": false
-    },
-    {
-      "date": "2026-06-16",
-      "text": "ESM runtime crash + iOS PWA storage reset + non-extractable-key backup failure — all caught by live smoke tests, not code review; one developer agent stalled (600s watchdog) and the fix was finished main-thread → 3 lessons saved",
-      "context": "spoken-build",
-      "high": false
     }
   ],
   "nightShift": {
     "status": "RED",
-    "lastRun": "2026-06-27",
+    "lastRun": "2026-07-05",
     "findings": [
-      "PIVOT: Eval Signal Rate — All canaries passing for 68 days across 21 runs. Evals too easy."
+      "CONSOLIDATION: Rule Overlap: agent-delegation-triggers.md <-> cloudflare-deploy.md (37% shared directives) — Files: `/Users/reggie/.claude/rules/agent-delegation-triggers.md`, `/Users/reggie/.claude/rules/cloudflare-deploy.md`",
+      "CONSOLIDATION: Stale Hook: chief-of-staff — Last fired: 2026-04-05 (91 days ago)",
+      "CONSOLIDATION: Stale Hook: code-accuracy — Last fired: 2026-04-19 (77 days ago)",
+      "ESTABLISHING: developer TC8 scored 4.6 (baseline not yet set — calibrating, no regression flag)",
+      "ESTABLISHING: reviewer TC7 scored 5.0 (baseline not yet set — calibrating, no regression flag)",
+      "PATTERN: Same-file churn — No files with >= 5 edits in a session that also had >= 2 fix_attempts (last 14 days)",
+      "PIVOT: Eval Signal Rate — All canaries passing for 75 days across 21 runs. Evals too easy.",
+      "WATCH: developer TC7 scored 4.2 (baseline 5.0, delta -0.80)",
+      "ERROR: developer TC6 returned empty output — possible budget exhaustion or API timeout",
+      "ERROR: developer TC6b returned empty output — possible budget exhaustion or API timeout",
+      "ERROR: developer TC7 returned empty output — possible budget exhaustion or API timeout",
+      "ERROR: developer TC8 returned empty output — possible budget exhaustion or API timeout",
+      "ERROR: night-shift TC1 returned empty output — possible budget exhaustion or API timeout",
+      "ERROR: reviewer TC1 returned empty output — possible budget exhaustion or API timeout",
+      "ERROR: reviewer TC7 returned empty output — possible budget exhaustion or API timeout",
+      "ERROR: Canary eval MISSING for developer (developer/TC6) — configured but produced no score",
+      "ERROR: Canary eval MISSING for developer-tc6b (developer/TC6b) — configured but produced no score",
+      "ERROR: Canary eval MISSING for developer-tc7 (developer/TC7) — configured but produced no score",
+      "ERROR: Canary eval MISSING for developer-tc8 (developer/TC8) — configured but produced no score",
+      "ERROR: Canary eval MISSING for night-shift (night-shift/TC1) — configured but produced no score",
+      "ERROR: Canary eval MISSING for reviewer (reviewer/TC1) — configured but produced no score",
+      "ERROR: Canary eval MISSING for reviewer-tc7 (reviewer/TC7) — configured but produced no score"
     ],
     "evalCanaries": [
       {
@@ -3322,8 +3510,8 @@
         "baseline": 3.6,
         "delta": 1,
         "status": "ok",
-        "lastRun": "2026-06-08",
-        "stale": true,
+        "lastRun": "2026-07-05",
+        "stale": false,
         "source": "run"
       },
       {
@@ -3362,12 +3550,12 @@
       {
         "agent": "night-shift",
         "promptId": "TC1",
-        "score": 4.8,
+        "score": 5,
         "baseline": 5,
-        "delta": -0.2,
+        "delta": 0,
         "status": "ok",
-        "lastRun": "2026-06-08",
-        "stale": true,
+        "lastRun": "2026-07-05",
+        "stale": false,
         "source": "run"
       },
       {
@@ -3384,12 +3572,12 @@
       {
         "agent": "reviewer",
         "promptId": "TC1",
-        "score": 4.8,
+        "score": 5,
         "baseline": 5,
-        "delta": -0.2,
+        "delta": 0,
         "status": "ok",
-        "lastRun": "2026-06-08",
-        "stale": true,
+        "lastRun": "2026-07-05",
+        "stale": false,
         "source": "run"
       },
       {
@@ -3399,8 +3587,8 @@
         "baseline": 5,
         "delta": -0.8,
         "status": "watch",
-        "lastRun": "2026-06-08",
-        "stale": true,
+        "lastRun": "2026-07-05",
+        "stale": false,
         "source": "run"
       },
       {
@@ -3410,53 +3598,78 @@
         "baseline": 5,
         "delta": -0.2,
         "status": "ok",
-        "lastRun": "2026-06-08",
-        "stale": true,
+        "lastRun": "2026-07-05",
+        "stale": false,
         "source": "run"
       },
       {
         "agent": "developer-tc8",
         "promptId": "TC8",
-        "score": 4.8,
+        "score": 4.6,
         "baseline": 5,
-        "delta": -0.2,
+        "delta": -0.4,
         "status": "ok",
-        "lastRun": "2026-06-08",
-        "stale": true,
+        "lastRun": "2026-07-05",
+        "stale": false,
         "source": "run"
       },
       {
         "agent": "reviewer-tc7",
         "promptId": "TC7",
-        "score": 4.2,
+        "score": 5,
         "baseline": 5,
-        "delta": -0.8,
-        "status": "watch",
-        "lastRun": "2026-06-08",
-        "stale": true,
+        "delta": 0,
+        "status": "ok",
+        "lastRun": "2026-07-05",
+        "stale": false,
         "source": "run"
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 0,
-    "proposals": [],
+    "proposalCount": 4,
+    "proposals": [
+      {
+        "id": "P-2026-07-05-001",
+        "category": "unknown",
+        "problem": "7 of tonight's task calls returned empty output (developer TC6/TC6b/TC7/TC8, night-shift TC1, reviewer TC1/TC7) with 'possible budget exhaustion or API timeout', cascading into 7 MISSING canary scores. Prior 7-day history shows 5 of 6 runs RED (2026-06-16 through 2026-06-27), suggesting this is a recurring pipeline failure, not a one-off. The Night Shift pipeline currently treats an empty subprocess response as terminal instead of distinguishing timeout from budget exhaustion and retrying.",
+        "solution": "In ~/.claude/night-shift/pipeline (canary eval runner stage), add: (1) detection of empty output with explicit cause classification (check remaining token budget before dispatch, capture HTTP timeout vs 200-with-empty-body), (2) one automatic retry with exponential backoff and a reduced-scope prompt for empty responses, (3) if retry fails, emit a 'canary_inconclusive' score of null with reason code rather than 'MISSING', so downstream RED/YELLOW grading can distinguish infrastructure failure from eval failure."
+      },
+      {
+        "id": "P-2026-07-05-002",
+        "category": "unknown",
+        "problem": "Finding 'PIVOT: Eval Signal Rate' — all canaries have passed for 75 consecutive days across 21 runs (consecutive_all_pass=21, all_pass_streak_days=75). Evals that never fail provide zero regression signal; tonight the only non-pass outcomes were MISSING due to infra errors, not eval difficulty. Meanwhile real capability gaps still occur (capability_gaps_7d=1, attributed to main-thread debrief slip per capability_gap_attribution).",
+        "solution": "In ~/.claude/evals/canaries/, harden the two highest-traffic suites first: developer/TC6-TC8 and reviewer/TC1/TC7. Add one adversarial variant per test case targeting known weak spots from A1 data — e.g., a developer canary requiring correct agent-deployment debrief per agent-deployment-tracking.md (the exact inline-loop slip attributed to main-thread), and a reviewer canary with a subtle unverified claim to exercise pre-response-claim-audit behavior. Target a canary pass rate of 80-95% rather than 100%."
+      },
+      {
+        "id": "P-2026-07-05-003",
+        "category": "unknown",
+        "problem": "B6 consolidation found 5 findings including: rule overlap between agent-delegation-triggers.md and cloudflare-deploy.md (37% shared directives), and 4 stale hooks — chief-of-staff last fired 91 days ago (2026-04-05) and code-accuracy last fired 77 days ago (2026-04-19). Stale hooks add per-session evaluation overhead with zero catches; overlapping rules risk divergent updates.",
+        "solution": "Merge the 37% shared directives from /Users/reggie/.claude/rules/cloudflare-deploy.md into /Users/reggie/.claude/rules/agent-delegation-triggers.md (keeping deploy-specific content in cloudflare-deploy.md with a cross-reference), and move the chief-of-staff and code-accuracy hooks to a disabled/archive state in ~/.claude/hooks/ with a 30-day reactivation note rather than deleting them outright."
+      },
+      {
+        "id": "P-2026-07-05-004",
+        "category": "unknown",
+        "problem": "hook_rule_fp_rate_7d shows pre-response-claim-audit at 25% false-positive rate (1 FP of 4 fires). With only 3 valid catches per week, each false positive materially erodes trust in the hook and trains the main thread to dismiss its output. Additionally, the single capability gap this week was a main-thread process slip ('debrief is NOT optional, BEFORE session close' per agent-deployment-tracking.md), indicating the rule's trigger placement isn't binding at session close.",
+        "solution": "In ~/.claude/rules/ (or hooks config for pre-response-claim-audit): tighten the claim-audit trigger to exclude the pattern class that produced the false positive (review the tagged FP event from A1 to identify it), and amend /Users/reggie/.claude/rules/agent-deployment-tracking.md to add an explicit session-close checkpoint directive ('before ending any session with agent deployments, emit debrief block') so the debrief requirement fires at close rather than relying on inline recall."
+      }
+    ],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-06-27\n\n## Status: RED\n\n## Key Findings\n- PIVOT: Eval Signal Rate — All canaries passing for 68 days across 21 runs. Evals too easy.\n\n## What Hero Worked On (7-day)\n- typescript: 3 sessions\n- agents: 2 sessions\n- cloudflare-workers: 2 sessions\n- d1: 2 sessions\n- react: 2 sessions\n\n## Agent Usage (7-day)\n- Explore: 3 sessions\n- reviewer: 3 sessions\n- developer: 2 sessions\n- Plan: 1 sessions\n- general-purpose: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n110 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 1\n- re_explanations: 0\n- patterns_detected: 5\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (22d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n79 total, 70 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 88% | 70/79 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-07-05\n\n## Status: RED\n\n## Key Findings\n- CONSOLIDATION: Rule Overlap: agent-delegation-triggers.md <-> cloudflare-deploy.md (37% shared directives) — Files: `/Users/reggie/.claude/rules/agent-delegation-triggers.md`, `/Users/reggie/.claude/rules/cloudflare-deploy.md`\n- CONSOLIDATION: Stale Hook: chief-of-staff — Last fired: 2026-04-05 (91 days ago)\n- CONSOLIDATION: Stale Hook: code-accuracy — Last fired: 2026-04-19 (77 days ago)\n- ESTABLISHING: developer TC8 scored 4.6 (baseline not yet set — calibrating, no regression flag)\n- ESTABLISHING: reviewer TC7 scored 5.0 (baseline not yet set — calibrating, no regression flag)\n- PATTERN: Same-file churn — No files with >= 5 edits in a session that also had >= 2 fix_attempts (last 14 days)\n- PIVOT: Eval Signal Rate — All canaries passing for 75 days across 21 runs. Evals too easy.\n- WATCH: developer TC7 scored 4.2 (baseline 5.0, delta -0.80)\n- ERROR: developer TC6 returned empty output — possible budget exhaustion or API timeout\n- ERROR: developer TC6b returned empty output — possible budget exhaustion or API timeout\n- ERROR: developer TC7 returned empty output — possible budget exhaustion or API timeout\n- ERROR: developer TC8 returned empty output — possible budget exhaustion or API timeout\n- ERROR: night-shift TC1 returned empty output — possible budget exhaustion or API timeout\n- ERROR: reviewer TC1 returned empty output — possible budget exhaustion or API timeout\n- ERROR: reviewer TC7 returned empty output — possible budget exhaustion or API timeout\n- ERROR: Canary eval MISSING for developer (developer/TC6) — configured but produced no score\n- ERROR: Canary eval MISSING for developer-tc6b (developer/TC6b) — configured but produced no score\n- ERROR: Canary eval MISSING for developer-tc7 (developer/TC7) — configured but produced no score\n- ERROR: Canary eval MISSING for developer-tc8 (developer/TC8) — configured but produced no score\n- ERROR: Canary eval MISSING for night-shift (night-shift/TC1) — configured but produced no score\n- ERROR: Canary eval MISSING for reviewer (reviewer/TC1) — configured but produced no score\n- ERROR: Canary eval MISSING for reviewer-tc7 (reviewer/TC7) — configured but produced no score\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 4.6 | 3.6 | 1.00 | ok |\n| developer | 4.8 | 5.0 | -0.20 | ok |\n| developer | 4.2 | 5.0 | -0.80 | watch |\n| developer | 4.6 | 5.0 | -0.40 | ok |\n| night-shift | 5.0 | 5.0 | 0.00 | ok |\n| reviewer | 5.0 | 5.0 | 0.00 | ok |\n| reviewer | 5.0 | 5.0 | 0.00 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n110 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 1\n- escalations: 0\n- hook_catches: 4\n- re_explanations: 0\n- patterns_detected: 3\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (30d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\n# Proposals — 2026-07-05\n\n## P-2026-07-05-001: self_improvement\n\n**Problem:** 7 of tonight's task calls returned empty output (developer TC6/TC6b/TC7/TC8, night-shift TC1, reviewer TC1/TC7) with 'possible budget exhaustion or API timeout', cascading into 7 MISSING canary scores. Prior 7-day history shows 5 of 6 runs RED (2026-06-16 through 2026-06-27), suggesting this is a recurring pipeline failure, not a one-off. The Night Shift pipeline currently treats an empty subprocess response as terminal instead of distinguishing timeout from budget exhaustion and retrying.\n\n**Solution:** In ~/.claude/night-shift/pipeline (canary eval runner stage), add: (1) detection of empty output with explicit cause classification (check remaining token budget before dispatch, capture HTTP timeout vs 200-with-empty-body), (2) one automatic retry with exponential backoff and a reduced-scope prompt for empty responses, (3) if retry fails, emit a 'canary_inconclusive' score of null with reason code rather than 'MISSING', so downstream RED/YELLOW grading can distinguish infrastructure failure from eval failure.\n\n**Impact:** Recovers most of the 7 lost canary scores per run, converts spurious REDs caused by infrastructure flakiness into accurate grades, and gives Bruce structured cause data (budget vs timeout) to propose targeted fixes in future runs instead of guessing.\n\n**Risk:** Retries double API cost on genuinely budget-exhausted nights, potentially worsening exhaustion; mitigate by checking budget headroom before retry. Misclassifying a real eval failure as 'inconclusive' could hide a true regression.\n\n## P-2026-07-05-002: eval_evolution\n\n**Problem:** Finding 'PIVOT: Eval Signal Rate' — all canaries have passed for 75 consecutive days across 21 runs (consecutive_all_pass=21, all_pass_streak_days=75). Evals that never fail provide zero regression signal; tonight the only non-pass outcomes were MISSING due to infra errors, not eval difficulty. Meanwhile real capability gaps still occur (capability_gaps_7d=1, attributed to main-thread debrief slip per capability_gap_attribution).\n\n**Solution:** In ~/.claude/evals/canaries/, harden the two highest-traffic suites first: developer/TC6-TC8 and reviewer/TC1/TC7. Add one adversarial variant per test case targeting known weak spots from A1 data — e.g., a developer canary requiring correct agent-deployment debrief per agent-deployment-tracking.md (the exact inline-loop slip attributed to main-thread), and a reviewer canary with a subtle unverified claim to exercise pre-response-claim-audit behavior. Target a canary pass rate of 80-95% rather than 100%.\n\n**Impact:** Restores discriminative power to the eval suite so regressions are detected before they hit production sessions; ties eval content directly to the one real capability gap observed this week.\n\n**Risk:** Overly hard canaries could flip the system to chronic RED and cause alert fatigue; new variants must be calibrated against 2-3 baseline runs before being made grading-relevant.\n\n## P-2026-07-05-003: memory_consolidation\n\n**Problem:** B6 consolidation found 5 findings including: rule overlap between agent-delegation-triggers.md and cloudflare-deploy.md (37% shared directives), and 4 stale hooks — chief-of-staff last fired 91 days ago (2026-04-05) and code-accuracy last fired 77 days ago (2026-04-19). Stale hooks add per-session evaluation overhead with zero catches; overlapping rules risk divergent updates.\n\n**Solution:** Merge the 37% shared directives from /Users/reggie/.claude/rules/cloudflare-deploy.md into /Users/reggie/.claude/rules/agent-delegation-triggers.md (keeping deploy-specific content in cloudflare-deploy.md with a cross-reference), and move the chief-of-staff and code-accuracy hooks to a disabled/archive state in ~/.claude/hooks/ with a 30-day reactivation note rather than deleting them outright.\n\n**Impact:** Reduces rule-maintenance divergence risk, trims dead-weight hook evaluation from every session, and shrinks the surface Bruce must audit each night (stale_hooks metric drops from 4 toward 0).\n\n**Risk:** A stale hook may be dormant-but-load-bearing for a rare workflow (e.g., code-accuracy firing only during specific review types); archiving with a reactivation note rather than deletion mitigates but does not eliminate this.\n\n## P-2026-07-05-004: agent_methodology\n\n**Problem:** hook_rule_fp_rate_7d shows pre-response-claim-audit at 25% false-positive rate (1 FP of 4 fires). With only 3 valid catches per week, each false positive materially erodes trust in the hook and trains the main thread to dismiss its output. Additionally, the single capability gap this week was a main-thread process slip ('debrief is NOT optional, BEFORE session close' per agent-deployment-tracking.md), indicating the rule's trigger placement isn't binding at session close.\n\n**Solution:** In ~/.claude/rules/ (or hooks config for pre-response-claim-audit): tighten the claim-audit trigger to exclude the pattern class that produced the false positive (review the tagged FP event from A1 to identify it), and amend /Users/reggie/.claude/rules/agent-deployment-tracking.md to add an explicit session-close checkpoint directive ('before ending any session with agent deployments, emit debrief block') so the debrief requirement fires at close rather than relying on inline recall.\n\n**Impact:** FP rate drops toward 0% preserving hook credibility, and the one recurring main-thread capability gap (skipped debriefs) gets a structural checkpoint instead of relying on memory.\n\n**Risk:** Narrowing the claim-audit trigger too far could suppress valid catches (only 3/week valid — small sample means tuning on n=1 FP is noisy); monitor hook_catches_valid_7d for two weeks after the change to detect suppression.\n\n## Proposal Track Record\n83 total, 70 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 88% | 70/79 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 79,
+      "total": 83,
       "accepted": 70,
-      "pending": 0,
+      "pending": 4,
       "rejected": 7
     },
     "benchmarks": [
       {
         "name": "Friction Rate",
         "status": "OK",
-        "detail": "0 fix_attempts (14d)"
+        "detail": "1 fix_attempts (14d)"
       },
       {
         "name": "Proposal Hit Rate",
@@ -3472,15 +3685,8 @@
   },
   "patterns": {
     "hasData": true,
-    "findings": [
-      {
-        "heading": "Similarity cluster: pattern_detected (3 events, trigram)",
-        "observed": "3x (2026-05-29, 2026-06-04, 2026-06-07)",
-        "signature": "",
-        "suggested": "[review] — pattern_detected cluster: these may be duplicate detections of the same root issue; consider raising threshold or deduplicating"
-      }
-    ],
-    "generated": "2026-06-26 14:44"
+    "findings": [],
+    "generated": "2026-07-05 10:40"
   },
   "consolidation": {
     "hasData": true,
@@ -3492,10 +3698,10 @@
         "action": ""
       },
       {
-        "heading": "Rule Overlaps",
-        "ratio": "",
+        "heading": "Rule Overlap: agent-delegation-triggers.md <-> cloudflare-deploy.md (37% shared directives)",
+        "ratio": "0.38 (6 shared directives)",
         "merge": "",
-        "action": ""
+        "action": "review for consolidation candidate"
       },
       {
         "heading": "Stale Hook: chief-of-staff",
@@ -3528,7 +3734,7 @@
         "action": ""
       }
     ],
-    "generated": "2026-06-14 01:45"
+    "generated": "2026-07-05 10:40"
   },
   "projects": [
     {
@@ -3536,26 +3742,26 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 18
+      "tool_calls_30d": 10
     },
     {
       "id": "Claude-Projects",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 45
+      "tool_calls_30d": 1
     },
     {
       "id": "agent-dashboard",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 300
+      "tool_calls_30d": 38
     },
     {
       "id": "agent-os",
       "friction_today": 0,
-      "unresolved_gaps": 1,
+      "unresolved_gaps": 2,
       "templates_used": 1,
       "tool_calls_30d": 0
     },
@@ -3564,49 +3770,21 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 1110
-    },
-    {
-      "id": "dashboard",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 13
-    },
-    {
-      "id": "engine",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 149
+      "tool_calls_30d": 571
     },
     {
       "id": "kultrverse",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 1640
+      "tool_calls_30d": 146
     },
     {
       "id": "media-engine",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 34
-    },
-    {
-      "id": "packages",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 63
-    },
-    {
-      "id": "pipeline",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 278
+      "tool_calls_30d": 146
     },
     {
       "id": "relay",
@@ -3620,7 +3798,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 3935
+      "tool_calls_30d": 5300
     },
     {
       "id": "spoken",
@@ -3653,58 +3831,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 2,
+      "failures": 1,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
     "lastWeek": {
-      "failures": 6,
-      "preventions": 4,
+      "failures": 5,
+      "preventions": 2,
       "autoInstalls": 0,
-      "conversionPct": 67
+      "conversionPct": 40
     },
     "daily": [
-      {
-        "date": "2026-06-14",
-        "failures": 0,
-        "preventions": 4
-      },
-      {
-        "date": "2026-06-15",
-        "failures": 1,
-        "preventions": 0
-      },
-      {
-        "date": "2026-06-16",
-        "failures": 4,
-        "preventions": 0
-      },
-      {
-        "date": "2026-06-17",
-        "failures": 1,
-        "preventions": 0
-      },
-      {
-        "date": "2026-06-18",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-06-19",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-06-20",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-06-21",
-        "failures": 1,
-        "preventions": 0
-      },
       {
         "date": "2026-06-22",
         "failures": 0,
@@ -3734,19 +3872,64 @@
         "date": "2026-06-27",
         "failures": 0,
         "preventions": 0
+      },
+      {
+        "date": "2026-06-28",
+        "failures": 4,
+        "preventions": 2
+      },
+      {
+        "date": "2026-06-29",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-06-30",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-01",
+        "failures": 1,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-02",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-03",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-04",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-05",
+        "failures": 0,
+        "preventions": 0
       }
     ],
     "stuckFailures": [
       {
         "session": "bruce-and-triage-batch",
         "detail": "Edit/Write tool calls from spawned developer subagents on ~/.claude/ files are auto-denied even when Hero has explicitly authorized the work",
-        "age_days": 29
+        "age_days": 37
+      },
+      {
+        "session": "desk-debrief-recovery",
+        "detail": "/learn session-end debrief was skipped for 3 desk sessions on 2026-06-28 (desk-batch-queue, desk-sibling-ig, desk-ig-crosspost) — agent_depl",
+        "age_days": 7
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 5,
+      "patternsDetected": 2,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3755,7 +3938,7 @@
       "stageStatus": "dormant"
     },
     "lastWeek": {
-      "patternsDetected": 4,
+      "patternsDetected": 6,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3791,36 +3974,23 @@
         ]
       }
     ],
-    "stuckPatterns": [
-      {
-        "heading": "Similarity cluster: pattern_detected (3 events, trigram)",
-        "age_days": null
-      }
-    ]
+    "stuckPatterns": []
   },
   "preventionEfficacy": {
     "activePreventions": 3,
-    "avgEfficacy": 0.9,
+    "avgEfficacy": 0.8461538461538461,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 0,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.9411764705882353,
-        "fires30d": 17,
-        "valid": 16,
+        "efficacy": 0.9,
+        "fires30d": 10,
+        "valid": 9,
         "invalid": 1,
         "sparkline": [
           1,
-          null,
-          1,
-          1,
-          0,
-          null,
-          1,
-          null,
-          1,
           1,
           null,
           null,
@@ -3838,12 +4008,20 @@
           null,
           null,
           1,
+          null,
+          null,
+          null,
+          null,
+          0.75,
+          null,
+          null,
+          null,
           null,
           null,
           null,
           null
         ],
-        "last_fire_date": "2026-06-23"
+        "last_fire_date": "2026-06-28"
       },
       {
         "rule": "system-reminder-citation",
@@ -3855,15 +4033,15 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -3901,16 +4079,16 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -3939,7 +4117,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "94% (17 fires/30d)",
+      "current": "90% (10 fires/30d)",
       "target": "stays ≥50%",
       "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -3955,7 +4133,7 @@
     {
       "id": "stuck-failures",
       "title": "Stuck failures resolved",
-      "current": "1 stuck",
+      "current": "2 stuck",
       "target": "reduce by ≥1 this week",
       "status": "yellow",
       "why": "Failures aged ≥7 days without prevention or resolution. Check Verb 1 carousel."
@@ -3963,11 +4141,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "5 this week (4 last)",
+      "current": "2 this week (6 last)",
       "target": "stay near or above last week",
-      "status": "green",
+      "status": "red",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-06-27T06:59:16.033Z"
+  "lastUpdated": "2026-07-05T16:59:57.062Z"
 }

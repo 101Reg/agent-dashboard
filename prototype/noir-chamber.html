@@ -1,0 +1,583 @@
+<title>Agent OS — Living System</title>
+<style>
+  /* ---------- tokens (deliberate single-theme: holographic command chamber) ---------- */
+  :root {
+    /* mono noir — the only "colors" are lightness steps */
+    --bg: #010102;
+    --panel: rgba(18, 18, 20, 0.55);
+    --line: rgba(240, 242, 245, 0.13);
+    --line-strong: rgba(240, 242, 245, 0.3);
+    --ink: #f2f3f5;
+    --ink-2: #9aa0a6;
+    --ink-3: #5c6166;
+    --holo: #e6ecf2;        /* chrome / hologram white */
+    --amber: #f2f3f5;       /* halo ring (was amber) */
+    --amber-glow: #ffffff;  /* highlight white */
+    --teal: #ffffff;        /* preventions = solid white */
+    --red: #9aa0a6;         /* failures = hollow gray */
+    --green: #6f757b;
+    --yellow: #c6cbd1;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    --sans: var(--mono);    /* full monotype commitment */
+  }
+  html { background: var(--bg); }
+  body { background: var(--bg); color: var(--ink); font-family: var(--sans); margin: 0; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+  /* ---------- full-screen chamber ---------- */
+  .chamber { position: relative; height: 100svh; min-height: 560px; overflow: hidden; }
+  .chamber canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .vignette { position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(0,0,0,0.88) 100%),
+      repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,0.02) 3px 4px);
+  }
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 20px; background: linear-gradient(180deg, rgba(1,1,2,0.88), rgba(1,1,2,0)); }
+  .brand { font-family: var(--mono); font-size: 12px; letter-spacing: .3em; color: var(--ink-2); white-space: nowrap; }
+  .brand em { font-style: normal; color: var(--amber-glow); }
+  .tabs { display: flex; gap: 4px; }
+  .tab { font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; color: var(--ink-3); background: none; border: none; border-bottom: 1px solid transparent; padding: 8px 12px; cursor: pointer; }
+  .tab.on { color: var(--holo); border-bottom-color: var(--holo); text-shadow: 0 0 14px rgba(255,255,255,0.45); }
+  .tab:hover { color: var(--ink); }
+
+  /* ---------- bio dossier ---------- */
+  .bio-head { padding: 84px 0 8px; }
+  .bio-head h1 { font-family: var(--mono); font-size: clamp(20px, 4vw, 28px); font-weight: 600; letter-spacing: .06em; margin: 0 0 10px; }
+  .bio-head h1 em { font-style: normal; color: var(--amber-glow); }
+  .bio-lede { font-size: 15px; line-height: 1.7; color: var(--ink-2); max-width: 62ch; }
+  .bio-lede b { color: var(--ink); font-weight: 600; }
+  .bio p { font-size: 13.5px; line-height: 1.7; color: var(--ink-2); max-width: 62ch; margin: 0 0 12px; }
+  .bio p b { color: var(--ink); font-weight: 600; }
+  .crew { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .crew .member { border: 1px solid var(--line); border-radius: 4px; background: var(--panel); padding: 11px 13px; }
+  .crew .nm { font-family: var(--mono); font-size: 12.5px; color: var(--ink); }
+  .crew .nm i { font-style: normal; color: var(--holo); opacity: .75; font-size: 10px; letter-spacing: .12em; margin-left: 6px; }
+  .crew .jd { font-size: 11.5px; color: var(--ink-2); margin-top: 3px; line-height: 1.45; }
+  .caps { display: flex; flex-direction: column; gap: 8px; }
+  .cap { display: grid; grid-template-columns: 22px 1fr; gap: 10px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); padding: 12px 14px; align-items: baseline; }
+  .cap .g { font-family: var(--mono); color: var(--amber-glow); font-size: 12px; }
+  .cap .t { font-size: 13px; color: var(--ink); font-weight: 600; }
+  .cap .d { font-size: 12px; color: var(--ink-2); line-height: 1.55; margin-top: 3px; }
+  .statuskey { border: 1px solid var(--line); border-radius: 4px; background: var(--panel); padding: 14px 16px; }
+  .statuskey .row { display: flex; gap: 10px; align-items: baseline; margin: 6px 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.55; }
+  .statuskey .row b { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; white-space: nowrap; }
+  @media (max-width: 560px) { .crew { grid-template-columns: 1fr; } }
+  .redpip { display: inline-flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em; color: var(--ink); }
+  .redpip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #ffffff; box-shadow: 0 0 12px rgba(255,255,255,0.8); animation: blink 1.6s ease-in-out infinite; }
+  @keyframes blink { 50% { opacity: .3 } }
+
+  /* ---------- the address ---------- */
+  .address { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 0 22px calc(28px + env(safe-area-inset-bottom)); text-align: center; }
+  .address .line { font-family: var(--mono); font-size: clamp(13px, 2.4vw, 17px); line-height: 1.75; color: var(--ink); max-width: 620px; margin: 0 auto; min-height: 5.2em; text-wrap: balance; text-shadow: 0 0 24px rgba(255,255,255,0.22); }
+  .address .line b { color: var(--amber-glow); font-weight: 600; }
+  .address .line .r { color: #050506; background: #f2f3f5; padding: 0 5px; font-weight: 700; }
+  .address .cursor { color: var(--holo); animation: blink 0.9s step-end infinite; }
+  .scrollcue { margin-top: 14px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .28em; color: var(--ink-3); animation: bob 2.4s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(4px); opacity: .5 } }
+  @media (prefers-reduced-motion: reduce) { .redpip::before, .scrollcue, .address .cursor { animation: none } }
+
+  /* ---------- boot ---------- */
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .boot { opacity: 0; animation: rise 0.7s cubic-bezier(.2,.7,.2,1) forwards; }
+  .b1 { animation-delay: .1s } .b2 { animation-delay: .3s } .b3 { animation-delay: .5s } .b4 { animation-delay: .7s }
+  @media (prefers-reduced-motion: reduce) { .boot { animation-duration: .01s; animation-delay: 0s } }
+
+  /* ---------- telemetry deck ---------- */
+  .wrap { max-width: 760px; margin: 0 auto; padding: 44px 18px 64px; }
+  .sec { margin-top: 34px; }
+  .sec:first-child { margin-top: 0; }
+  .sec-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .26em; color: var(--holo); opacity: .8; text-transform: uppercase; display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .sec-label::before { content: "◢"; font-size: 8px; }
+  .sec-label::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--line-strong), transparent); }
+
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .tile { border: 1px solid var(--line); border-radius: 4px; background: var(--panel); padding: 14px 14px 12px; position: relative; }
+  .tile::before, .tile::after { content: ""; position: absolute; width: 8px; height: 8px; border-color: var(--line-strong); border-style: solid; }
+  .tile::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+  .tile::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+  .tile .n { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 30px; font-weight: 600; color: var(--ink); line-height: 1; }
+  .tile .l { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; color: var(--holo); opacity: .8; text-transform: uppercase; margin-top: 7px; }
+
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .card { border: 1px solid var(--line); border-radius: 4px; background: var(--panel); padding: 16px; }
+  .card h3 { margin: 0 0 4px; font-family: var(--mono); font-size: 10px; letter-spacing: .18em; color: var(--ink-3); text-transform: uppercase; font-weight: 500; }
+  .big { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 34px; font-weight: 650; line-height: 1.1; }
+  .big.up { color: var(--teal); }
+  .sub { font-size: 12px; color: var(--ink-2); margin-top: 6px; line-height: 1.5; }
+  .flow { font-family: var(--mono); font-size: 13px; margin-top: 10px; color: var(--ink-2); }
+  .flow b { color: var(--ink); font-weight: 600; }
+  .fail { color: var(--ink-2); } .prev { color: #ffffff; }
+
+  .chart-card { border: 1px solid var(--line); border-radius: 4px; background: var(--panel); padding: 16px; margin-top: 10px; }
+  .legend { display: flex; gap: 18px; font-family: var(--mono); font-size: 11px; color: var(--ink-2); margin-bottom: 10px; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .chart-scroll { overflow-x: auto; }
+  svg text { font-family: var(--mono); }
+  .bar:hover { filter: brightness(1.35); }
+
+  .watch { display: flex; flex-direction: column; gap: 8px; }
+  .witem { display: grid; grid-template-columns: 20px 1fr auto; align-items: baseline; gap: 10px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); padding: 11px 14px; }
+  .witem .glyph { font-family: var(--mono); font-size: 12px; text-align: center; }
+  .witem .t { font-size: 13px; color: var(--ink); }
+  .witem .cur { font-family: var(--mono); font-size: 11.5px; font-variant-numeric: tabular-nums; color: var(--ink-2); white-space: nowrap; }
+  .g-green { color: #6f757b; } .g-yellow { color: #c6cbd1; } .g-red { color: #ffffff; }
+
+  footer { margin-top: 30px; font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); line-height: 1.7; letter-spacing: .04em; }
+
+  @media (max-width: 560px) {
+    .tiles { grid-template-columns: repeat(2, 1fr); }
+    .duo { grid-template-columns: 1fr; }
+    .tile .n { font-size: 26px; }
+  }
+</style>
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar boot b1">
+  <div class="brand">AGENT&nbsp;OS <em>◈</em></div>
+  <div class="tabs">
+    <button class="tab on" data-view="command">COMMAND</button>
+    <button class="tab" data-view="bio">BIO</button>
+  </div>
+  <div class="redpip">NIGHT SHIFT · RED</div>
+</div>
+
+<!-- ============ VIEW: COMMAND ============ -->
+<div id="view-command">
+<div class="chamber">
+  <canvas id="scene" aria-label="Holographic head of the Agent OS system, encircled by an amber conversion halo and orbiting agent motes"></canvas>
+  <div class="vignette"></div>
+  <div class="address boot b2">
+    <div class="line" id="voice"><noscript>Hero. All eight agents stand ready. This week I converted 3 failures into 7 preventions — 233%. Bruce's night briefing is RED: 3 consolidations await your command.</noscript><span class="cursor">▊</span></div>
+    <div class="scrollcue">▼ TELEMETRY ▼</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <!-- ============ WHAT IT IS ============ -->
+  <div class="sec boot b3">
+    <div class="sec-label">Anatomy</div>
+    <div class="tiles">
+      <div class="tile"><div class="n" data-count="8">0</div><div class="l">Agents</div></div>
+      <div class="tile"><div class="n" data-count="26">0</div><div class="l">Skills</div></div>
+      <div class="tile"><div class="n" data-count="22">0</div><div class="l">Rules</div></div>
+      <div class="tile"><div class="n" data-count="16">0</div><div class="l">Hooks</div></div>
+      <div class="tile"><div class="n" data-count="111">0</div><div class="l">Memories</div></div>
+      <div class="tile"><div class="n" data-count="199">0</div><div class="l">Sessions</div></div>
+    </div>
+  </div>
+
+  <!-- ============ HOW IT'S DOING ============ -->
+  <div class="sec boot b4">
+    <div class="sec-label">Immune system</div>
+    <div class="duo">
+      <div class="card">
+        <h3>Failure → Prevention · this week</h3>
+        <div class="big up">233%</div>
+        <div class="flow"><b class="fail">3</b> failures → <b class="prev">7</b> preventions</div>
+        <div class="sub">Last week: 5 → 2 (40%). The system shipped more fixes than it took hits.</div>
+      </div>
+      <div class="card">
+        <h3>Bruce · proposal track record</h3>
+        <div class="big">86%</div>
+        <div class="flow"><b>71</b> accepted / <b>83</b> proposed</div>
+        <div class="sub">Prevention efficacy avg 86%. 25 findings on tonight's RED briefing.</div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3 style="margin:0 0 10px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase;font-weight:500">Last 14 days · failures vs preventions</h3>
+      <div class="legend">
+        <span><i class="sw" style="background:none;border:1.5px solid #9aa0a6"></i> failures</span>
+        <span><i class="sw" style="background:#ffffff"></i> preventions</span>
+      </div>
+      <div class="chart-scroll"><svg id="days" width="712" height="150" viewBox="0 0 712 150"></svg></div>
+    </div>
+  </div>
+
+  <!-- ============ WATCH ITEMS ============ -->
+  <div class="sec">
+    <div class="sec-label">Bruce is watching</div>
+    <div class="watch" id="watch"></div>
+  </div>
+
+  <footer>
+    All values read from agent-dashboard/public/data.json, synced tonight 23:06.
+    Orbit motion is ambient; in the integrated build, pulses fire from the live os-performance.jsonl event log.
+  </footer>
+</div>
+</div><!-- /view-command -->
+
+<!-- ============ VIEW: BIO ============ -->
+<div id="view-bio" class="bio" hidden>
+<div class="wrap">
+  <div class="bio-head">
+    <h1>WHAT THIS SYSTEM IS <em>◈</em></h1>
+    <p class="bio-lede">Most people use AI as a chat window — ask a question, get an answer, start over tomorrow.
+    <b>Agent OS is an organization.</b> It has a staff, a memory that never resets, a rulebook written
+    from its own mistakes, and an inspector who audits everything overnight. Hero runs it; it runs the work.</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-label">In simple terms</div>
+    <p>Think of it as a small company where every employee is an AI. There's a <b>chief of staff</b> (the main
+    conversation) that routes work to <b>8 named specialists</b>. What any of them learns gets written down
+    permanently — <b>111 memory files</b> so far — so nothing has to be re-explained twice.</p>
+    <p>When something goes wrong, the mistake doesn't just get fixed — it becomes a <b>rule</b> (22 of them) or an
+    automatic <b>reflex</b> (16 hooks that fire on their own, like catching an unverified number before it
+    reaches Hero). That's why the dashboard's core metric is <b>failure → prevention</b>: the percentage of
+    hits taken that got turned into permanent immunity. Over 100% means the system shipped more armor than
+    it took damage — this week it's at 233%.</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-label">The crew — 8 agents</div>
+    <div class="crew">
+      <div class="member"><div class="nm">Gil <i>DEBUG</i></div><div class="jd">Forensic debugger. Hunts root causes when a bug survives repeated fixes.</div></div>
+      <div class="member"><div class="nm">Tony <i>DEVELOPER</i></div><div class="jd">Builds the code. Features, fixes, whole products.</div></div>
+      <div class="member"><div class="nm">reviewer <i>QUALITY</i></div><div class="jd">Checks work against the contract before anything ships.</div></div>
+      <div class="member"><div class="nm">research <i>INTEL</i></div><div class="jd">Scans markets, competitors, and user signals.</div></div>
+      <div class="member"><div class="nm">Sky <i>MARKETING</i></div><div class="jd">Copy, campaigns, and growth for 38twelve.</div></div>
+      <div class="member"><div class="nm">Johnny <i>LEGAL</i></div><div class="jd">Compliance, disclosures, contracts.</div></div>
+      <div class="member"><div class="nm">infra <i>INFRA</i></div><div class="jd">Servers, scheduling, keys — the plumbing.</div></div>
+      <div class="member"><div class="nm">Bruce <i>NIGHT SHIFT</i></div><div class="jd">Audits the whole system overnight and files improvement proposals.</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-label">What it's capable of</div>
+    <div class="caps">
+      <div class="cap"><div class="g">◈</div><div><div class="t">Ships real products, end to end</div><div class="d">The 38twelve media network (38twelveDaily, KULTRVERSE, Ringkultr) runs on one shared engine it built. Spoken and The Desk are live and in daily use.</div></div></div>
+      <div class="cap"><div class="g">◈</div><div><div class="t">Never forgets</div><div class="d">Decisions, preferences, and lessons persist across every session — 111 memory files and counting.</div></div></div>
+      <div class="cap"><div class="g">◈</div><div><div class="t">Turns failures into immunity</div><div class="d">Every mistake becomes a rule or an automatic hook so it can't repeat. This week: 3 failures in, 7 preventions out.</div></div></div>
+      <div class="cap"><div class="g">◈</div><div><div class="t">Improves itself</div><div class="d">Bruce reviews the system nightly and proposes upgrades — 71 of his 83 proposals have been accepted. The system that builds the products also rebuilds itself.</div></div></div>
+      <div class="cap"><div class="g">◈</div><div><div class="t">Enforces honesty</div><div class="d">Hooks intercept fabricated numbers and unverified claims before they reach Hero. Accuracy is law, mechanically enforced.</div></div></div>
+      <div class="cap"><div class="g">◈</div><div><div class="t">Works in parallel</div><div class="d">Independent work streams run as simultaneous agents — measured at up to ~1.8× faster than one pair of hands.</div></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-label">Reading the status light</div>
+    <div class="statuskey">
+      <div class="row"><b class="g-green">● GREEN</b><span>Bruce's overnight audit found nothing that needs you. Fly casual.</span></div>
+      <div class="row"><b class="g-red">✕ RED</b><span>Not an alarm — it means his report contains findings <b>waiting on your decision</b>. Tonight: two rules overlap and should probably merge, and two hooks haven't fired in ~3 months (dead weight candidates). Housekeeping, not fire.</span></div>
+    </div>
+  </div>
+
+  <footer>Bio reflects the system as of the 2026-07-05 sync. Product status from project memory; counts from data.json.</footer>
+</div>
+</div><!-- /view-bio -->
+
+<script>
+(() => {
+  // ======== REAL DATA — from data.json, synced 2026-07-05 23:06 ========
+  const AGENT_COUNT = 8;
+  const DAILY = [
+    ["Jun 23",1,0],["Jun 24",0,0],["Jun 25",0,0],["Jun 26",0,0],["Jun 27",0,0],
+    ["Jun 28",4,2],["Jun 29",0,0],["Jun 30",0,0],["Jul 01",1,0],["Jul 02",0,0],
+    ["Jul 03",0,0],["Jul 04",0,0],["Jul 05",1,4],["Jul 06",1,3],
+  ];
+  const WATCH = [
+    { s:"red",    t:"Auto-install fires this week",      c:"0/wk · target ≥1" },
+    { s:"red",    t:"Pattern detection velocity",        c:"2 this wk (6 last)" },
+    { s:"yellow", t:"Net active preventions (30d)",      c:"+0 · target ≥0" },
+    { s:"green",  t:"pre-response-claim-audit efficacy", c:"90%" },
+    { s:"green",  t:"Stuck failures",                    c:"0 aged ≥7d" },
+  ];
+  const CONVERSION = 233;
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ======== tabs ========
+  const views = { command: document.getElementById("view-command"), bio: document.getElementById("view-bio") };
+  document.querySelectorAll(".tab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(b => b.classList.toggle("on", b === btn));
+      Object.entries(views).forEach(([k, v]) => { v.hidden = k !== btn.dataset.view; });
+      scrollTo({ top: 0 });
+    });
+  });
+
+  // ======== count-up tiles ========
+  document.querySelectorAll("[data-count]").forEach(el => {
+    const target = +el.dataset.count;
+    if (reduced) { el.textContent = target; return; }
+    const io = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now(), dur = 1100 + Math.min(target, 200) * 2;
+      (function tick(t) {
+        const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * e);
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    });
+    io.observe(el);
+  });
+
+  // ======== the address — mouth flicker syncs to this ========
+  let speaking = false;
+  const LINE = 'Hero. All eight agents stand ready. This week I converted <b>3 failures into 7 preventions — 233%</b>. Bruce’s night briefing is <span class="r">RED</span>: 3 consolidations await your command.';
+  const PLAIN = LINE.replace(/<[^>]+>/g, "");
+  const voice = document.getElementById("voice");
+  if (reduced) { voice.innerHTML = LINE; }
+  else {
+    let i = 0;
+    voice.innerHTML = '<span id="vt"></span><span class="cursor">▊</span>';
+    const vt = document.getElementById("vt");
+    setTimeout(function type() {
+      speaking = true;
+      vt.textContent = PLAIN.slice(0, ++i);
+      if (i < PLAIN.length) setTimeout(type, PLAIN[i-1] === "." ? 300 : 22);
+      else { speaking = false; voice.innerHTML = LINE + '<span class="cursor">▊</span>'; }
+    }, 1600);
+  }
+
+  // ======== 14-day chart ========
+  const svg = document.getElementById("days");
+  const W = 712, H = 150, padB = 24, padT = 8, maxV = 4, n = DAILY.length;
+  const slot = W / n, bw = 9, gap = 2;
+  const y = v => H - padB - (v / maxV) * (H - padB - padT);
+  let s = `<line x1="0" x2="${W}" y1="${y(4)}" y2="${y(4)}" stroke="rgba(240,242,245,0.12)" stroke-dasharray="3 4"/><text x="4" y="${y(4)-4}" font-size="9" fill="#4f6579">4</text>`;
+  DAILY.forEach(([d, f, p], i) => {
+    const cx = i * slot + slot / 2;
+    if (f) s += `<rect class="bar" x="${cx - bw - gap/2}" y="${y(f)}" width="${bw}" height="${H - padB - y(f)}" rx="2" fill="none" stroke="#9aa0a6" stroke-width="1.5"><title>${d}: ${f} failure${f>1?"s":""}</title></rect>`;
+    if (p) s += `<rect class="bar" x="${cx + gap/2}" y="${y(p)}" width="${bw}" height="${H - padB - y(p)}" rx="2" fill="#ffffff"><title>${d}: ${p} prevention${p>1?"s":""}</title></rect>`;
+    if (!f && !p) s += `<circle cx="${cx}" cy="${H - padB - 2}" r="1.5" fill="rgba(255,255,255,0.3)"><title>${d}: quiet</title></circle>`;
+    if (i % 2 === 0) s += `<text x="${cx}" y="${H - 8}" font-size="9" fill="#4f6579" text-anchor="middle">${d}</text>`;
+  });
+  svg.innerHTML = s;
+
+  // ======== watch items ========
+  const GLYPH = { green: ["●","g-green"], yellow: ["▲","g-yellow"], red: ["✕","g-red"] };
+  document.getElementById("watch").innerHTML = WATCH.map(w => {
+    const [g, cls] = GLYPH[w.s];
+    return `<div class="witem"><div class="glyph ${cls}">${g}</div><div class="t">${w.t}</div><div class="cur">${w.c}</div></div>`;
+  }).join("");
+
+  // ================================================================
+  // ======== THE CHAMBER — the head, the halo, the orbit ==========
+  // ================================================================
+  const cv = document.getElementById("scene");
+  const ctx = cv.getContext("2d");
+  const DPR = Math.min(devicePixelRatio || 1, 2);
+  let W2 = 0, H2 = 0;
+  function size() {
+    W2 = cv.clientWidth; H2 = cv.clientHeight;
+    cv.width = W2 * DPR; cv.height = H2 * DPR;
+  }
+  size(); addEventListener("resize", size);
+
+  const HOLO = "230,236,242";
+  const AMBER = "#f2f3f5", TEAL = "#ffffff", RED = "#9aa0a6";
+  const TAU = Math.PI * 2;
+
+  // starfield — the galaxy
+  let seed = 7;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const STARS = Array.from({ length: 170 }, (_, i) => ({
+    x: rnd(), y: rnd(),
+    r: 0.4 + rnd() * 1.1,
+    phase: rnd() * TAU,
+    speed: 0.4 + rnd() * 1.4,
+    big: i < 7,                          // 7 anime cross-flare stars
+  }));
+  const GRAIN = 130;
+  // per-slice noise phases for head shimmer
+  const SLICES = 36;
+  const SLICE_PHASE = Array.from({ length: SLICES }, () => rnd() * TAU);
+
+  // head silhouette: half-width factor by v (0 = crown, 1 = chin)
+  function headHW(v) {
+    if (v < 0.36) return Math.sin((v / 0.36) * Math.PI / 2) * 0.98;       // cranium dome
+    if (v < 0.60) return 0.98 - (v - 0.36) * 0.18;                        // temples → cheeks
+    const k = (v - 0.60) / 0.40;                                          // jaw → chin
+    return 0.937 * (1 - 0.72 * k * k);
+  }
+
+  let pulses = [], lastPulse = 0;
+  let nextBlink = 3.2, blinkT = -1;
+  const BOOT_T = 2.2;
+
+  function draw(now) {
+    const t = reduced ? BOOT_T + 100 : now / 1000;
+    const boot = Math.min(1, t / BOOT_T);
+    const eb = 1 - Math.pow(1 - boot, 3);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.clearRect(0, 0, W2, H2);
+    const cx = W2 / 2, cy = H2 * 0.42;
+    const M = Math.min(W2, H2);
+
+    // --- energy column (Zordon tube) ---
+    const col = ctx.createLinearGradient(cx, 0, cx, H2);
+    col.addColorStop(0, `rgba(${HOLO},${0.10 * eb})`);
+    col.addColorStop(0.45, `rgba(${HOLO},${0.035 * eb})`);
+    col.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = col;
+    const colW = M * 0.44 * eb;
+    ctx.fillRect(cx - colW / 2, 0, colW, H2);
+    ctx.strokeStyle = `rgba(${HOLO},${0.12 * eb})`;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx - colW / 2, 0); ctx.lineTo(cx - colW / 2, H2 * 0.8); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx + colW / 2, 0); ctx.lineTo(cx + colW / 2, H2 * 0.8); ctx.stroke();
+
+    // --- nebula depth (faint gray clouds behind everything) ---
+    [[0.22, 0.3, 0.045], [0.78, 0.7, 0.035], [0.55, 0.15, 0.03]].forEach(([nx, ny, na]) => {
+      const neb = ctx.createRadialGradient(nx * W2, ny * H2, 0, nx * W2, ny * H2, M * 0.5);
+      neb.addColorStop(0, `rgba(200,206,212,${na * eb})`);
+      neb.addColorStop(1, "rgba(200,206,212,0)");
+      ctx.fillStyle = neb;
+      ctx.fillRect(0, 0, W2, H2);
+    });
+
+    // --- starfield: twinkle + anime cross-flares ---
+    STARS.forEach(st => {
+      const tw = reduced ? 0.7 : 0.35 + 0.65 * Math.abs(Math.sin(t * st.speed + st.phase));
+      const sx = st.x * W2, sy = st.y * H2;
+      ctx.fillStyle = `rgba(245,247,250,${0.18 + tw * 0.55})`;
+      ctx.beginPath(); ctx.arc(sx, sy, st.r, 0, TAU); ctx.fill();
+      if (st.big) {
+        const fl = st.r * (5 + tw * 9);
+        ctx.strokeStyle = `rgba(255,255,255,${0.10 + tw * 0.30})`;
+        ctx.lineWidth = 0.8;
+        ctx.beginPath(); ctx.moveTo(sx - fl, sy); ctx.lineTo(sx + fl, sy); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(sx, sy - fl); ctx.lineTo(sx, sy + fl); ctx.stroke();
+      }
+    });
+
+    // --- film grain (noir) ---
+    if (!reduced) {
+      ctx.fillStyle = "rgba(255,255,255,0.028)";
+      for (let i = 0; i < GRAIN; i++) {
+        ctx.fillRect(Math.random() * W2, Math.random() * H2, 1, 1);
+      }
+    }
+
+    // --- head geometry ---
+    const headH = M * 0.40 * (0.85 + 0.15 * eb);
+    const headW = M * 0.29 * (0.85 + 0.15 * eb);
+    const top = cy - headH / 2;
+
+    // ambient glow behind the head
+    const glow = ctx.createRadialGradient(cx, cy, headW * 0.2, cx, cy, headW * 2.2);
+    glow.addColorStop(0, `rgba(${HOLO},${0.16 * eb})`);
+    glow.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = glow;
+    ctx.beginPath(); ctx.arc(cx, cy, headW * 2.2, 0, TAU); ctx.fill();
+
+    // --- THE HEAD: contour scan-lines ---
+    for (let i = 0; i < SLICES; i++) {
+      const v = i / (SLICES - 1);
+      const hw = headHW(v) * headW / 2;
+      if (hw <= 1) continue;
+      const sy = top + v * headH;
+      // hologram shimmer + rare glitch
+      let ox = reduced ? 0 : Math.sin(t * 2 + SLICE_PHASE[i]) * 1.1;
+      if (!reduced && Math.sin(t * 0.9 + SLICE_PHASE[i] * 3) > 0.996) ox += 7;
+      // fade crown & chin edges
+      const edgeFade = Math.min(1, v * 6) * Math.min(1, (1 - v) * 4 + 0.25);
+      const a = (0.10 + 0.08 * Math.sin(v * Math.PI)) * edgeFade * eb;
+      // slice line
+      ctx.strokeStyle = `rgba(${HOLO},${a})`;
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(cx - hw + ox, sy); ctx.lineTo(cx + hw + ox, sy); ctx.stroke();
+      // bright silhouette endpoints
+      ctx.fillStyle = `rgba(${HOLO},${Math.min(0.85, a * 6)})`;
+      ctx.beginPath(); ctx.arc(cx - hw + ox, sy, 1.1, 0, TAU); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + hw + ox, sy, 1.1, 0, TAU); ctx.fill();
+    }
+
+    // --- eyes ---
+    if (!reduced && t > nextBlink) { blinkT = t; nextBlink = t + 2.8 + Math.random() * 3.5; }
+    let eyeOpen = 1;
+    if (blinkT > 0) {
+      const bk = (t - blinkT) / 0.22;
+      eyeOpen = bk >= 1 ? 1 : Math.abs(Math.cos(bk * Math.PI));
+    }
+    const eyeV = 0.46;
+    const eyeY = top + eyeV * headH;
+    const eyeDX = headHW(eyeV) * headW / 2 * 0.44;
+    const eyeW = headW * 0.115, eyeH = Math.max(0.8, headW * 0.028 * eyeOpen);
+    [-1, 1].forEach(side => {
+      const ex = cx + side * eyeDX;
+      const eg = ctx.createRadialGradient(ex, eyeY, 0, ex, eyeY, eyeW * 2.4);
+      eg.addColorStop(0, `rgba(${HOLO},${0.4 * eb * eyeOpen})`);
+      eg.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = eg;
+      ctx.beginPath(); ctx.arc(ex, eyeY, eyeW * 2.4, 0, TAU); ctx.fill();
+      ctx.fillStyle = `rgba(250,251,252,${0.95 * eb})`;
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(ex - eyeW / 2, eyeY - eyeH / 2, eyeW, eyeH, eyeH / 2);
+      else ctx.rect(ex - eyeW / 2, eyeY - eyeH / 2, eyeW, eyeH);
+      ctx.fill();
+    });
+
+    // --- mouth: flickers while speaking ---
+    const mouthY = top + 0.78 * headH;
+    const talk = speaking ? (0.35 + Math.abs(Math.sin(t * 11)) * 0.65) : 0.18;
+    const mouthW = headW * 0.16 * (0.6 + talk * 0.5);
+    ctx.fillStyle = `rgba(${HOLO},${(0.15 + talk * 0.45) * eb})`;
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(cx - mouthW / 2, mouthY - 1.2, mouthW, 2.4, 1.2);
+    else ctx.rect(cx - mouthW / 2, mouthY - 1.2, mouthW, 2.4);
+    ctx.fill();
+
+    // --- the halo: conversion ring (amber = first 100%, teal = surplus) ---
+    const haloR = M * 0.245 * (0.8 + 0.2 * eb);
+    const breathe = reduced ? 0 : Math.sin(t * 1.8) * 0.006 * M;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "rgba(240,242,245,0.14)"; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.arc(cx, cy, haloR + breathe, 0, TAU); ctx.stroke();
+    ctx.strokeStyle = AMBER;
+    ctx.beginPath(); ctx.arc(cx, cy, haloR + breathe, -Math.PI / 2, -Math.PI / 2 + TAU * Math.min(1, (CONVERSION / 100) * eb)); ctx.stroke();
+    const surplus = Math.min(1, (CONVERSION - 100) / 100) * eb;
+    if (surplus > 0) {
+      ctx.strokeStyle = "rgba(255,255,255,0.75)"; ctx.lineWidth = 2;
+      ctx.setLineDash([5, 6]);
+      ctx.beginPath(); ctx.arc(cx, cy, haloR + breathe + 8, -Math.PI / 2, -Math.PI / 2 + TAU * surplus); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // --- one slow gyroscope ring ---
+    const gR = haloR * 1.32;
+    const rot = t * 0.16;
+    ctx.strokeStyle = `rgba(${HOLO},${0.35 * eb})`; ctx.lineWidth = 1.2;
+    [[0, 1.2], [2.0, 2.5], [3.6, 5.3]].forEach(([a, b]) => {
+      ctx.beginPath(); ctx.arc(cx, cy, gR, rot + a, rot + b); ctx.stroke();
+    });
+    ctx.strokeStyle = `rgba(${HOLO},${0.07 * eb})`; ctx.lineWidth = 0.8;
+    ctx.beginPath(); ctx.arc(cx, cy, gR, 0, TAU); ctx.stroke();
+
+    // --- agent motes: 8 unlabeled satellites on a tilted plane ---
+    const oR = haloR * 1.55, tilt = 0.32;
+    ctx.strokeStyle = `rgba(${HOLO},${0.18 * eb})`; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.ellipse(cx, cy, oR, oR * tilt, 0, 0, TAU); ctx.stroke();
+
+    if (!reduced && t - lastPulse > 2.6 && boot >= 1) {
+      lastPulse = t;
+      pulses.push({ i: Math.floor(Math.random() * AGENT_COUNT), t0: t, good: Math.random() < 0.7 });
+    }
+    pulses = pulses.filter(p => t - p.t0 < 1.4);
+
+    for (let i = 0; i < AGENT_COUNT; i++) {
+      const ang = (i / AGENT_COUNT) * TAU + t * 0.1;
+      const x = cx + Math.cos(ang) * oR, yy = cy + Math.sin(ang) * oR * tilt;
+      const behind = Math.sin(ang) < 0;
+      const dim = behind ? 0.4 : 1;
+      pulses.forEach(p => {
+        if (p.i !== i) return;
+        const k = (t - p.t0) / 1.4;
+        ctx.fillStyle = p.good ? TEAL : RED;
+        ctx.globalAlpha = (1 - k) * dim;
+        ctx.beginPath(); ctx.arc(x + (cx - x) * k, yy + (cy - yy) * k, 2.2, 0, TAU); ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+      ctx.globalAlpha = dim * eb;
+      ctx.fillStyle = `rgba(${HOLO},0.9)`;
+      ctx.beginPath(); ctx.arc(x, yy, 2.8, 0, TAU); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    if (!reduced) requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>

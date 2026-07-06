@@ -3081,6 +3081,34 @@
             "detail": "F4 on proposal review: '2026-04-23 retirement' + CF-rule design intent were untagged citations of rules text injected via system-reminder (F"
           }
         ]
+      },
+      {
+        "name": "gh-scan-agent-os",
+        "date": "2026-07-06",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "b2-dynamic-evals-build",
+        "date": "2026-07-06",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "developer",
+            "detail": "trigger #8 (plan-driven build with locked sprint contract) fired but developer agents were not spawned — subagent Edit/Write on ~/.claude/ i"
+          }
+        ]
       }
     ],
     "hasData": true
@@ -3369,6 +3397,18 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-07-06",
+      "text": "trigger #8 (plan-driven build with locked sprint contract) fired but developer agents were not spawned — subagent Edit/Write on ~/.claude/ is auto-gated, so implementation routed through main-thread per feedback_subagent_claude_gate.md",
+      "context": "b2 dynamic-evals build",
+      "high": false
+    },
+    {
+      "date": "2026-07-05",
+      "text": "Finding 'PIVOT: Eval Signal Rate' — all canaries have passed for 75 consecutive days across 21 runs (consecutive_all_pas",
+      "context": "Bruce proposal P-2026-07-05-002",
+      "high": true
+    },
+    {
       "date": "2026-07-02",
       "text": "similarity-cluster size=3",
       "context": "Layer 2 scanner — similarity cluster",
@@ -3445,18 +3485,6 @@
       "text": "No retry-cap/auto-pivot heuristic when subagent API 529s en masse — ~30min lost looping Explore+reviewer retries before pivoting to main-thread.",
       "context": "sustained subagent 529 overload ~90min",
       "high": false
-    },
-    {
-      "date": "2026-06-21",
-      "text": "Subagent API 529-overloaded ~90min — ~6 spawn failures (Explore x2, reviewer x2) before pivoting to main-thread + composed-verify; Explore gate repeatedly blocked Reads (used Bash bypass). → 1 lessons saved",
-      "context": "spoken-becoming-loop",
-      "high": false
-    },
-    {
-      "date": "2026-06-17",
-      "text": "C2 reviewer-gate hook only recognizes reviewer agent_deployment as a standalone/top-level event, not when nested in an agents_used array; blocked vercel deploy repeatedly despite a logged reviewer PASS, cost multiple turns",
-      "context": "deploy after pressure-test fixes",
-      "high": false
     }
   ],
   "nightShift": {
@@ -3484,7 +3512,10 @@
       "ERROR: Canary eval MISSING for developer-tc8 (developer/TC8) — configured but produced no score",
       "ERROR: Canary eval MISSING for night-shift (night-shift/TC1) — configured but produced no score",
       "ERROR: Canary eval MISSING for reviewer (reviewer/TC1) — configured but produced no score",
-      "ERROR: Canary eval MISSING for reviewer-tc7 (reviewer/TC7) — configured but produced no score"
+      "ERROR: Canary eval MISSING for reviewer-tc7 (reviewer/TC7) — configured but produced no score",
+      "ERROR: Could not parse generation output — no valid {\"evals\": [...]} object found",
+      "ERROR: Could not parse generation output — no valid {\"evals\": [...]} object found (raw saved to b2-gen-raw.txt)",
+      "ERROR: Could not parse debug DYN-20260705-1 eval output"
     ],
     "evalCanaries": [
       {
@@ -3624,14 +3655,14 @@
     "proposalCount": 4,
     "proposals": [],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-07-05\n\n## Status: RED\n\n## Key Findings\n- CONSOLIDATION: Rule Overlap: agent-delegation-triggers.md <-> cloudflare-deploy.md (37% shared directives) — Files: `/Users/reggie/.claude/rules/agent-delegation-triggers.md`, `/Users/reggie/.claude/rules/cloudflare-deploy.md`\n- CONSOLIDATION: Stale Hook: chief-of-staff — Last fired: 2026-04-05 (91 days ago)\n- CONSOLIDATION: Stale Hook: code-accuracy — Last fired: 2026-04-19 (77 days ago)\n- ESTABLISHING: developer TC8 scored 4.6 (baseline not yet set — calibrating, no regression flag)\n- ESTABLISHING: reviewer TC7 scored 5.0 (baseline not yet set — calibrating, no regression flag)\n- PATTERN: Same-file churn — No files with >= 5 edits in a session that also had >= 2 fix_attempts (last 14 days)\n- PIVOT: Eval Signal Rate — All canaries passing for 75 days across 21 runs. Evals too easy.\n- WATCH: developer TC7 scored 4.2 (baseline 5.0, delta -0.80)\n- ERROR: developer TC6 returned empty output — possible budget exhaustion or API timeout\n- ERROR: developer TC6b returned empty output — possible budget exhaustion or API timeout\n- ERROR: developer TC7 returned empty output — possible budget exhaustion or API timeout\n- ERROR: developer TC8 returned empty output — possible budget exhaustion or API timeout\n- ERROR: night-shift TC1 returned empty output — possible budget exhaustion or API timeout\n- ERROR: reviewer TC1 returned empty output — possible budget exhaustion or API timeout\n- ERROR: reviewer TC7 returned empty output — possible budget exhaustion or API timeout\n- ERROR: Canary eval MISSING for developer (developer/TC6) — configured but produced no score\n- ERROR: Canary eval MISSING for developer-tc6b (developer/TC6b) — configured but produced no score\n- ERROR: Canary eval MISSING for developer-tc7 (developer/TC7) — configured but produced no score\n- ERROR: Canary eval MISSING for developer-tc8 (developer/TC8) — configured but produced no score\n- ERROR: Canary eval MISSING for night-shift (night-shift/TC1) — configured but produced no score\n- ERROR: Canary eval MISSING for reviewer (reviewer/TC1) — configured but produced no score\n- ERROR: Canary eval MISSING for reviewer-tc7 (reviewer/TC7) — configured but produced no score\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 4.6 | 3.6 | 1.00 | ok |\n| developer | 4.8 | 5.0 | -0.20 | ok |\n| developer | 4.2 | 5.0 | -0.80 | watch |\n| developer | 4.6 | 5.0 | -0.40 | ok |\n| night-shift | 5.0 | 5.0 | 0.00 | ok |\n| reviewer | 5.0 | 5.0 | 0.00 | ok |\n| reviewer | 5.0 | 5.0 | 0.00 | ok |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n110 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 1\n- escalations: 0\n- hook_catches: 4\n- re_explanations: 0\n- patterns_detected: 3\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (30d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\n# Proposals — 2026-07-05\n\n## P-2026-07-05-001: self_improvement\n\n**Problem:** 7 of tonight's task calls returned empty output (developer TC6/TC6b/TC7/TC8, night-shift TC1, reviewer TC1/TC7) with 'possible budget exhaustion or API timeout', cascading into 7 MISSING canary scores. Prior 7-day history shows 5 of 6 runs RED (2026-06-16 through 2026-06-27), suggesting this is a recurring pipeline failure, not a one-off. The Night Shift pipeline currently treats an empty subprocess response as terminal instead of distinguishing timeout from budget exhaustion and retrying.\n\n**Solution:** In ~/.claude/night-shift/pipeline (canary eval runner stage), add: (1) detection of empty output with explicit cause classification (check remaining token budget before dispatch, capture HTTP timeout vs 200-with-empty-body), (2) one automatic retry with exponential backoff and a reduced-scope prompt for empty responses, (3) if retry fails, emit a 'canary_inconclusive' score of null with reason code rather than 'MISSING', so downstream RED/YELLOW grading can distinguish infrastructure failure from eval failure.\n\n**Impact:** Recovers most of the 7 lost canary scores per run, converts spurious REDs caused by infrastructure flakiness into accurate grades, and gives Bruce structured cause data (budget vs timeout) to propose targeted fixes in future runs instead of guessing.\n\n**Risk:** Retries double API cost on genuinely budget-exhausted nights, potentially worsening exhaustion; mitigate by checking budget headroom before retry. Misclassifying a real eval failure as 'inconclusive' could hide a true regression.\n\n## P-2026-07-05-002: eval_evolution\n\n**Problem:** Finding 'PIVOT: Eval Signal Rate' — all canaries have passed for 75 consecutive days across 21 runs (consecutive_all_pass=21, all_pass_streak_days=75). Evals that never fail provide zero regression signal; tonight the only non-pass outcomes were MISSING due to infra errors, not eval difficulty. Meanwhile real capability gaps still occur (capability_gaps_7d=1, attributed to main-thread debrief slip per capability_gap_attribution).\n\n**Solution:** In ~/.claude/evals/canaries/, harden the two highest-traffic suites first: developer/TC6-TC8 and reviewer/TC1/TC7. Add one adversarial variant per test case targeting known weak spots from A1 data — e.g., a developer canary requiring correct agent-deployment debrief per agent-deployment-tracking.md (the exact inline-loop slip attributed to main-thread), and a reviewer canary with a subtle unverified claim to exercise pre-response-claim-audit behavior. Target a canary pass rate of 80-95% rather than 100%.\n\n**Impact:** Restores discriminative power to the eval suite so regressions are detected before they hit production sessions; ties eval content directly to the one real capability gap observed this week.\n\n**Risk:** Overly hard canaries could flip the system to chronic RED and cause alert fatigue; new variants must be calibrated against 2-3 baseline runs before being made grading-relevant.\n\n## P-2026-07-05-003: memory_consolidation\n\n**Problem:** B6 consolidation found 5 findings including: rule overlap between agent-delegation-triggers.md and cloudflare-deploy.md (37% shared directives), and 4 stale hooks — chief-of-staff last fired 91 days ago (2026-04-05) and code-accuracy last fired 77 days ago (2026-04-19). Stale hooks add per-session evaluation overhead with zero catches; overlapping rules risk divergent updates.\n\n**Solution:** Merge the 37% shared directives from /Users/reggie/.claude/rules/cloudflare-deploy.md into /Users/reggie/.claude/rules/agent-delegation-triggers.md (keeping deploy-specific content in cloudflare-deploy.md with a cross-reference), and move the chief-of-staff and code-accuracy hooks to a disabled/archive state in ~/.claude/hooks/ with a 30-day reactivation note rather than deleting them outright.\n\n**Impact:** Reduces rule-maintenance divergence risk, trims dead-weight hook evaluation from every session, and shrinks the surface Bruce must audit each night (stale_hooks metric drops from 4 toward 0).\n\n**Risk:** A stale hook may be dormant-but-load-bearing for a rare workflow (e.g., code-accuracy firing only during specific review types); archiving with a reactivation note rather than deletion mitigates but does not eliminate this.\n\n## P-2026-07-05-004: agent_methodology\n\n**Problem:** hook_rule_fp_rate_7d shows pre-response-claim-audit at 25% false-positive rate (1 FP of 4 fires). With only 3 valid catches per week, each false positive materially erodes trust in the hook and trains the main thread to dismiss its output. Additionally, the single capability gap this week was a main-thread process slip ('debrief is NOT optional, BEFORE session close' per agent-deployment-tracking.md), indicating the rule's trigger placement isn't binding at session close.\n\n**Solution:** In ~/.claude/rules/ (or hooks config for pre-response-claim-audit): tighten the claim-audit trigger to exclude the pattern class that produced the false positive (review the tagged FP event from A1 to identify it), and amend /Users/reggie/.claude/rules/agent-deployment-tracking.md to add an explicit session-close checkpoint directive ('before ending any session with agent deployments, emit debrief block') so the debrief requirement fires at close rather than relying on inline recall.\n\n**Impact:** FP rate drops toward 0% preserving hook credibility, and the one recurring main-thread capability gap (skipped debriefs) gets a structural checkpoint instead of relying on memory.\n\n**Risk:** Narrowing the claim-audit trigger too far could suppress valid catches (only 3/week valid — small sample means tuning on n=1 FP is noisy); monitor hook_catches_valid_7d for two weeks after the change to detect suppression.\n\n## Proposal Track Record\n83 total, 70 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 88% | 70/79 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-07-05\n\n## Status: RED\n\n## Key Findings\n- CONSOLIDATION: Rule Overlap: agent-delegation-triggers.md <-> cloudflare-deploy.md (37% shared directives) — Files: `/Users/reggie/.claude/rules/agent-delegation-triggers.md`, `/Users/reggie/.claude/rules/cloudflare-deploy.md`\n- CONSOLIDATION: Stale Hook: chief-of-staff — Last fired: 2026-04-05 (91 days ago)\n- CONSOLIDATION: Stale Hook: code-accuracy — Last fired: 2026-04-19 (77 days ago)\n- ESTABLISHING: developer TC8 scored 4.6 (baseline not yet set — calibrating, no regression flag)\n- ESTABLISHING: reviewer TC7 scored 5.0 (baseline not yet set — calibrating, no regression flag)\n- PATTERN: Same-file churn — No files with >= 5 edits in a session that also had >= 2 fix_attempts (last 14 days)\n- PIVOT: Eval Signal Rate — All canaries passing for 75 days across 21 runs. Evals too easy.\n- WATCH: developer TC7 scored 4.2 (baseline 5.0, delta -0.80)\n- ERROR: developer TC6 returned empty output — possible budget exhaustion or API timeout\n- ERROR: developer TC6b returned empty output — possible budget exhaustion or API timeout\n- ERROR: developer TC7 returned empty output — possible budget exhaustion or API timeout\n- ERROR: developer TC8 returned empty output — possible budget exhaustion or API timeout\n- ERROR: night-shift TC1 returned empty output — possible budget exhaustion or API timeout\n- ERROR: reviewer TC1 returned empty output — possible budget exhaustion or API timeout\n- ERROR: reviewer TC7 returned empty output — possible budget exhaustion or API timeout\n- ERROR: Canary eval MISSING for developer (developer/TC6) — configured but produced no score\n- ERROR: Canary eval MISSING for developer-tc6b (developer/TC6b) — configured but produced no score\n- ERROR: Canary eval MISSING for developer-tc7 (developer/TC7) — configured but produced no score\n- ERROR: Canary eval MISSING for developer-tc8 (developer/TC8) — configured but produced no score\n- ERROR: Canary eval MISSING for night-shift (night-shift/TC1) — configured but produced no score\n- ERROR: Canary eval MISSING for reviewer (reviewer/TC1) — configured but produced no score\n- ERROR: Canary eval MISSING for reviewer-tc7 (reviewer/TC7) — configured but produced no score\n- ERROR: Could not parse generation output — no valid {\"evals\": [...]} object found\n- ERROR: Could not parse generation output — no valid {\"evals\": [...]} object found (raw saved to b2-gen-raw.txt)\n- ERROR: Could not parse debug DYN-20260705-1 eval output\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 4.6 | 3.6 | 1.00 | ok |\n| developer | 4.8 | 5.0 | -0.20 | ok |\n| developer | 4.2 | 5.0 | -0.80 | watch |\n| developer | 4.6 | 5.0 | -0.40 | ok |\n| night-shift | 5.0 | 5.0 | 0.00 | ok |\n| reviewer | 5.0 | 5.0 | 0.00 | ok |\n| reviewer | 5.0 | 5.0 | 0.00 | ok |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| debug | DYN-20260705-1 | 4.6 | pass | agent-os |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n110 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 1\n- escalations: 0\n- hook_catches: 4\n- re_explanations: 0\n- patterns_detected: 3\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (30d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\n# Proposals — 2026-07-05\n\n## P-2026-07-05-001: self_improvement\n\n**Problem:** 7 of tonight's task calls returned empty output (developer TC6/TC6b/TC7/TC8, night-shift TC1, reviewer TC1/TC7) with 'possible budget exhaustion or API timeout', cascading into 7 MISSING canary scores. Prior 7-day history shows 5 of 6 runs RED (2026-06-16 through 2026-06-27), suggesting this is a recurring pipeline failure, not a one-off. The Night Shift pipeline currently treats an empty subprocess response as terminal instead of distinguishing timeout from budget exhaustion and retrying.\n\n**Solution:** In ~/.claude/night-shift/pipeline (canary eval runner stage), add: (1) detection of empty output with explicit cause classification (check remaining token budget before dispatch, capture HTTP timeout vs 200-with-empty-body), (2) one automatic retry with exponential backoff and a reduced-scope prompt for empty responses, (3) if retry fails, emit a 'canary_inconclusive' score of null with reason code rather than 'MISSING', so downstream RED/YELLOW grading can distinguish infrastructure failure from eval failure.\n\n**Impact:** Recovers most of the 7 lost canary scores per run, converts spurious REDs caused by infrastructure flakiness into accurate grades, and gives Bruce structured cause data (budget vs timeout) to propose targeted fixes in future runs instead of guessing.\n\n**Risk:** Retries double API cost on genuinely budget-exhausted nights, potentially worsening exhaustion; mitigate by checking budget headroom before retry. Misclassifying a real eval failure as 'inconclusive' could hide a true regression.\n\n## P-2026-07-05-002: eval_evolution\n\n**Problem:** Finding 'PIVOT: Eval Signal Rate' — all canaries have passed for 75 consecutive days across 21 runs (consecutive_all_pass=21, all_pass_streak_days=75). Evals that never fail provide zero regression signal; tonight the only non-pass outcomes were MISSING due to infra errors, not eval difficulty. Meanwhile real capability gaps still occur (capability_gaps_7d=1, attributed to main-thread debrief slip per capability_gap_attribution).\n\n**Solution:** In ~/.claude/evals/canaries/, harden the two highest-traffic suites first: developer/TC6-TC8 and reviewer/TC1/TC7. Add one adversarial variant per test case targeting known weak spots from A1 data — e.g., a developer canary requiring correct agent-deployment debrief per agent-deployment-tracking.md (the exact inline-loop slip attributed to main-thread), and a reviewer canary with a subtle unverified claim to exercise pre-response-claim-audit behavior. Target a canary pass rate of 80-95% rather than 100%.\n\n**Impact:** Restores discriminative power to the eval suite so regressions are detected before they hit production sessions; ties eval content directly to the one real capability gap observed this week.\n\n**Risk:** Overly hard canaries could flip the system to chronic RED and cause alert fatigue; new variants must be calibrated against 2-3 baseline runs before being made grading-relevant.\n\n## P-2026-07-05-003: memory_consolidation\n\n**Problem:** B6 consolidation found 5 findings including: rule overlap between agent-delegation-triggers.md and cloudflare-deploy.md (37% shared directives), and 4 stale hooks — chief-of-staff last fired 91 days ago (2026-04-05) and code-accuracy last fired 77 days ago (2026-04-19). Stale hooks add per-session evaluation overhead with zero catches; overlapping rules risk divergent updates.\n\n**Solution:** Merge the 37% shared directives from /Users/reggie/.claude/rules/cloudflare-deploy.md into /Users/reggie/.claude/rules/agent-delegation-triggers.md (keeping deploy-specific content in cloudflare-deploy.md with a cross-reference), and move the chief-of-staff and code-accuracy hooks to a disabled/archive state in ~/.claude/hooks/ with a 30-day reactivation note rather than deleting them outright.\n\n**Impact:** Reduces rule-maintenance divergence risk, trims dead-weight hook evaluation from every session, and shrinks the surface Bruce must audit each night (stale_hooks metric drops from 4 toward 0).\n\n**Risk:** A stale hook may be dormant-but-load-bearing for a rare workflow (e.g., code-accuracy firing only during specific review types); archiving with a reactivation note rather than deletion mitigates but does not eliminate this.\n\n## P-2026-07-05-004: agent_methodology\n\n**Problem:** hook_rule_fp_rate_7d shows pre-response-claim-audit at 25% false-positive rate (1 FP of 4 fires). With only 3 valid catches per week, each false positive materially erodes trust in the hook and trains the main thread to dismiss its output. Additionally, the single capability gap this week was a main-thread process slip ('debrief is NOT optional, BEFORE session close' per agent-deployment-tracking.md), indicating the rule's trigger placement isn't binding at session close.\n\n**Solution:** In ~/.claude/rules/ (or hooks config for pre-response-claim-audit): tighten the claim-audit trigger to exclude the pattern class that produced the false positive (review the tagged FP event from A1 to identify it), and amend /Users/reggie/.claude/rules/agent-deployment-tracking.md to add an explicit session-close checkpoint directive ('before ending any session with agent deployments, emit debrief block') so the debrief requirement fires at close rather than relying on inline recall.\n\n**Impact:** FP rate drops toward 0% preserving hook credibility, and the one recurring main-thread capability gap (skipped debriefs) gets a structural checkpoint instead of relying on memory.\n\n**Risk:** Narrowing the claim-audit trigger too far could suppress valid catches (only 3/week valid — small sample means tuning on n=1 FP is noisy); monitor hook_catches_valid_7d for two weeks after the change to detect suppression.\n\n## Proposal Track Record\n83 total, 71 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 88% | 70/79 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
       "total": 83,
-      "accepted": 70,
+      "accepted": 71,
       "pending": 0,
       "rejected": 10
     },
@@ -3708,11 +3739,11 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 50
+      "tool_calls_30d": 210
     },
     {
       "id": "agent-os",
-      "friction_today": 0,
+      "friction_today": 1,
       "unresolved_gaps": 0,
       "templates_used": 1,
       "tool_calls_30d": 0
@@ -3722,7 +3753,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 574
+      "tool_calls_30d": 583
     },
     {
       "id": "kultrverse",
@@ -3783,10 +3814,10 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 2,
-      "preventions": 4,
+      "failures": 3,
+      "preventions": 7,
       "autoInstalls": 0,
-      "conversionPct": 200
+      "conversionPct": 233
     },
     "lastWeek": {
       "failures": 5,
@@ -3862,8 +3893,8 @@
       },
       {
         "date": "2026-07-06",
-        "failures": 0,
-        "preventions": 0
+        "failures": 1,
+        "preventions": 3
       }
     ],
     "stuckFailures": []
@@ -4088,5 +4119,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-07-06T03:02:14.706Z"
+  "lastUpdated": "2026-07-06T04:06:18.405Z"
 }

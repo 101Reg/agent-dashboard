@@ -3708,7 +3708,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 46
+      "tool_calls_30d": 50
     },
     {
       "id": "agent-os",
@@ -3722,14 +3722,14 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 583
+      "tool_calls_30d": 574
     },
     {
       "id": "kultrverse",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 146
+      "tool_calls_30d": 49
     },
     {
       "id": "media-engine",
@@ -3750,7 +3750,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 5300
+      "tool_calls_30d": 4825
     },
     {
       "id": "spoken",
@@ -3784,9 +3784,9 @@
   "failureToPrevention": {
     "thisWeek": {
       "failures": 2,
-      "preventions": 3,
+      "preventions": 4,
       "autoInstalls": 0,
-      "conversionPct": 150
+      "conversionPct": 200
     },
     "lastWeek": {
       "failures": 5,
@@ -3795,11 +3795,6 @@
       "conversionPct": 40
     },
     "daily": [
-      {
-        "date": "2026-06-22",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-06-23",
         "failures": 1,
@@ -3863,7 +3858,12 @@
       {
         "date": "2026-07-05",
         "failures": 1,
-        "preventions": 3
+        "preventions": 4
+      },
+      {
+        "date": "2026-07-06",
+        "failures": 0,
+        "preventions": 0
       }
     ],
     "stuckFailures": []
@@ -3932,7 +3932,6 @@
         "invalid": 1,
         "sparkline": [
           1,
-          1,
           null,
           null,
           null,
@@ -3960,6 +3959,7 @@
           null,
           null,
           null,
+          null,
           null
         ],
         "last_fire_date": "2026-06-28"
@@ -3971,7 +3971,6 @@
         "valid": 1,
         "invalid": 1,
         "sparkline": [
-          null,
           null,
           null,
           0,
@@ -4000,7 +3999,8 @@
           null,
           null,
           null,
-          1
+          1,
+          null
         ],
         "last_fire_date": "2026-07-05"
       },
@@ -4019,9 +4019,9 @@
           null,
           null,
           null,
+          1,
+          1,
           null,
-          1,
-          1,
           null,
           null,
           null,
@@ -4088,5 +4088,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-07-05T21:05:56.123Z"
+  "lastUpdated": "2026-07-06T03:02:14.706Z"
 }

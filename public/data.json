@@ -3094,6 +3094,23 @@
         "events": []
       },
       {
+        "name": "spoken-mirror-chamber",
+        "date": "2026-07-06",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "reviewer-gate",
+            "detail": "C2 gate blocked vercel deploy: reviewer HAD passed but agent_deployment event not yet logged — ordering slip (log-then-deploy), fixed in-ses"
+          }
+        ]
+      },
+      {
         "name": "gh-scan-agent-os",
         "date": "2026-07-06",
         "fixAttempts": 0,
@@ -3122,29 +3139,90 @@
         ]
       },
       {
-        "name": "spoken-mirror-chamber",
+        "name": "kin-universal-capture",
         "date": "2026-07-06",
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
         "capabilityGaps": 0,
         "toilEvents": 0,
-        "hookCatches": 1,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "kin-marathon",
+        "date": "2026-07-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "kin-calm-pass",
+        "date": "2026-07-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
         "events": [
           {
-            "event": "hook_catch",
-            "agent": "reviewer-gate",
-            "detail": "C2 gate blocked vercel deploy: reviewer HAD passed but agent_deployment event not yet logged — ordering slip (log-then-deploy), fixed in-ses"
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Commit-gate reviewer skip: 1-file cosmetic reposition (settings link bottom-center to top-right), SSR-verified via curl; reviewer spawn disp"
           }
         ]
+      },
+      {
+        "name": "kin-phase-b",
+        "date": "2026-07-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "kin-phase-c",
+        "date": "2026-07-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Subagent session limit killed 2 agents mid-verification (work complete, reports lost); main-thread absorbed the dropped verification incl. F"
+          }
+        ]
+      },
+      {
+        "name": "kin-queue-completion",
+        "date": "2026-07-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 111,
+    "total": 112,
     "byType": {
-      "feedback": 48,
+      "feedback": 49,
       "project": 23,
       "user": 18,
       "reference": 20,
@@ -3159,10 +3237,16 @@
   },
   "timeline": [
     {
-      "date": "Jul 6, 2026",
-      "title": "Bruce B2 Dynamic Evals",
-      "desc": "Ran /bruce and root-caused silent canary failure (claude --bare stopped loading custom agents), Fixed Loop Health tile + paired 2 stuck failures + built a0 gap_resolved trailer derivation, GitHub scan for Agent OS improvements (3 parallel research agents)",
+      "date": "Jul 7, 2026",
+      "title": "Kin Marathon",
+      "desc": "Universal Capture Phase A+B (classify anything incl. home entities, duplicate/price-change detection, escalating reminders, export), Calm Pass UI (collapsible totals, tappable verification chips, quiet feed, empty state), Phase C app-wide form unification onto shared primitives",
       "active": true
+    },
+    {
+      "date": "Jul 6, 2026",
+      "title": "2 sessions",
+      "desc": "Ran /bruce and root-caused silent canary failure (claude --bare stopped loading custom agents), Fixed Loop Health tile + paired 2 stuck failures + built a0 gap_resolved trailer derivation, GitHub scan for Agent OS improvements (3 parallel research agents)",
+      "active": false
     },
     {
       "date": "Jun 27, 2026",
@@ -3431,6 +3515,24 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-07-07",
+      "text": "Commit-gate reviewer skip: 1-file cosmetic reposition (settings link bottom-center to top-right), SSR-verified via curl; reviewer spawn disproportionate",
+      "context": "agent-delegation-triggers commit gate — logging skip with reason per rule",
+      "high": false
+    },
+    {
+      "date": "2026-07-07",
+      "text": "Subagent session limit killed 2 agents mid-verification (work complete, reports lost); main-thread absorbed the dropped verification incl. FormData/R2 execution — recovery worked but cost a cycle; no mechanism warns before limit hits mid-sprint",
+      "context": "Phase C streams",
+      "high": false
+    },
+    {
+      "date": "2026-07-07",
+      "text": "Session limits killed 2 agents mid-verification (recovered); one deploy went out mid-review before the gate hardened; reviewer caught 3 real regressions → 5 lessons saved",
+      "context": "kin-marathon",
+      "high": false
+    },
+    {
       "date": "2026-07-06",
       "text": "trigger #8 (plan-driven build with locked sprint contract) fired but developer agents were not spawned — subagent Edit/Write on ~/.claude/ is auto-gated, so implementation routed through main-thread per feedback_subagent_claude_gate.md",
       "context": "b2 dynamic-evals build",
@@ -3440,6 +3542,12 @@
       "date": "2026-07-06",
       "text": "Heredoc-stdin repeat (seen_before:true), tail-beheaded JSON cost 2 smoke iterations, reviewer final message needed one SendMessage re-pull → 3 lessons saved",
       "context": "bruce-b2-dynamic-evals",
+      "high": false
+    },
+    {
+      "date": "2026-07-06",
+      "text": "Plan agent died on session API limit (main-thread authored plan); 3/7 subagents idled without final summaries (SendMessage pulls recovered); waveform took 3 deploys before Reduce Motion root cause — build stamp now prevents stale-bundle ambiguity → 4 lessons saved",
+      "context": "spoken-mirror-chamber",
       "high": false
     },
     {
@@ -3495,37 +3603,13 @@
       "text": "adversarial reviewer caught a cross-file seam bug (R2 key prefix mismatch causing live-IG 404) that tsc+build could not — validates the adversarial-debug rule on new live-publish code",
       "context": "P3b news-magazine",
       "high": true
-    },
-    {
-      "date": "2026-06-25",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-06-23",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
-    },
-    {
-      "date": "2026-06-23",
-      "text": "3 IG integration bugs + 60s carousel-item cap + a runner-repo wrong-turn + a half-landed deploy — all diagnosed via source-of-truth/live-path tracing and fixed; nothing shipped broken → 3 lessons saved",
-      "context": "desk-ig-reels-carousels",
-      "high": false
-    },
-    {
-      "date": "2026-06-21",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
     }
   ],
   "nightShift": {
     "status": "RED",
-    "lastRun": "2026-07-06",
+    "lastRun": "2026-07-07",
     "findings": [
-      "PIVOT: Eval Signal Rate — All canaries passing for 75 days across 21 runs. Evals too easy."
+      "PIVOT: Eval Signal Rate — All canaries passing for 73 days across 21 runs. Evals too easy."
     ],
     "evalCanaries": [
       {
@@ -3665,7 +3749,7 @@
     "proposalCount": 0,
     "proposals": [],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-07-06\n\n## Status: RED\n\n## Key Findings\n- PIVOT: Eval Signal Rate — All canaries passing for 75 days across 21 runs. Evals too easy.\n\n## What Hero Worked On (7-day)\n- agent-os: 1 sessions\n- agents: 1 sessions\n- bash: 1 sessions\n- dashboard: 1 sessions\n- evals: 1 sessions\n\n## Agent Usage (7-day)\n- Explore: 1 sessions\n- Plan: 1 sessions\n- research: 1 sessions\n- reviewer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n110 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 1\n- escalations: 0\n- hook_catches: 2\n- re_explanations: 0\n- patterns_detected: 2\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (31d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n83 total, 71 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 71/83 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-07-07\n\n## Status: RED\n\n## Key Findings\n- PIVOT: Eval Signal Rate — All canaries passing for 73 days across 21 runs. Evals too easy.\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- agent-os: 1 sessions\n- bash: 1 sessions\n- cloudflare: 1 sessions\n- cloudflare-workers: 1 sessions\n\n## Agent Usage (7-day)\n- Explore: 4 sessions\n- Plan: 3 sessions\n- dev-s1: 1 sessions\n- dev-s2: 1 sessions\n- dev-s3: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n111 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 1\n- escalations: 0\n- hook_catches: 2\n- re_explanations: 0\n- patterns_detected: 2\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (32d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n83 total, 71 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 71/83 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -3697,7 +3781,7 @@
   "patterns": {
     "hasData": true,
     "findings": [],
-    "generated": "2026-07-05 10:40"
+    "generated": "2026-07-06 18:16"
   },
   "consolidation": {
     "hasData": true,
@@ -3753,7 +3837,7 @@
     },
     {
       "id": "agent-os",
-      "friction_today": 1,
+      "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 1,
       "tool_calls_30d": 0
@@ -3763,7 +3847,14 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 591
+      "tool_calls_30d": 925
+    },
+    {
+      "id": "kin",
+      "friction_today": 2,
+      "unresolved_gaps": 2,
+      "templates_used": 0,
+      "tool_calls_30d": 1499
     },
     {
       "id": "kultrverse",
@@ -3791,14 +3882,14 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 4825
+      "tool_calls_30d": 4787
     },
     {
       "id": "spoken",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 2074
+      "tool_calls_30d": 2076
     },
     {
       "id": "the-desk",
@@ -3824,23 +3915,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 4,
+      "failures": 6,
       "preventions": 7,
       "autoInstalls": 0,
-      "conversionPct": 175
+      "conversionPct": 117
     },
     "lastWeek": {
-      "failures": 5,
+      "failures": 4,
       "preventions": 2,
       "autoInstalls": 0,
-      "conversionPct": 40
+      "conversionPct": 50
     },
     "daily": [
-      {
-        "date": "2026-06-23",
-        "failures": 1,
-        "preventions": 0
-      },
       {
         "date": "2026-06-24",
         "failures": 0,
@@ -3905,9 +3991,25 @@
         "date": "2026-07-06",
         "failures": 2,
         "preventions": 3
+      },
+      {
+        "date": "2026-07-07",
+        "failures": 2,
+        "preventions": 0
       }
     ],
-    "stuckFailures": []
+    "stuckFailures": [
+      {
+        "session": "kin-calm-pass",
+        "detail": "Commit-gate reviewer skip: 1-file cosmetic reposition (settings link bottom-center to top-right), SSR-verified via curl; reviewer spawn disp",
+        "age_days": 0
+      },
+      {
+        "session": "kin-phase-c",
+        "detail": "Subagent session limit killed 2 agents mid-verification (work complete, reports lost); main-thread absorbed the dropped verification incl. F",
+        "age_days": 0
+      }
+    ]
   },
   "patternToTemplate": {
     "thisWeek": {
@@ -3920,7 +4022,7 @@
       "stageStatus": "dormant"
     },
     "lastWeek": {
-      "patternsDetected": 6,
+      "patternsDetected": 5,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -3960,19 +4062,18 @@
   },
   "preventionEfficacy": {
     "activePreventions": 4,
-    "avgEfficacy": 0.8666666666666667,
+    "avgEfficacy": 0.8571428571428571,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 0,
     "perRule": [
       {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.9,
-        "fires30d": 10,
-        "valid": 9,
+        "efficacy": 0.8888888888888888,
+        "fires30d": 9,
+        "valid": 8,
         "invalid": 1,
         "sparkline": [
-          1,
           null,
           null,
           null,
@@ -4001,6 +4102,7 @@
           null,
           null,
           null,
+          null,
           null
         ],
         "last_fire_date": "2026-06-28"
@@ -4012,7 +4114,6 @@
         "valid": 1,
         "invalid": 1,
         "sparkline": [
-          null,
           null,
           0,
           null,
@@ -4041,6 +4142,7 @@
           null,
           null,
           1,
+          null,
           null
         ],
         "last_fire_date": "2026-07-05"
@@ -4059,9 +4161,9 @@
           null,
           null,
           null,
+          1,
+          1,
           null,
-          1,
-          1,
           null,
           null,
           null,
@@ -4120,8 +4222,8 @@
           null,
           null,
           null,
-          null,
-          1
+          1,
+          null
         ],
         "last_fire_date": "2026-07-06"
       }
@@ -4139,7 +4241,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "90% (10 fires/30d)",
+      "current": "89% (9 fires/30d)",
       "target": "stays ≥50%",
       "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -4155,19 +4257,19 @@
     {
       "id": "stuck-failures",
       "title": "Stuck failures resolved",
-      "current": "0 stuck",
+      "current": "2 stuck",
       "target": "reduce by ≥1 this week",
-      "status": "green",
+      "status": "yellow",
       "why": "Failures aged ≥7 days without prevention or resolution. Check Verb 1 carousel."
     },
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "2 this week (6 last)",
+      "current": "2 this week (5 last)",
       "target": "stay near or above last week",
       "status": "red",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-07-06T20:15:10.752Z"
+  "lastUpdated": "2026-07-07T20:11:34.586Z"
 }

@@ -3071,7 +3071,7 @@
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 0,
+        "capabilityGaps": 1,
         "toilEvents": 0,
         "hookCatches": 1,
         "events": [
@@ -3079,6 +3079,11 @@
             "event": "hook_catch",
             "agent": "stop-hook",
             "detail": "F4 on proposal review: '2026-04-23 retirement' + CF-rule design intent were untagged citations of rules text injected via system-reminder (F"
+          },
+          {
+            "event": "capability_gap",
+            "agent": "night-shift",
+            "detail": "Anthropic API credit balance too low mid-run — C0 proposals failed outright, B2 DYN-2 + B3 skill-gaps unparseable (raw = credit error), deve"
           }
         ]
       },
@@ -3581,6 +3586,12 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-07-13",
+      "text": "Anthropic API credit balance too low mid-run — C0 proposals failed outright, B2 DYN-2 + B3 skill-gaps unparseable (raw = credit error), developer TC6 scored 0 with empty raw (false DEGRADED). RED status partly infrastructure, not agent quality.",
+      "context": "manual /bruce run 2026-07-13",
+      "high": false
+    },
+    {
       "date": "2026-07-08",
       "text": "Second session-limit kill of builder agents in 24h (this time pre-start); main-thread absorbed both streams successfully but reviewer separation became the only independent check — worked (caught 2 real bugs in main-thread's auth code)",
       "context": "tester-access sprint",
@@ -3663,12 +3674,6 @@
       "text": "Explore gate blocked Reads mid-session (worked around via grep/sed/python); reviewer caught a thread-dup bug I introduced; 2 review agents idled without a verdict (pulled via SendMessage) → 3 lessons saved",
       "context": "the-desk-d1-d2-queue-d3",
       "high": false
-    },
-    {
-      "date": "2026-06-26",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
     }
   ],
   "nightShift": {
@@ -3682,8 +3687,12 @@
       "ESTABLISHING: reviewer TC7 scored 5.0 (baseline not yet set — calibrating, no regression flag)",
       "PATTERN: Same-file churn — No files with >= 5 edits in a session that also had >= 2 fix_attempts (last 14 days)",
       "PIVOT: Eval Signal Rate — All canaries passing for 77 days across 21 runs. Evals too easy.",
+      "Skill gap: agent-os-self-modification-delegation — 2026-07-06 event: plan-driven build trigger #8 fired but developer agents could",
+      "Skill gap: autonomous-run-infrastructure-health — 2026-07-13 night-shift event: Anthropic API credit balance exhausted mid-run — C",
+      "Skill gap: subagent-session-lifecycle — 3+ confirmed events in 7d: session limits killed 2 agents mid-verification on 20",
       "ERROR: Could not parse developer DYN-20260713-2 eval output (raw saved to b2-score-raw-DYN-20260713-2.txt)",
-      "ERROR: Could not parse skill gap analysis"
+      "ERROR: Could not parse skill gap analysis",
+      "ERROR: Could not parse reviewer TC1 eval output"
     ],
     "evalCanaries": [
       {
@@ -3700,10 +3709,10 @@
       {
         "agent": "developer",
         "promptId": "TC6",
-        "score": 0,
+        "score": 4.6,
         "baseline": 3.6,
-        "delta": -3.6,
-        "status": "DEGRADED",
+        "delta": 1,
+        "status": "ok",
         "lastRun": "2026-07-13",
         "stale": false,
         "source": "run"
@@ -3788,9 +3797,9 @@
       {
         "agent": "developer-tc6b",
         "promptId": "TC6b",
-        "score": 4.6,
+        "score": 4.8,
         "baseline": 5,
-        "delta": -0.4,
+        "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-07-13",
         "stale": false,
@@ -3820,18 +3829,43 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 0,
-    "proposals": [],
+    "proposalCount": 4,
+    "proposals": [
+      {
+        "id": "P-2026-07-13-001",
+        "category": "unknown",
+        "problem": "Night Shift cannot distinguish infrastructure failure from agent regression, and its eval-output parser is brittle. Tonight: 3 parse failures (DYN-20260713-2, B3 skill-gap output, reviewer TC1 — raws saved but unscored), and developer TC6 scored 0 (delta -3.60, flagged DEGRADED) while a same-night rerun scored 4.6 — the 0 was the API credit exhaustion documented in the B3 'autonomous-run-infrastructure-health' gap, not agent quality. Result: 7 consecutive RED runs (2026-06-21 through 2026-07-13) where RED is partly self-inflicted noise, eroding the signal Hero relies on.",
+        "solution": "Modify the Night Shift pipeline (~/.claude/agents/night-shift.md plus the B1/B2/B3 scoring scripts under ~/.claude/night-shift/): (1) add an A0 preflight that verifies API reachability/credit before any scoring phase and aborts to a distinct INFRA status if it fails; (2) classify empty or credit-error raws as INFRA_FAIL, excluded from baseline/delta math and status-color computation, listed in a separate 'infrastructure' briefing section; (3) wrap eval output in a strict JSON contract (retry once with a 'respond only with JSON' repair prompt before saving raw and marking INFRA_FAIL); (4) when duplicate runs of the same prompt_id exist in one night, use max score and flag variance instead of reporting both."
+      },
+      {
+        "id": "P-2026-07-13-002",
+        "category": "unknown",
+        "problem": "Eval saturation: consecutive_all_pass=21 and all_pass_streak_days=77 (B0 metrics), with the PIVOT finding 'All canaries passing for 77 days — evals too easy.' Multiple static canaries sit at ceiling (night-shift TC1: 5.0 twice tonight, reviewer TC7: 5.0 twice tonight). Meanwhile B2 dynamic evals produced only 2 attempts tonight (one unparseable), so the eval suite is measuring memorized floor behavior, not current failure modes like the 4 capability_gaps_7d.",
+        "solution": "In the eval definitions under ~/.claude/night-shift/ (B1 static suite + B2 dynamic generator): retire or graduate canaries that have scored ≥4.8 for 21+ consecutive runs (night-shift TC1, reviewer TC7) to a monthly spot-check cadence; replace them with 2-3 new canaries derived from this week's real incidents — a session-limit mid-verification kill scenario (from the subagent-session-lifecycle gap) and a ~/.claude/ write-gate delegation scenario (from agent-os-self-modification-delegation); raise B2 dynamic eval count from 2 to 4 per night since incident-sourced evals (e.g., DYN-20260713-1 at 4.6 with concrete c3/c5 deductions) are the only ones still producing discriminating signal."
+      },
+      {
+        "id": "P-2026-07-13-003",
+        "category": "unknown",
+        "problem": "B3 high-severity gap 'subagent-session-lifecycle' with fresh evidence (well within 14 days): session limits killed 2 agents mid-verification on 2026-07-07 (kin Phase C, reports lost), a second builder kill within 24h on 2026-07-08 (tester-access sprint), and 3/7 subagents idling without final summaries requiring SendMessage re-pulls. Attribution data confirms: main-thread absorbed 3 of 4 capability gaps this week (top context: tester-access sprint). No mechanism warns before limits hit or checkpoints work-in-progress.",
+        "solution": "Create ~/.claude/rules/subagent-session-budget.md encoding: (a) preflight estimate of remaining session capacity before spawning long-running builder agents, (b) mandatory incremental progress trailers (checkpoint block appended to the subagent's report file after each completed unit) so work survives a mid-task kill, and (c) a standardized SendMessage recovery-pull sequence for idle/killed agents. Add a 3-line reference to the checkpoint requirement in ~/.claude/agents/developer.md and ~/.claude/agents/reviewer.md."
+      },
+      {
+        "id": "P-2026-07-13-004",
+        "category": "unknown",
+        "problem": "Two B6 consolidation findings are accumulating dead weight: (1) hook 'pre-response-claim-audit' last fired 2026-06-07 (36 days stale) and its only firing in the 7d window was a false positive (fp_rate=1.0, 0 valid catches per hook_rule_fp_rate_7d); (2) rule overlap between agent-delegation-triggers.md and cloudflare-deploy.md at 37% shared directives, which risks divergent edits — notably relevant since agent-delegation-triggers was the one rule with a valid catch this week.",
+        "solution": "Two changes: (1) disable or archive the pre-response-claim-audit hook (move its definition to ~/.claude/hooks/archive/ with a dated note citing 36-day staleness and 100% recent FP rate), keeping the file recoverable; (2) deduplicate /Users/reggie/.claude/rules/cloudflare-deploy.md by replacing its 37% shared directives with a single reference line pointing to /Users/reggie/.claude/rules/agent-delegation-triggers.md as the canonical source, keeping only Cloudflare-specific directives in place."
+      }
+    ],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-07-13\n\n## Status: RED\n\n## Key Findings\n- CONSOLIDATION: Rule Overlap: agent-delegation-triggers.md <-> cloudflare-deploy.md (37% shared directives) — Files: `/Users/reggie/.claude/rules/agent-delegation-triggers.md`, `/Users/reggie/.claude/rules/cloudflare-deploy.md`\n- CONSOLIDATION: Stale Hook: pre-response-claim-audit — Last fired: 2026-06-07 (36 days ago)\n- DEGRADED: developer TC6 scored 0 (baseline 3.6, delta -3.60)\n- ESTABLISHING: developer TC8 scored 4.6 (baseline not yet set — calibrating, no regression flag)\n- ESTABLISHING: reviewer TC7 scored 5.0 (baseline not yet set — calibrating, no regression flag)\n- PATTERN: Same-file churn — No files with >= 5 edits in a session that also had >= 2 fix_attempts (last 14 days)\n- PIVOT: Eval Signal Rate — All canaries passing for 77 days across 21 runs. Evals too easy.\n- ERROR: Could not parse developer DYN-20260713-2 eval output (raw saved to b2-score-raw-DYN-20260713-2.txt)\n- ERROR: Could not parse skill gap analysis\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- agent-os: 1 sessions\n- bash: 1 sessions\n- cloudflare: 1 sessions\n- cloudflare-workers: 1 sessions\n\n## Agent Usage (7-day)\n- Explore: 4 sessions\n- Plan: 3 sessions\n- dev-s1: 1 sessions\n- dev-s2: 1 sessions\n- dev-s3: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 0 | 3.6 | -3.60 | DEGRADED |\n| developer | 4.6 | 5.0 | -0.40 | ok |\n| developer | 4.8 | 5.0 | -0.20 | ok |\n| developer | 4.6 | 5.0 | -0.40 | ok |\n| night-shift | 5.0 | 5.0 | 0.00 | ok |\n| reviewer | 4.8 | 5.0 | -0.20 | ok |\n| reviewer | 5.0 | 5.0 | 0.00 | ok |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| debug | DYN-20260713-1 | 4.6 | pass | deploy |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n111 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 2\n- re_explanations: 0\n- patterns_detected: 0\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (38d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nCredit balance is too low\n# Proposals — 2026-07-13\n\nPhase C failed to generate proposals.\n\n## Proposal Track Record\n83 total, 71 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 71/83 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-07-13\n\n## Status: RED\n\n## Key Findings\n- CONSOLIDATION: Rule Overlap: agent-delegation-triggers.md <-> cloudflare-deploy.md (37% shared directives) — Files: `/Users/reggie/.claude/rules/agent-delegation-triggers.md`, `/Users/reggie/.claude/rules/cloudflare-deploy.md`\n- CONSOLIDATION: Stale Hook: pre-response-claim-audit — Last fired: 2026-06-07 (36 days ago)\n- DEGRADED: developer TC6 scored 0 (baseline 3.6, delta -3.60)\n- ESTABLISHING: developer TC8 scored 4.6 (baseline not yet set — calibrating, no regression flag)\n- ESTABLISHING: reviewer TC7 scored 5.0 (baseline not yet set — calibrating, no regression flag)\n- PATTERN: Same-file churn — No files with >= 5 edits in a session that also had >= 2 fix_attempts (last 14 days)\n- PIVOT: Eval Signal Rate — All canaries passing for 77 days across 21 runs. Evals too easy.\n- Skill gap: agent-os-self-modification-delegation — 2026-07-06 event: plan-driven build trigger #8 fired but developer agents could \n- Skill gap: autonomous-run-infrastructure-health — 2026-07-13 night-shift event: Anthropic API credit balance exhausted mid-run — C\n- Skill gap: subagent-session-lifecycle — 3+ confirmed events in 7d: session limits killed 2 agents mid-verification on 20\n- ERROR: Could not parse developer DYN-20260713-2 eval output (raw saved to b2-score-raw-DYN-20260713-2.txt)\n- ERROR: Could not parse skill gap analysis\n- ERROR: Could not parse reviewer TC1 eval output\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- agent-os: 1 sessions\n- bash: 1 sessions\n- cloudflare: 1 sessions\n- cloudflare-workers: 1 sessions\n\n## Agent Usage (7-day)\n- Explore: 4 sessions\n- Plan: 3 sessions\n- dev-s1: 1 sessions\n- dev-s2: 1 sessions\n- dev-s3: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 4.6 | 3.6 | 1.00 | ok |\n| developer | 4.8 | 5.0 | -0.20 | ok |\n| developer | 4.8 | 5.0 | -0.20 | ok |\n| developer | 4.6 | 5.0 | -0.40 | ok |\n| night-shift | 5.0 | 5.0 | 0.00 | ok |\n| reviewer | 4.8 | 5.0 | -0.20 | ok |\n| reviewer | 5.0 | 5.0 | 0.00 | ok |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| debug | DYN-20260713-1 | 4.6 | pass | deploy |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n111 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 2\n- re_explanations: 0\n- patterns_detected: 0\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (38d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\n# Proposals — 2026-07-13\n\n## P-2026-07-13-001: self_improvement\n\n**Problem:** Night Shift cannot distinguish infrastructure failure from agent regression, and its eval-output parser is brittle. Tonight: 3 parse failures (DYN-20260713-2, B3 skill-gap output, reviewer TC1 — raws saved but unscored), and developer TC6 scored 0 (delta -3.60, flagged DEGRADED) while a same-night rerun scored 4.6 — the 0 was the API credit exhaustion documented in the B3 'autonomous-run-infrastructure-health' gap, not agent quality. Result: 7 consecutive RED runs (2026-06-21 through 2026-07-13) where RED is partly self-inflicted noise, eroding the signal Hero relies on.\n\n**Solution:** Modify the Night Shift pipeline (~/.claude/agents/night-shift.md plus the B1/B2/B3 scoring scripts under ~/.claude/night-shift/): (1) add an A0 preflight that verifies API reachability/credit before any scoring phase and aborts to a distinct INFRA status if it fails; (2) classify empty or credit-error raws as INFRA_FAIL, excluded from baseline/delta math and status-color computation, listed in a separate 'infrastructure' briefing section; (3) wrap eval output in a strict JSON contract (retry once with a 'respond only with JSON' repair prompt before saving raw and marking INFRA_FAIL); (4) when duplicate runs of the same prompt_id exist in one night, use max score and flag variance instead of reporting both.\n\n**Impact:** RED becomes reserved for genuine agent regression; false DEGRADED findings like tonight's TC6 disappear; the 3-per-night parse-failure class is either auto-repaired or cleanly quarantined; the 7-night RED streak resolves into an honest status signal Hero can act on.\n\n**Risk:** Overly broad INFRA_FAIL classification could mask a real regression that happens to produce malformed output (an agent emitting garbage IS a failure); mitigate by requiring the raw to match known error signatures (credit/rate-limit/HTTP 5xx) before excluding it from degradation math, and always surfacing INFRA_FAIL counts in the briefing.\n\n## P-2026-07-13-002: eval_evolution\n\n**Problem:** Eval saturation: consecutive_all_pass=21 and all_pass_streak_days=77 (B0 metrics), with the PIVOT finding 'All canaries passing for 77 days — evals too easy.' Multiple static canaries sit at ceiling (night-shift TC1: 5.0 twice tonight, reviewer TC7: 5.0 twice tonight). Meanwhile B2 dynamic evals produced only 2 attempts tonight (one unparseable), so the eval suite is measuring memorized floor behavior, not current failure modes like the 4 capability_gaps_7d.\n\n**Solution:** In the eval definitions under ~/.claude/night-shift/ (B1 static suite + B2 dynamic generator): retire or graduate canaries that have scored ≥4.8 for 21+ consecutive runs (night-shift TC1, reviewer TC7) to a monthly spot-check cadence; replace them with 2-3 new canaries derived from this week's real incidents — a session-limit mid-verification kill scenario (from the subagent-session-lifecycle gap) and a ~/.claude/ write-gate delegation scenario (from agent-os-self-modification-delegation); raise B2 dynamic eval count from 2 to 4 per night since incident-sourced evals (e.g., DYN-20260713-1 at 4.6 with concrete c3/c5 deductions) are the only ones still producing discriminating signal.\n\n**Impact:** Eval suite regains discriminative power; per-night compute shifts from confirming known-good behavior to probing the 4 active capability gaps; baselines for new canaries establish within ~5 runs given the existing ESTABLISHING mechanism.\n\n**Risk:** Retiring a saturated canary removes the tripwire for regression on that exact behavior — a future agent-file edit could silently reintroduce the failure; mitigate with the monthly spot-check cadence rather than full deletion, and auto-reinstate any canary whose spot-check drops below 4.5.\n\n## P-2026-07-13-003: skill_gap\n\n**Problem:** B3 high-severity gap 'subagent-session-lifecycle' with fresh evidence (well within 14 days): session limits killed 2 agents mid-verification on 2026-07-07 (kin Phase C, reports lost), a second builder kill within 24h on 2026-07-08 (tester-access sprint), and 3/7 subagents idling without final summaries requiring SendMessage re-pulls. Attribution data confirms: main-thread absorbed 3 of 4 capability gaps this week (top context: tester-access sprint). No mechanism warns before limits hit or checkpoints work-in-progress.\n\n**Solution:** Create ~/.claude/rules/subagent-session-budget.md encoding: (a) preflight estimate of remaining session capacity before spawning long-running builder agents, (b) mandatory incremental progress trailers (checkpoint block appended to the subagent's report file after each completed unit) so work survives a mid-task kill, and (c) a standardized SendMessage recovery-pull sequence for idle/killed agents. Add a 3-line reference to the checkpoint requirement in ~/.claude/agents/developer.md and ~/.claude/agents/reviewer.md.\n\n**Impact:** Eliminates the recurring lost-report/lost-verification failure (3+ events in 7d); main-thread stops paying a full recovery cycle per incident; independent verification survives session kills instead of being redone in-thread.\n\n**Risk:** Checkpoint trailers add token overhead to every builder session even when no kill occurs, and a badly-tuned capacity estimate could make main-thread refuse to spawn agents it should spawn; mitigate by making the preflight advisory (warn, don't block) for the first two weeks and measuring checkpoint overhead in the A1 telemetry.\n\n## P-2026-07-13-004: memory_consolidation\n\n**Problem:** Two B6 consolidation findings are accumulating dead weight: (1) hook 'pre-response-claim-audit' last fired 2026-06-07 (36 days stale) and its only firing in the 7d window was a false positive (fp_rate=1.0, 0 valid catches per hook_rule_fp_rate_7d); (2) rule overlap between agent-delegation-triggers.md and cloudflare-deploy.md at 37% shared directives, which risks divergent edits — notably relevant since agent-delegation-triggers was the one rule with a valid catch this week.\n\n**Solution:** Two changes: (1) disable or archive the pre-response-claim-audit hook (move its definition to ~/.claude/hooks/archive/ with a dated note citing 36-day staleness and 100% recent FP rate), keeping the file recoverable; (2) deduplicate /Users/reggie/.claude/rules/cloudflare-deploy.md by replacing its 37% shared directives with a single reference line pointing to /Users/reggie/.claude/rules/agent-delegation-triggers.md as the canonical source, keeping only Cloudflare-specific directives in place.\n\n**Impact:** Removes a hook that currently only produces false positives (halving the FP contribution to hook_catches_7d), and establishes a single source of truth for delegation triggers so future edits propagate instead of diverging.\n\n**Risk:** The stale hook may guard a rare-but-real failure mode that simply hasn't occurred in 36 days — archiving rather than deleting mitigates this; the rule dedup could break Cloudflare deploy flows if any of the 37% shared directives had context-specific wording, so the diff needs Hero review before applying.\n\n## Proposal Track Record\n87 total, 71 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 71/83 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
     "memoryHealth": null,
     "proposalTrackRecord": {
-      "total": 83,
+      "total": 87,
       "accepted": 71,
-      "pending": 0,
+      "pending": 4,
       "rejected": 10
     },
     "benchmarks": [
@@ -3893,7 +3927,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 180
+      "tool_calls_30d": 184
     },
     {
       "id": "agent-os",
@@ -3907,7 +3941,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 540
+      "tool_calls_30d": 544
     },
     {
       "id": "kin",
@@ -3975,7 +4009,7 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 1,
+      "failures": 2,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
@@ -4049,7 +4083,7 @@
       },
       {
         "date": "2026-07-13",
-        "failures": 0,
+        "failures": 1,
         "preventions": 0
       },
       {
@@ -4336,5 +4370,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-07-14T04:00:54.062Z"
+  "lastUpdated": "2026-07-14T04:14:13.040Z"
 }

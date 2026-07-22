@@ -3303,15 +3303,32 @@
             "detail": "B6 consolidation scanner produced false staleness finding: reported pre-response-claim-audit hook last fired 2026-06-07 (actual: 2026-07-08)"
           }
         ]
+      },
+      {
+        "name": "case-files-build",
+        "date": "2026-07-21",
+        "fixAttempts": 0,
+        "escalations": 1,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "escalation",
+            "agent": "reviewer",
+            "detail": "first adversarial reviewer stalled at 600s watchdog mid-review (141k tokens, heavy full-diff scope); respawned fresh reviewer-2 with narrowe"
+          }
+        ]
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 113,
+    "total": 114,
     "byType": {
       "feedback": 50,
-      "project": 23,
+      "project": 24,
       "user": 18,
       "reference": 20,
       "other": 1
@@ -3609,6 +3626,18 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-07-22",
+      "text": "3+ subagent idle-without-final-summary events in one session (stream-b once, stream-c twice, reviewer-2 twice) plus one reviewer stall — recovery pulls only partially effective; systemic fix candidate: idle-reason surfacing or summary-on-idle enforcement in briefs",
+      "context": "case-files parallel build + review",
+      "high": true
+    },
+    {
+      "date": "2026-07-19",
+      "text": "cross-session-repeat: agent:capability_gap x2",
+      "context": "Layer 2 scanner — 1 cross-session finding(s)",
+      "high": true
+    },
+    {
       "date": "2026-07-13",
       "text": "Anthropic API credit balance too low mid-run — C0 proposals failed outright, B2 DYN-2 + B3 skill-gaps unparseable (raw = credit error), developer TC6 scored 0 with empty raw (false DEGRADED). RED status partly infrastructure, not agent quality.",
       "context": "manual /bruce run 2026-07-13",
@@ -3685,37 +3714,13 @@
       "text": "Plan agent died on session API limit (main-thread authored plan); 3/7 subagents idled without final summaries (SendMessage pulls recovered); waveform took 3 deploys before Reduce Motion root cause — build stamp now prevents stale-bundle ambiguity → 4 lessons saved",
       "context": "spoken-mirror-chamber",
       "high": false
-    },
-    {
-      "date": "2026-07-05",
-      "text": "Finding 'PIVOT: Eval Signal Rate' — all canaries have passed for 75 consecutive days across 21 runs (consecutive_all_pas",
-      "context": "Bruce proposal P-2026-07-05-002",
-      "high": true
-    },
-    {
-      "date": "2026-07-02",
-      "text": "similarity-cluster size=3",
-      "context": "Layer 2 scanner — similarity cluster",
-      "high": true
     }
   ],
   "nightShift": {
-    "status": "RED",
-    "lastRun": "2026-07-13",
+    "status": "GREEN",
+    "lastRun": "2026-07-21",
     "findings": [
-      "CONSOLIDATION: Rule Overlap: agent-delegation-triggers.md <-> cloudflare-deploy.md (37% shared directives) — Files: `/Users/reggie/.claude/rules/agent-delegation-triggers.md`, `/Users/reggie/.claude/rules/cloudflare-deploy.md`",
-      "CONSOLIDATION: Stale Hook: pre-response-claim-audit — Last fired: 2026-06-07 (36 days ago)",
-      "ESTABLISHING: developer TC8 scored 4.6 (baseline not yet set — calibrating, no regression flag)",
-      "ESTABLISHING: reviewer TC7 scored 5.0 (baseline not yet set — calibrating, no regression flag)",
-      "PATTERN: Same-file churn — No files with >= 5 edits in a session that also had >= 2 fix_attempts (last 14 days)",
-      "PIVOT: Eval Signal Rate — All canaries passing for 77 days across 21 runs. Evals too easy.",
-      "Skill gap: agent-os-self-modification-delegation — 2026-07-06 event: plan-driven build trigger #8 fired but developer agents could",
-      "Skill gap: autonomous-run-infrastructure-health — 2026-07-13 night-shift event: Anthropic API credit balance exhausted mid-run — C",
-      "Skill gap: subagent-session-lifecycle — 3+ confirmed events in 7d: session limits killed 2 agents mid-verification on 20",
-      "VARIANCE: developer TC6 graded 4.6 apart across same-night runs — max kept, check run-to-run stability",
-      "ERROR: Could not parse developer DYN-20260713-2 eval output (raw saved to b2-score-raw-DYN-20260713-2.txt)",
-      "ERROR: Could not parse skill gap analysis",
-      "ERROR: Could not parse reviewer TC1 eval output"
+      "System healthy — no issues detected"
     ],
     "evalCanaries": [
       {
@@ -3874,10 +3879,10 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 4,
+    "proposalCount": 0,
     "proposals": [],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-07-13\n\n## Status: RED\n\n## Key Findings\n- CONSOLIDATION: Rule Overlap: agent-delegation-triggers.md <-> cloudflare-deploy.md (37% shared directives) — Files: `/Users/reggie/.claude/rules/agent-delegation-triggers.md`, `/Users/reggie/.claude/rules/cloudflare-deploy.md`\n- CONSOLIDATION: Stale Hook: pre-response-claim-audit — Last fired: 2026-06-07 (36 days ago)\n- ESTABLISHING: developer TC8 scored 4.6 (baseline not yet set — calibrating, no regression flag)\n- ESTABLISHING: reviewer TC7 scored 5.0 (baseline not yet set — calibrating, no regression flag)\n- PATTERN: Same-file churn — No files with >= 5 edits in a session that also had >= 2 fix_attempts (last 14 days)\n- PIVOT: Eval Signal Rate — All canaries passing for 77 days across 21 runs. Evals too easy.\n- Skill gap: agent-os-self-modification-delegation — 2026-07-06 event: plan-driven build trigger #8 fired but developer agents could \n- Skill gap: autonomous-run-infrastructure-health — 2026-07-13 night-shift event: Anthropic API credit balance exhausted mid-run — C\n- Skill gap: subagent-session-lifecycle — 3+ confirmed events in 7d: session limits killed 2 agents mid-verification on 20\n- VARIANCE: developer TC6 graded 4.6 apart across same-night runs — max kept, check run-to-run stability\n- ERROR: Could not parse developer DYN-20260713-2 eval output (raw saved to b2-score-raw-DYN-20260713-2.txt)\n- ERROR: Could not parse skill gap analysis\n- ERROR: Could not parse reviewer TC1 eval output\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- agent-os: 1 sessions\n- bash: 1 sessions\n- cloudflare: 1 sessions\n- cloudflare-workers: 1 sessions\n- agents: 3 sessions\n- bash: 2 sessions\n- d1: 2 sessions\n- evals: 2 sessions\n- agent-os: 1 sessions\n\n## Agent Usage (7-day)\n- Explore: 4 sessions\n- Plan: 3 sessions\n- dev-s1: 1 sessions\n- dev-s2: 1 sessions\n- dev-s3: 1 sessions\n- Explore: 4 sessions\n- Plan: 3 sessions\n- reviewer: 2 sessions\n- dev-s1: 1 sessions\n- dev-s2: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 4.6 | 3.6 | 1.00 | ok |\n| developer | 4.8 | 5.0 | -0.20 | ok |\n| developer | 4.8 | 5.0 | -0.20 | ok |\n| developer | 4.6 | 5.0 | -0.40 | ok |\n| night-shift | 5.0 | 5.0 | 0.00 | ok |\n| reviewer | 4.8 | 5.0 | -0.20 | ok |\n| reviewer | 5.0 | 5.0 | 0.00 | ok |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| debug | DYN-20260713-1 | 4.6 | pass | deploy |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n111 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 2\n- re_explanations: 0\n- patterns_detected: 0\n\n## Infrastructure\nNone — API healthy all run\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (38d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\n# Proposals — 2026-07-13\n\n## P-2026-07-13-001: self_improvement\n\n**Problem:** Night Shift cannot distinguish infrastructure failure from agent regression, and its eval-output parser is brittle. Tonight: 3 parse failures (DYN-20260713-2, B3 skill-gap output, reviewer TC1 — raws saved but unscored), and developer TC6 scored 0 (delta -3.60, flagged DEGRADED) while a same-night rerun scored 4.6 — the 0 was the API credit exhaustion documented in the B3 'autonomous-run-infrastructure-health' gap, not agent quality. Result: 7 consecutive RED runs (2026-06-21 through 2026-07-13) where RED is partly self-inflicted noise, eroding the signal Hero relies on.\n\n**Solution:** Modify the Night Shift pipeline (~/.claude/agents/night-shift.md plus the B1/B2/B3 scoring scripts under ~/.claude/night-shift/): (1) add an A0 preflight that verifies API reachability/credit before any scoring phase and aborts to a distinct INFRA status if it fails; (2) classify empty or credit-error raws as INFRA_FAIL, excluded from baseline/delta math and status-color computation, listed in a separate 'infrastructure' briefing section; (3) wrap eval output in a strict JSON contract (retry once with a 'respond only with JSON' repair prompt before saving raw and marking INFRA_FAIL); (4) when duplicate runs of the same prompt_id exist in one night, use max score and flag variance instead of reporting both.\n\n**Impact:** RED becomes reserved for genuine agent regression; false DEGRADED findings like tonight's TC6 disappear; the 3-per-night parse-failure class is either auto-repaired or cleanly quarantined; the 7-night RED streak resolves into an honest status signal Hero can act on.\n\n**Risk:** Overly broad INFRA_FAIL classification could mask a real regression that happens to produce malformed output (an agent emitting garbage IS a failure); mitigate by requiring the raw to match known error signatures (credit/rate-limit/HTTP 5xx) before excluding it from degradation math, and always surfacing INFRA_FAIL counts in the briefing.\n\n## P-2026-07-13-002: eval_evolution\n\n**Problem:** Eval saturation: consecutive_all_pass=21 and all_pass_streak_days=77 (B0 metrics), with the PIVOT finding 'All canaries passing for 77 days — evals too easy.' Multiple static canaries sit at ceiling (night-shift TC1: 5.0 twice tonight, reviewer TC7: 5.0 twice tonight). Meanwhile B2 dynamic evals produced only 2 attempts tonight (one unparseable), so the eval suite is measuring memorized floor behavior, not current failure modes like the 4 capability_gaps_7d.\n\n**Solution:** In the eval definitions under ~/.claude/night-shift/ (B1 static suite + B2 dynamic generator): retire or graduate canaries that have scored ≥4.8 for 21+ consecutive runs (night-shift TC1, reviewer TC7) to a monthly spot-check cadence; replace them with 2-3 new canaries derived from this week's real incidents — a session-limit mid-verification kill scenario (from the subagent-session-lifecycle gap) and a ~/.claude/ write-gate delegation scenario (from agent-os-self-modification-delegation); raise B2 dynamic eval count from 2 to 4 per night since incident-sourced evals (e.g., DYN-20260713-1 at 4.6 with concrete c3/c5 deductions) are the only ones still producing discriminating signal.\n\n**Impact:** Eval suite regains discriminative power; per-night compute shifts from confirming known-good behavior to probing the 4 active capability gaps; baselines for new canaries establish within ~5 runs given the existing ESTABLISHING mechanism.\n\n**Risk:** Retiring a saturated canary removes the tripwire for regression on that exact behavior — a future agent-file edit could silently reintroduce the failure; mitigate with the monthly spot-check cadence rather than full deletion, and auto-reinstate any canary whose spot-check drops below 4.5.\n\n## P-2026-07-13-003: skill_gap\n\n**Problem:** B3 high-severity gap 'subagent-session-lifecycle' with fresh evidence (well within 14 days): session limits killed 2 agents mid-verification on 2026-07-07 (kin Phase C, reports lost), a second builder kill within 24h on 2026-07-08 (tester-access sprint), and 3/7 subagents idling without final summaries requiring SendMessage re-pulls. Attribution data confirms: main-thread absorbed 3 of 4 capability gaps this week (top context: tester-access sprint). No mechanism warns before limits hit or checkpoints work-in-progress.\n\n**Solution:** Create ~/.claude/rules/subagent-session-budget.md encoding: (a) preflight estimate of remaining session capacity before spawning long-running builder agents, (b) mandatory incremental progress trailers (checkpoint block appended to the subagent's report file after each completed unit) so work survives a mid-task kill, and (c) a standardized SendMessage recovery-pull sequence for idle/killed agents. Add a 3-line reference to the checkpoint requirement in ~/.claude/agents/developer.md and ~/.claude/agents/reviewer.md.\n\n**Impact:** Eliminates the recurring lost-report/lost-verification failure (3+ events in 7d); main-thread stops paying a full recovery cycle per incident; independent verification survives session kills instead of being redone in-thread.\n\n**Risk:** Checkpoint trailers add token overhead to every builder session even when no kill occurs, and a badly-tuned capacity estimate could make main-thread refuse to spawn agents it should spawn; mitigate by making the preflight advisory (warn, don't block) for the first two weeks and measuring checkpoint overhead in the A1 telemetry.\n\n## P-2026-07-13-004: memory_consolidation\n\n**Problem:** Two B6 consolidation findings are accumulating dead weight: (1) hook 'pre-response-claim-audit' last fired 2026-06-07 (36 days stale) and its only firing in the 7d window was a false positive (fp_rate=1.0, 0 valid catches per hook_rule_fp_rate_7d); (2) rule overlap between agent-delegation-triggers.md and cloudflare-deploy.md at 37% shared directives, which risks divergent edits — notably relevant since agent-delegation-triggers was the one rule with a valid catch this week.\n\n**Solution:** Two changes: (1) disable or archive the pre-response-claim-audit hook (move its definition to ~/.claude/hooks/archive/ with a dated note citing 36-day staleness and 100% recent FP rate), keeping the file recoverable; (2) deduplicate /Users/reggie/.claude/rules/cloudflare-deploy.md by replacing its 37% shared directives with a single reference line pointing to /Users/reggie/.claude/rules/agent-delegation-triggers.md as the canonical source, keeping only Cloudflare-specific directives in place.\n\n**Impact:** Removes a hook that currently only produces false positives (halving the FP contribution to hook_catches_7d), and establishes a single source of truth for delegation triggers so future edits propagate instead of diverging.\n\n**Risk:** The stale hook may guard a rare-but-real failure mode that simply hasn't occurred in 36 days — archiving rather than deleting mitigates this; the rule dedup could break Cloudflare deploy flows if any of the 37% shared directives had context-specific wording, so the diff needs Hero review before applying.\n\n## Proposal Track Record\n87 total, 74 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 71/83 accepted |\n| Eval Signal | PIVOT | 21 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-07-21\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n113 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 1\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 2\n\n## Infrastructure\nNone — API healthy all run\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (46d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n## Proposals\nNone generated\n\n## Proposal Track Record\n87 total, 74 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 74/87 accepted |\n| Eval Signal | OK | 1 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -3892,24 +3897,31 @@
       {
         "name": "Friction Rate",
         "status": "OK",
-        "detail": "1 fix_attempts (14d)"
+        "detail": "0 fix_attempts (14d)"
       },
       {
         "name": "Proposal Hit Rate",
         "status": "85%",
-        "detail": "71/83 accepted"
+        "detail": "74/87 accepted"
       },
       {
         "name": "Eval Signal",
-        "status": "PIVOT",
-        "detail": "21 consecutive all-pass runs"
+        "status": "OK",
+        "detail": "1 consecutive all-pass runs"
       }
     ]
   },
   "patterns": {
     "hasData": true,
-    "findings": [],
-    "generated": "2026-07-13 22:51"
+    "findings": [
+      {
+        "heading": "Cross-session: agent:capability_gap repeating across sessions",
+        "observed": "2x (2026-07-13)",
+        "signature": "night-shift",
+        "suggested": "[hook] — gap diagnosis: recurring agent:capability_gap pattern across sessions without resolution"
+      }
+    ],
+    "generated": "2026-07-19 22:35"
   },
   "consolidation": {
     "hasData": true,
@@ -3947,7 +3959,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 218
+      "tool_calls_30d": 210
     },
     {
       "id": "agent-os",
@@ -3961,7 +3973,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 613
+      "tool_calls_30d": 499
     },
     {
       "id": "kin",
@@ -3972,10 +3984,10 @@
     },
     {
       "id": "media-engine",
-      "friction_today": 0,
+      "friction_today": 1,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 146
+      "tool_calls_30d": 148
     },
     {
       "id": "prototype",
@@ -3989,14 +4001,14 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 74
+      "tool_calls_30d": 2
     },
     {
       "id": "ringkultr",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 3693
+      "tool_calls_30d": 3852
     },
     {
       "id": "secondlook",
@@ -4010,7 +4022,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 2078
+      "tool_calls_30d": 676
     },
     {
       "id": "the-desk",
@@ -4029,58 +4041,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 3,
-      "preventions": 3,
+      "failures": 1,
+      "preventions": 0,
       "autoInstalls": 0,
-      "conversionPct": 100
+      "conversionPct": 0
     },
     "lastWeek": {
-      "failures": 6,
-      "preventions": 7,
+      "failures": 2,
+      "preventions": 3,
       "autoInstalls": 0,
-      "conversionPct": 117
+      "conversionPct": 150
     },
     "daily": [
-      {
-        "date": "2026-07-01",
-        "failures": 1,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-02",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-03",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-04",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-05",
-        "failures": 1,
-        "preventions": 4
-      },
-      {
-        "date": "2026-07-06",
-        "failures": 2,
-        "preventions": 3
-      },
-      {
-        "date": "2026-07-07",
-        "failures": 2,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-08",
-        "failures": 1,
-        "preventions": 0
-      },
       {
         "date": "2026-07-09",
         "failures": 0,
@@ -4110,34 +4082,74 @@
         "date": "2026-07-14",
         "failures": 0,
         "preventions": 0
+      },
+      {
+        "date": "2026-07-15",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-16",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-17",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-18",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-19",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-20",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-21",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-22",
+        "failures": 1,
+        "preventions": 0
       }
     ],
     "stuckFailures": [
       {
         "session": "kin-calm-pass",
         "detail": "Commit-gate reviewer skip: 1-file cosmetic reposition (settings link bottom-center to top-right), SSR-verified via curl; reviewer spawn disp",
-        "age_days": 7
+        "age_days": 15
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 0,
-      "templatesExtracted": 0,
-      "distinctTemplatesExtracted": 0,
-      "templatesInstantiated": 0,
-      "extractionRate": 0,
-      "extractablePatternCount": 0,
-      "stageStatus": "dormant"
-    },
-    "lastWeek": {
       "patternsDetected": 2,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
       "extractionRate": 0,
-      "extractablePatternCount": 0,
-      "stageStatus": "dormant"
+      "extractablePatternCount": 1,
+      "stageStatus": "broken"
+    },
+    "lastWeek": {
+      "patternsDetected": 0,
+      "templatesExtracted": 0,
+      "distinctTemplatesExtracted": 0,
+      "templatesInstantiated": 0,
+      "extractionRate": 0,
+      "extractablePatternCount": 1,
+      "stageStatus": "broken"
     },
     "activeTemplates": [
       {
@@ -4167,70 +4179,27 @@
         ]
       }
     ],
-    "stuckPatterns": []
+    "stuckPatterns": [
+      {
+        "heading": "Cross-session: agent:capability_gap repeating across sessions",
+        "age_days": null
+      }
+    ]
   },
   "preventionEfficacy": {
-    "activePreventions": 4,
-    "avgEfficacy": 0.8181818181818182,
+    "activePreventions": 3,
+    "avgEfficacy": 0.75,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 0,
     "perRule": [
       {
-        "rule": "source-labeling-convention",
-        "efficacy": 1,
-        "fires30d": 2,
-        "valid": 2,
-        "invalid": 0,
-        "sparkline": [
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        "last_fire_date": "2026-06-16"
-      },
-      {
         "rule": "pre-response-claim-audit",
-        "efficacy": 0.7142857142857143,
-        "fires30d": 7,
-        "valid": 5,
+        "efficacy": 0.6666666666666666,
+        "fires30d": 6,
+        "valid": 4,
         "invalid": 2,
         "sparkline": [
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
           null,
           null,
@@ -4247,6 +4216,14 @@
           null,
           null,
           0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -4275,15 +4252,15 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -4316,15 +4293,15 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -4350,7 +4327,7 @@
     {
       "id": "canary-rule",
       "title": "pre-response-claim-audit efficacy",
-      "current": "71% (7 fires/30d)",
+      "current": "67% (6 fires/30d)",
       "target": "stays ≥50%",
       "status": "green",
       "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
@@ -4374,11 +4351,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "0 this week (2 last)",
+      "current": "2 this week (0 last)",
       "target": "stay near or above last week",
-      "status": "red",
+      "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-07-14T04:52:18.771Z"
+  "lastUpdated": "2026-07-22T04:51:24.577Z"
 }

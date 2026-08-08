@@ -3351,7 +3351,7 @@
       },
       {
         "name": "desk-pacc-script-rules",
-        "date": "2026-07-26",
+        "date": "2026-07-27",
         "fixAttempts": 1,
         "escalations": 0,
         "reExplanations": 0,
@@ -3380,15 +3380,32 @@
             "detail": "trigger #1 slip: debug agent spawned only on Hero's explicit ask after 2 failed Open/PDF theories — should have auto-spawned at the 2nd fail"
           }
         ]
+      },
+      {
+        "name": "aocc-rescue-sprint0",
+        "date": "2026-08-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "reviewer not spawned before workers.dev deploy of mechanical Vite split — composed-verify (rebuild, node --check, 44-handler window cross-ch"
+          }
+        ]
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 115,
+    "total": 116,
     "byType": {
       "feedback": 50,
-      "project": 25,
+      "project": 26,
       "user": 18,
       "reference": 20,
       "other": 1
@@ -3402,10 +3419,16 @@
   },
   "timeline": [
     {
+      "date": "Jul 27, 2026",
+      "title": "Desk Pacc Script Rules",
+      "desc": "PACC delivery rules into Case Files reading-copy prompt + bible, quiet-window recap brief + premiere check + continuity + episode delete, root-caused and fixed CF SPA-fallback navigation swallow + edge-cache poisoning (run_worker_first all prefixes)",
+      "active": true
+    },
+    {
       "date": "Jul 22, 2026",
       "title": "Case Files Build",
       "desc": "Planned + built Case Files legal-case engine for the Desk (plan mode, 3 parallel dev streams, 35 files), Deployed desk hub with Cases tab, hourly CL/RSS poller, brief composer, PDF rasterize pipeline, Merged to main, armed case_doc workflow, proved PDF roundtrip with adversarial token probe",
-      "active": true
+      "active": false
     },
     {
       "date": "Jul 13, 2026",
@@ -3692,9 +3715,27 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-08-07",
+      "text": "reviewer not spawned before workers.dev deploy of mechanical Vite split — composed-verify (rebuild, node --check, 44-handler window cross-check) + live browser round-trip stood in; demo URL, sample data only",
+      "context": "agent-delegation-triggers #2 commit gate — logging the skip with reason per the OR-clause",
+      "high": false
+    },
+    {
+      "date": "2026-08-07",
+      "text": "3x this session: named teammate agents (aocc-split, aocc-review1; app/worker also) go idle without delivering final summaries as messages — recovery-pull SendMessage yields another idle notification; unnamed async Agent spawns (Explore, fork) delivered results in task-notifications fine",
+      "context": "systemic fix: spawn one-shot deliverable agents UNNAMED (async task-notification carries the result); reserve named teammates for long-lived interactive roles; for named agents collect deliverables from disk or TaskOutput",
+      "high": true
+    },
+    {
       "date": "2026-07-27",
       "text": "trigger #1 slip: debug agent spawned only on Hero's explicit ask after 2 failed Open/PDF theories — should have auto-spawned at the 2nd failed fix",
       "context": "Open/PDF dead-tap arc; also claude-api skill not loaded before editing Anthropic API call (its trigger covered the moment)",
+      "high": false
+    },
+    {
+      "date": "2026-07-27",
+      "text": "Wrong-layer PWA diagnosis shipped before debug spawn; wrangler tail wedged silently; token drift blocked authenticated verification for hours; SDK streaming guard turned a max_tokens bump into instant 502s → 3 lessons saved",
+      "context": "desk-pacc-script-rules",
       "high": false
     },
     {
@@ -3762,29 +3803,11 @@
       "text": "Eval saturation: consecutive_all_pass=21 and all_pass_streak_days=77 (B0 metrics), with the PIVOT finding 'All canaries ",
       "context": "Bruce proposal P-2026-07-13-002",
       "high": true
-    },
-    {
-      "date": "2026-07-13",
-      "text": "B3 high-severity gap 'subagent-session-lifecycle' with fresh evidence (well within 14 days): session limits killed 2 age",
-      "context": "Bruce proposal P-2026-07-13-003",
-      "high": true
-    },
-    {
-      "date": "2026-07-08",
-      "text": "Second session-limit kill of builder agents in 24h (this time pre-start); main-thread absorbed both streams successfully but reviewer separation became the only independent check — worked (caught 2 real bugs in main-thread's auth code)",
-      "context": "tester-access sprint",
-      "high": false
-    },
-    {
-      "date": "2026-07-07",
-      "text": "Commit-gate reviewer skip: 1-file cosmetic reposition (settings link bottom-center to top-right), SSR-verified via curl; reviewer spawn disproportionate",
-      "context": "agent-delegation-triggers commit gate — logging skip with reason per rule",
-      "high": false
     }
   ],
   "nightShift": {
     "status": "GREEN",
-    "lastRun": "2026-07-27",
+    "lastRun": "2026-08-07",
     "findings": [
       "System healthy — no issues detected"
     ],
@@ -3808,7 +3831,7 @@
         "delta": 1,
         "status": "ok",
         "lastRun": "2026-07-13",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3852,7 +3875,7 @@
         "delta": 0,
         "status": "ok",
         "lastRun": "2026-07-13",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3874,7 +3897,7 @@
         "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-07-13",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3885,7 +3908,7 @@
         "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-07-13",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3896,7 +3919,7 @@
         "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-07-13",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3907,7 +3930,7 @@
         "delta": -0.4,
         "status": "ok",
         "lastRun": "2026-07-13",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3918,7 +3941,7 @@
         "delta": 0,
         "status": "ok",
         "lastRun": "2026-07-13",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -3948,7 +3971,7 @@
     "proposalCount": 0,
     "proposals": [],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-07-27\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- agents: 1 sessions\n- cloudflare-workers: 1 sessions\n- courtlistener-api: 1 sessions\n- d1: 1 sessions\n- github-actions: 1 sessions\n\n## Agent Usage (7-day)\n- Explore: 1 sessions\n- Plan: 1 sessions\n- developer: 1 sessions\n- reviewer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n114 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 1\n- escalations: 1\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 1\n\n## Infrastructure\nNone — API healthy all run\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (52d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n\n### Upcoming (next 3 days)\n- **review-2026-07-29-trigger-5-evidence-N30** — due 2026-07-29 (2d): Re-evaluate trigger #5 (parallel-spawn) sticky-prompt-hook promotion with N>=30 deployments in window. Previous review (review-2026-05-07) resolved KEEP ADVISORY on N=26/30d, but Hero flagged sample size as insufficient for the confidence the verdict implied.\n## Proposals\nNone generated\n\n## Proposal Track Record\n87 total, 74 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 74/87 accepted |\n| Eval Signal | OK | 2 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-08-07\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n115 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 1\n\n## Infrastructure\nNone — API healthy all run\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (63d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n- **review-2026-07-29-trigger-5-evidence-N30** (9d overdue)\n  - Re-evaluate trigger #5 (parallel-spawn) sticky-prompt-hook promotion with N>=30 deployments in window. Previous review (review-2026-05-07) resolved KEEP ADVISORY on N=26/30d, but Hero flagged sample size as insufficient for the confidence the verdict implied.\n  - Verify: `python3 -c \"import json,datetime; log=open('/Users/reggie/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl').readlines(); cutoff=(datetime.date.today()-datetime.timedelta(days=60)).isoformat(); evts=[json.loads(l) for l in log if l.strip()]; deps=[e for e in evts if e.get('event')=='agent_deployment' and e.get('date','')>=cutoff]; missing=[e for e in deps if 'parallel_eligible' not in e]; skipped=[e for e in deps if e.get('parallel_eligible')==True and e.get('parallel_executed')==False]; print(f'60d deployments: {len(deps)} | missing parallel_eligible: {len(missing)} | eligible-but-skipped: {len(skipped)}')\"`\n  - Pass: REQUIRES N>=30 deployments in 60d window. If N<30: status=INCONCLUSIVE, extend soak 30d, re-review again. If N>=30 AND eligible-but-skipped >= 10% of N -> promote to sticky-prompt-hook. If N>=30 AND <10% -> CONFIRM KEEP ADVISORY (now data-backed). If N>=30 AND missing-field-rate >5% -> logging discipline regressed, fix that first.\n## Proposals\nNone generated\n\n## Proposal Track Record\n87 total, 74 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 74/87 accepted |\n| Eval Signal | OK | 3 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -3973,14 +3996,14 @@
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "2 consecutive all-pass runs"
+        "detail": "3 consecutive all-pass runs"
       }
     ]
   },
   "patterns": {
     "hasData": true,
     "findings": [],
-    "generated": "2026-07-26 20:49"
+    "generated": "2026-08-07 22:06"
   },
   "consolidation": {
     "hasData": true,
@@ -4018,21 +4041,42 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 210
+      "tool_calls_30d": 38
     },
     {
       "id": "agent-os",
-      "friction_today": 1,
+      "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 1,
       "tool_calls_30d": 0
+    },
+    {
+      "id": "aocc",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 275
+    },
+    {
+      "id": "app",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 4
+    },
+    {
+      "id": "blank",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 2
     },
     {
       "id": "claude-config",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 507
+      "tool_calls_30d": 127
     },
     {
       "id": "content-engine",
@@ -4046,14 +4090,14 @@
       "friction_today": 0,
       "unresolved_gaps": 1,
       "templates_used": 0,
-      "tool_calls_30d": 1968
+      "tool_calls_30d": 2
     },
     {
       "id": "media-engine",
       "friction_today": 0,
       "unresolved_gaps": 1,
       "templates_used": 0,
-      "tool_calls_30d": 128
+      "tool_calls_30d": 4
     },
     {
       "id": "prototype",
@@ -4061,13 +4105,6 @@
       "unresolved_gaps": 0,
       "templates_used": 0,
       "tool_calls_30d": 8
-    },
-    {
-      "id": "relay",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 2
     },
     {
       "id": "remotion",
@@ -4081,7 +4118,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 2990
+      "tool_calls_30d": 1220
     },
     {
       "id": "secondlook",
@@ -4095,90 +4132,30 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 676
+      "tool_calls_30d": 2
     },
     {
-      "id": "the-desk",
+      "id": "src",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 0
+      "tool_calls_30d": 21
     }
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 6,
-      "preventions": 1,
-      "autoInstalls": 0,
-      "conversionPct": 17
-    },
-    "lastWeek": {
-      "failures": 0,
+      "failures": 1,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
+    "lastWeek": {
+      "failures": 4,
+      "preventions": 1,
+      "autoInstalls": 0,
+      "conversionPct": 25
+    },
     "daily": [
-      {
-        "date": "2026-07-14",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-15",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-16",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-17",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-18",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-19",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-20",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-21",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-22",
-        "failures": 1,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-23",
-        "failures": 1,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-24",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-25",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-07-26",
         "failures": 3,
@@ -4188,18 +4165,78 @@
         "date": "2026-07-27",
         "failures": 1,
         "preventions": 0
+      },
+      {
+        "date": "2026-07-28",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-29",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-30",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-07-31",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-01",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-02",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-03",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-04",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-05",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-06",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-07",
+        "failures": 1,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-08",
+        "failures": 0,
+        "preventions": 0
       }
     ],
     "stuckFailures": [
       {
         "session": "kin-calm-pass",
         "detail": "Commit-gate reviewer skip: 1-file cosmetic reposition (settings link bottom-center to top-right), SSR-verified via curl; reviewer spawn disp",
-        "age_days": 20
+        "age_days": 32
       },
       {
         "session": "desk-case-files-reading-copies",
         "detail": "manual-mode delta (cron hook off, recap mode, fetch button) deployed without reviewer spawn — small tsc-verified delta on a same-session SHI",
-        "age_days": 4
+        "age_days": 16
       }
     ]
   },
@@ -4214,7 +4251,7 @@
       "stageStatus": "dormant"
     },
     "lastWeek": {
-      "patternsDetected": 1,
+      "patternsDetected": 0,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -4253,133 +4290,12 @@
     "stuckPatterns": []
   },
   "preventionEfficacy": {
-    "activePreventions": 3,
-    "avgEfficacy": 0.7142857142857143,
+    "activePreventions": 0,
+    "avgEfficacy": 0,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 0,
-    "perRule": [
-      {
-        "rule": "pre-response-claim-audit",
-        "efficacy": 0.6,
-        "fires30d": 5,
-        "valid": 3,
-        "invalid": 2,
-        "sparkline": [
-          0.75,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        "last_fire_date": "2026-07-08"
-      },
-      {
-        "rule": "system-reminder-citation",
-        "efficacy": 1,
-        "fires30d": 1,
-        "valid": 1,
-        "invalid": 0,
-        "sparkline": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        "last_fire_date": "2026-07-05"
-      },
-      {
-        "rule": "agent-delegation-triggers",
-        "efficacy": 1,
-        "fires30d": 1,
-        "valid": 1,
-        "invalid": 0,
-        "sparkline": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        "last_fire_date": "2026-07-06"
-      }
-    ]
+    "perRule": []
   },
   "watchItems": [
     {
@@ -4389,14 +4305,6 @@
       "target": "≥1 this week",
       "status": "red",
       "why": "Threshold lowered to 2 sessions. First fire flips Verb 1 from stalled to converting."
-    },
-    {
-      "id": "canary-rule",
-      "title": "pre-response-claim-audit efficacy",
-      "current": "60% (5 fires/30d)",
-      "target": "stays ≥50%",
-      "status": "green",
-      "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
     },
     {
       "id": "net-active",
@@ -4417,11 +4325,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "1 this week (1 last)",
+      "current": "1 this week (0 last)",
       "target": "stay near or above last week",
       "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-07-27T19:18:40.775Z"
+  "lastUpdated": "2026-08-08T04:54:58.814Z"
 }

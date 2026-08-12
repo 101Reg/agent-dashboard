@@ -3383,7 +3383,7 @@
       },
       {
         "name": "aocc-rescue-sprint0",
-        "date": "2026-08-07",
+        "date": "2026-08-08",
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
@@ -3397,14 +3397,119 @@
             "detail": "reviewer not spawned before workers.dev deploy of mechanical Vite split — composed-verify (rebuild, node --check, 44-handler window cross-ch"
           }
         ]
+      },
+      {
+        "name": "aocc-sprint3-packet-engine",
+        "date": "2026-08-08",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "aocc-ship",
+        "date": "2026-08-09",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "aocc-debug-sweep",
+        "date": "2026-08-09",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "4 of 5 parallel debug agents idled twice without delivering reports despite explicit checkpoint instructions in every brief; 2 slices (flat "
+          }
+        ]
+      },
+      {
+        "name": "aocc-dogfood-findings",
+        "date": "2026-08-09",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "aocc-print-fix",
+        "date": "2026-08-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "aocc-ccap-phase-a",
+        "date": "2026-08-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "aocc-templates-r2",
+        "date": "2026-08-10",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "aocc-deploy",
+        "date": "2026-08-11",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "aocc-documents-deploy-sweep",
+        "date": "2026-08-12",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 116,
+    "total": 118,
     "byType": {
-      "feedback": 50,
+      "feedback": 52,
       "project": 26,
       "user": 18,
       "reference": 20,
@@ -3419,10 +3524,22 @@
   },
   "timeline": [
     {
+      "date": "Aug 12, 2026",
+      "title": "Aocc Documents Deploy Sweep",
+      "desc": "Reviewed all 9 of the center's real documents against our blanks — all byte-identical, Built flat-PDF filling (label-anchored, offline coordinate resolution): CCAP 17pp, AOCC contract, DCFS 1050-53 receipt, Moved blank forms from the Worker bundle to R2 — 969KB to 272KB gzip, removing the 1MB ceiling",
+      "active": true
+    },
+    {
+      "date": "Aug 8, 2026",
+      "title": "Aocc Rescue Sprint0",
+      "desc": "Rescued AOCC codebase from conversation-only state into git repo, Planned + shipped Sprint 0 (Vite split + Workers deploy), Shipped Sprint 1 D1 data layer with cross-device verification",
+      "active": false
+    },
+    {
       "date": "Jul 27, 2026",
       "title": "Desk Pacc Script Rules",
       "desc": "PACC delivery rules into Case Files reading-copy prompt + bible, quiet-window recap brief + premiere check + continuity + episode delete, root-caused and fixed CF SPA-fallback navigation swallow + edge-cache poisoning (run_worker_first all prefixes)",
-      "active": true
+      "active": false
     },
     {
       "date": "Jul 22, 2026",
@@ -3715,6 +3832,30 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-08-12",
+      "text": "4 of 5 parallel debug agents idled twice without delivering reports despite explicit checkpoint instructions in every brief; 2 slices (flat coordinates, record integrity) got no adversarial coverage at all",
+      "context": "sweep coverage loss — main-thread self-verified the 2 most critical questions from the silent slices instead",
+      "high": false
+    },
+    {
+      "date": "2026-08-12",
+      "text": "4 of 5 parallel debug agents idled three times each without delivering reports, leaving 2 slices uncovered; a consent gate shipped family-wide and had to be corrected after deploy → 2 lessons saved",
+      "context": "aocc-documents-deploy-sweep",
+      "high": false
+    },
+    {
+      "date": "2026-08-10",
+      "text": "Second time a 'fixed by deploying' claim proved incomplete — the first diagnosis (stale frontend) was true but not the cause; the app had no print path at all. Diagnose the user-visible action end-to-end before attributing a symptom to deploy staleness",
+      "context": "finding 3 recurrence",
+      "high": true
+    },
+    {
+      "date": "2026-08-08",
+      "text": "Named teammate agents idled without summaries 3x (fixed: unnamed async spawns); two silent remote-delete failures caught by read-back; SPA route 404 despite documented rule (trigger scope too narrow). → 3 lessons saved",
+      "context": "aocc-rescue-sprint0",
+      "high": false
+    },
+    {
       "date": "2026-08-07",
       "text": "reviewer not spawned before workers.dev deploy of mechanical Vite split — composed-verify (rebuild, node --check, 44-handler window cross-check) + live browser round-trip stood in; demo URL, sample data only",
       "context": "agent-delegation-triggers #2 commit gate — logging the skip with reason per the OR-clause",
@@ -3779,35 +3920,11 @@
       "text": "Anthropic API credit balance too low mid-run — C0 proposals failed outright, B2 DYN-2 + B3 skill-gaps unparseable (raw = credit error), developer TC6 scored 0 with empty raw (false DEGRADED). RED status partly infrastructure, not agent quality.",
       "context": "manual /bruce run 2026-07-13",
       "high": false
-    },
-    {
-      "date": "2026-07-13",
-      "text": "B6 consolidation scanner produced false staleness finding: reported pre-response-claim-audit hook last fired 2026-06-07 (actual: 2026-07-08) and 100% FP (actual 60d: 19 valid / 3 FP). Wrong last-fired computation + FP window too small (7d, n~2). Nearly caused archival of the load-bearing Stop fabrication detector via P-2026-07-13-004.",
-      "context": "P-2026-07-13-004 verification",
-      "high": false
-    },
-    {
-      "date": "2026-07-13",
-      "text": "API credit exhaustion mid-Bruce-run produced a false DEGRADED and 3 parse errors; reviewer final summaries truncated twice, recovered via SendMessage re-pull → 3 lessons saved",
-      "context": "bruce-proposal-build",
-      "high": false
-    },
-    {
-      "date": "2026-07-13",
-      "text": "Night Shift cannot distinguish infrastructure failure from agent regression, and its eval-output parser is brittle. Toni",
-      "context": "Bruce proposal P-2026-07-13-001",
-      "high": true
-    },
-    {
-      "date": "2026-07-13",
-      "text": "Eval saturation: consecutive_all_pass=21 and all_pass_streak_days=77 (B0 metrics), with the PIVOT finding 'All canaries ",
-      "context": "Bruce proposal P-2026-07-13-002",
-      "high": true
     }
   ],
   "nightShift": {
-    "status": "GREEN",
-    "lastRun": "2026-08-07",
+    "status": "YELLOW",
+    "lastRun": "2026-08-11",
     "findings": [
       "System healthy — no issues detected"
     ],
@@ -3971,7 +4088,7 @@
     "proposalCount": 0,
     "proposals": [],
     "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-08-07\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n115 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 1\n\n## Infrastructure\nNone — API healthy all run\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (63d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n- **review-2026-07-29-trigger-5-evidence-N30** (9d overdue)\n  - Re-evaluate trigger #5 (parallel-spawn) sticky-prompt-hook promotion with N>=30 deployments in window. Previous review (review-2026-05-07) resolved KEEP ADVISORY on N=26/30d, but Hero flagged sample size as insufficient for the confidence the verdict implied.\n  - Verify: `python3 -c \"import json,datetime; log=open('/Users/reggie/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl').readlines(); cutoff=(datetime.date.today()-datetime.timedelta(days=60)).isoformat(); evts=[json.loads(l) for l in log if l.strip()]; deps=[e for e in evts if e.get('event')=='agent_deployment' and e.get('date','')>=cutoff]; missing=[e for e in deps if 'parallel_eligible' not in e]; skipped=[e for e in deps if e.get('parallel_eligible')==True and e.get('parallel_executed')==False]; print(f'60d deployments: {len(deps)} | missing parallel_eligible: {len(missing)} | eligible-but-skipped: {len(skipped)}')\"`\n  - Pass: REQUIRES N>=30 deployments in 60d window. If N<30: status=INCONCLUSIVE, extend soak 30d, re-review again. If N>=30 AND eligible-but-skipped >= 10% of N -> promote to sticky-prompt-hook. If N>=30 AND <10% -> CONFIRM KEEP ADVISORY (now data-backed). If N>=30 AND missing-field-rate >5% -> logging discipline regressed, fix that first.\n## Proposals\nNone generated\n\n## Proposal Track Record\n87 total, 74 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 1 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 74/87 accepted |\n| Eval Signal | OK | 3 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "briefingContent": "# Night Shift — 2026-08-11\n\n## Status: YELLOW\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- d1: 2 sessions\n- pdf: 2 sessions\n- r2: 2 sessions\n- typescript: 2 sessions\n\n## Agent Usage (7-day)\n- Explore: 2 sessions\n- developer: 2 sessions\n- reviewer: 2 sessions\n- debug: 1 sessions\n- fork-plan: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n117 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 2\n\n## Infrastructure\nNone — API healthy all run\n\n## Review Queue\n\n### Due Now\n- **review-2026-06-05-protective-gate-signal-source** (67d overdue)\n  - Investigate protective-gate (~/.claude/ Self-Modification block) signal source — when does it trust main-thread vs subagent, and how does ExitPlanMode interact\n  - Verify: `Trace the gate: (a) test main-thread Edit on ~/.claude/settings.json WITHOUT prior ExitPlanMode → should succeed; (b) test same after ExitPlanMode approval → currently blocks per 2026-04-27 cap_gap; (c) spawn a subagent and have it attempt Edit on any ~/.claude/ file → currently blocks per 2026-05-29 cap_gap. Find the hook/permission script that produces this matrix and document the signal it reads.`\n  - Pass: (a) Gate source identified (hook file, settings.json permission rule, or built-in harness primitive named). (b) Matrix above is reproduced and documented in a memory or rule file. (c) At least one of: rationalize the inconsistency, propose a uniform signal, OR document the inconsistency as intentional with workaround pattern codified.\n- **review-2026-07-29-trigger-5-evidence-N30** (13d overdue)\n  - Re-evaluate trigger #5 (parallel-spawn) sticky-prompt-hook promotion with N>=30 deployments in window. Previous review (review-2026-05-07) resolved KEEP ADVISORY on N=26/30d, but Hero flagged sample size as insufficient for the confidence the verdict implied.\n  - Verify: `python3 -c \"import json,datetime; log=open('/Users/reggie/.claude/projects/-Users-reggie/memory/logs/os-performance.jsonl').readlines(); cutoff=(datetime.date.today()-datetime.timedelta(days=60)).isoformat(); evts=[json.loads(l) for l in log if l.strip()]; deps=[e for e in evts if e.get('event')=='agent_deployment' and e.get('date','')>=cutoff]; missing=[e for e in deps if 'parallel_eligible' not in e]; skipped=[e for e in deps if e.get('parallel_eligible')==True and e.get('parallel_executed')==False]; print(f'60d deployments: {len(deps)} | missing parallel_eligible: {len(missing)} | eligible-but-skipped: {len(skipped)}')\"`\n  - Pass: REQUIRES N>=30 deployments in 60d window. If N<30: status=INCONCLUSIVE, extend soak 30d, re-review again. If N>=30 AND eligible-but-skipped >= 10% of N -> promote to sticky-prompt-hook. If N>=30 AND <10% -> CONFIRM KEEP ADVISORY (now data-backed). If N>=30 AND missing-field-rate >5% -> logging discipline regressed, fix that first.\n## Proposals\nNone generated\n\n## Proposal Track Record\n87 total, 74 accepted, 0\n0 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 74/87 accepted |\n| Eval Signal | OK | 4 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -3986,7 +4103,7 @@
       {
         "name": "Friction Rate",
         "status": "OK",
-        "detail": "1 fix_attempts (14d)"
+        "detail": "0 fix_attempts (14d)"
       },
       {
         "name": "Proposal Hit Rate",
@@ -3996,14 +4113,14 @@
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "3 consecutive all-pass runs"
+        "detail": "4 consecutive all-pass runs"
       }
     ]
   },
   "patterns": {
     "hasData": true,
     "findings": [],
-    "generated": "2026-08-07 22:06"
+    "generated": "2026-08-09 17:24"
   },
   "consolidation": {
     "hasData": true,
@@ -4052,31 +4169,31 @@
     },
     {
       "id": "aocc",
-      "friction_today": 0,
+      "friction_today": 1,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 275
+      "tool_calls_30d": 2068
     },
     {
       "id": "app",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 4
+      "tool_calls_30d": 35
     },
     {
       "id": "blank",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 2
+      "tool_calls_30d": 37
     },
     {
       "id": "claude-config",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 127
+      "tool_calls_30d": 156
     },
     {
       "id": "content-engine",
@@ -4086,13 +4203,6 @@
       "tool_calls_30d": 181
     },
     {
-      "id": "kin",
-      "friction_today": 0,
-      "unresolved_gaps": 1,
-      "templates_used": 0,
-      "tool_calls_30d": 2
-    },
-    {
       "id": "media-engine",
       "friction_today": 0,
       "unresolved_gaps": 1,
@@ -4100,11 +4210,11 @@
       "tool_calls_30d": 4
     },
     {
-      "id": "prototype",
+      "id": "out",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 8
+      "tool_calls_30d": 3
     },
     {
       "id": "remotion",
@@ -4118,21 +4228,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 1220
-    },
-    {
-      "id": "secondlook",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 14
-    },
-    {
-      "id": "spoken",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 2
+      "tool_calls_30d": 1053
     },
     {
       "id": "src",
@@ -4144,38 +4240,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 1,
+      "failures": 2,
+      "preventions": 12,
+      "autoInstalls": 0,
+      "conversionPct": 600
+    },
+    "lastWeek": {
+      "failures": 0,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
-    "lastWeek": {
-      "failures": 4,
-      "preventions": 1,
-      "autoInstalls": 0,
-      "conversionPct": 25
-    },
     "daily": [
-      {
-        "date": "2026-07-26",
-        "failures": 3,
-        "preventions": 1
-      },
-      {
-        "date": "2026-07-27",
-        "failures": 1,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-28",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-29",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-07-30",
         "failures": 0,
@@ -4225,24 +4301,44 @@
         "date": "2026-08-08",
         "failures": 0,
         "preventions": 0
+      },
+      {
+        "date": "2026-08-09",
+        "failures": 0,
+        "preventions": 7
+      },
+      {
+        "date": "2026-08-10",
+        "failures": 0,
+        "preventions": 3
+      },
+      {
+        "date": "2026-08-11",
+        "failures": 0,
+        "preventions": 1
+      },
+      {
+        "date": "2026-08-12",
+        "failures": 1,
+        "preventions": 1
       }
     ],
     "stuckFailures": [
       {
         "session": "kin-calm-pass",
         "detail": "Commit-gate reviewer skip: 1-file cosmetic reposition (settings link bottom-center to top-right), SSR-verified via curl; reviewer spawn disp",
-        "age_days": 32
+        "age_days": 36
       },
       {
         "session": "desk-case-files-reading-copies",
         "detail": "manual-mode delta (cron hook off, recap mode, fetch button) deployed without reviewer spawn — small tsc-verified delta on a same-session SHI",
-        "age_days": 16
+        "age_days": 20
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 1,
+      "patternsDetected": 2,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -4325,11 +4421,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "1 this week (0 last)",
+      "current": "2 this week (0 last)",
       "target": "stay near or above last week",
       "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-08-08T04:54:58.814Z"
+  "lastUpdated": "2026-08-12T02:59:32.497Z"
 }

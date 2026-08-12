@@ -4269,7 +4269,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 192
+      "tool_calls_30d": 195
     },
     {
       "id": "content-engine",
@@ -4503,5 +4503,5 @@
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-08-12T04:27:25.945Z"
+  "lastUpdated": "2026-08-12T04:48:47.154Z"
 }

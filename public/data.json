@@ -3537,6 +3537,17 @@
         "events": []
       },
       {
+        "name": "agent-os-v5-invert-and-retire",
+        "date": "2026-08-12",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "aocc-deploy-consent-fix",
         "date": "2026-08-12",
         "fixAttempts": 0,
@@ -3563,30 +3574,80 @@
             "detail": "Agent tool disallowed this session while agent-delegation-triggers #8 and adversarial-debug MANDATORY GATES both require spawns for plan-dri"
           }
         ]
+      },
+      {
+        "name": "agent-os-v5",
+        "date": "2026-08-12",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "counter-a1-scaffold",
+        "date": "2026-08-13",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Agent tool disallowed session-wide, so developer/reviewer/adversarial spawns were unavailable for the Counter Stage A build; main-thread abs"
+          }
+        ]
+      },
+      {
+        "name": "counter-stage-a-to-e",
+        "date": "2026-08-13",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "counter-build-and-sweep",
+        "date": "2026-08-13",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 118,
+    "total": 124,
     "byType": {
-      "feedback": 52,
+      "feedback": 56,
       "project": 26,
       "user": 18,
-      "reference": 20,
+      "reference": 22,
       "other": 1
     }
   },
   "system": {
-    "skills": 16,
-    "rules": 24,
+    "skills": 21,
+    "rules": 18,
     "hooks": 16,
     "mcpServers": 2
   },
   "timeline": [
     {
       "date": "Aug 12, 2026",
-      "title": "Aocc Documents Deploy Sweep",
+      "title": "2 sessions",
       "desc": "Reviewed all 9 of the center's real documents against our blanks — all byte-identical, Built flat-PDF filling (label-anchored, offline coordinate resolution): CCAP 17pp, AOCC contract, DCFS 1050-53 receipt, Moved blank forms from the Worker bundle to R2 — 969KB to 272KB gzip, removing the 1MB ceiling",
       "active": true
     },
@@ -3893,6 +3954,18 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-08-13",
+      "text": "Agent tool disallowed session-wide, so developer/reviewer/adversarial spawns were unavailable for the Counter Stage A build; main-thread absorbed the build, constant audit, and review",
+      "context": "session-level constraint per system prompt — degraded mode per agent-delegation-triggers.md",
+      "high": false
+    },
+    {
+      "date": "2026-08-13",
+      "text": "Three verification failures in one session share a root cause: measuring the input or the adjacent property instead of the behaviour under test (plan-determinism vs engine-determinism, constants-present vs constants-wired, compile-passes vs feature-works)",
+      "context": "feeds the delta append to feedback_assert_the_precondition.md",
+      "high": true
+    },
+    {
       "date": "2026-08-12",
       "text": "4 of 5 parallel debug agents idled twice without delivering reports despite explicit checkpoint instructions in every brief; 2 slices (flat coordinates, record integrity) got no adversarial coverage at all",
       "context": "sweep coverage loss — main-thread self-verified the 2 most critical questions from the silent slices instead",
@@ -3912,8 +3985,20 @@
     },
     {
       "date": "2026-08-12",
+      "text": "Premature completion claim before functional verification — declared b8 verified while its deploy counter read 0 for every agent; external research (arXiv 2606.09863 S7) names this as a dominant current agent failure mode that LLM judges detect near chance",
+      "context": "my own 76-to-0 hook_catch reading was an LLM-judge blind spot, not evidence the failure class went away",
+      "high": true
+    },
+    {
+      "date": "2026-08-12",
       "text": "4 of 5 parallel debug agents idled three times each without delivering reports, leaving 2 slices uncovered; a consent gate shipped family-wide and had to be corrected after deploy → 2 lessons saved",
       "context": "aocc-documents-deploy-sweep",
+      "high": false
+    },
+    {
+      "date": "2026-08-12",
+      "text": "Three cut lists failed their own pre-flight (4/5, 4/11, 3/4 wrong) — each built on a premise about this session rather than data; all five failure modes encoded as b8 guards. Two self-inflicted bugs: b8 deploy counter read 0 for every agent (caught by Bruce), gitignore-boundary mv silently changed tracking. Reported 'under budget' three times while over it — skill metadata was never counted. → 4 lessons saved",
+      "context": "agent-os-v5-invert-and-retire",
       "high": false
     },
     {
@@ -3957,57 +4042,13 @@
       "text": "reviewer not spawned before workers.dev deploy of mechanical Vite split — composed-verify (rebuild, node --check, 44-handler window cross-check) + live browser round-trip stood in; demo URL, sample data only",
       "context": "agent-delegation-triggers #2 commit gate — logging the skip with reason per the OR-clause",
       "high": false
-    },
-    {
-      "date": "2026-08-07",
-      "text": "3x this session: named teammate agents (aocc-split, aocc-review1; app/worker also) go idle without delivering final summaries as messages — recovery-pull SendMessage yields another idle notification; unnamed async Agent spawns (Explore, fork) delivered results in task-notifications fine",
-      "context": "systemic fix: spawn one-shot deliverable agents UNNAMED (async task-notification carries the result); reserve named teammates for long-lived interactive roles; for named agents collect deliverables from disk or TaskOutput",
-      "high": true
-    },
-    {
-      "date": "2026-07-27",
-      "text": "trigger #1 slip: debug agent spawned only on Hero's explicit ask after 2 failed Open/PDF theories — should have auto-spawned at the 2nd failed fix",
-      "context": "Open/PDF dead-tap arc; also claude-api skill not loaded before editing Anthropic API call (its trigger covered the moment)",
-      "high": false
-    },
-    {
-      "date": "2026-07-27",
-      "text": "Wrong-layer PWA diagnosis shipped before debug spawn; wrangler tail wedged silently; token drift blocked authenticated verification for hours; SDK streaming guard turned a max_tokens bump into instant 502s → 3 lessons saved",
-      "context": "desk-pacc-script-rules",
-      "high": false
-    },
-    {
-      "date": "2026-07-26",
-      "text": "Explore gate re-blocked Read/Edit despite an Explore agent spawned+completed this session — gate keys on agent_deployment (logged at session end) so in-session spawns are invisible; 3rd+ recurrence (prior: 2026-06-03, 2026-07-10)",
-      "context": "PACC prompt edit on media-engine; worked around via EXPLORE_GATE_BYPASS Bash + python string surgery",
-      "high": false
     }
   ],
   "nightShift": {
-    "status": "YELLOW",
-    "lastRun": "2026-08-12",
+    "status": "GREEN",
+    "lastRun": "2026-08-13",
     "findings": [
-      "CONSOLIDATION: Stale Hook: pre-response-claim-audit — Last fired: 2026-06-07 (66 days ago)",
-      "CONTEXT BUDGET BREACHED: standing context ~53175 est tokens vs 40000 budget (over by ~13175; 24 rules). Any addition proposed tonight must name what it displaces.",
-      "ESTABLISHING: developer TC10 scored 4.8 (baseline not yet set — calibrating, no regression flag)",
-      "ESTABLISHING: developer TC8 scored 4.6 (baseline not yet set — calibrating, no regression flag)",
-      "ESTABLISHING: developer TC9 scored 4.4 (baseline not yet set — calibrating, no regression flag)",
-      "PATTERN: Same-file churn — No files with >= 5 edits in a session that also had >= 2 fix_attempts (last 14 days)",
-      "RETIRE BLOCKED: agent `debug` — bound to a configured canary — b1 build_agents_json reads agents/debug.md and hard-errors if absent; park the canary first",
-      "RETIRE BLOCKED: agent `developer` — bound to a configured canary — b1 build_agents_json reads agents/developer.md and hard-errors if absent; park the canary first",
-      "RETIRE BLOCKED: agent `infra` — bound to a configured canary — b1 build_agents_json reads agents/infra.md and hard-errors if absent; park the canary first",
-      "RETIRE BLOCKED: agent `legal` — bound to a configured canary — b1 build_agents_json reads agents/legal.md and hard-errors if absent; park the canary first",
-      "RETIRE BLOCKED: agent `marketer` — bound to a configured canary — b1 build_agents_json reads agents/marketer.md and hard-errors if absent; park the canary first",
-      "RETIRE BLOCKED: agent `night-shift` — bound to a configured canary — b1 build_agents_json reads agents/night-shift.md and hard-errors if absent; park the canary first",
-      "RETIRE BLOCKED: agent `research` — bound to a configured canary — b1 build_agents_json reads agents/research.md and hard-errors if absent; park the canary first",
-      "RETIRE BLOCKED: agent `reviewer` — bound to a configured canary — b1 build_agents_json reads agents/reviewer.md and hard-errors if absent; park the canary first",
-      "RETIRE BLOCKED: agent `shared-context` — explicitly excluded from agent lists by Bruce phases — this is a DATA file, not a spawnable agent; zero deploys is expected",
-      "RETIRE CANDIDATE: skill `verification-before-completion` — 0 live references AND 0 recorded invocations",
-      "Skill gap: agent-delegation under tool unavailability (degraded-mode precedence) — 2 raw capability_gap events, both main-thread, both within 6 days and one today",
-      "Skill gap: multi-party consent / signature attestation on government + benefit forms — aocc-documents-deploy-sweep (2026-08-12): 'Adversarial debug sweep found a live",
-      "Skill gap: remote mutation verification (D1/R2/Workers write + delete paths) — aocc-rescue-sprint0 friction: 'two silent remote-delete failures caught by read-",
-      "WATCH: developer TC6b scored 4.4 (baseline 5.0, delta -0.60)",
-      "WATCH: developer TC9 scored 4.4 (baseline 5.0, delta -0.60)"
+      "System healthy — no issues detected"
     ],
     "evalCanaries": [
       {
@@ -4177,35 +4218,35 @@
       }
     ],
     "frictionTrends": null,
-    "proposalCount": 5,
+    "proposalCount": 0,
     "proposals": [
       {
         "id": "P-2026-08-12-001",
-        "category": "unknown",
-        "problem": "B8's agent deploy counter is broken and reads zero for every agent. b8-retirement-scan.sh:205 counts `e.get(\"agent\") == name and e.get(\"event\") == \"agent_deployment\"`, but agent_deployment events in os-performance.jsonl (183 of them) store the agent under a nested list — `agents_used: [{\"agent\": \"debug\", \"mode\": \"parallel\", ...}]` — with no top-level `agent` key. The match therefore never fires. Tonight's retirement-scan.json records `deploys: 0` for debug and developer while A1's agent_deploy_frequency_7d, reading the same log, counts debug=10 and developer=10 in the last 7 days alone. All 9 agents were nominated for retirement and were saved only by guard #4 (canary-bound); the moment any agent exists without a configured canary, B8 will nominate a heavily-used agent for deletion with 'deploys: 0' as its evidence. This is the same silent-zero shape as the two silent remote-delete failures in B3's evidence: the operation reported success and applied nothing.",
-        "solution": "In night-shift/phases/b8-retirement-scan.sh, replace the deploy count with a nested read: `deploys = sum(1 for e in perf if e.get(\"event\") == \"agent_deployment\" for u in (e.get(\"agents_used\") or []) if u.get(\"agent\") == name)`, keeping the top-level `e.get(\"agent\")` match as a fallback for older event shapes. Then add a self-test that makes a silent zero impossible: after computing counts, if EVERY agent scores deploys == 0 while the perf log contains >= 1 agent_deployment event in the window, abort the phase with `error: deploy-count-schema-mismatch` instead of emitting nominations. Emit `deploys` for the 3 most-deployed agents into the metrics block so A1 and B8 can be cross-checked from the briefing without reading the JSON."
+        "category": "self_improvement",
+        "problem": "B8's agent deploy counter is broken and reads zero for every agent. b8-retirement-scan.sh:205 counts `e.get(\"agent\") == ",
+        "solution": ""
       },
       {
         "id": "P-2026-08-12-002",
-        "category": "unknown",
-        "problem": "My eval harness scored agent behavior it never observed, and that produced tonight's only regression flag. Three of seven B1 canaries record the substitution in their own notes: TC1 — 'Sandbox blocked fixture creation (/tmp and ~/.claude writes denied), so scored against reviewer.md's specified behavior for the TC1 setup rather than a live run'; TC6b — 'Sandbox blocked fixture creation (no checkout.ts available), so the move itself was not observable — scored against the encoded Pre-Refactor Gate behavior'; TC7 — reachability curl 'attempted here, sandbox-blocked'. TC6b then emitted the WATCH finding at 4.4 vs baseline 5.0 (delta -0.60), and its own note says 'completion was not demonstrated here. Recommend re-running in a directory with a real checkout.ts plus three callers to resolve c5.' So the delta measures fixture absence, not agent regression. This is exactly the failure my own debug rule names — 'stimulate, never simulate' — committed by the machinery that grades everyone else, and it feeds the baseline file, so a spec-read score becomes next week's baseline.",
-        "solution": "Two changes. (1) night-shift/phases/b1-canary-evals.sh and b2-dynamic-evals.sh: add a required `fixture_status` field per eval with values `live` or `spec_only`. When spec_only, emit the result with `score: null`, `delta: null`, `status: \"UNSCORED — fixture unavailable\"`, exclude it from baseline updates entirely, and count it in a new `evals_unscored` metric surfaced in the briefing. A regression/WATCH flag may only be raised from a `live` run. (2) Provision the fixtures instead of losing them: create night-shift/fixtures/ (inside the sandbox's writable root, alongside the run dir that already accepts writes tonight — night-shift/2026-08-12/ was written successfully), and have b1 materialize each canary's required files there from a checked-in template before invoking the agent, TC6b's checkout.ts-plus-three-callers first since it is the case that failed tonight."
+        "category": "self_improvement",
+        "problem": "My eval harness scored agent behavior it never observed, and that produced tonight's only regression flag. Three of seve",
+        "solution": ""
       },
       {
         "id": "P-2026-08-12-003",
         "category": "unknown",
-        "problem": "The skill `verification-before-completion` has stopped earning its keep and is the single unblocked candidate B8 produced tonight: 0 live references and 0 recorded invocations (night-shift/2026-08-12/retirement-scan.json). The only files mentioning it are the scan output, the V4 plan, and its own SKILL.md and evals.json — no rule, agent, or hook loads it. Its content is fully superseded by artifacts that DO fire: rules/pre-response-claim-audit.md (213 lines, always-on, and the V4 plan's measured counterweight explicitly credits the rules — not the hook — with catching the two 2026-08-11 overclaims), plus the Iron Law in developer.md and the 'looks correct is not PASS' mandate in reviewer.md that tonight's TC1/TC7 evals show firing. Its banned-language list, evidence table, and rationalization table restate pre-response-claim-audit's content in a file nothing reads. Checked the ledger: no prior retirement proposal names this skill, so this is not a re-proposal of a rejected cut.",
-        "solution": "Move skills/verification-before-completion/ to skills/retired/verification-before-completion/ using scripts/retire-artifact.sh (the retired/ directory already exists and holds prior cuts), preserving SKILL.md and evals/evals.json so the eval history stays auditable. Before moving, run `grep -rn 'verification-before-completion' ~/.claude --include='*.md' --include='*.json' --include='*.sh'` and confirm the only hits are the four known files — if any rule or agent turns out to reference it, abort and instead cross-link it from that rule. Add one line to rules/pre-response-claim-audit.md's Source section noting it absorbed this skill's scope on 2026-08-12, so the next reader does not re-create it."
+        "problem": "The skill `verification-before-completion` has stopped earning its keep and is the single unblocked candidate B8 produce",
+        "solution": ""
       },
       {
         "id": "P-2026-08-12-004",
-        "category": "unknown",
-        "problem": "A false certification shipped to production on forms filed with the state. B3 records aocc-documents-deploy-sweep (2026-08-12): 'Adversarial debug sweep found a live false-certification bug: consent gating was family-wide, now per-signer' — reached prod and was corrected only after deploy, on CCAP (17pp), the AOCC contract, and DCFS 1050-53, where a signature IS a certification. adversarial-debug.md records the mechanism: the gate needed a three-step state sequence (family signs -> co-parent added later -> co-parent signs) that two reviewer passes approved anyway. skills/pdf/forms.md covers field coordinates and mechanical filling only and has no model of who may attest to what; the legal agent's scope is CAN-SPAM/FTC/GDPR/agency MSAs, nothing on benefit-program attestation, and it is Read/Grep/Glob-only so it cannot audit a live gating path. forms and pdf both appear in this week's domain frequency. (Triage note on B3's other two gaps: degraded-mode delegation precedence is already scoped as V4 Phase 2 in plans/agent-os-v4-retire-and-retarget.md and should be executed there, not re-proposed; remote-mutation read-back is already carried by rules/cloudflare-deploy.md's 'For writes, read back the source of truth (D1 row / R2 object)' plus strategy card SC-2026-06-09-001 from",
+        "category": "skill_gap",
+        "problem": "A false certification shipped to production on forms filed with the state. B3 records aocc-documents-deploy-sweep (2026-",
         "solution": ""
       }
     ],
-    "actionRequired": true,
-    "briefingContent": "# Night Shift — 2026-08-12\n\n## Status: YELLOW\n\n## Key Findings\n- CONSOLIDATION: Stale Hook: pre-response-claim-audit — Last fired: 2026-06-07 (66 days ago)\n- CONTEXT BUDGET BREACHED: standing context ~53175 est tokens vs 40000 budget (over by ~13175; 24 rules). Any addition proposed tonight must name what it displaces.\n- ESTABLISHING: developer TC10 scored 4.8 (baseline not yet set — calibrating, no regression flag)\n- ESTABLISHING: developer TC8 scored 4.6 (baseline not yet set — calibrating, no regression flag)\n- ESTABLISHING: developer TC9 scored 4.4 (baseline not yet set — calibrating, no regression flag)\n- PATTERN: Same-file churn — No files with >= 5 edits in a session that also had >= 2 fix_attempts (last 14 days)\n- RETIRE BLOCKED: agent `debug` — bound to a configured canary — b1 build_agents_json reads agents/debug.md and hard-errors if absent; park the canary first\n- RETIRE BLOCKED: agent `developer` — bound to a configured canary — b1 build_agents_json reads agents/developer.md and hard-errors if absent; park the canary first\n- RETIRE BLOCKED: agent `infra` — bound to a configured canary — b1 build_agents_json reads agents/infra.md and hard-errors if absent; park the canary first\n- RETIRE BLOCKED: agent `legal` — bound to a configured canary — b1 build_agents_json reads agents/legal.md and hard-errors if absent; park the canary first\n- RETIRE BLOCKED: agent `marketer` — bound to a configured canary — b1 build_agents_json reads agents/marketer.md and hard-errors if absent; park the canary first\n- RETIRE BLOCKED: agent `night-shift` — bound to a configured canary — b1 build_agents_json reads agents/night-shift.md and hard-errors if absent; park the canary first\n- RETIRE BLOCKED: agent `research` — bound to a configured canary — b1 build_agents_json reads agents/research.md and hard-errors if absent; park the canary first\n- RETIRE BLOCKED: agent `reviewer` — bound to a configured canary — b1 build_agents_json reads agents/reviewer.md and hard-errors if absent; park the canary first\n- RETIRE BLOCKED: agent `shared-context` — explicitly excluded from agent lists by Bruce phases — this is a DATA file, not a spawnable agent; zero deploys is expected\n- RETIRE CANDIDATE: skill `verification-before-completion` — 0 live references AND 0 recorded invocations\n- Skill gap: agent-delegation under tool unavailability (degraded-mode precedence) — 2 raw capability_gap events, both main-thread, both within 6 days and one today \n- Skill gap: multi-party consent / signature attestation on government + benefit forms — aocc-documents-deploy-sweep (2026-08-12): 'Adversarial debug sweep found a live \n- Skill gap: remote mutation verification (D1/R2/Workers write + delete paths) — aocc-rescue-sprint0 friction: 'two silent remote-delete failures caught by read-\n- WATCH: developer TC6b scored 4.4 (baseline 5.0, delta -0.60)\n- WATCH: developer TC9 scored 4.4 (baseline 5.0, delta -0.60)\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- d1: 2 sessions\n- pdf: 2 sessions\n- r2: 2 sessions\n- typescript: 2 sessions\n\n## Agent Usage (7-day)\n- Explore: 2 sessions\n- developer: 2 sessions\n- reviewer: 2 sessions\n- debug: 1 sessions\n- fork-plan: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| developer | 4.8 | 5.0 | -0.20 | ok |\n| developer | 4.2 | 3.6 | 0.60 | ok |\n| developer | 4.4 | 5.0 | -0.60 | watch |\n| developer | 4.6 | 5.0 | -0.40 | ok |\n| developer | 4.6 | 5.0 | -0.40 | ok |\n| developer | 4.4 | 5.0 | -0.60 | watch |\n| reviewer | 4.6 | 5.0 | -0.40 | ok |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| debug | DYN-20260812-3 | 3.8 | pass | testing |\n| developer | DYN-20260812-1 | 4.0 | pass | data-migration |\n| night-shift | DYN-20260812-4 | 4.8 | pass | agents |\n| reviewer | DYN-20260812-2 | 3.8 | pass | code-review |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n117 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 3\n\n## Infrastructure\nNone — API healthy all run\n\n\n## Proposals\n# Proposals — 2026-08-12\n\n## P-2026-08-12-001: self_improvement\n\n**Problem:** B8's agent deploy counter is broken and reads zero for every agent. b8-retirement-scan.sh:205 counts `e.get(\"agent\") == name and e.get(\"event\") == \"agent_deployment\"`, but agent_deployment events in os-performance.jsonl (183 of them) store the agent under a nested list — `agents_used: [{\"agent\": \"debug\", \"mode\": \"parallel\", ...}]` — with no top-level `agent` key. The match therefore never fires. Tonight's retirement-scan.json records `deploys: 0` for debug and developer while A1's agent_deploy_frequency_7d, reading the same log, counts debug=10 and developer=10 in the last 7 days alone. All 9 agents were nominated for retirement and were saved only by guard #4 (canary-bound); the moment any agent exists without a configured canary, B8 will nominate a heavily-used agent for deletion with 'deploys: 0' as its evidence. This is the same silent-zero shape as the two silent remote-delete failures in B3's evidence: the operation reported success and applied nothing.\n\n**Solution:** In night-shift/phases/b8-retirement-scan.sh, replace the deploy count with a nested read: `deploys = sum(1 for e in perf if e.get(\"event\") == \"agent_deployment\" for u in (e.get(\"agents_used\") or []) if u.get(\"agent\") == name)`, keeping the top-level `e.get(\"agent\")` match as a fallback for older event shapes. Then add a self-test that makes a silent zero impossible: after computing counts, if EVERY agent scores deploys == 0 while the perf log contains >= 1 agent_deployment event in the window, abort the phase with `error: deploy-count-schema-mismatch` instead of emitting nominations. Emit `deploys` for the 3 most-deployed agents into the metrics block so A1 and B8 can be cross-checked from the briefing without reading the JSON.\n\n**Impact:** The retirement verb starts measuring what it claims to measure. Blocked-list noise drops from 9 to the 1-2 genuinely idle agents, so the canary guard stops being the only thing preventing a bad cut, and future 'retire agent X' proposals carry a real usage number instead of a structural zero. The abort-on-all-zero assertion generalizes: any future schema change to the perf log fails loudly in B8 rather than producing a plausible-looking nomination list.\n\n**Risk:** The fallback keeps double-counting possible if an event ever carries both shapes — mitigated by counting per event, not per match. Correcting the count could unblock nominations that the zero was accidentally suppressing; those still pass through the other four guards and reach Hero as proposals, not as executed deletions. The all-zero assertion could abort B8 on a genuinely quiet 60-day window with zero deployments — it is conditioned on >= 1 agent_deployment existing in the log, so an empty log is not an error.\n\n## P-2026-08-12-002: self_improvement\n\n**Problem:** My eval harness scored agent behavior it never observed, and that produced tonight's only regression flag. Three of seven B1 canaries record the substitution in their own notes: TC1 — 'Sandbox blocked fixture creation (/tmp and ~/.claude writes denied), so scored against reviewer.md's specified behavior for the TC1 setup rather than a live run'; TC6b — 'Sandbox blocked fixture creation (no checkout.ts available), so the move itself was not observable — scored against the encoded Pre-Refactor Gate behavior'; TC7 — reachability curl 'attempted here, sandbox-blocked'. TC6b then emitted the WATCH finding at 4.4 vs baseline 5.0 (delta -0.60), and its own note says 'completion was not demonstrated here. Recommend re-running in a directory with a real checkout.ts plus three callers to resolve c5.' So the delta measures fixture absence, not agent regression. This is exactly the failure my own debug rule names — 'stimulate, never simulate' — committed by the machinery that grades everyone else, and it feeds the baseline file, so a spec-read score becomes next week's baseline.\n\n**Solution:** Two changes. (1) night-shift/phases/b1-canary-evals.sh and b2-dynamic-evals.sh: add a required `fixture_status` field per eval with values `live` or `spec_only`. When spec_only, emit the result with `score: null`, `delta: null`, `status: \"UNSCORED — fixture unavailable\"`, exclude it from baseline updates entirely, and count it in a new `evals_unscored` metric surfaced in the briefing. A regression/WATCH flag may only be raised from a `live` run. (2) Provision the fixtures instead of losing them: create night-shift/fixtures/ (inside the sandbox's writable root, alongside the run dir that already accepts writes tonight — night-shift/2026-08-12/ was written successfully), and have b1 materialize each canary's required files there from a checked-in template before invoking the agent, TC6b's checkout.ts-plus-three-callers first since it is the case that failed tonight.\n\n**Impact:** Eliminates the fabricated-delta class from my own output: no baseline is ever set or moved by a run that did not happen, and Hero stops triaging WATCH flags whose root cause is my sandbox. Re-running TC6b against a real checkout.ts either confirms the c5 stall risk (competing step-3b staged-rollout and Iron-Law instructions on a pure symbol move — an actionable developer.md fix) or clears it; today neither is knowable. The evals_unscored metric makes harness decay visible as a number instead of as prose buried in a notes field.\n\n**Risk:** Scored eval volume drops in the short term and B1 may report mostly UNSCORED until fixtures are checked in, which looks like coverage loss — it is coverage that was already absent, now labeled. Checked-in fixtures rot against the agent specs they exercise; mitigate by keeping them minimal (one file plus callers, no build system) and re-deriving from the eval file's own setup block. If sandbox policy blocks night-shift/fixtures/ too, the phase must still emit UNSCORED rather than falling back to spec-reading — that fallback is the bug.\n\n## P-2026-08-12-003: retirement\n\n**Problem:** The skill `verification-before-completion` has stopped earning its keep and is the single unblocked candidate B8 produced tonight: 0 live references and 0 recorded invocations (night-shift/2026-08-12/retirement-scan.json). The only files mentioning it are the scan output, the V4 plan, and its own SKILL.md and evals.json — no rule, agent, or hook loads it. Its content is fully superseded by artifacts that DO fire: rules/pre-response-claim-audit.md (213 lines, always-on, and the V4 plan's measured counterweight explicitly credits the rules — not the hook — with catching the two 2026-08-11 overclaims), plus the Iron Law in developer.md and the 'looks correct is not PASS' mandate in reviewer.md that tonight's TC1/TC7 evals show firing. Its banned-language list, evidence table, and rationalization table restate pre-response-claim-audit's content in a file nothing reads. Checked the ledger: no prior retirement proposal names this skill, so this is not a re-proposal of a rejected cut.\n\n**Solution:** Move skills/verification-before-completion/ to skills/retired/verification-before-completion/ using scripts/retire-artifact.sh (the retired/ directory already exists and holds prior cuts), preserving SKILL.md and evals/evals.json so the eval history stays auditable. Before moving, run `grep -rn 'verification-before-completion' ~/.claude --include='*.md' --include='*.json' --include='*.sh'` and confirm the only hits are the four known files — if any rule or agent turns out to reference it, abort and instead cross-link it from that rule. Add one line to rules/pre-response-claim-audit.md's Source section noting it absorbed this skill's scope on 2026-08-12, so the next reader does not re-create it.\n\n**Impact:** The balancing loop registers a measured removal rather than a nominated one — this is the third artifact class (skill) where the retire verb has fired in five months against 29 additions. Removes a discovery decoy: an agent searching for verification guidance currently finds two sources, one of which is unreferenced and unmaintained, and picking the dead one produces subtly weaker behavior than the live rule. Also removes an eval file from the maintenance surface.\n\n**Risk:** Skills do not load into standing context (measured in the V4 plan: Phase 1 retirements moved standing tokens +664, not down), so this proposal yields zero token reduction and must not be counted toward the 53k -> 40k target. If a future session invokes the skill by name it will 404 — mitigated by the retired/ path being greppable and by pre-response-claim-audit.md carrying the forwarding note. Small chance the skill's evals were the only automated coverage of banned-completion-language; if so, that check should be folded into a pre-response-claim-audit eval before the move.\n\n## P-2026-08-12-004: skill_gap\n\n**Problem:** A false certification shipped to production on forms filed with the state. B3 records aocc-documents-deploy-sweep (2026-08-12): 'Adversarial debug sweep found a live false-certification bug: consent gating was family-wide, now per-signer' — reached prod and was corrected only after deploy, on CCAP (17pp), the AOCC contract, and DCFS 1050-53, where a signature IS a certification. adversarial-debug.md records the mechanism: the gate needed a three-step state sequence (family signs -> co-parent added later -> co-parent signs) that two reviewer passes approved anyway. skills/pdf/forms.md covers field coordinates and mechanical filling only and has no model of who may attest to what; the legal agent's scope is CAN-SPAM/FTC/GDPR/agency MSAs, nothing on benefit-program attestation, and it is Read/Grep/Glob-only so it cannot audit a live gating path. forms and pdf both appear in this week's domain frequency. (Triage note on B3's other two gaps: degraded-mode delegation precedence is already scoped as V4 Phase 2 in plans/agent-os-v4-retire-and-retarget.md and should be executed there, not re-proposed; remote-mutation read-back is already carried by rules/cloudflare-deploy.md's 'For writes, read back the source of truth (D1 row / R2 object)' plus strategy card SC-2026-06-09-001 from P-2026-06-01-001, so it needs a scope widening from writes to DELETE/UPDATE, not a new rule.)\n\n**Solution:** Add a `## Signer Model` section to skills/pdf/forms.md, required before any consent or signature gate ships: (1) enumerate every signature and checkbox on the form as a triple — signer identity, exact scope of what they attest, what data may be prefilled on their behalf; (2) consent state MUST be keyed to the signer identity, never to household/family/case/account — name the AOCC family-wide gate as the worked failure; (3) an explicit read-back test in the acceptance criteria: 'signer A consented — does signer B's block render as signed?' must return no. Then add one blocking dimension to agents/reviewer.md alongside the existing Affordance & Interaction Audit: a certification rendered without that specific signer's act is a FAIL at the same severity tier as a hidden destructive control, and the reviewer must see the two-signer read-back output before PASS on any diff touching a consent, signature, or attestation path.\n\n**Impact:** Converts the most expensive bug of the week — a wrong statement made to a state agency under someone else's name — from an adversarial-sweep catch into a pre-deploy checklist item. The reviewer dimension makes it catchable by the cheaper gate that already runs on every deploy, rather than depending on the adversarial spawn that happened to fire this time. Generalizes past AOCC: any multi-party form (leases, medical consent, joint accounts) inherits the signer-keyed rule.\n\n**Risk:** Context budget is BREACHED (53,175 est vs 40,000, over by 13,175), so displacement matters: this proposal adds ZERO standing context — skills/pdf/forms.md loads on demand and agents/reviewer.md loads only when reviewer is spawned; standing context is CLAUDE.md plus the 24 always-on rules (B8 rules_counted=24). If Hero prefers this as a rule instead of a skill section, the named displacement is the duplicated 2026-08-12 consent-gate narrative told at ~9 lines in BOTH rules/adversarial-debug.md (MANDATORY GATES) and rules/agent-delegation-triggers.md (trigger #2) — collapse the second to a one-line cross-reference first. Behavioral risk: a new blocking reviewer dimension raises false-FAIL rate on forms with a single legitimate signer; scope the trigger to diffs touching consent/signature/attestation state so single-signer flows are untouched.\n\n## Proposal Track Record\n95 total, 78 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 85% | 78/91 accepted |\n| Eval Signal | OK | 1 consecutive all-pass runs |\n\n## Action Required: YES\n",
+    "actionRequired": false,
+    "briefingContent": "# Night Shift — 2026-08-13\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- d1: 2 sessions\n- pdf: 2 sessions\n- r2: 2 sessions\n- typescript: 2 sessions\n\n## Agent Usage (7-day)\n- Explore: 2 sessions\n- developer: 2 sessions\n- reviewer: 2 sessions\n- debug: 1 sessions\n- fork-plan: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n123 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 5\n\n## Infrastructure\nNone — API healthy all run\n\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n95 total, 78 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 82% | 78/95 accepted |\n| Eval Signal | OK | 1 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -4224,8 +4265,8 @@
       },
       {
         "name": "Proposal Hit Rate",
-        "status": "85%",
-        "detail": "78/91 accepted"
+        "status": "82%",
+        "detail": "78/95 accepted"
       },
       {
         "name": "Eval Signal",
@@ -4275,18 +4316,18 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 50
+      "tool_calls_30d": 12
     },
     {
       "id": "agent-os",
-      "friction_today": 1,
+      "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 1,
       "tool_calls_30d": 1
     },
     {
       "id": "aocc",
-      "friction_today": 1,
+      "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
       "tool_calls_30d": 2072
@@ -4310,7 +4351,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 320
+      "tool_calls_30d": 417
     },
     {
       "id": "content-engine",
@@ -4318,6 +4359,13 @@
       "unresolved_gaps": 0,
       "templates_used": 0,
       "tool_calls_30d": 181
+    },
+    {
+      "id": "counter",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 506
     },
     {
       "id": "media-engine",
@@ -4345,7 +4393,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 1053
+      "tool_calls_30d": 1042
     },
     {
       "id": "src",
@@ -4358,27 +4406,17 @@
   "failureToPrevention": {
     "thisWeek": {
       "failures": 3,
-      "preventions": 22,
+      "preventions": 26,
       "autoInstalls": 0,
-      "conversionPct": 733
+      "conversionPct": 867
     },
     "lastWeek": {
-      "failures": 0,
+      "failures": 1,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
     "daily": [
-      {
-        "date": "2026-07-30",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-07-31",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-08-01",
         "failures": 0,
@@ -4437,25 +4475,35 @@
       {
         "date": "2026-08-12",
         "failures": 2,
-        "preventions": 4
+        "preventions": 7
+      },
+      {
+        "date": "2026-08-13",
+        "failures": 1,
+        "preventions": 1
+      },
+      {
+        "date": "2026-08-14",
+        "failures": 0,
+        "preventions": 0
       }
     ],
     "stuckFailures": [
       {
         "session": "kin-calm-pass",
         "detail": "Commit-gate reviewer skip: 1-file cosmetic reposition (settings link bottom-center to top-right), SSR-verified via curl; reviewer spawn disp",
-        "age_days": 36
+        "age_days": 38
       },
       {
         "session": "desk-case-files-reading-copies",
         "detail": "manual-mode delta (cron hook off, recap mode, fetch button) deployed without reviewer spawn — small tsc-verified delta on a same-session SHI",
-        "age_days": 20
+        "age_days": 22
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 3,
+      "patternsDetected": 4,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -4464,7 +4512,7 @@
       "stageStatus": "dormant"
     },
     "lastWeek": {
-      "patternsDetected": 0,
+      "patternsDetected": 1,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -4538,11 +4586,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "3 this week (0 last)",
+      "current": "4 this week (1 last)",
       "target": "stay near or above last week",
       "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-08-12T20:42:47.218Z"
+  "lastUpdated": "2026-08-14T01:03:58.390Z"
 }

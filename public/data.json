@@ -3587,6 +3587,17 @@
         "events": []
       },
       {
+        "name": "counter-build-and-sweep",
+        "date": "2026-08-13",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "counter-a1-scaffold",
         "date": "2026-08-13",
         "fixAttempts": 0,
@@ -3615,24 +3626,47 @@
         "events": []
       },
       {
-        "name": "counter-build-and-sweep",
+        "name": "counter-ios-silent-switch",
         "date": "2026-08-13",
         "fixAttempts": 0,
         "escalations": 0,
         "reExplanations": 0,
-        "capabilityGaps": 0,
+        "capabilityGaps": 1,
         "toilEvents": 0,
         "hookCatches": 0,
-        "events": []
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Agent tool off by session instruction — reviewer (delegation #2) and adversarial pre-deploy pass (adversarial-debug MANDATORY GATES) run as "
+          }
+        ]
+      },
+      {
+        "name": "aocc-ssn-center",
+        "date": "2026-08-17",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Agent tool disallowed by session policy, so delegation triggers #1/#2/#3 and the adversarial-debug pre-commit gate were all satisfied in mai"
+          }
+        ]
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 124,
+    "total": 129,
     "byType": {
-      "feedback": 56,
-      "project": 26,
+      "feedback": 60,
+      "project": 27,
       "user": 18,
       "reference": 22,
       "other": 1
@@ -3646,10 +3680,16 @@
   },
   "timeline": [
     {
+      "date": "Aug 13, 2026",
+      "title": "Counter Build And Sweep",
+      "desc": "Ported the Counter artifact to a Vite PWA and shipped stages A-E to production, Replaced the design system with a Super Punch-Out!! era ladder, procedural chiptune, and Blind mode, Built the share block, opponent roster, and a serverless date-seeded Daily",
+      "active": true
+    },
+    {
       "date": "Aug 12, 2026",
       "title": "2 sessions",
       "desc": "Reviewed all 9 of the center's real documents against our blanks — all byte-identical, Built flat-PDF filling (label-anchored, offline coordinate resolution): CCAP 17pp, AOCC contract, DCFS 1050-53 receipt, Moved blank forms from the Worker bundle to R2 — 969KB to 272KB gzip, removing the 1MB ceiling",
-      "active": true
+      "active": false
     },
     {
       "date": "Aug 8, 2026",
@@ -3954,6 +3994,12 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-08-17",
+      "text": "Agent tool disallowed by session policy, so delegation triggers #1/#2/#3 and the adversarial-debug pre-commit gate were all satisfied in main-thread on a crypto + filed-government-form change",
+      "context": "degraded mode declared once at session top per agent-delegation-triggers.md and adversarial-debug.md; substitution named as weaker than a spawned adversary",
+      "high": false
+    },
+    {
       "date": "2026-08-13",
       "text": "Agent tool disallowed session-wide, so developer/reviewer/adversarial spawns were unavailable for the Counter Stage A build; main-thread absorbed the build, constant audit, and review",
       "context": "session-level constraint per system prompt — degraded mode per agent-delegation-triggers.md",
@@ -3964,6 +4010,18 @@
       "text": "Three verification failures in one session share a root cause: measuring the input or the adjacent property instead of the behaviour under test (plan-determinism vs engine-determinism, constants-present vs constants-wired, compile-passes vs feature-works)",
       "context": "feeds the delta append to feedback_assert_the_precondition.md",
       "high": true
+    },
+    {
+      "date": "2026-08-13",
+      "text": "Agent tool off by session instruction — reviewer (delegation #2) and adversarial pre-deploy pass (adversarial-debug MANDATORY GATES) run as main-thread self-check instead",
+      "context": "iOS ringer-switch audio override in src/sound.js",
+      "high": false
+    },
+    {
+      "date": "2026-08-13",
+      "text": "Three verification failures shared one root cause — measuring the input or the adjacent property rather than the behaviour; the Daily was broken the entire time 75 assertions were green. → 5 lessons saved",
+      "context": "counter-build-and-sweep",
+      "high": false
     },
     {
       "date": "2026-08-12",
@@ -4024,31 +4082,13 @@
       "text": "The week's dominant work domain has no specialist and keeps failing on unverified remote state. Cloudflare-adjacent doma",
       "context": "Bruce proposal P-2026-08-11-004",
       "high": true
-    },
-    {
-      "date": "2026-08-10",
-      "text": "Second time a 'fixed by deploying' claim proved incomplete — the first diagnosis (stale frontend) was true but not the cause; the app had no print path at all. Diagnose the user-visible action end-to-end before attributing a symptom to deploy staleness",
-      "context": "finding 3 recurrence",
-      "high": true
-    },
-    {
-      "date": "2026-08-08",
-      "text": "Named teammate agents idled without summaries 3x (fixed: unnamed async spawns); two silent remote-delete failures caught by read-back; SPA route 404 despite documented rule (trigger scope too narrow). → 3 lessons saved",
-      "context": "aocc-rescue-sprint0",
-      "high": false
-    },
-    {
-      "date": "2026-08-07",
-      "text": "reviewer not spawned before workers.dev deploy of mechanical Vite split — composed-verify (rebuild, node --check, 44-handler window cross-check) + live browser round-trip stood in; demo URL, sample data only",
-      "context": "agent-delegation-triggers #2 commit gate — logging the skip with reason per the OR-clause",
-      "high": false
     }
   ],
   "nightShift": {
     "status": "GREEN",
-    "lastRun": "2026-08-13",
+    "lastRun": "2026-08-17",
     "findings": [
-      "System healthy — no issues detected"
+      "Global memory count is 128 (runaway backstop: >125). Check the cluster-consolidation findings above for actionable merges before a blanket /dream."
     ],
     "evalCanaries": [
       {
@@ -4246,7 +4286,7 @@
       }
     ],
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-08-13\n\n## Status: GREEN\n\n## Key Findings\n- System healthy — no issues detected\n\n## What Hero Worked On (7-day)\n- agents: 2 sessions\n- d1: 2 sessions\n- pdf: 2 sessions\n- r2: 2 sessions\n- typescript: 2 sessions\n\n## Agent Usage (7-day)\n- Explore: 2 sessions\n- developer: 2 sessions\n- reviewer: 2 sessions\n- debug: 1 sessions\n- fork-plan: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n123 total files, 0 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 5\n\n## Infrastructure\nNone — API healthy all run\n\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n95 total, 78 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 82% | 78/95 accepted |\n| Eval Signal | OK | 1 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "briefingContent": "# Night Shift — 2026-08-17\n\n## Status: GREEN\n\n## Key Findings\n- Global memory count is 128 (runaway backstop: >125). Check the cluster-consolidation findings above for actionable merges before a blanket /dream.\n\n## What Hero Worked On (7-day)\n- javascript: 2 sessions\n- agent-os: 1 sessions\n- agents: 1 sessions\n- bash: 1 sessions\n- cloudflare-workers: 1 sessions\n\n## Agent Usage (7-day)\n- debug: 2 sessions\n- reviewer: 2 sessions\n- Explore: 1 sessions\n- developer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n128 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 4\n\n## Infrastructure\nNone — API healthy all run\n\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n95 total, 78 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 82% | 78/95 accepted |\n| Eval Signal | OK | 2 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -4271,14 +4311,14 @@
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "1 consecutive all-pass runs"
+        "detail": "2 consecutive all-pass runs"
       }
     ]
   },
   "patterns": {
     "hasData": true,
     "findings": [],
-    "generated": "2026-08-12 15:31"
+    "generated": "2026-08-17 21:06"
   },
   "consolidation": {
     "hasData": true,
@@ -4330,14 +4370,14 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 2072
+      "tool_calls_30d": 2267
     },
     {
       "id": "app",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 35
+      "tool_calls_30d": 36
     },
     {
       "id": "blank",
@@ -4351,7 +4391,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 417
+      "tool_calls_30d": 440
     },
     {
       "id": "content-engine",
@@ -4365,7 +4405,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 506
+      "tool_calls_30d": 595
     },
     {
       "id": "media-engine",
@@ -4405,38 +4445,18 @@
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 3,
-      "preventions": 26,
+      "failures": 5,
+      "preventions": 9,
       "autoInstalls": 0,
-      "conversionPct": 867
+      "conversionPct": 180
     },
     "lastWeek": {
       "failures": 1,
-      "preventions": 0,
+      "preventions": 18,
       "autoInstalls": 0,
-      "conversionPct": 0
+      "conversionPct": 1800
     },
     "daily": [
-      {
-        "date": "2026-08-01",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-02",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-03",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-04",
-        "failures": 0,
-        "preventions": 0
-      },
       {
         "date": "2026-08-05",
         "failures": 0,
@@ -4479,11 +4499,31 @@
       },
       {
         "date": "2026-08-13",
-        "failures": 1,
+        "failures": 2,
         "preventions": 1
       },
       {
         "date": "2026-08-14",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-15",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-16",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-17",
+        "failures": 1,
+        "preventions": 1
+      },
+      {
+        "date": "2026-08-18",
         "failures": 0,
         "preventions": 0
       }
@@ -4492,18 +4532,18 @@
       {
         "session": "kin-calm-pass",
         "detail": "Commit-gate reviewer skip: 1-file cosmetic reposition (settings link bottom-center to top-right), SSR-verified via curl; reviewer spawn disp",
-        "age_days": 38
+        "age_days": 42
       },
       {
         "session": "desk-case-files-reading-copies",
         "detail": "manual-mode delta (cron hook off, recap mode, fetch button) deployed without reviewer spawn — small tsc-verified delta on a same-session SHI",
-        "age_days": 22
+        "age_days": 26
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 4,
+      "patternsDetected": 3,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -4512,7 +4552,7 @@
       "stageStatus": "dormant"
     },
     "lastWeek": {
-      "patternsDetected": 1,
+      "patternsDetected": 2,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -4586,11 +4626,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "4 this week (1 last)",
+      "current": "3 this week (2 last)",
       "target": "stay near or above last week",
       "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-08-14T01:03:58.390Z"
+  "lastUpdated": "2026-08-18T03:46:00.840Z"
 }

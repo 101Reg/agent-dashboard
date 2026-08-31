@@ -3658,17 +3658,112 @@
             "detail": "Agent tool disallowed by session policy, so delegation triggers #1/#2/#3 and the adversarial-debug pre-commit gate were all satisfied in mai"
           }
         ]
+      },
+      {
+        "name": "runemark-slice1",
+        "date": "2026-08-21",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "cartmuse-ai-pwa",
+        "date": "2026-08-24",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Agent tool disabled this session — reviewer (trigger #2) and adversarial pre-deploy pass (adversarial-debug.md) both substituted by main-thr"
+          }
+        ]
+      },
+      {
+        "name": "cartmuse-phases",
+        "date": "2026-08-24",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "aocc-start-early-rebuild",
+        "date": "2026-08-25",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Agent tool unavailable this session, so adversarial-debug.md pre-commit gate and agent-delegation-triggers #2 reviewer were satisfied by mai"
+          }
+        ]
+      },
+      {
+        "name": "cartmuse-phase4",
+        "date": "2026-08-25",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Agent tool disallowed this session — Explore (trigger #3), reviewer (trigger #2) and the adversarial pre-commit pass (adversarial-debug.md) "
+          },
+          {
+            "event": "hook_catch",
+            "agent": "bash-guard",
+            "detail": "`npx expo export -p web` blocked as the shell builtin `export -p`; long flag --platform web ran fine"
+          }
+        ]
+      },
+      {
+        "name": "cartmuse-ship",
+        "date": "2026-08-30",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 1,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": [
+          {
+            "event": "capability_gap",
+            "agent": "main-thread",
+            "detail": "Hero: 'we had way too many bugs and things we had to catch' — 9 defects in one session, 2 reaching the user on device; degraded mode (no age"
+          }
+        ]
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 129,
+    "total": 136,
     "byType": {
-      "feedback": 60,
-      "project": 27,
+      "feedback": 64,
+      "project": 29,
       "user": 18,
-      "reference": 22,
+      "reference": 23,
       "other": 1
     }
   },
@@ -3680,10 +3775,16 @@
   },
   "timeline": [
     {
+      "date": "Aug 17, 2026",
+      "title": "Aocc Ssn Center",
+      "desc": "Mapped the centre's six supplied details onto CCAP Sections 6/7 + Legal Care Arrangement (64/64 anchors), Built encrypted SSN storage (AES-GCM, AAD-bound, separate table) with no route returning a full number, Deployed to production and verified authenticated incl. an injection probe, then cleaned up all test artifacts",
+      "active": true
+    },
+    {
       "date": "Aug 13, 2026",
       "title": "Counter Build And Sweep",
       "desc": "Ported the Counter artifact to a Vite PWA and shipped stages A-E to production, Replaced the design system with a Super Punch-Out!! era ladder, procedural chiptune, and Blind mode, Built the share block, opponent roster, and a serverless date-seeded Daily",
-      "active": true
+      "active": false
     },
     {
       "date": "Aug 12, 2026",
@@ -3994,9 +4095,45 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-08-30",
+      "text": "Hero: 'we had way too many bugs and things we had to catch' — 9 defects in one session, 2 reaching the user on device; degraded mode (no agents) was reported as a disclaimer instead of slowing the pace",
+      "context": "/learn Step 7b voice-of-customer",
+      "high": false
+    },
+    {
+      "date": "2026-08-25",
+      "text": "Agent tool unavailable this session, so adversarial-debug.md pre-commit gate and agent-delegation-triggers #2 reviewer were satisfied by main-thread hostile-sequence self-check (co-parent field collision, overlap, out-of-bounds) plus mutation tests of all five gate arms",
+      "context": "degraded mode per adversarial-debug.md § Degraded mode — one log per session, not per commit",
+      "high": false
+    },
+    {
+      "date": "2026-08-25",
+      "text": "Agent tool disallowed this session — Explore (trigger #3), reviewer (trigger #2) and the adversarial pre-commit pass (adversarial-debug.md) all ran in main-thread instead of spawned agents",
+      "context": "CartMuse Phase 4 build; degraded-mode clause resolved once for the session per agent-delegation-triggers.md",
+      "high": false
+    },
+    {
+      "date": "2026-08-24",
+      "text": "Agent tool disabled this session — reviewer (trigger #2) and adversarial pre-deploy pass (adversarial-debug.md) both substituted by main-thread self-review; the adversarial pass found a real allergy-filter bypass introduced by my own commit",
+      "context": "session-level constraint, resolved once per agent-delegation-triggers.md Degraded mode clause",
+      "high": false
+    },
+    {
+      "date": "2026-08-21",
+      "text": "Three visual rewrites (flashcard -> lane runner -> RPG) all rejected on feel; iterating on presentation while the underlying loop stayed one verb repeated 40x",
+      "context": "Neen predicts kids will get bored; Hero does not like it",
+      "high": true
+    },
+    {
       "date": "2026-08-17",
       "text": "Agent tool disallowed by session policy, so delegation triggers #1/#2/#3 and the adversarial-debug pre-commit gate were all satisfied in main-thread on a crypto + filed-government-form change",
       "context": "degraded mode declared once at session top per agent-delegation-triggers.md and adversarial-debug.md; substitution named as weaker than a spawned adversary",
+      "high": false
+    },
+    {
+      "date": "2026-08-17",
+      "text": "Agent tool disallowed by session policy, so debug/reviewer/adversarial passes ran in main-thread (degraded, logged once); deployed before covering a slice I had already declared unknown, and the later coverage pass found a defect in the just-shipped code. → 2 lessons saved",
+      "context": "aocc-ssn-center",
       "high": false
     },
     {
@@ -4046,49 +4183,13 @@
       "text": "Premature completion claim before functional verification — declared b8 verified while its deploy counter read 0 for every agent; external research (arXiv 2606.09863 S7) names this as a dominant current agent failure mode that LLM judges detect near chance",
       "context": "my own 76-to-0 hook_catch reading was an LLM-judge blind spot, not evidence the failure class went away",
       "high": true
-    },
-    {
-      "date": "2026-08-12",
-      "text": "4 of 5 parallel debug agents idled three times each without delivering reports, leaving 2 slices uncovered; a consent gate shipped family-wide and had to be corrected after deploy → 2 lessons saved",
-      "context": "aocc-documents-deploy-sweep",
-      "high": false
-    },
-    {
-      "date": "2026-08-12",
-      "text": "Three cut lists failed their own pre-flight (4/5, 4/11, 3/4 wrong) — each built on a premise about this session rather than data; all five failure modes encoded as b8 guards. Two self-inflicted bugs: b8 deploy counter read 0 for every agent (caught by Bruce), gitignore-boundary mv silently changed tracking. Reported 'under budget' three times while over it — skill metadata was never counted. → 4 lessons saved",
-      "context": "agent-os-v5-invert-and-retire",
-      "high": false
-    },
-    {
-      "date": "2026-08-11",
-      "text": "Two of tonight's three DEGRADED flags are artifacts of my own harness, not agent regressions. B1 pulls the eval PROMPT f",
-      "context": "Bruce proposal P-2026-08-11-001",
-      "high": true
-    },
-    {
-      "date": "2026-08-11",
-      "text": "Parallel subagent fan-out silently loses coverage and nothing in the system notices. Three separate events, all within t",
-      "context": "Bruce proposal P-2026-08-11-002",
-      "high": true
-    },
-    {
-      "date": "2026-08-11",
-      "text": "The reviewer agent will fail a sprint gate on an artifact of its own tooling. Dynamic eval DYN-20260811-3 (incident 2557",
-      "context": "Bruce proposal P-2026-08-11-003",
-      "high": true
-    },
-    {
-      "date": "2026-08-11",
-      "text": "The week's dominant work domain has no specialist and keeps failing on unverified remote state. Cloudflare-adjacent doma",
-      "context": "Bruce proposal P-2026-08-11-004",
-      "high": true
     }
   ],
   "nightShift": {
     "status": "GREEN",
-    "lastRun": "2026-08-17",
+    "lastRun": "2026-08-30",
     "findings": [
-      "Global memory count is 128 (runaway backstop: >125). Check the cluster-consolidation findings above for actionable merges before a blanket /dream."
+      "Global memory count is 135 (runaway backstop: >125). Check the cluster-consolidation findings above for actionable merges before a blanket /dream."
     ],
     "evalCanaries": [
       {
@@ -4099,7 +4200,7 @@
         "delta": 0.3,
         "status": "ok",
         "lastRun": "2026-08-11",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4110,7 +4211,7 @@
         "delta": 0.6,
         "status": "ok",
         "lastRun": "2026-08-12",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4121,7 +4222,7 @@
         "delta": -1.2,
         "status": "DEGRADED",
         "lastRun": "2026-08-11",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4132,7 +4233,7 @@
         "delta": -0.4,
         "status": "ok",
         "lastRun": "2026-08-11",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4143,7 +4244,7 @@
         "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-08-11",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4165,7 +4266,7 @@
         "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-08-11",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4176,7 +4277,7 @@
         "delta": -0.4,
         "status": "ok",
         "lastRun": "2026-08-12",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4187,7 +4288,7 @@
         "delta": -0.4,
         "status": "ok",
         "lastRun": "2026-08-12",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4198,7 +4299,7 @@
         "delta": -0.6,
         "status": "watch",
         "lastRun": "2026-08-12",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4209,7 +4310,7 @@
         "delta": -0.4,
         "status": "ok",
         "lastRun": "2026-08-12",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4231,7 +4332,7 @@
         "delta": -0.6,
         "status": "watch",
         "lastRun": "2026-08-12",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4242,7 +4343,7 @@
         "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-08-12",
-        "stale": false,
+        "stale": true,
         "source": "run"
       },
       {
@@ -4253,7 +4354,7 @@
         "delta": -0.2,
         "status": "ok",
         "lastRun": "2026-08-11",
-        "stale": false,
+        "stale": true,
         "source": "run"
       }
     ],
@@ -4286,7 +4387,7 @@
       }
     ],
     "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-08-17\n\n## Status: GREEN\n\n## Key Findings\n- Global memory count is 128 (runaway backstop: >125). Check the cluster-consolidation findings above for actionable merges before a blanket /dream.\n\n## What Hero Worked On (7-day)\n- javascript: 2 sessions\n- agent-os: 1 sessions\n- agents: 1 sessions\n- bash: 1 sessions\n- cloudflare-workers: 1 sessions\n\n## Agent Usage (7-day)\n- debug: 2 sessions\n- reviewer: 2 sessions\n- Explore: 1 sessions\n- developer: 1 sessions\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n128 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 0\n- re_explanations: 0\n- patterns_detected: 4\n\n## Infrastructure\nNone — API healthy all run\n\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n95 total, 78 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 82% | 78/95 accepted |\n| Eval Signal | OK | 2 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "briefingContent": "# Night Shift — 2026-08-30\n\n## Status: GREEN\n\n## Key Findings\n- Global memory count is 135 (runaway backstop: >125). Check the cluster-consolidation findings above for actionable merges before a blanket /dream.\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n135 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 1\n- re_explanations: 0\n- patterns_detected: 0\n\n## Infrastructure\nNone — API healthy all run\n\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n95 total, 78 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 82% | 78/95 accepted |\n| Eval Signal | OK | 3 consecutive all-pass runs |\n\n## Action Required: NO\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -4311,14 +4412,14 @@
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "2 consecutive all-pass runs"
+        "detail": "3 consecutive all-pass runs"
       }
     ]
   },
   "patterns": {
     "hasData": true,
     "findings": [],
-    "generated": "2026-08-17 21:06"
+    "generated": "2026-08-25 09:15"
   },
   "consolidation": {
     "hasData": true,
@@ -4352,6 +4453,20 @@
   },
   "projects": [
     {
+      "id": "Downloads",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 2
+    },
+    {
+      "id": "Kids app",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 14
+    },
+    {
       "id": "agent-dashboard",
       "friction_today": 0,
       "unresolved_gaps": 0,
@@ -4370,7 +4485,7 @@
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 2267
+      "tool_calls_30d": 2447
     },
     {
       "id": "app",
@@ -4387,32 +4502,39 @@
       "tool_calls_30d": 37
     },
     {
+      "id": "cartmuse",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 0
+    },
+    {
+      "id": "cartmuse-app",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 387
+    },
+    {
       "id": "claude-config",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 440
-    },
-    {
-      "id": "content-engine",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 181
+      "tool_calls_30d": 431
     },
     {
       "id": "counter",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 595
+      "tool_calls_30d": 627
     },
     {
-      "id": "media-engine",
+      "id": "ocr",
       "friction_today": 0,
-      "unresolved_gaps": 1,
+      "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 4
+      "tool_calls_30d": 1
     },
     {
       "id": "out",
@@ -4422,18 +4544,18 @@
       "tool_calls_30d": 3
     },
     {
-      "id": "remotion",
+      "id": "reading-foundations",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 33
+      "tool_calls_30d": 60
     },
     {
-      "id": "ringkultr",
+      "id": "runemark",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 1042
+      "tool_calls_30d": 0
     },
     {
       "id": "src",
@@ -4441,89 +4563,96 @@
       "unresolved_gaps": 0,
       "templates_used": 0,
       "tool_calls_30d": 21
+    },
+    {
+      "id": "start-early",
+      "friction_today": 0,
+      "unresolved_gaps": 0,
+      "templates_used": 0,
+      "tool_calls_30d": 36
     }
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 5,
-      "preventions": 9,
+      "failures": 3,
+      "preventions": 1,
       "autoInstalls": 0,
-      "conversionPct": 180
+      "conversionPct": 33
     },
     "lastWeek": {
       "failures": 1,
-      "preventions": 18,
+      "preventions": 0,
       "autoInstalls": 0,
-      "conversionPct": 1800
+      "conversionPct": 0
     },
     "daily": [
       {
-        "date": "2026-08-05",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-06",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-07",
-        "failures": 1,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-08",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-09",
-        "failures": 0,
-        "preventions": 7
-      },
-      {
-        "date": "2026-08-10",
-        "failures": 0,
-        "preventions": 3
-      },
-      {
-        "date": "2026-08-11",
-        "failures": 0,
-        "preventions": 8
-      },
-      {
-        "date": "2026-08-12",
-        "failures": 2,
-        "preventions": 7
-      },
-      {
-        "date": "2026-08-13",
-        "failures": 2,
-        "preventions": 1
-      },
-      {
-        "date": "2026-08-14",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-15",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-16",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-17",
-        "failures": 1,
-        "preventions": 1
-      },
-      {
         "date": "2026-08-18",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-19",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-20",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-21",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-22",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-23",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-24",
+        "failures": 1,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-25",
+        "failures": 2,
+        "preventions": 1
+      },
+      {
+        "date": "2026-08-26",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-27",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-28",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-29",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-30",
+        "failures": 1,
+        "preventions": 0
+      },
+      {
+        "date": "2026-08-31",
         "failures": 0,
         "preventions": 0
       }
@@ -4532,18 +4661,18 @@
       {
         "session": "kin-calm-pass",
         "detail": "Commit-gate reviewer skip: 1-file cosmetic reposition (settings link bottom-center to top-right), SSR-verified via curl; reviewer spawn disp",
-        "age_days": 42
+        "age_days": 55
       },
       {
         "session": "desk-case-files-reading-copies",
         "detail": "manual-mode delta (cron hook off, recap mode, fetch button) deployed without reviewer spawn — small tsc-verified delta on a same-session SHI",
-        "age_days": 26
+        "age_days": 39
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 3,
+      "patternsDetected": 0,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -4552,7 +4681,7 @@
       "stageStatus": "dormant"
     },
     "lastWeek": {
-      "patternsDetected": 2,
+      "patternsDetected": 1,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -4591,12 +4720,53 @@
     "stuckPatterns": []
   },
   "preventionEfficacy": {
-    "activePreventions": 0,
+    "activePreventions": 1,
     "avgEfficacy": 0,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 0,
-    "perRule": []
+    "perRule": [
+      {
+        "rule": "unknown",
+        "efficacy": 0,
+        "fires30d": 1,
+        "valid": 0,
+        "invalid": 1,
+        "sparkline": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "last_fire_date": "2026-08-25"
+      }
+    ]
   },
   "watchItems": [
     {
@@ -4626,11 +4796,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "3 this week (2 last)",
+      "current": "0 this week (1 last)",
       "target": "stay near or above last week",
-      "status": "green",
+      "status": "red",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-08-18T03:46:00.840Z"
+  "lastUpdated": "2026-08-31T04:26:50.770Z"
 }

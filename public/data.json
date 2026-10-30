@@ -3738,6 +3738,17 @@
         ]
       },
       {
+        "name": "cartmuse-pricing-and-ship",
+        "date": "2026-08-30",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
         "name": "cartmuse-ship",
         "date": "2026-08-30",
         "fixAttempts": 0,
@@ -3753,32 +3764,131 @@
             "detail": "Hero: 'we had way too many bugs and things we had to catch' — 9 defects in one session, 2 reaching the user on device; degraded mode (no age"
           }
         ]
+      },
+      {
+        "name": "agent-harness-decision-review",
+        "date": "2026-09-07",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 1,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Flagged memory-hygiene.md rule content as F4 fabrication; content was present verbatim in this turn's CLAUDE.md system-reminder but was cite"
+          }
+        ]
+      },
+      {
+        "name": "desk-kultrverse-revamp",
+        "date": "2026-10-28",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 4,
+        "events": [
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated DASHBOARD_TOKEN rotation date 2026-07-27 from memory without a [memory:] tag; fact was correct (project_youtube_clipper.md, read turn"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Stated the 11:18 Threads error came from a second callback attempt as fact; it is an inference from save time 04:15:59 UTC vs screenshot 11:"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Called abeautyforum/eveydayhype/Liv Simple Goods other Facebook Pages; they were business-portfolio names from an earlier screenshot, not Pa"
+          },
+          {
+            "event": "hook_catch",
+            "agent": "stop-hook",
+            "detail": "Called clip 1 IG/FB posts last night when they posted this morning, and gave the DST end date without a check"
+          }
+        ]
+      },
+      {
+        "name": "desk-kultrverse-revamp-phase4-5",
+        "date": "2026-10-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-muse-desks",
+        "date": "2026-10-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-redesign",
+        "date": "2026-10-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
+      },
+      {
+        "name": "desk-sweep",
+        "date": "2026-10-29",
+        "fixAttempts": 0,
+        "escalations": 0,
+        "reExplanations": 0,
+        "capabilityGaps": 0,
+        "toilEvents": 0,
+        "hookCatches": 0,
+        "events": []
       }
     ],
     "hasData": true
   },
   "memory": {
-    "total": 136,
+    "total": 141,
     "byType": {
-      "feedback": 64,
-      "project": 29,
-      "user": 18,
+      "feedback": 65,
+      "project": 30,
+      "user": 21,
       "reference": 23,
       "other": 1
     }
   },
   "system": {
-    "skills": 21,
+    "skills": 33,
     "rules": 18,
     "hooks": 16,
     "mcpServers": 2
   },
   "timeline": [
     {
+      "date": "Aug 30, 2026",
+      "title": "Cartmuse Pricing And Ship",
+      "desc": "Phase 4: AI list generation now uses household history, ranked by distinctiveness with staples bucketed, Audited every price source — found actualPrice never written, so the savings claim was measured against a guess, Built receipt capture + utils/spend.ts; adversarial pass caught a multi-store double-count claiming $110 saved on a $100 budget",
+      "active": true
+    },
+    {
       "date": "Aug 17, 2026",
       "title": "Aocc Ssn Center",
       "desc": "Mapped the centre's six supplied details onto CCAP Sections 6/7 + Legal Care Arrangement (64/64 anchors), Built encrypted SSN storage (AES-GCM, AAD-bound, separate table) with no route returning a full number, Deployed to production and verified authenticated incl. an injection probe, then cleaned up all test artifacts",
-      "active": true
+      "active": false
     },
     {
       "date": "Aug 13, 2026",
@@ -4095,9 +4205,27 @@
   ],
   "selfImprovement": [
     {
+      "date": "2026-10-29",
+      "text": "Keyword-list safety screen + audience-number regex needed 3 adversarial rounds; each round found new evasions — regex screens have diminishing returns",
+      "context": "Systemic answer applied: safety made structural (refusals final, server publish gate, column-based bulk-approve exclusion, human approval required); regex kept as backstop only",
+      "high": true
+    },
+    {
+      "date": "2026-10-28",
+      "text": "hook_catch x3",
+      "context": "advisory — hook_catch-only friction surfaced for Bruce review; stop NOT blocked (hook_catches are already self-corrected by the per-response Stop hook and often cross-session)",
+      "high": true
+    },
+    {
       "date": "2026-08-30",
       "text": "Hero: 'we had way too many bugs and things we had to catch' — 9 defects in one session, 2 reaching the user on device; degraded mode (no agents) was reported as a disclaimer instead of slowing the pace",
       "context": "/learn Step 7b voice-of-customer",
+      "high": false
+    },
+    {
+      "date": "2026-08-30",
+      "text": "9 defects across the session — 3 wrong claims from stale memory, 2 shipped bugs in the one untested surface (keypad covering Save); Agent tool unavailable throughout so no reviewer read the diff → 5 lessons saved",
+      "context": "cartmuse-pricing-and-ship",
       "high": false
     },
     {
@@ -4165,31 +4293,14 @@
       "text": "4 of 5 parallel debug agents idled twice without delivering reports despite explicit checkpoint instructions in every brief; 2 slices (flat coordinates, record integrity) got no adversarial coverage at all",
       "context": "sweep coverage loss — main-thread self-verified the 2 most critical questions from the silent slices instead",
       "high": false
-    },
-    {
-      "date": "2026-08-12",
-      "text": "V4 plan Phase 1 retirement list was 4/5 wrong on measurement: marketer+night-shift agents canary-bound, shared-context is a data file not an agent, Stop hook retirement already rejected in P-2026-07-13-004 and reads 82% valid over 60d vs 28% lifetime FP",
-      "context": "reference-count and lifetime-FP are invalid retirement metrics for rules, skills, and quiet-but-precise hooks",
-      "high": true
-    },
-    {
-      "date": "2026-08-12",
-      "text": "Agent tool disallowed this session while agent-delegation-triggers #8 and adversarial-debug MANDATORY GATES both require spawns for plan-driven builds; resolved once by main-thread self-verification instead of per-commit re-derivation",
-      "context": "the exact conflict V4 Phase 2 would codify a precedence clause for",
-      "high": false
-    },
-    {
-      "date": "2026-08-12",
-      "text": "Premature completion claim before functional verification — declared b8 verified while its deploy counter read 0 for every agent; external research (arXiv 2606.09863 S7) names this as a dominant current agent failure mode that LLM judges detect near chance",
-      "context": "my own 76-to-0 hook_catch reading was an LLM-judge blind spot, not evidence the failure class went away",
-      "high": true
     }
   ],
   "nightShift": {
-    "status": "GREEN",
-    "lastRun": "2026-08-30",
+    "status": "RED",
+    "lastRun": "2026-10-29",
     "findings": [
-      "Global memory count is 135 (runaway backstop: >125). Check the cluster-consolidation findings above for actionable merges before a blanket /dream."
+      "Global memory count is 140 (runaway backstop: >125). Check the cluster-consolidation findings above for actionable merges before a blanket /dream.",
+      "PIVOT: Eval Signal Rate — All canaries passing for 77 days across 6 runs. Evals too easy."
     ],
     "evalCanaries": [
       {
@@ -4386,8 +4497,8 @@
         "solution": ""
       }
     ],
-    "actionRequired": false,
-    "briefingContent": "# Night Shift — 2026-08-30\n\n## Status: GREEN\n\n## Key Findings\n- Global memory count is 135 (runaway backstop: >125). Check the cluster-consolidation findings above for actionable merges before a blanket /dream.\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n135 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 1\n- re_explanations: 0\n- patterns_detected: 0\n\n## Infrastructure\nNone — API healthy all run\n\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n95 total, 78 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 82% | 78/95 accepted |\n| Eval Signal | OK | 3 consecutive all-pass runs |\n\n## Action Required: NO\n",
+    "actionRequired": true,
+    "briefingContent": "# Night Shift — 2026-10-29\n\n## Status: RED\n\n## Key Findings\n- Global memory count is 140 (runaway backstop: >125). Check the cluster-consolidation findings above for actionable merges before a blanket /dream.\n- PIVOT: Eval Signal Rate — All canaries passing for 77 days across 6 runs. Evals too easy.\n\n## What Hero Worked On (7-day)\n\n\n## Agent Usage (7-day)\n\n\n## Eval Canaries\n| Agent | Score | Baseline | Delta | Status |\n|-------|-------|----------|-------|--------|\n| — | — | — | — | no evals this run |\n\n## Dynamic Evals (friction-sourced)\n| Agent | DYN id | Score | Verdict | Incident domain |\n|-------|--------|-------|---------|-----------------|\n| — | — | — | — | no dynamic evals this run |\n\n## Skill Gaps\nNone detected\n\n## Memory Health\n140 total files, 1 consolidation candidates\n\n## Friction Trends (7-day)\n- fix_attempts: 0\n- escalations: 0\n- hook_catches: 4\n- re_explanations: 0\n- patterns_detected: 2\n\n## Infrastructure\nNone — API healthy all run\n\n\n## Proposals\nNone generated\n\n## Proposal Track Record\n95 total, 78 accepted, 4 pending\n\n## Benchmarks\n| Benchmark | Status | Detail |\n|-----------|--------|--------|\n| Friction Rate | OK | 0 fix_attempts (14d) |\n| Proposal Hit Rate | 82% | 78/95 accepted |\n| Eval Signal | OK | 6 consecutive all-pass runs |\n\n## Action Required: YES\n",
     "domainFrequency": [],
     "agentUsage": [],
     "skillGaps": [],
@@ -4412,14 +4523,14 @@
       {
         "name": "Eval Signal",
         "status": "OK",
-        "detail": "3 consecutive all-pass runs"
+        "detail": "6 consecutive all-pass runs"
       }
     ]
   },
   "patterns": {
     "hasData": true,
     "findings": [],
-    "generated": "2026-08-25 09:15"
+    "generated": "2026-10-28 21:38"
   },
   "consolidation": {
     "hasData": true,
@@ -4453,206 +4564,122 @@
   },
   "projects": [
     {
-      "id": "Downloads",
+      "id": "ai-agency",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 2
-    },
-    {
-      "id": "Kids app",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 14
-    },
-    {
-      "id": "agent-dashboard",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 12
-    },
-    {
-      "id": "agent-os",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 1,
-      "tool_calls_30d": 1
-    },
-    {
-      "id": "aocc",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 2447
-    },
-    {
-      "id": "app",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 36
-    },
-    {
-      "id": "blank",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 37
-    },
-    {
-      "id": "cartmuse",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 0
-    },
-    {
-      "id": "cartmuse-app",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 387
+      "tool_calls_30d": 4
     },
     {
       "id": "claude-config",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 431
+      "tool_calls_30d": 18
     },
     {
-      "id": "counter",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 627
-    },
-    {
-      "id": "ocr",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 1
-    },
-    {
-      "id": "out",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 3
-    },
-    {
-      "id": "reading-foundations",
-      "friction_today": 0,
-      "unresolved_gaps": 0,
-      "templates_used": 0,
-      "tool_calls_30d": 60
-    },
-    {
-      "id": "runemark",
+      "id": "kultrverse",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
       "tool_calls_30d": 0
     },
     {
-      "id": "src",
+      "id": "media-engine",
       "friction_today": 0,
-      "unresolved_gaps": 0,
+      "unresolved_gaps": 1,
       "templates_used": 0,
-      "tool_calls_30d": 21
+      "tool_calls_30d": 5
     },
     {
-      "id": "start-early",
+      "id": "ringkultr",
       "friction_today": 0,
       "unresolved_gaps": 0,
       "templates_used": 0,
-      "tool_calls_30d": 36
+      "tool_calls_30d": 2108
     }
   ],
   "failureToPrevention": {
     "thisWeek": {
-      "failures": 3,
-      "preventions": 1,
+      "failures": 4,
+      "preventions": 0,
       "autoInstalls": 0,
-      "conversionPct": 33
+      "conversionPct": 0
     },
     "lastWeek": {
-      "failures": 1,
+      "failures": 0,
       "preventions": 0,
       "autoInstalls": 0,
       "conversionPct": 0
     },
     "daily": [
       {
-        "date": "2026-08-18",
+        "date": "2026-10-17",
         "failures": 0,
         "preventions": 0
       },
       {
-        "date": "2026-08-19",
+        "date": "2026-10-18",
         "failures": 0,
         "preventions": 0
       },
       {
-        "date": "2026-08-20",
+        "date": "2026-10-19",
         "failures": 0,
         "preventions": 0
       },
       {
-        "date": "2026-08-21",
+        "date": "2026-10-20",
         "failures": 0,
         "preventions": 0
       },
       {
-        "date": "2026-08-22",
+        "date": "2026-10-21",
         "failures": 0,
         "preventions": 0
       },
       {
-        "date": "2026-08-23",
+        "date": "2026-10-22",
         "failures": 0,
         "preventions": 0
       },
       {
-        "date": "2026-08-24",
+        "date": "2026-10-23",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-10-24",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-10-25",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-10-26",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-10-27",
+        "failures": 0,
+        "preventions": 0
+      },
+      {
+        "date": "2026-10-28",
+        "failures": 3,
+        "preventions": 0
+      },
+      {
+        "date": "2026-10-29",
         "failures": 1,
         "preventions": 0
       },
       {
-        "date": "2026-08-25",
-        "failures": 2,
-        "preventions": 1
-      },
-      {
-        "date": "2026-08-26",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-27",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-28",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-29",
-        "failures": 0,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-30",
-        "failures": 1,
-        "preventions": 0
-      },
-      {
-        "date": "2026-08-31",
+        "date": "2026-10-30",
         "failures": 0,
         "preventions": 0
       }
@@ -4661,18 +4688,18 @@
       {
         "session": "kin-calm-pass",
         "detail": "Commit-gate reviewer skip: 1-file cosmetic reposition (settings link bottom-center to top-right), SSR-verified via curl; reviewer spawn disp",
-        "age_days": 55
+        "age_days": 115
       },
       {
         "session": "desk-case-files-reading-copies",
         "detail": "manual-mode delta (cron hook off, recap mode, fetch button) deployed without reviewer spawn — small tsc-verified delta on a same-session SHI",
-        "age_days": 39
+        "age_days": 99
       }
     ]
   },
   "patternToTemplate": {
     "thisWeek": {
-      "patternsDetected": 0,
+      "patternsDetected": 2,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -4681,7 +4708,7 @@
       "stageStatus": "dormant"
     },
     "lastWeek": {
-      "patternsDetected": 1,
+      "patternsDetected": 0,
       "templatesExtracted": 0,
       "distinctTemplatesExtracted": 0,
       "templatesInstantiated": 0,
@@ -4720,18 +4747,18 @@
     "stuckPatterns": []
   },
   "preventionEfficacy": {
-    "activePreventions": 1,
-    "avgEfficacy": 0,
+    "activePreventions": 2,
+    "avgEfficacy": 1,
     "retirementCandidates": [],
     "retirementsThisWeek": 0,
     "netActive30d": 0,
     "perRule": [
       {
-        "rule": "unknown",
-        "efficacy": 0,
+        "rule": "source-labeling-convention",
+        "efficacy": 1,
         "fires30d": 1,
-        "valid": 0,
-        "invalid": 1,
+        "valid": 1,
+        "invalid": 0,
         "sparkline": [
           null,
           null,
@@ -4756,15 +4783,55 @@
           null,
           null,
           null,
-          0,
           null,
           null,
           null,
           null,
+          1,
           null,
           null
         ],
-        "last_fire_date": "2026-08-25"
+        "last_fire_date": "2026-10-28"
+      },
+      {
+        "rule": "pre-response-claim-audit",
+        "efficacy": 1,
+        "fires30d": 3,
+        "valid": 3,
+        "invalid": 0,
+        "sparkline": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ],
+        "last_fire_date": "2026-10-29"
       }
     ]
   },
@@ -4776,6 +4843,14 @@
       "target": "≥1 this week",
       "status": "red",
       "why": "Threshold lowered to 2 sessions. First fire flips Verb 1 from stalled to converting."
+    },
+    {
+      "id": "canary-rule",
+      "title": "pre-response-claim-audit efficacy",
+      "current": "100% (3 fires/30d)",
+      "target": "stays ≥50%",
+      "status": "green",
+      "why": "Worst-performing rule with real fire volume. Drift below 30% = retirement candidate."
     },
     {
       "id": "net-active",
@@ -4796,11 +4871,11 @@
     {
       "id": "pattern-velocity",
       "title": "Pattern detection velocity",
-      "current": "0 this week (1 last)",
+      "current": "2 this week (0 last)",
       "target": "stay near or above last week",
-      "status": "red",
+      "status": "green",
       "why": "Detection volume = system visibility. Drop signals scanners stalling, not problems vanishing."
     }
   ],
-  "lastUpdated": "2026-08-31T04:26:50.770Z"
+  "lastUpdated": "2026-10-30T00:04:17.837Z"
 }
